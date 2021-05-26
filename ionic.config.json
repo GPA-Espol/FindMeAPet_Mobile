@@ -1,0 +1,7 @@
+{
+  "name": "gpa_mobile",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}
