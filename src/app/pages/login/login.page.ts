@@ -32,4 +32,22 @@ export class LoginPage implements OnInit {
   }
 
   login() {}
+
+  switchUserType() {
+    this.separator.nativeElement.classList.add('switch-user-type-animation');
+    this.content.nativeElement.classList.add('switch-user-type-animation');
+    setTimeout(() => {
+      this.separator.nativeElement.classList.remove(
+        'switch-user-type-animation'
+      );
+      this.content.nativeElement.classList.remove('switch-user-type-animation');
+    }, 500);
+    if (this.userType == UserType.Admin) {
+      this.userType = UserType.Volunteer;
+      this.otherUserType = UserType.Admin;
+    } else {
+      this.userType = UserType.Admin;
+      this.otherUserType = UserType.Volunteer;
+    }
+  }
 }
