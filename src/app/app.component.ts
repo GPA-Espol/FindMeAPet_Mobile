@@ -1,4 +1,9 @@
 import { Component } from '@angular/core';
+import { StatusBar } from '@ionic-native/status-bar/ngx';
+import { SplashScreen } from '@ionic-native/splash-screen/ngx';
+
+import { environment } from 'src/environments/environment';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +11,19 @@ import { Component } from '@angular/core';
   styleUrls: ['app.component.scss'],
 })
 export class AppComponent {
-  constructor() {}
+  constructor(
+    private statusBar: StatusBar,
+    private splashScreen: SplashScreen,
+    private router: Router
+  ) {
+    this.initializeApp();
+  }
+
+  initializeApp() {
+    if (environment.version != 'web') {
+      this.statusBar.backgroundColorByHexString('#EC823A');
+      this.splashScreen.hide();
+    }
+    this.router.navigateByUrl('/');
+  }
 }
