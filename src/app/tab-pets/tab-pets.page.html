@@ -1,0 +1,60 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Mascotas</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="ion-margin-start ion-margin-vertical">
+    <ion-chip class="animal-chip" [outline]="lugarBuscar=='todos'? false: true"  (click)="filterLocation('todos')">
+        <ion-label>
+          <ion-text color="secondary"> Todos </ion-text>
+        </ion-label>
+      </ion-chip>
+    <ion-chip class="animal-chip" [outline]="lugarBuscar=='Refugio'? false: true"  (click)="filterLocation('Refugio')">
+      <ion-label>
+        <ion-text color="secondary"> Refugio </ion-text>
+      </ion-label>
+    </ion-chip>
+    <ion-chip class="animal-chip" [outline]="lugarBuscar=='Espol'? false: true" (click)="filterLocation('Espol')">
+      <ion-label>
+        <ion-text color="secondary"> Espol </ion-text>
+      </ion-label>
+    </ion-chip>
+    <ion-chip class="animal-chip" [outline]="lugarBuscar=='Externo'? false: true" (click)="filterLocation('Externo')">
+        <ion-label>
+          <ion-text color="secondary"> Externo </ion-text>
+        </ion-label>
+      </ion-chip>
+    <ion-searchbar
+      animated
+      clearIcon
+      placeholder="Buscar"
+      (ionChange)="buscar( $event )"
+    ></ion-searchbar>
+  </div>
+  <div>
+    <ion-card *ngFor="let animal of animals | lugar:lugarBuscar |filtro: textoBuscar ">
+      <ion-list>
+        <ion-item lines="none">
+          <ion-thumbnail>
+            <img [src]="animal.img" />
+          </ion-thumbnail>
+          <ion-label class="ion-margin-start ion-margin-vertical ion-text-wrap">
+            <h2>{{animal.name}}</h2>
+            <ion-row class="ion-margin-vertical">
+              <ion-icon id="icon-location" name="location-outline"></ion-icon>
+              <h3>{{animal.location}}</h3>
+              <ion-col class="ion-no-margin ion-no-padding">
+                <div class="ion-text-end">
+                  <h3>{{animal.age}}</h3>
+                </div>
+              </ion-col>
+            </ion-row>
+            <p>{{animal.description}}</p>
+          </ion-label>
+        </ion-item>
+      </ion-list>
+    </ion-card>
+  </div>
+</ion-content>
