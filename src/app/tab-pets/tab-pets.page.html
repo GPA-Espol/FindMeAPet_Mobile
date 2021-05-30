@@ -6,16 +6,26 @@
 
 <ion-content>
   <div class="ion-margin-start ion-margin-vertical">
-    <ion-chip class="animal-chip">
+    <ion-chip class="animal-chip" [outline]="lugarBuscar=='todos'? false: true"  (click)="filterLocation('todos')">
+        <ion-label>
+          <ion-text color="secondary"> Todos </ion-text>
+        </ion-label>
+      </ion-chip>
+    <ion-chip class="animal-chip" [outline]="lugarBuscar=='Refugio'? false: true"  (click)="filterLocation('Refugio')">
       <ion-label>
-        <ion-text color="secondary"> Gatos </ion-text>
+        <ion-text color="secondary"> Refugio </ion-text>
       </ion-label>
     </ion-chip>
-    <ion-chip class="animal-chip">
+    <ion-chip class="animal-chip" [outline]="lugarBuscar=='Espol'? false: true" (click)="filterLocation('Espol')">
       <ion-label>
-        <ion-text color="secondary"> Perros </ion-text>
+        <ion-text color="secondary"> Espol </ion-text>
       </ion-label>
     </ion-chip>
+    <ion-chip class="animal-chip" [outline]="lugarBuscar=='Externo'? false: true" (click)="filterLocation('Externo')">
+        <ion-label>
+          <ion-text color="secondary"> Externo </ion-text>
+        </ion-label>
+      </ion-chip>
     <ion-searchbar
       animated
       clearIcon
@@ -24,7 +34,7 @@
     ></ion-searchbar>
   </div>
   <div>
-    <ion-card *ngFor="let animal of animals | filtro: textoBuscar ">
+    <ion-card *ngFor="let animal of animals | lugar:lugarBuscar |filtro: textoBuscar ">
       <ion-list>
         <ion-item lines="none">
           <ion-thumbnail>

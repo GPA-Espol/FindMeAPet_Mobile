@@ -8,6 +8,7 @@ import { Component, OnInit } from '@angular/core';
 export class TabPetsPage implements OnInit {
   animals : any[] = [];
   textoBuscar : '';
+  lugarBuscar = 'todos';
   constructor() { }
 
   ngOnInit() {
@@ -20,12 +21,11 @@ export class TabPetsPage implements OnInit {
     ];
   }
   buscar(event){
-    //console.log(event);
-    //console.log(event.target.value);
-    
     this.textoBuscar = event.target.value;
-    //console.log(this.textoBuscar);
-    
-  } 
+  }
+
+  filterLocation(lugar){
+    this.lugarBuscar = lugar
+  }
 
 }
