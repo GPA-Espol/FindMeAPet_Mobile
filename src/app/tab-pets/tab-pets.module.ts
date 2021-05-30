@@ -7,13 +7,15 @@ import { IonicModule } from '@ionic/angular';
 import { TabPetsPageRoutingModule } from './tab-pets-routing.module';
 
 import { TabPetsPage } from './tab-pets.page';
+import { PipesModule } from '../pipes/pipes.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    TabPetsPageRoutingModule
+    TabPetsPageRoutingModule,
+    PipesModule
   ],
   declarations: [TabPetsPage]
 })
