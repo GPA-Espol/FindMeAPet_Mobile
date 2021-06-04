@@ -1,22 +1,17 @@
-<ion-tabs>
+<ion-tabs (ionTabsWillChange)="changeTab()">
   <ion-tab-bar slot="bottom">
-    <ion-tab-button tab="tab3">
-      <ion-icon src="assets/icon/huella.svg"></ion-icon>
-      <ion-label>Tab 1</ion-label>
-    </ion-tab-button>
-
-    <ion-tab-button tab="tab3">
-      <ion-icon name="ellipse"></ion-icon>
-      <ion-label>Tab 2</ion-label>
-    </ion-tab-button>
-
-    <ion-tab-button tab="tab3">
-      <ion-icon name="square"></ion-icon>
-      <ion-label>Tab 3</ion-label>
-    </ion-tab-button>
-    <ion-tab-button tab="tab-pets">
-      <ion-icon name="square"></ion-icon>
-      <ion-label>Pets</ion-label>
+    <ion-tab-button *ngFor="let tabInfo of tabs" [tab]="tabInfo.tab">
+      <ion-icon
+        *ngIf="tabInfo.tab == tabSelected"
+        [src]="tabInfo.iconActivo"
+      ></ion-icon>
+      <ion-icon
+        *ngIf="tabInfo.tab != tabSelected"
+        [src]="tabInfo.icon"
+      ></ion-icon>
+      <ion-label *ngIf="tabInfo.tab == tabSelected" class="selector">
+        •
+      </ion-label>
     </ion-tab-button>
   </ion-tab-bar>
 </ion-tabs>

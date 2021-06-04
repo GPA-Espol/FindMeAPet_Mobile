@@ -15,6 +15,34 @@ const routes: Routes = [
           ),
       },
       {
+        path: 'perfil',
+        loadChildren: () =>
+          import('../pages/tab-pets/tab-pets.module').then(
+            (m) => m.TabPetsPageModule
+          ),
+      },
+      {
+        path: 'inicio',
+        loadChildren: () =>
+          import('../pages/tab-pets/tab-pets.module').then(
+            (m) => m.TabPetsPageModule
+          ),
+      },
+      {
+        path: 'solicitud',
+        loadChildren: () =>
+          import('../pages/tab-pets/tab-pets.module').then(
+            (m) => m.TabPetsPageModule
+          ),
+      },
+      {
+        path: 'configuracion',
+        loadChildren: () =>
+          import('../pages/tab-pets/tab-pets.module').then(
+            (m) => m.TabPetsPageModule
+          ),
+      },
+      {
         path: '',
         redirectTo: '/tabs/mascotas',
         pathMatch: 'full',
