@@ -5,22 +5,35 @@
 </ion-header>
 
 <ion-content>
+  
+
+  <ion-card id="upload-image">
+    <ion-row class="ion-justify-content-center">
+      <ion-col size="3">
+        <img src="./assets/upload_image.png" />
+      </ion-col>
+    </ion-row>
+  </ion-card>
   <div class="ion-justify-content ion-margin-horizontal ion-margin-top">
     <div>
-      <ion-row>
+      <ion-row class="ion-margin-start">
         <ion-text color="primary"> 1. </ion-text>
         <div class="title">
           <ion-text color="dark"> Nombre </ion-text>
           <ion-text color="danger"> * </ion-text>
         </div>
       </ion-row>
-      <ion-row><sub class="subtitle">Ej: Doraemon, Mimi</sub></ion-row>
-      <ion-item lines="none" class="ion-margin-top ion-margin-horizontal">
-        <ion-input type="text" size="10"></ion-input>
+      <!--ion-row><sub class="subtitle">Ej: Doraemon, Mimi</sub></ion-row-->
+      <ion-item lines="none" class="ion-margin-horizontal">
+        <ion-input
+          type="text"
+          size="10"
+          placeholder="Ej: Doraemon, Mimi"
+        ></ion-input>
       </ion-item>
     </div>
 
-    <ion-row>
+    <!--ion-row>
       <ion-col>
         <ion-row
           ><ion-text color="primary"> 2. </ion-text>
@@ -54,25 +67,61 @@
           </ion-item></ion-row
         ></ion-col
       >
+    </ion-row-->
+    <ion-row class="ion-margin-start"
+      ><ion-text color="primary"> 2. </ion-text>
+      <div class="title">
+        <ion-text color="dark"> Edad </ion-text>
+        <ion-text color="danger"> * </ion-text>
+      </div>
     </ion-row>
+
+    <!--ion-row><sub class="subtitle">Ej: 2 años, 6 meses</sub></ion-row-->
+    <ion-item lines="none" class="ion-margin-top ion-margin-horizontal">
+      <ion-input
+        type="text"
+        size="10"
+        placeholder="Ej: 2 años, 6 meses"
+      ></ion-input>
+    </ion-item>
+    <ion-row class="ion-margin-start">
+      <ion-text color="primary"> 3. </ion-text>
+      <div class="title">
+        <ion-text color="dark"> Sexo </ion-text>
+        <ion-text color="danger"> * </ion-text>
+      </div>
+    </ion-row>
+
+    <!--ion-row
+        ><sub class="subtitle">Ej: Macho, Hembra</sub></ion-row-->
+    <ion-item lines="none" class="ion-margin-top ion-margin-horizontal">
+      <ion-select   placeholder=" " okText="Ok" cancelText="Cancelar">
+        <ion-select-option value="f">Hembra</ion-select-option>
+        <ion-select-option value="m">Macho</ion-select-option>
+      </ion-select>
+    </ion-item>
     <div>
-      <ion-row>
+      <ion-row class="ion-margin-start">
         <ion-text color="primary"> 4. </ion-text>
         <div class="title">
           <ion-text color="dark"> Color </ion-text>
           <ion-text color="danger"> * </ion-text>
         </div>
       </ion-row>
-      <ion-row
+      <!--ion-row
         ><sub class="subtitle"
           >Ej: Amarillo, blanco con manchas negras</sub
         ></ion-row
-      >
+      -->
       <ion-item lines="none" class="ion-margin-top ion-margin-horizontal">
-        <ion-input type="text" size="10"></ion-input>
+        <ion-input
+          type="text"
+          size="10"
+          placeholder="Ej: Amarillo, blanco con manchas negras"
+        ></ion-input>
       </ion-item>
     </div>
-    <ion-row>
+    <ion-row class="ion-margin-start">
       <ion-text color="primary"> 5. </ion-text>
       <div class="title">
         <ion-text color="dark"> Caracteristicas </ion-text>
