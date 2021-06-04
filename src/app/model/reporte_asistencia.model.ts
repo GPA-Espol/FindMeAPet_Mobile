@@ -1,21 +1,21 @@
 import { CantidadComida } from './enums.model';
 
 export class ReporteAsistencia {
-  private _fecha: String | Date;
+  private _fecha: string | Date;
   private _comida: CantidadComida;
-  private _anomalia: String;
-  private _mapa: String;
-  private _fotoL: String[];
+  private _anomalia: string;
+  private _mapa: string;
+  private _fotoL: string[];
 
   constructor() {
     this._fotoL = [];
   }
 
   // Getters and Setters
-  public get fecha(): String | Date {
+  public get fecha(): string | Date {
     return this._fecha;
   }
-  public set fecha(value: String | Date) {
+  public set fecha(value: string | Date) {
     this._fecha = value;
   }
 
@@ -26,21 +26,21 @@ export class ReporteAsistencia {
     this._comida = value;
   }
 
-  public get anomalia(): String {
+  public get anomalia(): string {
     return this._anomalia;
   }
-  public set anomalia(value: String) {
+  public set anomalia(value: string) {
     this._anomalia = value;
   }
 
-  public get mapa(): String {
+  public get mapa(): string {
     return this._mapa;
   }
-  public set mapa(value: String) {
+  public set mapa(value: string) {
     this._mapa = value;
   }
 
-  public get fotoL(): String[] {
+  public get fotoL(): string[] {
     return this._fotoL;
   }
 }

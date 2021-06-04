@@ -1,39 +1,39 @@
 import { EstadoSolicitud } from '../enums.model';
 
 export class Formulario {
-  protected _CI: String;
-  protected _nombre: String;
-  protected _apellido: String;
-  protected _ciudad: String;
-  protected _edad: String;
-  protected _email: String;
-  protected _fecha: Date | String;
-  protected _direccion: String;
+  protected _CI: string;
+  protected _nombre: string;
+  protected _apellido: string;
+  protected _ciudad: string;
+  protected _edad: string;
+  protected _email: string;
+  protected _fecha: Date | string;
+  protected _direccion: string;
   protected _estado: EstadoSolicitud;
 
   //Getters y Setters
-  public get CI(): String {
+  public get CI(): string {
     return this._CI;
   }
-  public get nombre(): String {
+  public get nombre(): string {
     return this._nombre;
   }
-  public get apellido(): String {
+  public get apellido(): string {
     return this._apellido;
   }
-  public get ciudad(): String {
+  public get ciudad(): string {
     return this._ciudad;
   }
-  public get edad(): String {
+  public get edad(): string {
     return this._edad;
   }
-  public get email(): String {
+  public get email(): string {
     return this._email;
   }
-  public get fecha(): Date | String {
+  public get fecha(): Date | string {
     return this._fecha;
   }
-  public get direccion(): String {
+  public get direccion(): string {
     return this._direccion;
   }
   public get estado(): EstadoSolicitud {

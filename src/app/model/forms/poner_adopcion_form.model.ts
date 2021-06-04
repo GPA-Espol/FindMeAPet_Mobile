@@ -2,15 +2,15 @@ import { Mascota } from '../mascota.model';
 import { Formulario } from './formulario.model';
 
 export class FormularioPonerAdopcion extends Formulario {
-  private _motivo: String;
-  private _ubicacion: String[];
+  private _motivo: string;
+  private _ubicacion: string[];
   private _mascota: Mascota;
 
   //Getters
-  public get motivo(): String {
+  public get motivo(): string {
     return this._motivo;
   }
-  public get ubicacion(): String[] {
+  public get ubicacion(): string[] {
     return this._ubicacion;
   }
   public get mascota(): Mascota {

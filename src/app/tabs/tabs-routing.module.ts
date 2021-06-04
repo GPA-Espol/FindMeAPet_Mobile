@@ -4,29 +4,28 @@ import { TabsPage } from './tabs.page';
 
 const routes: Routes = [
   {
-    path: 'tabs',
+    path: '',
     component: TabsPage,
     children: [
       {
-        path: 'tab3',
-        loadChildren: () => import('../pages/tab3/tab3.module').then(m => m.Tab3PageModule)
-      },
-      {
-        path: 'tab-pets',
-        loadChildren: () => import('../tab-pets/tab-pets.module').then(m => m.TabPetsPageModule)
+        path: 'mascotas',
+        loadChildren: () =>
+          import('../pages/tab-pets/tab-pets.module').then(
+            (m) => m.TabPetsPageModule
+          ),
       },
       {
         path: '',
-        redirectTo: '/tabs/tab3',
-        pathMatch: 'full'
-      }
-    ]
+        redirectTo: '/tabs/mascotas',
+        pathMatch: 'full',
+      },
+    ],
   },
   {
     path: '',
-    redirectTo: '/tabs/tab3',
-    pathMatch: 'full'
-  }
+    redirectTo: '/tabs/mascotas',
+    pathMatch: 'full',
+  },
 ];
 
 @NgModule({

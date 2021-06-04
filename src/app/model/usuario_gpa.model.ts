@@ -1,49 +1,48 @@
-import { UserService } from '../services/user.service';
+import { HttpClient } from '@angular/common/http';
 
 export abstract class UsuarioGPA {
-  protected _nombreUsuario: String;
-  protected _nombre: String;
-  protected _apellido: String;
-  protected _edad: String;
-  protected _sexo: String;
+  protected _nombreUsuario: string;
+  protected _nombre: string;
+  protected _apellido: string;
+  protected _edad: string;
+  protected _sexo: string;
   protected _isEstESPOL: boolean;
-  protected _foto: String;
+  protected _foto: string;
 
-  constructor() {}
+  constructor(private http: HttpClient) {}
 
-  public iniciarSesion() {
+  public iniciarSesion(usuario: string, contraseña: string) {
     // TODO implementar método
   }
 
-  //Getters y Setters
-  public get nombreUsuario(): String {
+  public get nombreUsuario(): string {
     return this._nombreUsuario;
   }
-  public set nombreUsuario(value: String) {
+  public set nombreUsuario(value: string) {
     this._nombreUsuario = value;
   }
-  public get nombre(): String {
+  public get nombre(): string {
     return this._nombre;
   }
-  public set nombre(value: String) {
+  public set nombre(value: string) {
     this._nombre = value;
   }
-  public get apellido(): String {
+  public get apellido(): string {
     return this._apellido;
   }
-  public set apellido(value: String) {
+  public set apellido(value: string) {
     this._apellido = value;
   }
-  public get edad(): String {
+  public get edad(): string {
     return this._edad;
   }
-  public set edad(value: String) {
+  public set edad(value: string) {
     this._edad = value;
   }
-  public get sexo(): String {
+  public get sexo(): string {
     return this._sexo;
   }
-  public set sexo(value: String) {
+  public set sexo(value: string) {
     this._sexo = value;
   }
   public get isEstESPOL(): boolean {
@@ -52,10 +51,10 @@ export abstract class UsuarioGPA {
   public set isEstESPOL(value: boolean) {
     this._isEstESPOL = value;
   }
-  public get foto(): String {
+  public get foto(): string {
     return this._foto;
   }
-  public set foto(value: String) {
+  public set foto(value: string) {
     this._foto = value;
   }
 }

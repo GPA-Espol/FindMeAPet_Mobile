@@ -2,15 +2,15 @@ import { EstadoSolicitud } from './enums.model';
 import { Voluntario } from './voluntario.model';
 
 export class SolicitudActualizacionMascota {
-  private _fecha: Date | String;
+  private _fecha: Date | string;
   private _voluntario: Voluntario;
   private _estado: EstadoSolicitud;
 
   //Getters y setters
-  public get fecha(): Date | String {
+  public get fecha(): Date | string {
     return this._fecha;
   }
-  public set fecha(value: Date | String) {
+  public set fecha(value: Date | string) {
     this._fecha = value;
   }
   public get voluntario(): Voluntario {

@@ -1,8 +1,8 @@
 import { TipoPublicacion } from './enums.model';
 
 export class Publicacion {
-  private imagen: String;
-  private descripcion: String;
+  private imagen: string;
+  private descripcion: string;
   private tipo: TipoPublicacion;
-  private fecha: Date | String;
+  private fecha: Date | string;
 }
