@@ -29,12 +29,12 @@
     <ion-searchbar
       animated
       clearIcon
-      placeholder="Buscar"
+      [placeholder]="'Buscar en '+lugarBuscar.toLowerCase()"
       (ionChange)="buscar( $event )"
     ></ion-searchbar>
   </div>
   <div>
-    <ion-card *ngFor="let animal of animals | lugar:lugarBuscar |filtro: textoBuscar ">
+    <ion-card class="card" *ngFor="let animal of animals | lugar:lugarBuscar |filtro: textoBuscar ">
       <ion-list>
         <ion-item lines="none">
           <ion-thumbnail>
@@ -56,5 +56,10 @@
         </ion-item>
       </ion-list>
     </ion-card>
+    
   </div>
+ 
+  <ion-fab slot="fixed" style="bottom: 10px; right: 15px;">
+    <ion-fab-button  routerLink="/tab-pets/add-pet" ><ion-icon  name="add-outline"></ion-icon></ion-fab-button>
+  </ion-fab>
 </ion-content>

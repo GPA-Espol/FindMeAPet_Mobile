@@ -1,0 +1,100 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Agregar mascota</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="ion-justify-content ion-margin-horizontal ion-margin-top">
+    <div>
+      <ion-row>
+        <ion-text color="primary"> 1. </ion-text>
+        <div class="title">
+          <ion-text color="dark"> Nombre </ion-text>
+          <ion-text color="danger"> * </ion-text>
+        </div>
+      </ion-row>
+      <ion-row><sub class="subtitle">Ej: Doraemon, Mimi</sub></ion-row>
+      <ion-item lines="none" class="ion-margin-top ion-margin-horizontal">
+        <ion-input type="text" size="10"></ion-input>
+      </ion-item>
+    </div>
+
+    <ion-row>
+      <ion-col>
+        <ion-row
+          ><ion-text color="primary"> 2. </ion-text>
+          <div class="title">
+            <ion-text color="dark"> Edad </ion-text>
+            <ion-text color="danger"> * </ion-text>
+          </div>
+        </ion-row>
+
+        <ion-row><sub class="subtitle">Ej: 2 años, 6 meses</sub></ion-row>
+        <ion-item lines="none" class="ion-margin-top ion-margin-horizontal">
+          <ion-input type="text" size="10"></ion-input> </ion-item
+      ></ion-col>
+
+      <ion-col>
+        <ion-row>
+          <ion-text color="primary"> 3. </ion-text>
+          <div class="title">
+            <ion-text color="dark"> Sexo </ion-text>
+            <ion-text color="danger"> * </ion-text>
+          </div>
+        </ion-row>
+
+        <ion-row
+          ><sub class="subtitle">Ej: Macho, Hembra</sub>
+          <ion-item lines="none" class="ion-margin-top ion-margin-horizontal">
+            <ion-select placeholder="Sexo" okText="Ok" cancelText="Cancelar">
+              <ion-select-option value="f">Hembra</ion-select-option>
+              <ion-select-option value="m">Macho</ion-select-option>
+            </ion-select>
+          </ion-item></ion-row
+        ></ion-col
+      >
+    </ion-row>
+    <div>
+      <ion-row>
+        <ion-text color="primary"> 4. </ion-text>
+        <div class="title">
+          <ion-text color="dark"> Color </ion-text>
+          <ion-text color="danger"> * </ion-text>
+        </div>
+      </ion-row>
+      <ion-row
+        ><sub class="subtitle"
+          >Ej: Amarillo, blanco con manchas negras</sub
+        ></ion-row
+      >
+      <ion-item lines="none" class="ion-margin-top ion-margin-horizontal">
+        <ion-input type="text" size="10"></ion-input>
+      </ion-item>
+    </div>
+    <ion-row>
+      <ion-text color="primary"> 5. </ion-text>
+      <div class="title">
+        <ion-text color="dark"> Caracteristicas </ion-text>
+      </div>
+    </ion-row>
+    <ion-list>
+      <ion-item lines="none" class="no-margin-item">
+        <ion-label>Esterilizado</ion-label>
+        <ion-checkbox slot="end" color="primary"></ion-checkbox>
+      </ion-item>
+      <ion-item lines="none" class="no-margin-item">
+        <ion-label>Adoptado</ion-label>
+        <ion-checkbox slot="end" color="primary"></ion-checkbox>
+      </ion-item>
+      <ion-item lines="none" class="no-margin-item">
+        <ion-label>Caso Externo</ion-label>
+        <ion-checkbox slot="end" color="primary"></ion-checkbox>
+      </ion-item>
+      <ion-item lines="none" class="no-margin-item">
+        <ion-label>Es adopable</ion-label>
+        <ion-checkbox slot="end" color="primary"></ion-checkbox>
+      </ion-item>
+    </ion-list>
+  </div>
+</ion-content>

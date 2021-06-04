@@ -10,7 +10,11 @@ const routes: Routes = [
   },
   {
     path: 'tab-pets',
-    loadChildren: () => import('./tab-pets/tab-pets.module').then( m => m.TabPetsPageModule)
+    loadChildren: () => import('./pages/tab-pets/tab-pets.module').then( m => m.TabPetsPageModule)
+  },
+  {
+    path: 'tabs',
+    loadChildren: () => import('./tabs/tabs.module').then( m => m.TabsPageModule)
   }
 ];
 @NgModule({

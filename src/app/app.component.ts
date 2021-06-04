@@ -24,6 +24,6 @@ export class AppComponent {
       this.statusBar.backgroundColorByHexString('#EC823A');
       this.splashScreen.hide();
     }
-    this.router.navigateByUrl('tab-pets'); 
+    //this.router.navigateByUrl('tab-pets'); 
   }
 }
