@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  version: 'web'
+  version: 'web',
+  api: 'https://findmepet.herokuapp.com/',
 };
 
 /*

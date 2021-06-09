@@ -7,7 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { TabPetsPageRoutingModule } from './tab-pets-routing.module';
 
 import { TabPetsPage } from './tab-pets.page';
-import { PipesModule } from '../pipes/pipes.module';
+import { PipesModule } from '../../pipes/pipes.module';
 
 @NgModule({
   imports: [
@@ -15,8 +15,8 @@ import { PipesModule } from '../pipes/pipes.module';
     FormsModule,
     IonicModule,
     TabPetsPageRoutingModule,
-    PipesModule
+    PipesModule,
   ],
-  declarations: [TabPetsPage]
+  declarations: [TabPetsPage],
 })
 export class TabPetsPageModule {}

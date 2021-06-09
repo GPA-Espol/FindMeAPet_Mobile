@@ -1,24 +1,24 @@
 import { Personalidad, UbicacionMascota } from './enums.model';
 
 export class Mascota {
-  private _nombre: String;
+  private _nombre: string;
   private _edad: number;
-  private _color: String;
+  private _color: string;
   private _ublicacionMascota: UbicacionMascota;
   private _isEsterilizado: boolean;
   private _isAdoptado: boolean;
   private _isCasoExterno: boolean;
   private _isAdoptable: boolean;
-  private _descripcion: String;
+  private _descripcion: string;
   private _personalidadL: Personalidad[];
-  private _sexo: String;
-  private _tipoAnimal: String;
+  private _sexo: string;
+  private _tipoAnimal: string;
 
   //Getters y Setters
-  public get nombre(): String {
+  public get nombre(): string {
     return this._nombre;
   }
-  public set nombre(value: String) {
+  public set nombre(value: string) {
     this._nombre = value;
   }
 
@@ -29,10 +29,10 @@ export class Mascota {
     this._edad = value;
   }
 
-  public get color(): String {
+  public get color(): string {
     return this._color;
   }
-  public set color(value: String) {
+  public set color(value: string) {
     this._color = value;
   }
 
@@ -71,10 +71,10 @@ export class Mascota {
     this._isAdoptable = value;
   }
 
-  public get descripcion(): String {
+  public get descripcion(): string {
     return this._descripcion;
   }
-  public set descripcion(value: String) {
+  public set descripcion(value: string) {
     this._descripcion = value;
   }
 
@@ -84,16 +84,16 @@ export class Mascota {
   public set personalidadL(value: Personalidad[]) {
     this._personalidadL = value;
   }
-  public get sexo(): String {
+  public get sexo(): string {
     return this._sexo;
   }
-  public set sexo(value: String) {
+  public set sexo(value: string) {
     this._sexo = value;
   }
-  public get tipoAnimal(): String {
+  public get tipoAnimal(): string {
     return this._tipoAnimal;
   }
-  public set tipoAnimal(value: String) {
+  public set tipoAnimal(value: string) {
     this._tipoAnimal = value;
   }
 }

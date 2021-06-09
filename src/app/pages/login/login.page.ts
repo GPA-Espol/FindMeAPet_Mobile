@@ -1,6 +1,9 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { IonGrid } from '@ionic/angular';
+import { AlertaService } from 'src/app/services/alerta.service';
+import { SistemaService } from 'src/app/services/sistema.service';
 
 enum UserType {
   Volunteer = 'Voluntario',
@@ -18,7 +21,11 @@ export class LoginPage implements OnInit {
   otherUserType: UserType = UserType.Admin;
   @ViewChild('separator') separator: ElementRef;
   @ViewChild('content') content: ElementRef;
-  constructor() {}
+  constructor(
+    private sistema: SistemaService,
+    private alertaService: AlertaService,
+    private router: Router
+  ) {}
 
   ngOnInit() {
     this.initForm();
@@ -31,23 +38,17 @@ export class LoginPage implements OnInit {
     });
   }
 
-  login() {}
-
-  switchUserType() {
-    this.separator.nativeElement.classList.add('switch-user-type-animation');
-    this.content.nativeElement.classList.add('switch-user-type-animation');
-    setTimeout(() => {
-      this.separator.nativeElement.classList.remove(
-        'switch-user-type-animation'
-      );
-      this.content.nativeElement.classList.remove('switch-user-type-animation');
-    }, 500);
-    if (this.userType == UserType.Admin) {
-      this.userType = UserType.Volunteer;
-      this.otherUserType = UserType.Admin;
-    } else {
-      this.userType = UserType.Admin;
-      this.otherUserType = UserType.Volunteer;
+  async iniciarSesion() {
+    const usuario = this.loginForm.get('user').value;
+    const contraseña = this.loginForm.get('password').value;
+    await this.alertaService.presentLoading('Iniciando sesión...');
+    try {
+      await this.sistema.login(usuario, contraseña);
+      this.router.navigateByUrl('/tabs', { replaceUrl: true });
+    } catch (err) {
+      console.error('Error al iniciar sesion: ', err);
+      this.alertaService.presentToast('Usuario o contraseña incorrectas');
     }
+    this.alertaService.dismissLoading();
   }
 }
