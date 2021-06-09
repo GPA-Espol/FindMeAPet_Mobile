@@ -42,8 +42,13 @@ export class LoginPage implements OnInit {
     const usuario = this.loginForm.get('user').value;
     const contraseña = this.loginForm.get('password').value;
     await this.alertaService.presentLoading('Iniciando sesión...');
-    await this.sistema.login(usuario, contraseña);
-    this.router.navigateByUrl('/tabs', { replaceUrl: true });
+    try {
+      await this.sistema.login(usuario, contraseña);
+      this.router.navigateByUrl('/tabs', { replaceUrl: true });
+    } catch (err) {
+      console.error('Error al iniciar sesion: ', err);
+      this.alertaService.presentToast('Usuario o contraseña incorrectas');
+    }
     this.alertaService.dismissLoading();
   }
 }
