@@ -40,6 +40,10 @@ export class SistemaService {
     await this.store.remove('usuario');
   }
 
+  public async userLoggedIn() {
+    return await this.store.get('usuario');
+  }
+
   public async getMascotas(forceReload = false) {
     let url = environment.api + 'mascota';
     if (

@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { AuthAdminGuard, AuthVoluntarioGuard } from './auth.guard';
 
 const routes: Routes = [
   {
@@ -11,11 +12,13 @@ const routes: Routes = [
     path: 'tabs/admin',
     loadChildren: () =>
       import('./tabs-admin/tabs.module').then((m) => m.TabsPageModule),
+    canActivate: [AuthAdminGuard],
   },
   {
     path: 'tabs/voluntario',
     loadChildren: () =>
       import('./tabs-voluntario/tabs.module').then((m) => m.TabsPageModule),
+    canActivate: [AuthVoluntarioGuard],
   },
 ];
 @NgModule({

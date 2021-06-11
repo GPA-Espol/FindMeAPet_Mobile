@@ -19,7 +19,10 @@ export class StorageService {
     await this._storage.set(key, value);
   }
 
-  get(key: string) {
+  async get(key: string) {
+    if (!this._storage) {
+      await this.init();
+    }
     return this._storage.get(key);
   }
 

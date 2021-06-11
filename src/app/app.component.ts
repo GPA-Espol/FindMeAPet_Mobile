@@ -5,6 +5,7 @@ import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { environment } from 'src/environments/environment';
 import { Router } from '@angular/router';
 import { SistemaService } from './services/sistema.service';
+import { RolUsuario } from './model/enums.model';
 
 @Component({
   selector: 'app-root',
@@ -21,12 +22,19 @@ export class AppComponent {
     this.initializeApp();
   }
 
-  initializeApp() {
+  async initializeApp() {
     if (environment.version != 'web') {
       this.statusBar.backgroundColorByHexString('#EC823A');
       this.splashScreen.hide();
     }
-  
+    let userLoggedIn = await this.sistema.userLoggedIn();
+    if (userLoggedIn) {
+      if (userLoggedIn.rol == RolUsuario.ADMIN) {
+        this.router.navigateByUrl('/tabs/admin', { replaceUrl: true });
+      } else {
+        this.router.navigateByUrl('/tabs/voluntario', { replaceUrl: true });
+      }
+    }
   }
 
   public async cerrarSesion() {
