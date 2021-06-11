@@ -15,8 +15,8 @@ import { PipesModule } from '../../pipes/pipes.module';
     FormsModule,
     IonicModule,
     TabPetsPageRoutingModule,
-    PipesModule
+    PipesModule,
   ],
-  declarations: [TabPetsPage]
+  declarations: [TabPetsPage],
 })
 export class TabPetsPageModule {}

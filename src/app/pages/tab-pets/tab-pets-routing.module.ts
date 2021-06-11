@@ -9,7 +9,7 @@ const routes: Routes = [
     component: TabPetsPage
   },
   {
-    path: 'add-pet',
+    path: 'anadir',
     loadChildren: () => import('./add-pet/add-pet.module').then( m => m.AddPetPageModule)
   },
   {

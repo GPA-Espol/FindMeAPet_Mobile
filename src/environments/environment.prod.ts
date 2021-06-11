@@ -1,4 +1,5 @@
 export const environment = {
   production: true,
-  version: 'mobile'
+  version: 'mobile',
+  api: 'https://findmepet.herokuapp.com/',
 };

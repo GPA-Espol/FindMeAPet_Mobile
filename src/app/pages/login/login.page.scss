@@ -81,24 +81,3 @@ ion-input {
 .login-link span {
   border-bottom: 1px solid white;
 }
-
-/*
- * Animaciones
- */
-@keyframes switch-user-type {
-  0% {
-    transform: translateY(0vh);
-  }
-  50% {
-    transform: translateY(100vh);
-  }
-  100% {
-    transform: translateY(0vh);
-  }
-}
-
-.switch-user-type-animation {
-  animation-name: switch-user-type;
-  animation-duration: 0.5s;
-  animation-iteration-count: 1;
-}

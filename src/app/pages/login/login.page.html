@@ -8,15 +8,15 @@
       <img src="/assets/icon/logo_GPA.jpg" alt="" width="160" height="160" />
     </ion-row>
     <div class="separator" #separator></div>
-    <div class="login-content" #content> 
+    <div class="login-content" #content>
       <ion-row>
         <div class="welcome ion-text-center ion-padding-top">Bienvenido,</div>
         <div class="login-info ion-text-center">
-          Accede como {{userType}} de GPA
+          Accede a tu cuenta de GPA
         </div>
       </ion-row>
       <ion-row class="ion-padding ion-margin-horizontal">
-        <form [formGroup]="loginForm" (ngSubmit)="login()">
+        <form [formGroup]="loginForm" (ngSubmit)="iniciarSesion()">
           <ion-item>
             <ion-label position="floating"
               >Usuario <ion-text>*</ion-text></ion-label
@@ -50,15 +50,11 @@
             Por favor ingresa la contraseña
           </ion-row>
           <ion-row class="ion-margin ion-justify-content-center">
-            <ion-button shape="round" color="light">Iniciar sesión</ion-button>
+            <ion-button shape="round" color="light" (click)="iniciarSesion()">
+              Iniciar sesión</ion-button
+            >
           </ion-row>
         </form>
-      </ion-row>
-      <ion-row>
-        <div class="login-info ion-text-center">¿Eres {{otherUserType}}?</div>
-        <div class="login-info login-link ion-text-center">
-          <span (click)="switchUserType()" tappable> Inicia sesión aquí</span>
-        </div>
       </ion-row>
     </div>
   </div>
