@@ -1,0 +1,21 @@
+.content {
+  border-top-right-radius: 15px;
+  border-top-left-radius: 15px;
+  border-top-color: indigo;
+  border-width: 50px;
+}
+
+.list-time {
+  width: 70px;
+  min-height: 4.3em;
+}
+.list-time.purple-border {
+  border-right: 2px solid purple;
+}
+.list-time.orange-border {
+  border-right: 2px solid orange;
+}
+.list-time .bold {
+  color: black;
+}
+
