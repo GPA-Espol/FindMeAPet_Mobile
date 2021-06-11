@@ -5,8 +5,6 @@
 </ion-header>
 
 <ion-content>
-  
-
   <ion-card id="upload-image">
     <ion-row class="ion-justify-content-center">
       <ion-col size="3">
@@ -77,13 +75,33 @@
     </ion-row>
 
     <!--ion-row><sub class="subtitle">Ej: 2 años, 6 meses</sub></ion-row-->
-    <ion-item lines="none" class="ion-margin-top ion-margin-horizontal">
-      <ion-input
-        type="text"
-        size="10"
-        placeholder="Ej: 2 años, 6 meses"
-      ></ion-input>
-    </ion-item>
+    <ion-row class="ion-margin-start my-vertical-margin">
+      <ion-col size="3" class="ion-no-margin">
+        <ion-item lines="none" class="ion-no-margin number-margin">
+          <ion-input type="number" size="5"></ion-input>
+        </ion-item>
+      </ion-col>
+      <ion-col size="5" class="ion-no-margin">
+        <ion-item lines="none" class="number-margin">
+          <ion-select placeholder="Tiempo" okText="Ok" cancelText="Cancelar" [(ngModel)]="ageType">
+            <ion-select-option value="y">Año(s)</ion-select-option>
+            <ion-select-option value="m">Mes(es)</ion-select-option>
+            <ion-select-option value="w">Semanas(s)</ion-select-option>
+            <ion-select-option value="d">Día(s)</ion-select-option>
+          </ion-select>
+        </ion-item>
+      </ion-col>
+      <ion-button *ngIf="this.ageType=='y'||this.ageType=='m'||this.ageType=='w'" class="more-button" fill="clear" (click)="extraInformation=!extraInformation" >{{!extraInformation? 'más':'menos'}}</ion-button>
+    </ion-row>
+    <ion-row *ngIf="extraInformation && (this.ageType=='y'||this.ageType=='m'||this.ageType=='w')" class="ion-margin-start my-vertical-margin ion-align-items-center extra-content my-padding">
+      <ion-col size="3" class="ion-no-margin ion-margin-start  ">
+        <ion-item lines="none" class="ion-no-margin number-margin">
+          <ion-input type="number" size="5"></ion-input>
+        </ion-item>
+      </ion-col>
+      <ion-col size="4" class="ion-no-margin"> {{this.ageType=='y'? 'Meses': this.ageType=='m'? 'Semanas': 'Días' }} </ion-col>
+    </ion-row>
+    
     <ion-row class="ion-margin-start">
       <ion-text color="primary"> 3. </ion-text>
       <div class="title">
@@ -95,7 +113,8 @@
     <!--ion-row
         ><sub class="subtitle">Ej: Macho, Hembra</sub></ion-row-->
     <ion-item lines="none" class="ion-margin-top ion-margin-horizontal">
-      <ion-select   placeholder=" " okText="Ok" cancelText="Cancelar">
+      <ion-label>Sexo de la mascota</ion-label>
+      <ion-select placeholder=" Elegir uno" okText="Ok" cancelText="Cancelar">
         <ion-select-option value="f">Hembra</ion-select-option>
         <ion-select-option value="m">Macho</ion-select-option>
       </ion-select>
@@ -124,7 +143,26 @@
     <ion-row class="ion-margin-start">
       <ion-text color="primary"> 5. </ion-text>
       <div class="title">
+        <ion-text color="dark"> Ubicación </ion-text>
+        <ion-text color="danger"> * </ion-text>
+      </div>
+    </ion-row>
+
+    
+    <ion-item lines="none" class="ion-margin-top ion-margin-horizontal">
+      <ion-label>Lugar</ion-label>
+      <ion-select placeholder="Seleccione uno" okText="Ok" cancelText="Cancelar">
+        <ion-select-option value="f">Refugio</ion-select-option>
+        <ion-select-option value="e">Externo</ion-select-option>
+        <ion-select-option value="d">Dentro de Espol</ion-select-option>
+        <ion-select-option value="h">Hogar Temporal</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-row class="ion-margin-start">
+      <ion-text color="primary"> 6. </ion-text>
+      <div class="title">
         <ion-text color="dark"> Caracteristicas </ion-text>
+        <ion-text color="danger"> * </ion-text>
       </div>
     </ion-row>
     <ion-list>
@@ -145,5 +183,57 @@
         <ion-checkbox slot="end" color="primary"></ion-checkbox>
       </ion-item>
     </ion-list>
+    <div>
+      <ion-row class="ion-margin-start ion-margin-top">
+        <ion-text color="primary"> 7. </ion-text>
+        <div class="title">
+          <ion-text color="dark"> Personalidad </ion-text>
+          <ion-text color="danger"> * </ion-text>
+        </div>
+      </ion-row>
+      
+      <ion-item lines="none" class="ion-margin-top ion-margin-horizontal">
+        <ion-label>Personalidad</ion-label>
+        <ion-select placeholder="Seleccione uno" okText="Ok" cancelText="Cancelar">
+          <ion-select-option value="f">Tímido</ion-select-option>
+          <ion-select-option value="e">Dócil</ion-select-option>
+          <ion-select-option value="d">Sociable</ion-select-option>
+          <ion-select-option value="h">Féroz</ion-select-option>
+          <ion-select-option value="j">Juguetón</ion-select-option>
+        </ion-select>
+      </ion-item>
+    </div>
+    <div>
+      <ion-row class="ion-margin-start ion-margin-top">
+        <ion-text color="primary"> 8. </ion-text>
+        <div class="title">
+          <ion-text color="dark"> Tipo de animal </ion-text>
+          <ion-text color="danger"> * </ion-text>
+        </div>
+      </ion-row>
+      
+      <ion-item lines="none" class="ion-margin-top ion-margin-horizontal">
+        <ion-label>Tipo</ion-label>
+        <ion-select placeholder="Seleccione uno" okText="Ok" cancelText="Cancelar">
+          <ion-select-option value="f">Perro</ion-select-option>
+          <ion-select-option value="e">Gato</ion-select-option>
+          
+        </ion-select>
+      </ion-item>
+    </div>
+    <div>
+      <ion-row class="ion-margin-start">
+        <ion-text color="primary"> 9. </ion-text>
+        <div class="title">
+          <ion-text color="dark"> Descripción </ion-text>
+        </div>
+      </ion-row>
+      
+      <ion-item>
+        
+        <ion-textarea auto-grow rows="4" placeholder="Breve descripción de la mascota"></ion-textarea>
+      </ion-item>
+    </div>
+    
   </div>
 </ion-content>

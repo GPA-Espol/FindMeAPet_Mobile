@@ -32,6 +32,14 @@ ion-select {
     margin: 10px;
 }
 
+.number-margin{
+  margin: 0px;
+}
+.my-vertical-margin{
+  margin-bottom: 5px;
+  margin-top: 5px;
+}
+
 .title {
   margin-left: 10px;
 }
@@ -39,15 +47,35 @@ ion-select {
   font-style: italic;
   margin-left: 19px;
   color: grey;
-  padding-top: 2px;
+  
 }
 #upload-image{
   
   //--background:rgb(196, 196, 196);
   --background:rgb(201, 201, 201);
   border-radius: 15px !important;
-  
+  --padding-left: 50px;
+  margin-left: 50px;
+  margin-right: 50px;
 }
+.extra-content{
+  background-color: #F5F5FA ;
+  -moz-border-radius: 50px;
+  -webkit-border-radius: 50px;
+  border-radius: 20px;
+
+}
+.my-padding{
+  margin-left: 20px;
+  margin-right: 20px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+/*.more-button{
+  --background: transparent;
+  --color: #ec823a;
+  --background-activated:#eec4a2;
+}*/
 * {
   //--ion-background-color: #f5f5f5;
   font-family: "Poppins", sans-serif;

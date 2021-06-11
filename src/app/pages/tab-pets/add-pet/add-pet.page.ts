@@ -6,6 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./add-pet.page.scss'],
 })
 export class AddPetPage implements OnInit {
+  extraInformation: boolean = false;
 
   constructor() { }
 

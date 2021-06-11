@@ -34,7 +34,7 @@
     ></ion-searchbar>
   </div>
   <div>
-    <ion-card class="card" *ngFor="let animal of animals | lugar:lugarBuscar |filtro: textoBuscar ">
+    <ion-card class="card" *ngFor="let animal of animals | lugar:lugarBuscar |filtro: textoBuscar " routerLink="/tab-pets/specific-pet">
       <ion-list>
         <ion-item lines="none">
           <ion-thumbnail>
