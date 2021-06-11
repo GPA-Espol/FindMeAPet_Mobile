@@ -18,15 +18,24 @@ export class SistemaService {
 
   public async login(usuario: string, password: string) {
     let loginUrl = environment.api + 'auth';
-    let { token, rol } = /*await this.http
+    let { token, rol } = await this.http
       .post<any>(loginUrl, { usuario, password })
-      .toPromise();*/ { token: 'a', rol: 'Admin' };
-    await this.store.set('user', { token, rol });
+      .toPromise();
+    await this.store.set('usuario', { token, rol });
     if (rol == RolUsuario.ADMIN) {
       this._usuario = new Administrador(this.http);
     } else {
       this._usuario = new Voluntario(this.http);
     }
     return rol;
+  }
+
+  public async logout() {
+    this._usuario = undefined;
+    await this.store.remove('usuario');
+  }
+
+  public get usuario() {
+    return this._usuario;
   }
 }
