@@ -14,6 +14,18 @@ export class Mascota {
   private _sexo: string;
   private _tipoAnimal: string;
 
+  static deserialize(data: any[]) {
+    return data.map((mascota) => {
+      let mascotaResult = new Mascota();
+      Object.assign(mascotaResult, mascota);
+      mascotaResult._isEsterilizado = mascota.is_esterilizado;
+      mascotaResult._isAdoptable = mascota.is_adoptable;
+      mascotaResult._isAdoptado = mascota.is_adoptado;
+      mascotaResult._isCasoExterno = mascota.is_caso_externo;
+      return mascotaResult;
+    });
+  }
+
   //Getters y Setters
   public get nombre(): string {
     return this._nombre;

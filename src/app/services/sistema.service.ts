@@ -3,18 +3,23 @@ import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { Administrador } from '../model/admin/administrador.model';
 import { RolUsuario } from '../model/enums.model';
+import { Mascota } from '../model/mascota.model';
 import { UsuarioGPA } from '../model/usuario_gpa.model';
 import { Voluntario } from '../model/voluntario.model';
+import { Utils } from '../utils/utils';
 import { StorageService } from './storage.service';
 @Injectable({
   providedIn: 'root',
 })
 export class SistemaService {
   private _usuario: UsuarioGPA;
+  private _mascotas: { data: Mascota[]; time: number };
 
-  constructor(private http: HttpClient, private store: StorageService) {
-    console.log('creandose');
-  }
+  constructor(
+    private http: HttpClient,
+    private store: StorageService,
+    private utils: Utils
+  ) {}
 
   public async login(usuario: string, password: string) {
     let loginUrl = environment.api + 'auth';
@@ -35,7 +40,25 @@ export class SistemaService {
     await this.store.remove('usuario');
   }
 
-  public get usuario() {
-    return this._usuario;
+  public async getMascotas(forceReload = false) {
+    let url = environment.api + 'mascota';
+    if (
+      forceReload ||
+      !this._mascotas ||
+      this.utils.cacheExpired(this._mascotas.time)
+    ) {
+      let data = await this.http.get<any[]>(url).toPromise();
+      let now = new Date().getTime();
+      this._mascotas = { data: Mascota.deserialize(data), time: now };
+    }
+    return this._mascotas.data;
+  }
+
+  public get voluntario() {
+    return this._usuario as Voluntario;
+  }
+
+  public get admin() {
+    return this._usuario as Administrador;
   }
 }
