@@ -9,11 +9,7 @@ export abstract class UsuarioGPA {
   protected _isEstESPOL: boolean;
   protected _foto: string;
 
-  constructor(private http: HttpClient) {}
-
-  public iniciarSesion(usuario: string, contraseña: string) {
-    // TODO implementar método
-  }
+  constructor(protected http: HttpClient) {}
 
   public get nombreUsuario(): string {
     return this._nombreUsuario;

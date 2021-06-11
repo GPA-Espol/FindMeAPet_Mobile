@@ -2,6 +2,7 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { IonGrid } from '@ionic/angular';
+import { RolUsuario } from 'src/app/model/enums.model';
 import { AlertaService } from 'src/app/services/alerta.service';
 import { SistemaService } from 'src/app/services/sistema.service';
 
@@ -43,8 +44,12 @@ export class LoginPage implements OnInit {
     const contraseña = this.loginForm.get('password').value;
     await this.alertaService.presentLoading('Iniciando sesión...');
     try {
-      await this.sistema.login(usuario, contraseña);
-      this.router.navigateByUrl('/tabs', { replaceUrl: true });
+      let rol = await this.sistema.login(usuario, contraseña);
+      if (rol == RolUsuario.ADMIN) {
+        this.router.navigateByUrl('/tabs/admin', { replaceUrl: true });
+      } else {
+        this.router.navigateByUrl('/tabs/voluntario', { replaceUrl: true });
+      }
     } catch (err) {
       console.error('Error al iniciar sesion: ', err);
       this.alertaService.presentToast('Usuario o contraseña incorrectas');

@@ -8,9 +8,14 @@ const routes: Routes = [
       import('./pages/login/login.module').then((m) => m.LoginPageModule),
   },
   {
-    path: 'tabs',
+    path: 'tabs/admin',
     loadChildren: () =>
-      import('./tabs/tabs.module').then((m) => m.TabsPageModule),
+      import('./tabs-admin/tabs.module').then((m) => m.TabsPageModule),
+  },
+  {
+    path: 'tabs/voluntario',
+    loadChildren: () =>
+      import('./tabs-voluntario/tabs.module').then((m) => m.TabsPageModule),
   },
 ];
 @NgModule({

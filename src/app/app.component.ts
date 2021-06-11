@@ -4,6 +4,7 @@ import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 
 import { environment } from 'src/environments/environment';
 import { Router } from '@angular/router';
+import { SistemaService } from './services/sistema.service';
 
 @Component({
   selector: 'app-root',
@@ -14,7 +15,8 @@ export class AppComponent {
   constructor(
     private statusBar: StatusBar,
     private splashScreen: SplashScreen,
-    private router: Router
+    private router: Router,
+    private sistema: SistemaService
   ) {
     this.initializeApp();
   }
@@ -24,5 +26,10 @@ export class AppComponent {
       this.statusBar.backgroundColorByHexString('#EC823A');
       this.splashScreen.hide();
     }
+  }
+
+  public async cerrarSesion() {
+    await this.sistema.logout();
+    this.router.navigateByUrl('/', { replaceUrl: true });
   }
 }

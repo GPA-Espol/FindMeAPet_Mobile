@@ -1,3 +1,8 @@
+export enum RolUsuario {
+  VOLUNTARIO = 'Voluntario',
+  ADMIN = 'Admin',
+}
+
 export enum RolVoluntario {
   RECORRIDO = 'Recorrido',
   REFUGIO = 'Refugio',
