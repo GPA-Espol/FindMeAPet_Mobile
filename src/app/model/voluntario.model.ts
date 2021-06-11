@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Dia, RolVoluntario } from './enums.model';
 import { UsuarioGPA } from './usuario_gpa.model';
 
@@ -5,8 +6,8 @@ export class Voluntario extends UsuarioGPA {
   private _rol: RolVoluntario[];
   private _horario: Dia[];
 
-  constructor() {
-    super();
+  constructor(http: HttpClient) {
+    super(http);
     this._rol = [];
     this._horario = [];
   }

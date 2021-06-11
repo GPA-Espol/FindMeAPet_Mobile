@@ -1,0 +1,17 @@
+<ion-tabs (ionTabsWillChange)="changeTab()">
+  <ion-tab-bar slot="bottom">
+    <ion-tab-button *ngFor="let tabInfo of tabs" [tab]="tabInfo.tab">
+      <ion-icon
+        *ngIf="tabInfo.tab == tabSelected"
+        [src]="tabInfo.iconActivo"
+      ></ion-icon>
+      <ion-icon
+        *ngIf="tabInfo.tab != tabSelected"
+        [src]="tabInfo.icon"
+      ></ion-icon>
+      <ion-label *ngIf="tabInfo.tab == tabSelected" class="selector">
+        •
+      </ion-label>
+    </ion-tab-button>
+  </ion-tab-bar>
+</ion-tabs>

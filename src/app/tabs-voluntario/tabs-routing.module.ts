@@ -44,14 +44,14 @@ const routes: Routes = [
       },
       {
         path: '',
-        redirectTo: '/tabs/mascotas',
+        redirectTo: '/tabs/voluntario/mascotas',
         pathMatch: 'full',
       },
     ],
   },
   {
     path: '',
-    redirectTo: '/tabs/mascotas',
+    redirectTo: '/tabs/voluntario/mascotas',
     pathMatch: 'full',
   },
 ];
