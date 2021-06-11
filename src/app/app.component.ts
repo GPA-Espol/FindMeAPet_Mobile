@@ -26,6 +26,7 @@ export class AppComponent {
       this.statusBar.backgroundColorByHexString('#EC823A');
       this.splashScreen.hide();
     }
+  
   }
 
   public async cerrarSesion() {
