@@ -94,7 +94,21 @@ describe('SistemaService', () => {
     expect(await service.userLoggedIn()).toBeFalsy();
   });
 
-  it('Should get pets info', () => {});
+  it("shouldn't log in, unauthorized", (done) => {
+    service
+      .login('admin', '1234')
+      .then(() => {})
+      .catch(async (err) => {
+        expect(err).toBeTruthy();
+        let userLogged = await storage.get('usuario');
+        expect(userLogged).toBeFalsy();
+        expect(service.voluntario).toBeFalsy();
+        done();
+      });
+
+    const req = httpMock.expectOne(`${environment.api}auth`);
+    req.error(new ErrorEvent('Unauthorized'));
+  });
 
   afterEach(() => {
     httpMock.verify();

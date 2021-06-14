@@ -24,6 +24,6 @@ getTestBed().initTestEnvironment(
   platformBrowserDynamicTesting()
 );
 // Then we find all the tests.
-const context = require.context('./', true, /sistema\.service\.spec\.ts$/);
+const context = require.context('./', true, /auth\.guard\.spec\.ts$/);
 // And load the modules.
 context.keys().map(context);

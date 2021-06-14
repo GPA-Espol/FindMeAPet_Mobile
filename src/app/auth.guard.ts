@@ -14,6 +14,7 @@ export class LoggedInGuard implements CanActivate {
       return true;
     }
     this.router.navigateByUrl('/', { replaceUrl: true });
+    return false;
   }
 }
 
@@ -29,6 +30,7 @@ export class AuthAdminGuard implements CanActivate {
       return true;
     }
     this.router.navigateByUrl('/', { replaceUrl: true });
+    return false;
   }
 }
 
@@ -44,5 +46,6 @@ export class AuthVoluntarioGuard implements CanActivate {
       return true;
     }
     this.router.navigateByUrl('/', { replaceUrl: true });
+    return false;
   }
 }
