@@ -16,6 +16,9 @@ export class StorageService {
   }
 
   async set(key: string, value: any) {
+    if (!this._storage) {
+      await this.init();
+    }
     await this._storage.set(key, value);
   }
 
@@ -27,6 +30,9 @@ export class StorageService {
   }
 
   async remove(key: string) {
+    if (!this._storage) {
+      await this.init();
+    }
     await this._storage.remove(key);
   }
 }
