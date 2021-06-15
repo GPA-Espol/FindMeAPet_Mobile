@@ -5,6 +5,6 @@ import { LugarPipe } from './lugar.pipe';
 
 @NgModule({
   declarations: [FiltroPipe, LugarPipe],
-  exports : [FiltroPipe, LugarPipe]
+  exports: [FiltroPipe, LugarPipe],
 })
 export class PipesModule {}
