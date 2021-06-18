@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AddPetPage implements OnInit {
   extraInformation: boolean = false;
-
+  ageType: string = '';
   constructor() { }
 
   ngOnInit() {
