@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 
@@ -6,6 +6,7 @@ import { environment } from 'src/environments/environment';
 import { Router } from '@angular/router';
 import { SistemaService } from './services/sistema/sistema.service';
 import { RolUsuario } from './model/enums.model';
+import { IonMenu } from '@ionic/angular';
 
 @Component({
   selector: 'app-root',
@@ -13,6 +14,7 @@ import { RolUsuario } from './model/enums.model';
   styleUrls: ['app.component.scss'],
 })
 export class AppComponent {
+  @ViewChild('ion-menu') ionMenu: IonMenu;
   constructor(
     private statusBar: StatusBar,
     private splashScreen: SplashScreen,
@@ -39,6 +41,7 @@ export class AppComponent {
 
   public async cerrarSesion() {
     await this.sistema.logout();
+    this.ionMenu.close(true);
     this.router.navigateByUrl('/', { replaceUrl: true });
   }
 }

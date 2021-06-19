@@ -30,6 +30,7 @@ export class Mascota {
   public get nombre(): string {
     return this._nombre;
   }
+
   public set nombre(value: string) {
     this._nombre = value;
   }
@@ -37,6 +38,7 @@ export class Mascota {
   public get edad(): number {
     return this._edad;
   }
+
   public set edad(value: number) {
     this._edad = value;
   }
@@ -44,6 +46,7 @@ export class Mascota {
   public get color(): string {
     return this._color;
   }
+
   public set color(value: string) {
     this._color = value;
   }
@@ -51,6 +54,7 @@ export class Mascota {
   public get ublicacionMascota(): UbicacionMascota {
     return this._ublicacionMascota;
   }
+
   public set ublicacionMascota(value: UbicacionMascota) {
     this._ublicacionMascota = value;
   }
@@ -58,6 +62,7 @@ export class Mascota {
   public get isEsterilizado(): boolean {
     return this._isEsterilizado;
   }
+
   public set isEsterilizado(value: boolean) {
     this._isEsterilizado = value;
   }
@@ -65,6 +70,7 @@ export class Mascota {
   public get isAdoptado(): boolean {
     return this._isAdoptado;
   }
+
   public set isAdoptado(value: boolean) {
     this._isAdoptado = value;
   }
@@ -72,6 +78,7 @@ export class Mascota {
   public get isCasoExterno(): boolean {
     return this._isCasoExterno;
   }
+
   public set isCasoExterno(value: boolean) {
     this._isCasoExterno = value;
   }
@@ -79,6 +86,7 @@ export class Mascota {
   public get isAdoptable(): boolean {
     return this._isAdoptable;
   }
+
   public set isAdoptable(value: boolean) {
     this._isAdoptable = value;
   }
@@ -86,6 +94,7 @@ export class Mascota {
   public get descripcion(): string {
     return this._descripcion;
   }
+
   public set descripcion(value: string) {
     this._descripcion = value;
   }
@@ -93,18 +102,23 @@ export class Mascota {
   public get personalidadL(): Personalidad[] {
     return this._personalidadL;
   }
+
   public set personalidadL(value: Personalidad[]) {
     this._personalidadL = value;
   }
+
   public get sexo(): string {
     return this._sexo;
   }
+
   public set sexo(value: string) {
     this._sexo = value;
   }
+
   public get tipoAnimal(): string {
     return this._tipoAnimal;
   }
+
   public set tipoAnimal(value: string) {
     this._tipoAnimal = value;
   }

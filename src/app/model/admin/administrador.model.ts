@@ -16,15 +16,19 @@ export class Administrador extends UsuarioGPA {
   public get adminUsuario(): AdministrarUsuario {
     return this._adminUsuario;
   }
+
   public get adminReporteAsistencia(): AdministrarReporteAsistencia {
     return this._adminReporteAsistencia;
   }
+
   public get adminFormulario(): AdministrarFormulario {
     return this._adminFormulario;
   }
+
   public get adminMascota(): AdministrarMascota {
     return this._adminMascota;
   }
+
   public get adminPublicacion(): AdministrarPublicacion {
     return this._adminPublicacion;
   }

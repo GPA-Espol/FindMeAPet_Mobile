@@ -15,6 +15,7 @@ export class ReporteAsistencia {
   public get fecha(): string | Date {
     return this._fecha;
   }
+
   public set fecha(value: string | Date) {
     this._fecha = value;
   }
@@ -22,6 +23,7 @@ export class ReporteAsistencia {
   public get comida(): CantidadComida {
     return this._comida;
   }
+
   public set comida(value: CantidadComida) {
     this._comida = value;
   }
@@ -29,6 +31,7 @@ export class ReporteAsistencia {
   public get anomalia(): string {
     return this._anomalia;
   }
+
   public set anomalia(value: string) {
     this._anomalia = value;
   }
@@ -36,6 +39,7 @@ export class ReporteAsistencia {
   public get mapa(): string {
     return this._mapa;
   }
+
   public set mapa(value: string) {
     this._mapa = value;
   }

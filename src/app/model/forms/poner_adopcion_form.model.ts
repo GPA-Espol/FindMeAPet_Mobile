@@ -10,9 +10,11 @@ export class FormularioPonerAdopcion extends Formulario {
   public get motivo(): string {
     return this._motivo;
   }
+
   public get ubicacion(): string[] {
     return this._ubicacion;
   }
+
   public get mascota(): Mascota {
     return this._mascota;
   }
