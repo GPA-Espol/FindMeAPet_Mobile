@@ -3,11 +3,7 @@ import { TestBed } from '@angular/core/testing';
 import { IonicStorageModule } from '@ionic/storage-angular';
 import { AppRoutingModule } from './app-routing.module';
 import { Storage } from '@ionic/storage';
-import {
-  AuthAdminGuard,
-  AuthVoluntarioGuard,
-  LoggedInGuard,
-} from './auth.guard';
+import { AuthAdminGuard, AuthVoluntarioGuard, LoggedInGuard } from './auth.guard';
 
 describe('LoggedInGuard', () => {
   let guard: LoggedInGuard;
@@ -16,11 +12,7 @@ describe('LoggedInGuard', () => {
     let storageService = new Storage();
     storage = await storageService.create();
     TestBed.configureTestingModule({
-      imports: [
-        AppRoutingModule,
-        HttpClientModule,
-        IonicStorageModule.forRoot(),
-      ],
+      imports: [AppRoutingModule, HttpClientModule, IonicStorageModule.forRoot()],
     });
     guard = TestBed.inject(LoggedInGuard);
   });
@@ -48,11 +40,7 @@ describe('AuthAdminGuard', () => {
     let storageService = new Storage();
     storage = await storageService.create();
     TestBed.configureTestingModule({
-      imports: [
-        AppRoutingModule,
-        HttpClientModule,
-        IonicStorageModule.forRoot(),
-      ],
+      imports: [AppRoutingModule, HttpClientModule, IonicStorageModule.forRoot()],
     });
     guard = TestBed.inject(AuthAdminGuard);
   });
@@ -80,11 +68,7 @@ describe('AuthVoluntarioGuard', () => {
     let storageService = new Storage();
     storage = await storageService.create();
     TestBed.configureTestingModule({
-      imports: [
-        AppRoutingModule,
-        HttpClientModule,
-        IonicStorageModule.forRoot(),
-      ],
+      imports: [AppRoutingModule, HttpClientModule, IonicStorageModule.forRoot()],
     });
     guard = TestBed.inject(AuthVoluntarioGuard);
   });

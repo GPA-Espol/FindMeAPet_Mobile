@@ -6,7 +6,6 @@ export class FormularioPonerAdopcion extends Formulario {
   private _ubicacion: string[];
   private _mascota: Mascota;
 
-  //Getters
   public get motivo(): string {
     return this._motivo;
   }

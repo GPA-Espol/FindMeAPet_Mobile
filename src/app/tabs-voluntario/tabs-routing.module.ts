@@ -9,38 +9,23 @@ const routes: Routes = [
     children: [
       {
         path: 'mascotas',
-        loadChildren: () =>
-          import('../pages/tab-pets/tab-pets.module').then(
-            (m) => m.TabPetsPageModule
-          ),
+        loadChildren: () => import('../pages/tab-pets/tab-pets.module').then((m) => m.TabPetsPageModule),
       },
       {
         path: 'perfil',
-        loadChildren: () =>
-          import('../pages/tab-pets/tab-pets.module').then(
-            (m) => m.TabPetsPageModule
-          ),
+        loadChildren: () => import('../pages/tab-pets/tab-pets.module').then((m) => m.TabPetsPageModule),
       },
       {
         path: 'inicio',
-        loadChildren: () =>
-          import('../pages/tab-pets/tab-pets.module').then(
-            (m) => m.TabPetsPageModule
-          ),
+        loadChildren: () => import('../pages/tab-pets/tab-pets.module').then((m) => m.TabPetsPageModule),
       },
       {
         path: 'solicitud',
-        loadChildren: () =>
-          import('../pages/tab-pets/tab-pets.module').then(
-            (m) => m.TabPetsPageModule
-          ),
+        loadChildren: () => import('../pages/tab-pets/tab-pets.module').then((m) => m.TabPetsPageModule),
       },
       {
         path: 'configuracion',
-        loadChildren: () =>
-          import('../pages/tab-pets/tab-pets.module').then(
-            (m) => m.TabPetsPageModule
-          ),
+        loadChildren: () => import('../pages/tab-pets/tab-pets.module').then((m) => m.TabPetsPageModule),
       },
       {
         path: '',

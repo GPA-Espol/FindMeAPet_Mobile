@@ -26,7 +26,6 @@ export class Mascota {
     });
   }
 
-  //Getters y Setters
   public get nombre(): string {
     return this._nombre;
   }

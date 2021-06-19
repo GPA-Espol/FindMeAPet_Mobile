@@ -12,7 +12,6 @@ export class Administrador extends UsuarioGPA {
   private _adminMascota: AdministrarMascota;
   private _adminPublicacion: AdministrarPublicacion;
 
-  //Getters
   public get adminUsuario(): AdministrarUsuario {
     return this._adminUsuario;
   }

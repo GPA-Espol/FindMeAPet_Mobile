@@ -11,7 +11,6 @@ export class Formulario {
   protected _direccion: string;
   protected _estado: EstadoSolicitud;
 
-  //Getters y Setters
   public get CI(): string {
     return this._CI;
   }

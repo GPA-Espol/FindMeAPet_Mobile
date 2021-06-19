@@ -6,7 +6,6 @@ export class SolicitudActualizacionMascota {
   private _voluntario: Voluntario;
   private _estado: EstadoSolicitud;
 
-  //Getters y setters
   public get fecha(): Date | string {
     return this._fecha;
   }

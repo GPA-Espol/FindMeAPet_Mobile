@@ -11,11 +11,7 @@ describe('AppComponent', () => {
   beforeEach(
     waitForAsync(() => {
       TestBed.configureTestingModule({
-        imports: [
-          AppRoutingModule,
-          HttpClientModule,
-          IonicStorageModule.forRoot(),
-        ],
+        imports: [AppRoutingModule, HttpClientModule, IonicStorageModule.forRoot()],
         declarations: [AppComponent],
         schemas: [CUSTOM_ELEMENTS_SCHEMA],
         providers: [StatusBar, SplashScreen],

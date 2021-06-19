@@ -5,26 +5,21 @@ import { AuthAdminGuard, AuthVoluntarioGuard } from './auth.guard';
 const routes: Routes = [
   {
     path: '',
-    loadChildren: () =>
-      import('./pages/login/login.module').then((m) => m.LoginPageModule),
+    loadChildren: () => import('./pages/login/login.module').then((m) => m.LoginPageModule),
   },
   {
     path: 'tabs/admin',
-    loadChildren: () =>
-      import('./tabs-admin/tabs.module').then((m) => m.TabsPageModule),
+    loadChildren: () => import('./tabs-admin/tabs.module').then((m) => m.TabsPageModule),
     canActivate: [AuthAdminGuard],
   },
   {
     path: 'tabs/voluntario',
-    loadChildren: () =>
-      import('./tabs-voluntario/tabs.module').then((m) => m.TabsPageModule),
+    loadChildren: () => import('./tabs-voluntario/tabs.module').then((m) => m.TabsPageModule),
     canActivate: [AuthVoluntarioGuard],
   },
 ];
 @NgModule({
-  imports: [
-    RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules }),
-  ],
+  imports: [RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })],
   exports: [RouterModule],
 })
 export class AppRoutingModule {}

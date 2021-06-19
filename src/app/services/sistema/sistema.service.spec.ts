@@ -1,12 +1,7 @@
-import { HttpClientModule } from '@angular/common/http';
 import { TestBed } from '@angular/core/testing';
 import { IonicStorageModule } from '@ionic/storage-angular';
-import {
-  HttpClientTestingModule,
-  HttpTestingController,
-} from '@angular/common/http/testing';
+import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { SistemaService } from './sistema.service';
-import { StorageService } from '../storage/storage.service';
 import { Storage } from '@ionic/storage';
 import { environment } from 'src/environments/environment';
 

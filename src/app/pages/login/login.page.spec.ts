@@ -14,12 +14,7 @@ describe('LoginPage', () => {
     waitForAsync(() => {
       TestBed.configureTestingModule({
         declarations: [LoginPage],
-        imports: [
-          IonicModule.forRoot(),
-          HttpClientModule,
-          IonicStorageModule.forRoot(),
-          AppRoutingModule,
-        ],
+        imports: [IonicModule.forRoot(), HttpClientModule, IonicStorageModule.forRoot(), AppRoutingModule],
       }).compileComponents();
 
       fixture = TestBed.createComponent(LoginPage);

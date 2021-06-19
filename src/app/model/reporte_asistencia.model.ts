@@ -11,7 +11,6 @@ export class ReporteAsistencia {
     this._fotoL = [];
   }
 
-  // Getters and Setters
   public get fecha(): string | Date {
     return this._fecha;
   }

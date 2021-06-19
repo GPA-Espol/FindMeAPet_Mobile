@@ -6,8 +6,8 @@ import { SpecificPetPage } from './specific-pet.page';
 const routes: Routes = [
   {
     path: '',
-    component: SpecificPetPage
-  }
+    component: SpecificPetPage,
+  },
 ];
 
 @NgModule({

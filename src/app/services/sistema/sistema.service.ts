@@ -15,17 +15,11 @@ export class SistemaService {
   private _usuario: UsuarioGPA;
   private _mascotas: { data: Mascota[]; time: number };
 
-  constructor(
-    private http: HttpClient,
-    private store: StorageService,
-    private utils: Utils
-  ) {}
+  constructor(private http: HttpClient, private store: StorageService, private utils: Utils) {}
 
   public async login(usuario: string, password: string) {
     let loginUrl = environment.api + 'auth';
-    let { token, rol } = await this.http
-      .post<any>(loginUrl, { usuario, password })
-      .toPromise();
+    let { token, rol } = await this.http.post<any>(loginUrl, { usuario, password }).toPromise();
     await this.store.set('usuario', { token, rol });
     if (rol == RolUsuario.ADMIN) {
       this._usuario = new Administrador(this.http);
@@ -45,11 +39,7 @@ export class SistemaService {
 
   public async getMascotas(forceReload = false) {
     let url = environment.api + 'mascota';
-    if (
-      forceReload ||
-      !this._mascotas ||
-      this.utils.cacheExpired(this._mascotas.time)
-    ) {
+    if (forceReload || !this._mascotas || this.utils.cacheExpired(this._mascotas.time)) {
       let data = await this.http.get<any[]>(url).toPromise();
       let now = new Date().getTime();
       this._mascotas = { data: Mascota.deserialize(data), time: now };

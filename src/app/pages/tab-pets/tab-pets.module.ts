@@ -10,13 +10,7 @@ import { TabPetsPage } from './tab-pets.page';
 import { PipesModule } from '../../pipes/pipes.module';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-    IonicModule,
-    TabPetsPageRoutingModule,
-    PipesModule,
-  ],
+  imports: [CommonModule, FormsModule, IonicModule, TabPetsPageRoutingModule, PipesModule],
   declarations: [TabPetsPage],
 })
 export class TabPetsPageModule {}

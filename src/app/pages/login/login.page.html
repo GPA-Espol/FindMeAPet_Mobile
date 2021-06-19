@@ -2,57 +2,33 @@
 
 <ion-content>
   <div class="container">
-    <ion-row
-      class="login-header ion-justify-content-center ion-align-items-center"
-    >
+    <ion-row class="login-header ion-justify-content-center ion-align-items-center">
       <img src="/assets/icon/logo_GPA.jpg" alt="" width="160" height="160" />
     </ion-row>
     <div class="separator" #separator></div>
     <div class="login-content" #content>
       <ion-row>
         <div class="welcome ion-text-center ion-padding-top">Bienvenido,</div>
-        <div class="login-info ion-text-center">
-          Accede a tu cuenta de GPA
-        </div>
+        <div class="login-info ion-text-center">Accede a tu cuenta de GPA</div>
       </ion-row>
       <ion-row class="ion-padding ion-margin-horizontal">
         <form [formGroup]="loginForm" (ngSubmit)="iniciarSesion()">
           <ion-item>
-            <ion-label position="floating"
-              >Usuario <ion-text>*</ion-text></ion-label
-            >
-            <ion-input
-              required
-              formControlName="user"
-              type="text"
-              autocomplete="off"
-            ></ion-input>
+            <ion-label position="floating">Usuario <ion-text>*</ion-text></ion-label>
+            <ion-input required formControlName="user" type="text" autocomplete="off"></ion-input>
           </ion-item>
-          <ion-row
-            *ngIf="loginForm.controls['user'].invalid && loginForm.controls['user'].touched "
-          >
+          <ion-row *ngIf="loginForm.controls['user'].invalid && loginForm.controls['user'].touched ">
             Por favor ingresa un usuario
           </ion-row>
           <ion-item>
-            <ion-label position="floating"
-              >Contraseña <ion-text>*</ion-text></ion-label
-            >
-            <ion-input
-              required
-              formControlName="password"
-              type="password"
-              autocomplete="off"
-            ></ion-input>
+            <ion-label position="floating">Contraseña <ion-text>*</ion-text></ion-label>
+            <ion-input required formControlName="password" type="password" autocomplete="off"></ion-input>
           </ion-item>
-          <ion-row
-            *ngIf="loginForm.controls['password'].invalid && loginForm.controls['password'].touched "
-          >
+          <ion-row *ngIf="loginForm.controls['password'].invalid && loginForm.controls['password'].touched ">
             Por favor ingresa la contraseña
           </ion-row>
           <ion-row class="ion-margin ion-justify-content-center">
-            <ion-button shape="round" color="light" (click)="iniciarSesion()">
-              Iniciar sesión</ion-button
-            >
+            <ion-button shape="round" color="light" (click)="iniciarSesion()"> Iniciar sesión</ion-button>
           </ion-row>
         </form>
       </ion-row>
