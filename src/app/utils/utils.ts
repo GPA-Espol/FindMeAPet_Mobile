@@ -4,8 +4,6 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class Utils {
-  constructor() {}
-
   cacheExpired(setup_time: number) {
     var now = new Date().getTime();
     var hours = 1 / 2;

@@ -7,7 +7,6 @@ import { Router } from '@angular/router';
 import { SistemaService } from './services/sistema/sistema.service';
 import { RolUsuario } from './model/enums.model';
 import { IonMenu } from '@ionic/angular';
-import { IonicStorageModule } from '@ionic/storage-angular';
 
 @Component({
   selector: 'app-root',

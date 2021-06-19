@@ -8,9 +8,7 @@ import { Component, OnInit } from '@angular/core';
 export class AddPetPage implements OnInit {
   extraInformation: boolean = false;
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit() {
-  }
-
+  ngOnInit() {}
 }
