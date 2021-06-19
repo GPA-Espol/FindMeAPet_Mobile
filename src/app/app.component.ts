@@ -4,7 +4,7 @@ import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 
 import { environment } from 'src/environments/environment';
 import { Router } from '@angular/router';
-import { SistemaService } from './services/sistema.service';
+import { SistemaService } from './services/sistema/sistema.service';
 import { RolUsuario } from './model/enums.model';
 
 @Component({

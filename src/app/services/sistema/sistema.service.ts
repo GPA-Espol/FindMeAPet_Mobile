@@ -1,13 +1,13 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { Administrador } from '../model/admin/administrador.model';
-import { RolUsuario } from '../model/enums.model';
-import { Mascota } from '../model/mascota.model';
-import { UsuarioGPA } from '../model/usuario_gpa.model';
-import { Voluntario } from '../model/voluntario.model';
-import { Utils } from '../utils/utils';
-import { StorageService } from './storage.service';
+import { Administrador } from '../../model/admin/administrador.model';
+import { RolUsuario } from '../../model/enums.model';
+import { Mascota } from '../../model/mascota.model';
+import { UsuarioGPA } from '../../model/usuario_gpa.model';
+import { Voluntario } from '../../model/voluntario.model';
+import { Utils } from '../../utils/utils';
+import { StorageService } from '../storage/storage.service';
 @Injectable({
   providedIn: 'root',
 })
@@ -32,7 +32,6 @@ export class SistemaService {
     } else {
       this._usuario = new Voluntario(this.http);
     }
-    return rol;
   }
 
   public async logout() {

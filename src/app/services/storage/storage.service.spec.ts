@@ -16,25 +16,25 @@ describe('StorageService', () => {
     service = TestBed.inject(StorageService);
   });
 
-  it('should be created', () => {
+  it('TS-01 should be created', () => {
     expect(service).toBeTruthy();
   });
 
-  it('Should save a value on localStorage', async () => {
+  it('TS-02 Should save a value on localStorage', async () => {
     let objectToSave = { test: 'test' };
     await service.set(key, objectToSave);
     let test = await storage.get(key);
     expect(test).toEqual(objectToSave);
   });
 
-  it('Should get a value from localStorage', async () => {
+  it('TS-03 Should get a value from localStorage', async () => {
     let objectToGet = { test: 'test' };
     await storage.set(key, objectToGet);
     let test = await service.get(key);
     expect(test).toEqual(objectToGet);
   });
 
-  it('Should remove a value from localStorage', async () => {
+  it('TS-04 Should remove a value from localStorage', async () => {
     let objectToGet = { test: 'test' };
     await storage.set(key, objectToGet);
     await service.remove(key);

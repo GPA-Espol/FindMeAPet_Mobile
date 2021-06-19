@@ -6,7 +6,7 @@ import {
   HttpTestingController,
 } from '@angular/common/http/testing';
 import { SistemaService } from './sistema.service';
-import { StorageService } from './storage.service';
+import { StorageService } from '../storage/storage.service';
 import { Storage } from '@ionic/storage';
 import { environment } from 'src/environments/environment';
 
@@ -25,15 +25,15 @@ describe('SistemaService', () => {
     httpMock = TestBed.inject(HttpTestingController);
   });
 
-  it('should be created', () => {
+  it('SS-01 should be created', () => {
     expect(service).toBeTruthy();
   });
 
-  it('Should check that user is not logged In', async () => {
+  it('SS-02 should check that user is not logged In', async () => {
     expect(await service.userLoggedIn()).toBeFalsy();
   });
 
-  it('should log in as admin', (done) => {
+  it('SS-03 should log in as admin', (done) => {
     let token = 'abcd';
     let rol = 'Admin';
     let usuario = 'admin';
@@ -53,18 +53,18 @@ describe('SistemaService', () => {
     req.flush({ token, rol, id: 1 });
   });
 
-  it('Should check that user is logged In', async () => {
+  it('SS-04 should check that user is logged In', async () => {
     expect(await service.userLoggedIn()).toBeTruthy();
   });
 
-  it('Should log out from admin', async () => {
+  it('SS-05 should log out from admin', async () => {
     await service.logout();
     let userLogged = await storage.get('usuario');
     expect(userLogged).toBeFalsy();
     expect(service.admin).toBeFalsy();
   });
 
-  it('should log in as volunteer', (done) => {
+  it('SS-06 should log in as volunteer', (done) => {
     let token = 'abcd';
     let rol = 'Voluntario';
     let usuario = 'voluntario';
@@ -83,18 +83,18 @@ describe('SistemaService', () => {
     req.flush({ token, rol, id: 1 });
   });
 
-  it('Should log out from volunteer', async () => {
+  it('SS-07 should log out from volunteer', async () => {
     await service.logout();
     let userLogged = await storage.get('usuario');
     expect(userLogged).toBeFalsy();
     expect(service.voluntario).toBeFalsy();
   });
 
-  it('Should check that user is not logged In', async () => {
+  it('SS-08 should check that user is not logged In', async () => {
     expect(await service.userLoggedIn()).toBeFalsy();
   });
 
-  it("shouldn't log in, unauthorized", (done) => {
+  it("SS-09 shouldn't log in, unauthorized", (done) => {
     service
       .login('admin', '1234')
       .then(() => {})

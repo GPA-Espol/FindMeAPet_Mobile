@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, Router } from '@angular/router';
 import { RolUsuario } from './model/enums.model';
-import { SistemaService } from './services/sistema.service';
+import { SistemaService } from './services/sistema/sistema.service';
 
 @Injectable({
   providedIn: 'root',
