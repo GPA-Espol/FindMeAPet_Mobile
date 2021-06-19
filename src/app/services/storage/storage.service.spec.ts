@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 import { IonicStorageModule } from '@ionic/storage-angular';
-import { StorageService } from './storage/storage.service';
+import { StorageService } from './storage.service';
 import { Storage } from '@ionic/storage';
 
 describe('StorageService', () => {

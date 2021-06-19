@@ -6,10 +6,7 @@ import { LoadingController, ToastController } from '@ionic/angular';
 })
 export class AlertaService {
   private loading: HTMLIonLoadingElement;
-  constructor(
-    private toastController: ToastController,
-    private loadingController: LoadingController
-  ) {}
+  constructor(private toastController: ToastController, private loadingController: LoadingController) {}
 
   async presentToast(message: string, duration?: number) {
     const toast = await this.toastController.create({

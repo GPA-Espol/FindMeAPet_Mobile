@@ -6,17 +6,16 @@ import { TabPetsPage } from './tab-pets.page';
 const routes: Routes = [
   {
     path: '',
-    component: TabPetsPage
+    component: TabPetsPage,
   },
   {
     path: 'anadir',
-    loadChildren: () => import('./add-pet/add-pet.module').then( m => m.AddPetPageModule)
+    loadChildren: () => import('./add-pet/add-pet.module').then((m) => m.AddPetPageModule),
   },
   {
     path: 'specific-pet',
-    loadChildren: () => import('./specific-pet/specific-pet.module').then( m => m.SpecificPetPageModule)
-  }
-
+    loadChildren: () => import('./specific-pet/specific-pet.module').then((m) => m.SpecificPetPageModule),
+  },
 ];
 
 @NgModule({

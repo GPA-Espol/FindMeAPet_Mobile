@@ -32,7 +32,6 @@ export class Voluntario extends UsuarioGPA {
     // TODO implementar método
   }
 
-  //Getters y Setters
   public get rol(): RolVoluntario[] {
     return this._rol;
   }

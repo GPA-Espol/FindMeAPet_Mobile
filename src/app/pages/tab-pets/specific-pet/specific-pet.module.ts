@@ -9,12 +9,7 @@ import { SpecificPetPageRoutingModule } from './specific-pet-routing.module';
 import { SpecificPetPage } from './specific-pet.page';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-    IonicModule,
-    SpecificPetPageRoutingModule
-  ],
-  declarations: [SpecificPetPage]
+  imports: [CommonModule, FormsModule, IonicModule, SpecificPetPageRoutingModule],
+  declarations: [SpecificPetPage],
 })
 export class SpecificPetPageModule {}
