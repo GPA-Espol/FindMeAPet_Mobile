@@ -1,4 +1,4 @@
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
@@ -14,6 +14,7 @@ import { PipesModule } from './pipes/pipes.module';
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 import { AngularFireModule } from '@angular/fire';
 import { environment } from 'src/environments/environment';
+import { TokenInterceptorService } from './services/token-interceptor/token-interceptor.service';
 
 @NgModule({
   declarations: [AppComponent],
@@ -25,12 +26,19 @@ import { environment } from 'src/environments/environment';
     AppRoutingModule,
     HttpClientModule,
     PipesModule,
-    AppRoutingModule,AngularFireModule.initializeApp(environment.firebase)
+    AppRoutingModule,
+    AngularFireModule.initializeApp(environment.firebase),
   ],
   providers: [
     StatusBar,
     SplashScreen,
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },Camera
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    Camera,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptorService,
+      multi: true,
+    },
   ],
   bootstrap: [AppComponent],
 })

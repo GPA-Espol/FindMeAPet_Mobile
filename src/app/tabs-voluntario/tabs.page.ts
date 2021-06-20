@@ -36,7 +36,6 @@ export class TabsPage {
     },
   ];
   @ViewChild(IonTabs) ionTabs: IonTabs;
-  constructor() {}
 
   changeTab() {
     this.tabSelected = this.ionTabs.getSelected();

@@ -62,7 +62,7 @@
       <ion-list>
         <ion-item lines="none">
           <ion-thumbnail>
-            <img [src]="animal.img" />
+            <img [src]="animal.img" alt="image of {{animal.name}}" />
           </ion-thumbnail>
           <ion-label class="ion-margin-start ion-margin-vertical ion-text-wrap">
             <h2>{{animal.name}}</h2>
@@ -83,8 +83,6 @@
   </div>
 
   <ion-fab slot="fixed" style="bottom: 10px; right: 15px">
-    <ion-fab-button routerLink="anadir"
-      ><ion-icon name="add-outline"></ion-icon
-    ></ion-fab-button>
+    <ion-fab-button routerLink="anadir"><ion-icon name="add-outline"></ion-icon></ion-fab-button>
   </ion-fab>
 </ion-content>

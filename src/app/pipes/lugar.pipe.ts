@@ -1,13 +1,11 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
-  name: 'lugar'
+  name: 'lugar',
 })
 export class LugarPipe implements PipeTransform {
-
   transform(arreglo: any[], lugar: string): any[] {
-    //console.log(arreglo);
-    if (lugar === '' || lugar == undefined||lugar == 'todos') {
+    if (lugar === '' || lugar == undefined || lugar == 'todos') {
       return arreglo;
     } else {
       lugar = lugar.toLowerCase();
@@ -17,5 +15,4 @@ export class LugarPipe implements PipeTransform {
       });
     }
   }
-
 }
