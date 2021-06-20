@@ -5,13 +5,24 @@
 </ion-header>
 
 <ion-content>
-  <ion-card id="upload-image">
-    <ion-row class="ion-justify-content-center">
-      <ion-col size="3">
-        <img src="./assets/upload_image.png" />
-      </ion-col>
-    </ion-row>
-  </ion-card>
+  <div class="center-contenedor">
+    <ion-card id="upload-image" >
+      <ion-row
+        *ngIf="!image64"
+        class="ion-justify-content-center ion-no-padding"
+      >
+        <div style="margin-top: 35px;">
+          <ion-icon id="icon-camera" name="image"></ion-icon>
+        </div>
+      </ion-row>
+      <ion-img *ngIf="image64" width="45%" height="120" [src]="image64"></ion-img>
+    </ion-card>
+  </div>
+  <div class="center-contenedor">
+    <ion-button  (click)="selectImage()">
+      <ion-icon slot="start" name="arrow-up-circle"></ion-icon> Subir imagen
+    </ion-button>
+  </div>
   <div class="ion-justify-content ion-margin-horizontal ion-margin-top">
     <div>
       <ion-row class="ion-margin-start">
@@ -75,7 +86,29 @@
     </ion-row>
 
     <!--ion-row><sub class="subtitle">Ej: 2 años, 6 meses</sub></ion-row-->
-    <ion-row class="ion-margin-start my-vertical-margin">
+    <ion-row class=" my-vertical-margin">
+      
+      <ion-col size="4" class="ion-no-margin">
+        <ion-item lines="none">
+          <!--ion-label position="floating">años</ion-label-->
+          <ion-input type="number" placeholder="años"></ion-input>
+        </ion-item>
+      </ion-col>
+      <ion-col size="4" class="ion-no-margin">
+        <ion-item lines="none">
+          <!--ion-label position="floating">meses</ion-label-->
+          <ion-input type="number" placeholder="meses"></ion-input>
+        </ion-item>
+      </ion-col>
+      <ion-col size="4" class="ion-no-margin">
+        <ion-item lines="none">
+          <!--ion-label position="floating">días</ion-label-->
+          <ion-input type="number" placeholder="días"></ion-input>
+        </ion-item>
+      </ion-col>
+      
+    </ion-row>
+    <!--ion-row class="ion-margin-start my-vertical-margin">
       <ion-col size="3" class="ion-no-margin">
         <ion-item lines="none" class="ion-no-margin number-margin">
           <ion-input type="number" size="5"></ion-input>
@@ -92,15 +125,15 @@
         </ion-item>
       </ion-col>
       <ion-button *ngIf="this.ageType=='y'||this.ageType=='m'||this.ageType=='w'" class="more-button" fill="clear" (click)="extraInformation=!extraInformation" >{{!extraInformation? 'más':'menos'}}</ion-button>
-    </ion-row>
-    <ion-row *ngIf="extraInformation && (this.ageType=='y'||this.ageType=='m'||this.ageType=='w')" class="ion-margin-start my-vertical-margin ion-align-items-center extra-content my-padding">
+    </ion-row-->
+    <!--ion-row *ngIf="extraInformation && (this.ageType=='y'||this.ageType=='m'||this.ageType=='w')" class="ion-margin-start my-vertical-margin ion-align-items-center extra-content my-padding">
       <ion-col size="3" class="ion-no-margin ion-margin-start  ">
         <ion-item lines="none" class="ion-no-margin number-margin">
           <ion-input type="number" size="5"></ion-input>
         </ion-item>
       </ion-col>
       <ion-col size="4" class="ion-no-margin"> {{this.ageType=='y'? 'Meses': this.ageType=='m'? 'Semanas': 'Días' }} </ion-col>
-    </ion-row>
+    </ion-row-->
     
     <ion-row class="ion-margin-start">
       <ion-text color="primary"> 3. </ion-text>
@@ -229,7 +262,7 @@
         </div>
       </ion-row>
       
-      <ion-item>
+      <ion-item lines="none">
         
         <ion-textarea auto-grow rows="4" placeholder="Breve descripción de la mascota"></ion-textarea>
       </ion-item>
