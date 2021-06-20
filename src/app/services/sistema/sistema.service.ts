@@ -8,6 +8,12 @@ import { UsuarioGPA } from '../../model/usuario_gpa.model';
 import { Voluntario } from '../../model/voluntario.model';
 import { Utils } from '../../utils/utils';
 import { StorageService } from '../storage/storage.service';
+/**
+ * Service Class in charge of retaining most general information about the system
+ * like get from the api and save the user object logged in in the app, or the
+ * pets consulted.
+ * @category Services
+ */
 @Injectable({
   providedIn: 'root',
 })
@@ -17,6 +23,13 @@ export class SistemaService {
 
   constructor(private http: HttpClient, private store: StorageService, private utils: Utils) {}
 
+  /**
+   * Make an http request to log in the user in the system, and save his/her role and save the
+   * jsonwebtoken in the localStorage and create the user instance if he/she logs in succesfuly.
+   * @throws Error if the user or password are incorrect.
+   * @param {string} usuario The username to login
+   * @param {string} password The password of the user to login
+   */
   public async login(usuario: string, password: string) {
     let loginUrl = environment.api + 'auth';
     let { token, rol } = await this.http.post<any>(loginUrl, { usuario, password }).toPromise();
@@ -28,15 +41,31 @@ export class SistemaService {
     }
   }
 
+  /**
+   * Logs out the user in the system. It remove the user instance, and remove its info from the
+   * localStorage.
+   */
   public async logout() {
     this._usuario = undefined;
     await this.store.remove('usuario');
   }
 
-  public userLoggedIn() {
+  /**
+   * Consult the user that has logged in in the system
+   * @returns If the user has logged in, returns an object \{token,rol\}
+   * Else returns undefined
+   */
+  public async userLoggedIn() {
     return this.store.get('usuario');
   }
 
+  /**
+   * Get the pets from the REST-API and cache them for 30 mins. If the pets has already been
+   * cached, it returns the cached pets and avoid make the http request.
+   * @param {bool=} forceReload If true it makes the httpRequest for the pets regardless
+   * of if these have been cached or not
+   * @returns An array of pets
+   */
   public async getMascotas(forceReload = false) {
     let url = environment.api + 'mascota';
     if (forceReload || !this._mascotas || this.utils.cacheExpired(this._mascotas.time)) {

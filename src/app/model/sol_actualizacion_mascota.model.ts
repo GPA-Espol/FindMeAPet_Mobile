@@ -1,6 +1,10 @@
 import { EstadoSolicitud } from './enums.model';
 import { Voluntario } from './voluntario.model';
-
+/**
+ * Class containing the data of a update request of a pet from an Volunteer
+ * to an Admin
+ * @category Model
+ */
 export class SolicitudActualizacionMascota {
   private _fecha: Date | string;
   private _voluntario: Voluntario;

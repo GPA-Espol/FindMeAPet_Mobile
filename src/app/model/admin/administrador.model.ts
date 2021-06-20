@@ -5,6 +5,15 @@ import { AdministrarPublicacion } from './publicacion_admin.model';
 import { AdministrarReporteAsistencia } from './reporte_asistencia_admin.model';
 import { AdministrarUsuario } from './usuario_admin.model';
 
+/**
+ * Class extending from {@link UsuarioGPA} with the aim of represent an Admin
+ * in the system, and contain the actions that he/she can do.
+ * The admin can do several actions in the system, so these actions were divided
+ * into the classes {@link AdministrarUsuario}, {@link AdministrarReporteAsistencia},
+ * {@link AdministrarFormulario}, {@link AdministrarMascota} and {@link AdministrarPublicacion}.
+ * And this class is the responsible for grouping all of them.
+ * @category Model
+ */
 export class Administrador extends UsuarioGPA {
   private _adminUsuario: AdministrarUsuario;
   private _adminReporteAsistencia: AdministrarReporteAsistencia;

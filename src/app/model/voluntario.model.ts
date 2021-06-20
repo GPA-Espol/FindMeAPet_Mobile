@@ -2,6 +2,11 @@ import { HttpClient } from '@angular/common/http';
 import { Dia, RolVoluntario } from './enums.model';
 import { UsuarioGPA } from './usuario_gpa.model';
 
+/**
+ * Class extending from {@link UsuarioGPA} containing the information of a volunteer,
+ * and the functions it can do in the system.
+ * @category Model
+ */
 export class Voluntario extends UsuarioGPA {
   private _rol: RolVoluntario[];
   private _horario: Dia[];
