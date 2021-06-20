@@ -1,5 +1,9 @@
 import { CantidadComida } from './enums.model';
 
+/**
+ * Class containing the data of the assitence report
+ * @category Model
+ */
 export class ReporteAsistencia {
   private _fecha: string | Date;
   private _comida: CantidadComida;

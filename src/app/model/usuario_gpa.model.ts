@@ -1,5 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 
+/**
+ * Abstract class containing the base information of a GPA User
+ * @category Model
+ */
 export abstract class UsuarioGPA {
   protected _nombreUsuario: string;
   protected _nombre: string;

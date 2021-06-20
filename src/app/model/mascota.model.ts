@@ -1,5 +1,9 @@
 import { Personalidad, UbicacionMascota } from './enums.model';
 
+/**
+ * Class representing the pets in the system.
+ * @category Model
+ */
 export class Mascota {
   private _nombre: string;
   private _edad: number;
@@ -14,6 +18,12 @@ export class Mascota {
   private _sexo: string;
   private _tipoAnimal: string;
 
+  /**
+   * Method to synchronize the data obtained from the REST-API to the Model that we have in
+   * the ionic System.
+   * @param {any[]} data The responsed array of pets from the REST-API
+   * @returns {Mascota[]} Array of objects instance of {@link Mascota}
+   */
   static deserialize(data: any[]) {
     return data.map((mascota) => {
       let mascotaResult = new Mascota();

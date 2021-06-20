@@ -8,13 +8,17 @@ import { SistemaService } from './services/sistema/sistema.service';
 import { RolUsuario } from './model/enums.model';
 import { IonMenu } from '@ionic/angular';
 
+/**
+ * App component
+ * @category Components
+ */
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
   styleUrls: ['app.component.scss'],
 })
 export class AppComponent {
-  @ViewChild('ion-menu') ionMenu: IonMenu;
+  @ViewChild('menu') ionMenu: IonMenu;
   constructor(
     private statusBar: StatusBar,
     private splashScreen: SplashScreen,
@@ -24,6 +28,10 @@ export class AppComponent {
     this.initializeApp();
   }
 
+  /**
+   * Handle some initialization tasks of the app, like setting the backgroundcolor, hide
+   * the splashscreen, and redirecting the user to home if has already logged in.
+   */
   async initializeApp() {
     if (environment.version != 'web') {
       this.statusBar.backgroundColorByHexString('#EC823A');
@@ -39,9 +47,13 @@ export class AppComponent {
     }
   }
 
+  /**
+   * Logs out the session, redirect the user to the login, and clean the userdata from
+   * the system.
+   */
   public async cerrarSesion() {
+    this.router.navigateByUrl('/', { replaceUrl: true });
     await this.sistema.logout();
     this.ionMenu.close(true);
-    this.router.navigateByUrl('/', { replaceUrl: true });
   }
 }

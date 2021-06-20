@@ -1,5 +1,9 @@
 import { EstadoSolicitud } from '../enums.model';
 
+/**
+ * Class containing the basic information needed to fill in the forms.
+ * @category Model
+ */
 export class Formulario {
   protected _CI: string;
   protected _nombre: string;

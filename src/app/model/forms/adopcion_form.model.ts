@@ -1,5 +1,10 @@
 import { Formulario } from './formulario.model';
 
+/**
+ * Class containing the information of the form to be filled for adopting a pet.
+ * This form will be needed to be accepted by an Admin
+ * @category Model
+ */
 export class FormularioAdopcion extends Formulario {
   private _estadoCivil: string;
   private _numeroMascotas: number;
