@@ -6,9 +6,9 @@ import { Personalidad, UbicacionMascota } from './enums.model';
  */
 export class Mascota {
   private _nombre: string;
-  private _edad: number;
+  private _fechaNacimiento: Date;
   private _color: string;
-  private _ublicacionMascota: UbicacionMascota;
+  private _ublicacion: UbicacionMascota;
   private _isEsterilizado: boolean;
   private _isAdoptado: boolean;
   private _isCasoExterno: boolean;
@@ -27,11 +27,15 @@ export class Mascota {
   static deserialize(data: any[]) {
     return data.map((mascota) => {
       let mascotaResult = new Mascota();
-      Object.assign(mascotaResult, mascota);
-      mascotaResult._isEsterilizado = mascota.is_esterilizado;
-      mascotaResult._isAdoptable = mascota.is_adoptable;
-      mascotaResult._isAdoptado = mascota.is_adoptado;
-      mascotaResult._isCasoExterno = mascota.is_caso_externo;
+      mascotaResult.nombre = mascota.nombre;
+      mascotaResult.fechaNacimiento = new Date(mascota.fecha_nacimiento);
+      mascotaResult.color = mascota.color;
+      mascotaResult.isEsterilizado = mascota.is_esterilizado;
+      mascotaResult.isAdoptable = mascota.is_adoptable;
+      mascotaResult.isAdoptado = mascota.is_adoptado;
+      mascotaResult.isCasoExterno = mascota.is_caso_externo;
+      mascotaResult.descripcion = mascota.descripcion;
+      mascotaResult.sexo = mascotaResult.sexo;
       return mascotaResult;
     });
   }
@@ -44,12 +48,12 @@ export class Mascota {
     this._nombre = value;
   }
 
-  public get edad(): number {
-    return this._edad;
+  public get fechaNacimiento(): Date {
+    return this._fechaNacimiento;
   }
 
-  public set edad(value: number) {
-    this._edad = value;
+  public set fechaNacimiento(value: Date) {
+    this._fechaNacimiento = value;
   }
 
   public get color(): string {
@@ -61,11 +65,11 @@ export class Mascota {
   }
 
   public get ublicacionMascota(): UbicacionMascota {
-    return this._ublicacionMascota;
+    return this._ublicacion;
   }
 
   public set ublicacionMascota(value: UbicacionMascota) {
-    this._ublicacionMascota = value;
+    this._ublicacion = value;
   }
 
   public get isEsterilizado(): boolean {

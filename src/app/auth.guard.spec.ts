@@ -22,6 +22,7 @@ describe('LoggedInGuard', () => {
   });
 
   it("shouldn't active the guard", async () => {
+    await storage.remove('usuario');
     expect(await guard.canActivate()).toBeFalse();
   });
 
