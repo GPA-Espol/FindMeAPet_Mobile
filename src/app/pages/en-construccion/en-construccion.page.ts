@@ -1,15 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 
+/**
+ * Class Page in charge to show a in construction graph to the user
+ * when he visits a page that hasn't been constructed yet.
+ * @category Component
+ */
 @Component({
   selector: 'app-en-construccion',
   templateUrl: './en-construccion.page.html',
   styleUrls: ['./en-construccion.page.scss'],
 })
 export class EnConstruccionPage implements OnInit {
-
-  constructor() { }
-
   ngOnInit() {
+    console.log('construction page works');
   }
-
 }

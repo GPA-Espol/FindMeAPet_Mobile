@@ -1,7 +1,7 @@
 import { FiltroPipe } from './filtro.pipe';
 
 describe('FiltroPipe', () => {
-  it('create an instance', () => {
+  it('FP-01 create an instance', () => {
     const pipe = new FiltroPipe();
     expect(pipe).toBeTruthy();
   });
