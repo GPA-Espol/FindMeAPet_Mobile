@@ -50,32 +50,28 @@
       clearIcon
       [placeholder]="'Buscar en '+lugarBuscar.toLowerCase()"
       (ionChange)="buscar( $event )"
-      mode='ios'
+      mode="ios"
     ></ion-searchbar>
   </div>
   <div>
-    <ion-card
-      class="card"
-      *ngFor="let animal of animals | lugar:lugarBuscar |filtro: textoBuscar "
-      routerLink="/tab-pets/specific-pet"
-    >
+    <ion-card class="card" *ngFor="let pet of pets | lugar:lugarBuscar |filtro: textoBuscar ">
       <ion-list>
         <ion-item lines="none">
           <ion-thumbnail>
-            <img [src]="animal.img" alt="image of {{animal.name}}" />
+            <img [src]="pet.imagenUrl" alt="image of {{pet.nombre}}" />
           </ion-thumbnail>
           <ion-label class="ion-margin-start ion-margin-vertical ion-text-wrap">
-            <h2>{{animal.name}}</h2>
+            <h2>{{pet.nombre}}</h2>
             <ion-row class="ion-margin-vertical">
               <ion-icon id="icon-location" name="location-outline"></ion-icon>
-              <h3>{{animal.location}}</h3>
+              <h3>{{pet.ubicacionMascota}}</h3>
               <ion-col class="ion-no-margin ion-no-padding">
                 <div class="ion-text-end">
-                  <h3>{{animal.age}}</h3>
+                  <h3>{{pet.edad}}</h3>
                 </div>
               </ion-col>
             </ion-row>
-            <p>{{animal.description}}</p>
+            <p>{{pet.descripcion}}</p>
           </ion-label>
         </ion-item>
       </ion-list>

@@ -40,8 +40,10 @@ export class AppComponent {
     let userLoggedIn = await this.sistema.userLoggedIn();
     if (userLoggedIn) {
       if (userLoggedIn.rol == RolUsuario.ADMIN) {
+        this.sistema.crearUsuario();
         this.router.navigateByUrl('/tabs/admin', { replaceUrl: true });
-      } else {
+      } else if (userLoggedIn.rol == RolUsuario.VOLUNTARIO) {
+        this.sistema.crearUsuario();
         this.router.navigateByUrl('/tabs/voluntario', { replaceUrl: true });
       }
     }

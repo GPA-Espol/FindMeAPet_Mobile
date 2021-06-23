@@ -1,3 +1,4 @@
+import * as moment from 'moment';
 import { Personalidad, UbicacionMascota } from './enums.model';
 
 /**
@@ -44,6 +45,47 @@ export class Mascota {
       mascotaResult.imagenUrl = mascota.imagen_url;
       return mascotaResult;
     });
+  }
+
+  /**
+   * Method to synchronize the Model that we have in the ionic System with
+   * the data that the API recieves.
+   * @param {any[]} data The responsed array of pets from the REST-API
+   * @returns {Mascota[]} Array of objects instance of {@link Mascota}
+   */
+  static serialize(mascota: Mascota) {
+    console.log(mascota);
+
+    return {
+      nombre: mascota.nombre,
+      fecha_nacimiento: moment(mascota.fechaNacimiento).format('YYYY-MM-DD'),
+      color: mascota.color,
+      is_esterilizado: mascota.isEsterilizado ? 1 : 0,
+      is_adoptado: mascota.isAdoptado ? 1 : 0,
+      is_caso_externo: mascota.isCasoExterno ? 1 : 0,
+      is_adoptable: mascota.isAdoptable ? 1 : 0,
+      descripcion: mascota.descripcion,
+      sexo: mascota.sexo,
+      ubicacion: mascota.ubicacionMascota,
+      tipo_mascota: mascota.tipoAnimal,
+      imagen_url: mascota.imagenUrl,
+    };
+
+    /*let mascotaResult = new Mascota();
+      mascotaResult._id = mascota.id;
+      mascotaResult.nombre = mascota.nombre;
+      mascotaResult.fechaNacimiento = new Date(mascota.fecha_nacimiento);
+      mascotaResult.color = mascota.color;
+      mascotaResult.isEsterilizado = !!mascota.is_esterilizado;
+      mascotaResult.isAdoptable = !!mascota.is_adoptable;
+      mascotaResult.isAdoptado = !!mascota.is_adoptado;
+      mascotaResult.isCasoExterno = !!mascota.is_caso_externo;
+      mascotaResult.descripcion = mascota.descripcion;
+      mascotaResult.sexo = mascota.sexo;
+      mascotaResult.ubicacionMascota = mascota.ubicacion;
+      mascotaResult.tipoAnimal = mascota.tipo_mascota;
+      mascotaResult.imagenUrl = mascota.imagen_url;
+      return mascotaResult;*/
   }
 
   public get id(): number {

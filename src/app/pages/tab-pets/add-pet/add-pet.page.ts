@@ -8,6 +8,10 @@ import { Observable } from 'rxjs';
 import { SistemaService } from 'src/app/services/sistema/sistema.service';
 import { AlertaService } from 'src/app/services/alerta/alerta.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Mascota } from 'src/app/model/mascota.model';
+import * as moment from 'moment';
+import { Administrador } from 'src/app/model/admin/administrador.model';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 @Component({
   selector: 'app-add-pet',
   templateUrl: './add-pet.page.html',
@@ -18,8 +22,8 @@ export class AddPetPage implements OnInit {
   ageType: string = '';
   image64: string;
   downloadURL: Observable<string>;
-  public mascota: FormGroup;
-
+  mascota: FormGroup;
+  administrador: Administrador;
   constructor(
     private camera: Camera,
     private actionSheetController: ActionSheetController,
@@ -29,10 +33,11 @@ export class AddPetPage implements OnInit {
     private alertaService: AlertaService,
     private navCtrl: NavController,
     private formBuilder: FormBuilder
-  ) {
+  ) {}
+
+  ngOnInit() {
     this.mascota = this.formBuilder.group({
       nombre: ['', Validators.required],
-      fecha_nacimiento: '2019-01-28',
       color: ['', Validators.required],
       esterilizado: 0,
       adoptado: 0,
@@ -40,14 +45,74 @@ export class AddPetPage implements OnInit {
       adoptable: 0,
       descripcion: ['', Validators.required],
       sexo: ['', Validators.required],
-      ubicacion: ['REFUGIO', Validators.required],
-      fecha_adopcion: 'NA',
-      tipo: ['perro', Validators.required],
+      ubicacion: ['', Validators.required],
+      tipo: ['', Validators.required],
+      years: '',
+      months: '',
+      days: '',
       image: '',
     });
+    this.administrador = this.sistema.admin;
   }
 
-  ngOnInit() {}
+  async onSubmit() {
+    let newPet = new Mascota();
+    newPet.nombre = this.mascota.get('nombre').value;
+    newPet.fechaNacimiento = this.getBirthDate();
+    newPet.color = this.mascota.get('color').value;
+    newPet.isCasoExterno = this.mascota.get('caso_externo').value;
+    newPet.isEsterilizado = this.mascota.get('esterilizado').value;
+    newPet.isAdoptado = this.mascota.get('adoptado').value;
+    newPet.isAdoptable = this.mascota.get('adoptable').value;
+    newPet.sexo = this.mascota.get('sexo').value;
+    newPet.ubicacionMascota = this.mascota.get('ubicacion').value;
+    newPet.descripcion = this.mascota.get('descripcion').value;
+    newPet.tipoAnimal = this.mascota.get('tipo').value;
+    await this.alertaService.presentLoading('Creando mascota');
+    try {
+      await this.upload();
+      newPet.imagenUrl = this.mascota.get('image').value;
+      await this.administrador.adminMascota.crearMascota(newPet);
+      this.alertaService.presentToast('La mascota ha sido agregada');
+      this.goback();
+    } catch (err) {
+      console.error('Error al crear mascota: ', err);
+      this.alertaService.presentToast('Error al guardar mascota, por favor intente de nuevo' + err);
+    }
+    this.alertaService.dismissLoading();
+  }
+
+  async upload() {
+    var currentDate = Date.now();
+    const file: any = this.base64ToImage(this.image64);
+    const filePath = `Images/${currentDate}`;
+    const fileRef = this.storage.ref(filePath);
+
+    const task = this.storage.upload(`Images/${currentDate}`, file);
+    await task
+      .snapshotChanges()
+      .pipe(
+        finalize(() => {
+          this.downloadURL = fileRef.getDownloadURL();
+        })
+      )
+      .toPromise();
+    let imageURL = await this.downloadURL.toPromise();
+    this.mascota.patchValue({ image: imageURL });
+  }
+
+  base64ToImage(dataURI: string) {
+    const fileDate = dataURI.split(',');
+    const byteString = atob(fileDate[1]);
+    const arrayBuffer = new ArrayBuffer(byteString.length);
+    const int8Array = new Uint8Array(arrayBuffer);
+    for (let i = 0; i < byteString.length; i++) {
+      int8Array[i] = byteString.charCodeAt(i);
+    }
+    const blob = new Blob([arrayBuffer], { type: 'image/png' });
+    return blob;
+  }
+
   async selectImage() {
     const actionSheet = await this.actionSheetController.create({
       mode: 'ios',
@@ -66,13 +131,14 @@ export class AddPetPage implements OnInit {
           },
         },
         {
-          text: 'Cancel',
+          text: 'Cancelar',
           role: 'cancel',
         },
       ],
     });
     await actionSheet.present();
   }
+
   takePicture(source) {
     const options: CameraOptions = {
       quality: 100,
@@ -92,76 +158,16 @@ export class AddPetPage implements OnInit {
       }
     );
   }
-  async upload() {
-    var currentDate = Date.now();
-    const file: any = this.base64ToImage(this.image64);
-    const filePath = `Images/${currentDate}`;
-    const fileRef = this.storage.ref(filePath);
 
-    const task = this.storage.upload(`Images/${currentDate}`, file);
-    await task
-      .snapshotChanges()
-      .pipe(
-        finalize(() => {
-          this.downloadURL = fileRef.getDownloadURL();
-        })
-      )
-      .toPromise();
-    let imageURL = await this.downloadURL.toPromise();
-    this.mascota.patchValue({ image: imageURL });
-    console.log('en el upload', imageURL);
-  }
-
-  base64ToImage(dataURI) {
-    const fileDate = dataURI.split(',');
-    // const mime = fileDate[0].match(/:(.*?);/)[1];
-    const byteString = atob(fileDate[1]);
-    const arrayBuffer = new ArrayBuffer(byteString.length);
-    const int8Array = new Uint8Array(arrayBuffer);
-    for (let i = 0; i < byteString.length; i++) {
-      int8Array[i] = byteString.charCodeAt(i);
-    }
-    const blob = new Blob([arrayBuffer], { type: 'image/png' });
-    return blob;
-  }
   goback() {
     this.navCtrl.navigateBack('/tabs/admin/mascotas');
   }
-  async onSubmit() {
-    let newMascota = {
-      nombre: this.mascota.get('nombre').value,
-      fecha_nacimiento: '2019-01-28',
-      color: this.mascota.get('color').value,
-      is_esterilizado: this.transformBoolean(this.mascota.get('esterilizado').value),
-      is_adoptado: this.transformBoolean(this.mascota.get('adoptado').value),
-      is_caso_externo: this.transformBoolean(this.mascota.get('caso_externo').value),
-      is_adoptable: this.transformBoolean(this.mascota.get('adoptable').value),
-      descripcion: this.mascota.get('descripcion').value,
-      sexo: this.mascota.get('sexo').value,
-      ubicacion: this.mascota.get('ubicacion').value,
-      fecha_adopcion: 'NA',
-      tipo_mascota: this.mascota.get('tipo').value,
-      imagen_url: '',
-    };
-    await this.alertaService.presentLoading('Creando mascota');
-    try {
-      await this.upload();
-      console.log(this.mascota.get('image').value);
-      newMascota.imagen_url = this.mascota.get('image').value;
-      await this.sistema.createMacota(newMascota);
-    } catch (err) {
-      console.error('Error al crear mascota: ', err);
-      this.alertaService.presentToast('Error al guardar mascota, por favor intente de nuevo' + err);
-    }
-    this.alertaService.dismissLoading();
-    console.log(this.mascota.get('image').value);
-  }
 
-  transformBoolean(value: boolean) {
-    if (value) {
-      return 1;
-    } else {
-      return 0;
-    }
+  getBirthDate() {
+    let today = moment(new Date());
+    today.subtract(this.mascota.get('years').value, 'years');
+    today.subtract(this.mascota.get('months').value, 'months');
+    today.subtract(this.mascota.get('days').value, 'days');
+    return today.toDate();
   }
 }

@@ -1,4 +1,5 @@
 import { HttpClient } from '@angular/common/http';
+import { SistemaService } from 'src/app/services/sistema/sistema.service';
 
 /**
  * Abstract class containing the base information of a GPA User
@@ -13,7 +14,7 @@ export abstract class UsuarioGPA {
   protected _isEstESPOL: boolean;
   protected _foto: string;
 
-  constructor(protected http: HttpClient) {}
+  constructor(protected http: HttpClient, protected sistema: SistemaService) {}
 
   public get nombreUsuario(): string {
     return this._nombreUsuario;
