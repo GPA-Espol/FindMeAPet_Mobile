@@ -1,0 +1,173 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title> app/model/forms/formulario.model.ts</title>
+
+  <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script src="./build/entry.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <link href="https://fonts.googleapis.com/css?family=Roboto:100,400,700|Inconsolata,700" rel="stylesheet">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+  <link type="text/css" rel="stylesheet" href="https://jmblog.github.io/color-themes-for-google-code-prettify/themes/tomorrow-night.min.css">
+  <link type="text/css" rel="stylesheet" href="styles/app.min.css">
+  <link type="text/css" rel="stylesheet" href="styles/iframe.css">
+  <link type="text/css" rel="stylesheet" href="">
+  <script async defer src="https://buttons.github.io/buttons.js"></script>
+
+  
+</head>
+
+
+
+<body class="layout small-header">
+    <div id="stickyNavbarOverlay"></div>
+    
+
+<div class="top-nav">
+    <div class="inner">
+        <a id="hamburger" role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+        </a>
+        <div class="logo">
+            
+            
+        </div>
+        <div class="menu">
+            
+            <div class="navigation">
+                <a
+                    href="index.html"
+                    class="link"
+                >
+                    API Documentation
+                </a>
+                
+                
+                
+            </div>
+        </div>
+    </div>
+</div>
+    <div id="main">
+        <div
+            class="sidebar "
+            id="sidebarNav"
+        >
+            
+            <nav>
+                
+                    <h2><a href="index.html">Documentation</a></h2><div class="category"></div><div class="category"><h2>Component</h2><h3>Classes</h3><ul><li><a href="LoginPage.html">LoginPage</a></li></ul></div><div class="category"><h2>Components</h2><h3>Classes</h3><ul><li><a href="AppComponent.html">AppComponent</a></li></ul></div><div class="category"><h2>Model</h2><h3>Classes</h3><ul><li><a href="Administrador.html">Administrador</a></li><li><a href="AdministrarFormulario.html">AdministrarFormulario</a></li><li><a href="AdministrarMascota.html">AdministrarMascota</a></li><li><a href="AdministrarPublicacion.html">AdministrarPublicacion</a></li><li><a href="AdministrarReporteAsistencia.html">AdministrarReporteAsistencia</a></li><li><a href="AdministrarUsuario.html">AdministrarUsuario</a></li><li><a href="Formulario.html">Formulario</a></li><li><a href="FormularioAdopcion.html">FormularioAdopcion</a></li><li><a href="FormularioPonerAdopcion.html">FormularioPonerAdopcion</a></li><li><a href="Mascota.html">Mascota</a></li><li><a href="Publicacion.html">Publicacion</a></li><li><a href="ReporteAsistencia.html">ReporteAsistencia</a></li><li><a href="SolicitudActualizacionMascota.html">SolicitudActualizacionMascota</a></li><li><a href="UsuarioGPA.html">UsuarioGPA</a></li><li><a href="Voluntario.html">Voluntario</a></li></ul></div><div class="category"><h2>Services</h2><h3>Classes</h3><ul><li><a href="AlertaService.html">AlertaService</a></li><li><a href="SistemaService.html">SistemaService</a></li><li><a href="StorageService.html">StorageService</a></li><li><a href="TokenInterceptorService.html">TokenInterceptorService</a></li><li><a href="Utils.html">Utils</a></li></ul></div>
+                
+            </nav>
+        </div>
+        <div class="core" id="main-content-wrapper">
+            <div class="content">
+                <header class="page-title">
+                    <p>Source</p>
+                    <h1>app/model/forms/formulario.model.ts</h1>
+                </header>
+                
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import { EstadoSolicitud } from '../enums.model';
+
+/**
+ * Class containing the basic information needed to fill in the forms.
+ * @category Model
+ */
+export class Formulario {
+  protected _CI: string;
+  protected _nombre: string;
+  protected _apellido: string;
+  protected _ciudad: string;
+  protected _edad: string;
+  protected _email: string;
+  protected _fecha: Date | string;
+  protected _direccion: string;
+  protected _estado: EstadoSolicitud;
+
+  public get CI(): string {
+    return this._CI;
+  }
+
+  public get nombre(): string {
+    return this._nombre;
+  }
+
+  public get apellido(): string {
+    return this._apellido;
+  }
+
+  public get ciudad(): string {
+    return this._ciudad;
+  }
+
+  public get edad(): string {
+    return this._edad;
+  }
+
+  public get email(): string {
+    return this._email;
+  }
+
+  public get fecha(): Date | string {
+    return this._fecha;
+  }
+
+  public get direccion(): string {
+    return this._direccion;
+  }
+
+  public get estado(): EstadoSolicitud {
+    return this._estado;
+  }
+
+  public set estado(value: EstadoSolicitud) {
+    this._estado = value;
+  }
+}
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+            </div>
+            
+            <footer class="footer">
+                <div class="content has-text-centered">
+                    <p>Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.7</a></p>
+                    <p class="sidebar-created-by">
+                        <a href="https://github.com/SoftwareBrothers/better-docs" target="_blank">BetterDocs theme</a> provided with <i class="fas fa-heart"></i> by 
+                        <a href="http://softwarebrothers.co" target="_blank">SoftwareBrothers - JavaScript Development Agency</a>
+                    </p>
+                </div>
+            </footer>
+            
+        </div>
+        <div id="side-nav" class="side-nav">
+        </div>
+    </div>
+<script src="scripts/app.min.js"></script>
+<script>PR.prettyPrint();</script>
+<script src="scripts/linenumber.js"> </script>
+
+</body>
+</html>

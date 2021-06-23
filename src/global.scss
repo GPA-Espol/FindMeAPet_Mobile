@@ -30,3 +30,23 @@
 * {
   font-family: "Nunito", sans-serif;
 }
+
+ion-toolbar {
+  --border-width: 0 !important;
+  box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.2);
+  border-radius: 0 0 20px 20px;
+}
+
+.header-md::after {
+  background-image: none;
+}
+
+ion-menu-button {
+  --color: #3a2a11;
+}
+
+ion-title {
+  color: #3a2a11;
+  font-size: 20px;
+  font-weight: 600;
+}

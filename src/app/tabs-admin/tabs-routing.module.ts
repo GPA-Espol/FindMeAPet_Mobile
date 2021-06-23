@@ -13,19 +13,23 @@ const routes: Routes = [
       },
       {
         path: 'perfil',
-        loadChildren: () => import('../pages/tab-pets/tab-pets.module').then((m) => m.TabPetsPageModule),
+        loadChildren: () =>
+          import('../pages/en-construccion/en-construccion.module').then((m) => m.EnConstruccionPageModule),
       },
       {
         path: 'inicio',
-        loadChildren: () => import('../pages/tab-pets/tab-pets.module').then((m) => m.TabPetsPageModule),
+        loadChildren: () =>
+          import('../pages/en-construccion/en-construccion.module').then((m) => m.EnConstruccionPageModule),
       },
       {
         path: 'solicitud',
-        loadChildren: () => import('../pages/tab-pets/tab-pets.module').then((m) => m.TabPetsPageModule),
+        loadChildren: () =>
+          import('../pages/en-construccion/en-construccion.module').then((m) => m.EnConstruccionPageModule),
       },
       {
         path: 'configuracion',
-        loadChildren: () => import('../pages/tab-pets/tab-pets.module').then((m) => m.TabPetsPageModule),
+        loadChildren: () =>
+          import('../pages/en-construccion/en-construccion.module').then((m) => m.EnConstruccionPageModule),
       },
       {
         path: '',

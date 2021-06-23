@@ -1,16 +1,22 @@
 {
   "opts": {
-    "template": "node_modules/better-docs"
+    "template": "node_modules/better-docs",
+    "destination": "./documentation/"
   },
   "tags": {
     "allowUnknownTags": [
-      "optional"
+      "optional",
+      "category"
     ]
   },
   "plugins": [
+    "node_modules/better-docs/category",
     "node_modules/better-docs/typescript"
   ],
   "source": {
     "includePattern": "\\.(jsx|js|ts|tsx)$"
+  },
+  "templates": {
+    "cleverLinks": true
   }
 }

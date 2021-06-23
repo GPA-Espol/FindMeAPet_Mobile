@@ -10,6 +10,10 @@ enum UserType {
   Admin = 'Administrador',
 }
 
+/**
+ * Class in charge of the behaviour of the Login Page.
+ * @category Component
+ */
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
@@ -29,6 +33,10 @@ export class LoginPage implements OnInit {
     this.initForm();
   }
 
+  /**
+   * Initializes the login form Group with the fields of user and password,
+   * both of them as required.
+   */
   initForm() {
     this._loginForm = new FormGroup({
       user: new FormControl('', [Validators.required]),
@@ -36,6 +44,12 @@ export class LoginPage implements OnInit {
     });
   }
 
+  /**
+   * Log the user in getting the user and password value from the login form group
+   * and calling the {@link SistemaService#login}.
+   * If authenticated correctly, redirect the user to the Home page of the app.
+   * If not, presenting a toast to the user pointing that user or password was incorrect
+   */
   async iniciarSesion() {
     const usuario = this._loginForm.get('user').value;
     const password = this._loginForm.get('password').value;

@@ -1,3 +1,7 @@
+/**
+ * Class containing the actions that the admin can do regarding the all users
+ * @category Model
+ */
 export class AdministrarUsuario {
   public crearVoluntario() {
     // TODO implementar método
