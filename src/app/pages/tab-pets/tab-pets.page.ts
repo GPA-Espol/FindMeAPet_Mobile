@@ -25,8 +25,4 @@ export class TabPetsPage implements OnInit {
   filterLocation(lugar) {
     this.lugarBuscar = lugar;
   }
-
-  getValue(key) {
-    return UbicacionMascota[key];
-  }
 }
