@@ -32,9 +32,7 @@ export class SistemaService {
    */
   public async login(usuario: string, password: string) {
     let loginUrl = environment.api + 'auth';
-    //let { token, rol } = await this.http.post<any>(loginUrl, { usuario, password }).toPromise();
-    let token = 'aa';
-    let rol = RolUsuario.ADMIN;
+    let { token, rol } = await this.http.post<any>(loginUrl, { usuario, password }).toPromise();
     await this.store.set('usuario', { token, rol });
     if (rol == RolUsuario.ADMIN) {
       this._usuario = new Administrador(this.http);
@@ -78,9 +76,9 @@ export class SistemaService {
     return this._mascotas.data;
   }
 
-  public async createMacota(mascota:any) {
+  public async createMacota(mascota: any) {
     let url = environment.api + 'mascota';
-    let response_code = await this.http.post<any[]>(url, mascota ).toPromise();
+    let response_code = await this.http.post<any[]>(url, mascota).toPromise();
     return response_code;
   }
 

@@ -25,6 +25,7 @@ describe('SistemaService', () => {
   });
 
   it('SS-02 should check that user is not logged In', async () => {
+    await storage.remove('usuario');
     expect(await service.userLoggedIn()).toBeFalsy();
   });
 
@@ -34,8 +35,8 @@ describe('SistemaService', () => {
     let usuario = 'admin';
     let password = 'admin';
 
-    service.login('admin', 'admin').then(async (result: any) => {
-      let userLogged = await storage.get('usuario');
+    service.login('admin', 'admin').then(async () => {
+      let userLogged = await service.userLoggedIn();
       expect(userLogged).toEqual({ token, rol });
       expect(service.admin).toBeTruthy();
       done();
@@ -63,10 +64,9 @@ describe('SistemaService', () => {
     let rol = 'Voluntario';
     let usuario = 'voluntario';
     let password = 'voluntario';
-    service.login(usuario, password).then(async (result: any) => {
-      expect(result).toBe(rol);
-      let userLogged = await storage.get('usuario');
-      expect(userLogged).toEqual({ token, rol });
+    service.login(usuario, password).then(async () => {
+      let userLogged = await service.userLoggedIn();
+      expect(userLogged).toEqual({ rol, token });
       expect(service.voluntario).toBeTruthy();
       done();
     });
