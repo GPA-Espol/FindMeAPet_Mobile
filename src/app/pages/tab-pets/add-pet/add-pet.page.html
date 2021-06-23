@@ -19,11 +19,11 @@
     </ion-card>
   </div>
   <div class="center-contenedor">
-    <ion-button (click)="selectImage()" mode='ios'>
+    <ion-button (click)="selectImage()" mode="ios">
       <ion-icon slot="start" name="arrow-up-circle"></ion-icon> Subir imagen
     </ion-button>
   </div>
-  <form [formGroup]="mascota" >
+  <form [formGroup]="mascota">
     <div class="ion-justify-content ion-margin-horizontal ion-margin-top">
       <div>
         <ion-row class="ion-margin-start">
@@ -35,7 +35,12 @@
         </ion-row>
 
         <ion-item lines="none" class="ion-margin-horizontal">
-          <ion-input type="text" size="10" placeholder="Ej: Doraemon, Mimi" formControlName="nombre"></ion-input>
+          <ion-input
+            type="text"
+            size="10"
+            placeholder="Ej: Doraemon, Mimi"
+            formControlName="nombre"
+          ></ion-input>
         </ion-item>
       </div>
 
@@ -50,17 +55,17 @@
       <ion-row class="my-vertical-margin">
         <ion-col size="4" class="ion-no-margin">
           <ion-item lines="none">
-            <ion-input type="number" placeholder="años"></ion-input>
+            <ion-input type="number" placeholder="años" formControlName="years"></ion-input>
           </ion-item>
         </ion-col>
         <ion-col size="4" class="ion-no-margin">
           <ion-item lines="none">
-            <ion-input type="number" placeholder="meses"></ion-input>
+            <ion-input type="number" placeholder="meses" formControlName="months"></ion-input>
           </ion-item>
         </ion-col>
         <ion-col size="4" class="ion-no-margin">
           <ion-item lines="none">
-            <ion-input type="number" placeholder="días"></ion-input>
+            <ion-input type="number" placeholder="días" formControlName="days"></ion-input>
           </ion-item>
         </ion-col>
       </ion-row>
@@ -75,7 +80,13 @@
 
       <ion-item lines="none" class="ion-margin-top ion-margin-horizontal">
         <ion-label>Sexo de la mascota</ion-label>
-        <ion-select placeholder=" Elegir uno" okText="Ok" cancelText="Cancelar" formControlName="sexo" mode='ios'>
+        <ion-select
+          placeholder=" Elegir uno"
+          okText="Ok"
+          cancelText="Cancelar"
+          formControlName="sexo"
+          mode="ios"
+        >
           <ion-select-option value="H">Hembra</ion-select-option>
           <ion-select-option value="M">Macho</ion-select-option>
         </ion-select>
@@ -90,7 +101,12 @@
         </ion-row>
 
         <ion-item lines="none" class="ion-margin-top ion-margin-horizontal">
-          <ion-input type="text" size="10" placeholder="Ej: Amarillo, blanco con manchas negras" formControlName="color"></ion-input>
+          <ion-input
+            type="text"
+            size="10"
+            placeholder="Ej: Amarillo, blanco con manchas negras"
+            formControlName="color"
+          ></ion-input>
         </ion-item>
       </div>
       <ion-row class="ion-margin-start">
@@ -103,7 +119,13 @@
 
       <ion-item lines="none" class="ion-margin-top ion-margin-horizontal">
         <ion-label>Lugar</ion-label>
-        <ion-select placeholder="Seleccione uno" okText="Ok" cancelText="Cancelar" formControlName="ubicacion"  mode='ios'>
+        <ion-select
+          placeholder="Seleccione uno"
+          okText="Ok"
+          cancelText="Cancelar"
+          formControlName="ubicacion"
+          mode="ios"
+        >
           <ion-select-option value="REFUGIO">Refugio</ion-select-option>
           <ion-select-option value="EXTERNO">Externo</ion-select-option>
           <ion-select-option value="DENTRO_ESPOL">Dentro de Espol</ion-select-option>
@@ -118,21 +140,21 @@
         </div>
       </ion-row>
       <ion-list>
-        <ion-item lines="none" class="no-margin-item" >
+        <ion-item lines="none" class="no-margin-item">
           <ion-label>Esterilizado</ion-label>
-          <ion-checkbox slot="end" color="primary" formControlName="esterilizado"  mode='ios'></ion-checkbox>
+          <ion-checkbox slot="end" color="primary" formControlName="esterilizado" mode="ios"></ion-checkbox>
         </ion-item>
         <ion-item lines="none" class="no-margin-item">
           <ion-label>Adoptado</ion-label>
-          <ion-checkbox slot="end" color="primary" formControlName="adoptado"  mode='ios'></ion-checkbox>
+          <ion-checkbox slot="end" color="primary" formControlName="adoptado" mode="ios"></ion-checkbox>
         </ion-item>
         <ion-item lines="none" class="no-margin-item">
           <ion-label>Caso Externo</ion-label>
-          <ion-checkbox slot="end" color="primary" formControlName="caso_externo"  mode='ios'></ion-checkbox>
+          <ion-checkbox slot="end" color="primary" formControlName="caso_externo" mode="ios"></ion-checkbox>
         </ion-item>
         <ion-item lines="none" class="no-margin-item">
           <ion-label>Es adopable</ion-label>
-          <ion-checkbox slot="end" color="primary" formControlName="adoptable"  mode='ios'></ion-checkbox>
+          <ion-checkbox slot="end" color="primary" formControlName="adoptable" mode="ios"></ion-checkbox>
         </ion-item>
       </ion-list>
       <div>
@@ -146,7 +168,13 @@
 
         <ion-item lines="none" class="ion-margin-top ion-margin-horizontal">
           <ion-label>Personalidad</ion-label>
-          <ion-select placeholder="Seleccione uno" okText="Ok" cancelText="Cancelar" formControlName="descripcion"  mode='ios'>
+          <ion-select
+            placeholder="Seleccione uno"
+            okText="Ok"
+            cancelText="Cancelar"
+            formControlName="descripcion"
+            mode="ios"
+          >
             <ion-select-option value="TIMIDO">Tímido</ion-select-option>
             <ion-select-option value="DOCIL">Dócil</ion-select-option>
             <ion-select-option value="SOCIABLE">Sociable</ion-select-option>
@@ -166,7 +194,13 @@
 
         <ion-item lines="none" class="ion-margin-top ion-margin-horizontal">
           <ion-label>Tipo</ion-label>
-          <ion-select placeholder="Seleccione uno" okText="Ok" cancelText="Cancelar" formControlName="tipo"  mode='ios'>
+          <ion-select
+            placeholder="Seleccione uno"
+            okText="Ok"
+            cancelText="Cancelar"
+            formControlName="tipo"
+            mode="ios"
+          >
             <ion-select-option value="perro">Perro</ion-select-option>
             <ion-select-option value="gato">Gato</ion-select-option>
           </ion-select>
@@ -181,18 +215,23 @@
         </ion-row>
 
         <ion-item lines="none">
-          <ion-textarea auto-grow rows="4" placeholder="Breve descripción de la mascota" formControlName="descripcion"></ion-textarea>
+          <ion-textarea
+            auto-grow
+            rows="4"
+            placeholder="Breve descripción de la mascota"
+            formControlName="descripcion"
+          ></ion-textarea>
         </ion-item>
       </div>
       <ion-col class="ion-no-padding">
-        <ion-button expand="block" fill="outline" (click)="onSubmit()"  mode='ios'> Guardar </ion-button>
+        <ion-button expand="block" fill="outline" (click)="onSubmit()" mode="ios"> Guardar </ion-button>
         <ion-button
           class="ion-margin-vertical"
           expand="block"
           fill="outline"
           color="medium"
           (click)="goback()"
-          mode='ios'
+          mode="ios"
         >
           Cancelar
         </ion-button>

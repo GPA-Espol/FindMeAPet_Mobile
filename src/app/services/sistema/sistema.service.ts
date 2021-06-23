@@ -35,9 +35,9 @@ export class SistemaService {
     let { token, rol } = await this.http.post<any>(loginUrl, { usuario, password }).toPromise();
     await this.store.set('usuario', { token, rol });
     if (rol == RolUsuario.ADMIN) {
-      this._usuario = new Administrador(this.http);
+      this._usuario = new Administrador(this.http, this);
     } else {
-      this._usuario = new Voluntario(this.http);
+      this._usuario = new Voluntario(this.http, this);
     }
   }
 
@@ -88,5 +88,9 @@ export class SistemaService {
 
   public get admin() {
     return this._usuario as Administrador;
+  }
+
+  public get mascotas() {
+    return this._mascotas.data;
   }
 }
