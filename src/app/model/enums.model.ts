@@ -4,8 +4,8 @@ export enum RolUsuario {
 }
 
 export enum RolVoluntario {
-  RECORRIDO = 'Recorrido',
-  REFUGIO = 'Refugio',
+  RECORRIDO = 'RECORRIDO',
+  REFUGIO = 'REFUGIO',
 }
 
 export enum Dia {

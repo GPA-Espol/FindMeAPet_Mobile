@@ -5,10 +5,11 @@ import { Personalidad, UbicacionMascota } from './enums.model';
  * @category Model
  */
 export class Mascota {
+  private _id: number;
   private _nombre: string;
-  private _edad: number;
+  private _fechaNacimiento: Date;
   private _color: string;
-  private _ublicacionMascota: UbicacionMascota;
+  private _ubicacion: UbicacionMascota;
   private _isEsterilizado: boolean;
   private _isAdoptado: boolean;
   private _isCasoExterno: boolean;
@@ -17,6 +18,7 @@ export class Mascota {
   private _personalidadL: Personalidad[];
   private _sexo: string;
   private _tipoAnimal: string;
+  private _imagenUrl: string;
 
   /**
    * Method to synchronize the data obtained from the REST-API to the Model that we have in
@@ -27,13 +29,25 @@ export class Mascota {
   static deserialize(data: any[]) {
     return data.map((mascota) => {
       let mascotaResult = new Mascota();
-      Object.assign(mascotaResult, mascota);
-      mascotaResult._isEsterilizado = mascota.is_esterilizado;
-      mascotaResult._isAdoptable = mascota.is_adoptable;
-      mascotaResult._isAdoptado = mascota.is_adoptado;
-      mascotaResult._isCasoExterno = mascota.is_caso_externo;
+      mascotaResult._id = mascota.id;
+      mascotaResult.nombre = mascota.nombre;
+      mascotaResult.fechaNacimiento = new Date(mascota.fecha_nacimiento);
+      mascotaResult.color = mascota.color;
+      mascotaResult.isEsterilizado = !!mascota.is_esterilizado;
+      mascotaResult.isAdoptable = !!mascota.is_adoptable;
+      mascotaResult.isAdoptado = !!mascota.is_adoptado;
+      mascotaResult.isCasoExterno = !!mascota.is_caso_externo;
+      mascotaResult.descripcion = mascota.descripcion;
+      mascotaResult.sexo = mascota.sexo;
+      mascotaResult.ubicacionMascota = mascota.ubicacion;
+      mascotaResult.tipoAnimal = mascota.tipo_mascota;
+      mascotaResult.imagenUrl = mascota.imagen_url;
       return mascotaResult;
     });
+  }
+
+  public get id(): number {
+    return this._id;
   }
 
   public get nombre(): string {
@@ -44,12 +58,12 @@ export class Mascota {
     this._nombre = value;
   }
 
-  public get edad(): number {
-    return this._edad;
+  public get fechaNacimiento(): Date {
+    return this._fechaNacimiento;
   }
 
-  public set edad(value: number) {
-    this._edad = value;
+  public set fechaNacimiento(value: Date) {
+    this._fechaNacimiento = value;
   }
 
   public get color(): string {
@@ -60,12 +74,12 @@ export class Mascota {
     this._color = value;
   }
 
-  public get ublicacionMascota(): UbicacionMascota {
-    return this._ublicacionMascota;
+  public get ubicacionMascota(): UbicacionMascota {
+    return this._ubicacion;
   }
 
-  public set ublicacionMascota(value: UbicacionMascota) {
-    this._ublicacionMascota = value;
+  public set ubicacionMascota(value: UbicacionMascota) {
+    this._ubicacion = value;
   }
 
   public get isEsterilizado(): boolean {
@@ -130,5 +144,12 @@ export class Mascota {
 
   public set tipoAnimal(value: string) {
     this._tipoAnimal = value;
+  }
+
+  public get imagenUrl(): string {
+    return this._imagenUrl;
+  }
+  public set imagenUrl(value: string) {
+    this._imagenUrl = value;
   }
 }

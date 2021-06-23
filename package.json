@@ -8,10 +8,11 @@
     "start": "ng serve",
     "build": "ionic cordova build android --prod",
     "test": "ng test",
-    "release": "ng test --watch false && start ./coverage/ngv/index.html && ionic cordova build android --prod",
+    "release": "ng test --watch false && start ./coverage/ngv/lcov-report/index.html && ionic cordova build android --prod",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "docs": "jsdoc -r src/ -c jsdoc.json"
+    "docs": "jsdoc -r src/ -c jsdoc.json",
+    "sonar": "node sonar-project.js"
   },
   "private": true,
   "dependencies": {
