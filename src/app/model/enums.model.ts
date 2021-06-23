@@ -4,8 +4,8 @@ export enum RolUsuario {
 }
 
 export enum RolVoluntario {
-  RECORRIDO = 'RECORRIDO',
-  REFUGIO = 'REFUGIO',
+  RECORRIDO = 'Recorrido',
+  REFUGIO = 'Refugio',
 }
 
 export enum Dia {
@@ -25,27 +25,27 @@ export enum CantidadComida {
 }
 
 export enum TipoPublicacion {
-  EVENTO,
-  NOTICIA,
+  EVENTO = 'Evento',
+  NOTICIA = 'Noticia',
 }
 
 export enum UbicacionMascota {
-  REFUGIO,
-  EXTERNO,
-  DENTRO_ESPOL,
-  HOGAR_TEMPORAL,
+  REFUGIO = 'Refugio',
+  EXTERNO = 'Externo',
+  DENTRO_ESPOL = 'Dentro espol',
+  HOGAR_TEMPORAL = 'Hogar temporal',
 }
 
 export enum Personalidad {
-  TIMIDO,
-  DOCIL,
-  SOCIABLE,
-  FEROZ,
-  JUGUETON,
+  TIMIDO = 'Tímido',
+  DOCIL = 'Dócil',
+  SOCIABLE = 'Sociable',
+  FEROZ = 'Feroz',
+  JUGUETON = 'Juguetón',
 }
 
 export enum EstadoSolicitud {
-  PENDIENTE,
-  APROBADO,
-  RECHAZADO,
+  PENDIENTE = 'Pendiente',
+  APROBADO = 'Aprobado',
+  RECHAZADO = 'Rechazado',
 }

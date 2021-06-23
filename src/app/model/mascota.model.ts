@@ -54,6 +54,8 @@ export class Mascota {
    * @returns {Mascota[]} Array of objects instance of {@link Mascota}
    */
   static serialize(mascota: Mascota) {
+    console.log(mascota);
+
     return {
       nombre: mascota.nombre,
       fecha_nacimiento: moment(mascota.fechaNacimiento).format('YYYY-MM-DD'),

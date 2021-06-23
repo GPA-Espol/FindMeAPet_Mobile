@@ -47,12 +47,70 @@ export class AddPetPage implements OnInit {
       sexo: ['', Validators.required],
       ubicacion: ['', Validators.required],
       tipo: ['', Validators.required],
-      years: 0,
-      months: 0,
-      days: 0,
+      years: '',
+      months: '',
+      days: '',
       image: '',
     });
     this.administrador = this.sistema.admin;
+  }
+
+  async onSubmit() {
+    let newPet = new Mascota();
+    newPet.nombre = this.mascota.get('nombre').value;
+    newPet.fechaNacimiento = this.getBirthDate();
+    newPet.color = this.mascota.get('color').value;
+    newPet.isCasoExterno = this.mascota.get('caso_externo').value;
+    newPet.isEsterilizado = this.mascota.get('esterilizado').value;
+    newPet.isAdoptado = this.mascota.get('adoptado').value;
+    newPet.isAdoptable = this.mascota.get('adoptable').value;
+    newPet.sexo = this.mascota.get('sexo').value;
+    newPet.ubicacionMascota = this.mascota.get('ubicacion').value;
+    newPet.descripcion = this.mascota.get('descripcion').value;
+    newPet.tipoAnimal = this.mascota.get('tipo').value;
+    await this.alertaService.presentLoading('Creando mascota');
+    try {
+      await this.upload();
+      newPet.imagenUrl = this.mascota.get('image').value;
+      await this.administrador.adminMascota.crearMascota(newPet);
+      this.alertaService.presentToast('La mascota ha sido agregada');
+      this.goback();
+    } catch (err) {
+      console.error('Error al crear mascota: ', err);
+      this.alertaService.presentToast('Error al guardar mascota, por favor intente de nuevo' + err);
+    }
+    this.alertaService.dismissLoading();
+  }
+
+  async upload() {
+    var currentDate = Date.now();
+    const file: any = this.base64ToImage(this.image64);
+    const filePath = `Images/${currentDate}`;
+    const fileRef = this.storage.ref(filePath);
+
+    const task = this.storage.upload(`Images/${currentDate}`, file);
+    await task
+      .snapshotChanges()
+      .pipe(
+        finalize(() => {
+          this.downloadURL = fileRef.getDownloadURL();
+        })
+      )
+      .toPromise();
+    let imageURL = await this.downloadURL.toPromise();
+    this.mascota.patchValue({ image: imageURL });
+  }
+
+  base64ToImage(dataURI: string) {
+    const fileDate = dataURI.split(',');
+    const byteString = atob(fileDate[1]);
+    const arrayBuffer = new ArrayBuffer(byteString.length);
+    const int8Array = new Uint8Array(arrayBuffer);
+    for (let i = 0; i < byteString.length; i++) {
+      int8Array[i] = byteString.charCodeAt(i);
+    }
+    const blob = new Blob([arrayBuffer], { type: 'image/png' });
+    return blob;
   }
 
   async selectImage() {
@@ -73,7 +131,7 @@ export class AddPetPage implements OnInit {
           },
         },
         {
-          text: 'Cancel',
+          text: 'Cancelar',
           role: 'cancel',
         },
       ],
@@ -101,66 +159,8 @@ export class AddPetPage implements OnInit {
     );
   }
 
-  async upload() {
-    var currentDate = Date.now();
-    const file: any = this.base64ToImage(this.image64);
-    const filePath = `Images/${currentDate}`;
-    const fileRef = this.storage.ref(filePath);
-
-    const task = this.storage.upload(`Images/${currentDate}`, file);
-    await task
-      .snapshotChanges()
-      .pipe(
-        finalize(() => {
-          this.downloadURL = fileRef.getDownloadURL();
-        })
-      )
-      .toPromise();
-    let imageURL = await this.downloadURL.toPromise();
-    this.mascota.patchValue({ image: imageURL });
-    console.log('en el upload', imageURL);
-  }
-
-  base64ToImage(dataURI) {
-    const fileDate = dataURI.split(',');
-    // const mime = fileDate[0].match(/:(.*?);/)[1];
-    const byteString = atob(fileDate[1]);
-    const arrayBuffer = new ArrayBuffer(byteString.length);
-    const int8Array = new Uint8Array(arrayBuffer);
-    for (let i = 0; i < byteString.length; i++) {
-      int8Array[i] = byteString.charCodeAt(i);
-    }
-    const blob = new Blob([arrayBuffer], { type: 'image/png' });
-    return blob;
-  }
-
   goback() {
     this.navCtrl.navigateBack('/tabs/admin/mascotas');
-  }
-
-  async onSubmit() {
-    let newPet = new Mascota();
-    newPet.nombre = this.mascota.get('nombre').value;
-    newPet.fechaNacimiento = this.getBirthDate();
-    newPet.isCasoExterno = this.mascota.get('caso_externo').value;
-    newPet.isEsterilizado = this.mascota.get('esterilizado').value;
-    newPet.isAdoptado = this.mascota.get('adoptado').value;
-    newPet.isAdoptable = this.mascota.get('adoptable').value;
-    (newPet.sexo = this.mascota.get('sexo').value),
-      (newPet.ubicacionMascota = this.mascota.get('ubicacion').value),
-      (newPet.tipoAnimal = this.mascota.get('tipo').value),
-      await this.alertaService.presentLoading('Creando mascota');
-    try {
-      await this.upload();
-      newPet.imagenUrl = this.mascota.get('image').value;
-      await this.administrador.adminMascota.crearMascota(newPet);
-    } catch (err) {
-      console.error('Error al crear mascota: ', err);
-      this.alertaService.presentToast('Error al guardar mascota, por favor intente de nuevo' + err);
-    }
-    this.alertaService.dismissLoading();
-    this.alertaService.presentToast('La mascota ha sido agregada');
-    this.goback();
   }
 
   getBirthDate() {

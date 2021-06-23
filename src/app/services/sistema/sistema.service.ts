@@ -82,6 +82,17 @@ export class SistemaService {
     return response_code;
   }
 
+  public async crearUsuario() {
+    if (!this._usuario) {
+      let usuario = await this.userLoggedIn();
+      if (usuario.rol == RolUsuario.ADMIN) {
+        this._usuario = new Administrador(this.http, this);
+      } else if (usuario.rol == RolUsuario.VOLUNTARIO) {
+        this._usuario = new Voluntario(this.http, this);
+      }
+    }
+  }
+
   public get voluntario() {
     return this._usuario as Voluntario;
   }

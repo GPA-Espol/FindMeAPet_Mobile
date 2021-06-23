@@ -4,14 +4,14 @@ import { Pipe, PipeTransform } from '@angular/core';
   name: 'lugar',
 })
 export class LugarPipe implements PipeTransform {
-  transform(arreglo: any[], lugar: string): any[] {
+  transform(mascotas: any[], lugar: string): any[] {
     if (lugar === '' || lugar == undefined || lugar == 'todos') {
-      return arreglo;
+      return mascotas;
     } else {
       lugar = lugar.toLowerCase();
 
-      return arreglo.filter((item) => {
-        return item.location.toLowerCase().includes(lugar);
+      return mascotas.filter((mascota) => {
+        return mascota.ubicacionMascota.toLowerCase().includes(lugar);
       });
     }
   }
