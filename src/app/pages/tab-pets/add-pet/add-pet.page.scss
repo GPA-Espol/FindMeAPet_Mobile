@@ -55,6 +55,11 @@ ion-select {
   color: grey;
 }
 
+.image-preview {
+  object-fit: cover;
+  object-position: center center;
+}
+
 .extra-content {
   background-color: #f5f5fa;
   -moz-border-radius: 50px;
@@ -70,7 +75,6 @@ ion-select {
 }
 
 #upload-image {
-  //--background:rgb(196, 196, 196);
   width: 45% !important;
   height: 140px !important;
   --background: rgb(223, 223, 223);

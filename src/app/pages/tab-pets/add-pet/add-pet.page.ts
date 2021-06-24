@@ -141,19 +141,20 @@ export class AddPetPage implements OnInit {
 
   takePicture(source) {
     const options: CameraOptions = {
-      quality: 100,
+      quality: 80,
       destinationType: this.camera.DestinationType.DATA_URL,
       encodingType: this.camera.EncodingType.JPEG,
       mediaType: this.camera.MediaType.PICTURE,
       sourceType: source,
+      targetWidth: 1000,
+      targetHeight: 1000,
     };
     this.camera.getPicture(options).then(
       (imageData) => {
-        // imageData is either a base64 encoded string or a file URI
         this.image64 = 'data:image/jpeg;base64,' + imageData;
       },
       (err) => {
-        // Handle error
+        this.alertaService.presentToast('Ha ocurrido un error al tomar la foto.');
         console.error(err);
       }
     );

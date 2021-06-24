@@ -45,4 +45,8 @@ export class TabPetsPage implements OnInit {
       return months + noun;
     }
   }
+  async refreshPets(event: any) {
+    this.pets = await this.sistema.getMascotas(true);
+    event.target.complete();
+  }
 }
