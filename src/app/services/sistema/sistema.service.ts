@@ -35,9 +35,9 @@ export class SistemaService {
     let { token, rol } = await this.http.post<any>(loginUrl, { usuario, password }).toPromise();
     await this.store.set('usuario', { token, rol });
     if (rol == RolUsuario.ADMIN) {
-      this._usuario = new Administrador(this.http);
+      this._usuario = new Administrador(this.http, this);
     } else {
-      this._usuario = new Voluntario(this.http);
+      this._usuario = new Voluntario(this.http, this);
     }
   }
 
@@ -82,11 +82,26 @@ export class SistemaService {
     return response_code;
   }
 
+  public async crearUsuario() {
+    if (!this._usuario) {
+      let usuario = await this.userLoggedIn();
+      if (usuario.rol == RolUsuario.ADMIN) {
+        this._usuario = new Administrador(this.http, this);
+      } else if (usuario.rol == RolUsuario.VOLUNTARIO) {
+        this._usuario = new Voluntario(this.http, this);
+      }
+    }
+  }
+
   public get voluntario() {
     return this._usuario as Voluntario;
   }
 
   public get admin() {
     return this._usuario as Administrador;
+  }
+
+  public get mascotas() {
+    return this._mascotas.data;
   }
 }

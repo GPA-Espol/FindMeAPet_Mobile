@@ -1,17 +1,18 @@
 import { Pipe, PipeTransform } from '@angular/core';
+import { Mascota } from '../model/mascota.model';
 
 @Pipe({
   name: 'filtro',
 })
 export class FiltroPipe implements PipeTransform {
-  transform(arreglo: any[], texto: string): any[] {
+  transform(mascotas: Mascota[], texto: string): any[] {
     if (texto === '' || texto == undefined) {
-      return arreglo;
+      return mascotas;
     } else {
       texto = texto.toLowerCase();
 
-      return arreglo.filter((item) => {
-        return item.name.toLowerCase().includes(texto);
+      return mascotas.filter((mascota) => {
+        return mascota.nombre.toLowerCase().includes(texto);
       });
     }
   }
