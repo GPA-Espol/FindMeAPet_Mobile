@@ -50,12 +50,10 @@ export class Mascota {
   /**
    * Method to synchronize the Model that we have in the ionic System with
    * the data that the API recieves.
-   * @param {any[]} data The responsed array of pets from the REST-API
-   * @returns {Mascota[]} Array of objects instance of {@link Mascota}
+   * @param {Mascota} mascota The pet you want to send through the API
+   * @returns {any} Object with the fields compatible with the API
    */
   static serialize(mascota: Mascota) {
-    console.log(mascota);
-
     return {
       nombre: mascota.nombre,
       fecha_nacimiento: moment(mascota.fechaNacimiento).format('YYYY-MM-DD'),
@@ -70,22 +68,6 @@ export class Mascota {
       tipo_mascota: mascota.tipoAnimal,
       imagen_url: mascota.imagenUrl,
     };
-
-    /*let mascotaResult = new Mascota();
-      mascotaResult._id = mascota.id;
-      mascotaResult.nombre = mascota.nombre;
-      mascotaResult.fechaNacimiento = new Date(mascota.fecha_nacimiento);
-      mascotaResult.color = mascota.color;
-      mascotaResult.isEsterilizado = !!mascota.is_esterilizado;
-      mascotaResult.isAdoptable = !!mascota.is_adoptable;
-      mascotaResult.isAdoptado = !!mascota.is_adoptado;
-      mascotaResult.isCasoExterno = !!mascota.is_caso_externo;
-      mascotaResult.descripcion = mascota.descripcion;
-      mascotaResult.sexo = mascota.sexo;
-      mascotaResult.ubicacionMascota = mascota.ubicacion;
-      mascotaResult.tipoAnimal = mascota.tipo_mascota;
-      mascotaResult.imagenUrl = mascota.imagen_url;
-      return mascotaResult;*/
   }
 
   public get id(): number {
