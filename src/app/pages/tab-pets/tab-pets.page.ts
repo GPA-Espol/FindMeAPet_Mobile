@@ -31,4 +31,9 @@ export class TabPetsPage implements OnInit {
   filterLocation(lugar) {
     this.lugarBuscar = lugar;
   }
+
+  async refreshPets(event:any){
+    this.pets = await this.sistema.getMascotas(true);
+    event.target.complete();
+  }
 }

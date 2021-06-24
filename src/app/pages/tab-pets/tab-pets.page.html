@@ -42,6 +42,9 @@
   </ion-row>
   <ng-template #loadedContent>
     <div *ngIf="pets.length">
+      <ion-refresher slot="fixed" (ionRefresh)="refreshPets($event)">
+        <ion-refresher-content></ion-refresher-content>
+      </ion-refresher>
       <ion-card class="card" *ngFor="let pet of pets | lugar:lugarBuscar |filtro: textoBuscar ">
         <ion-list>
           <ion-item lines="none">
