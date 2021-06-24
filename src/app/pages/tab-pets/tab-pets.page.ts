@@ -32,7 +32,20 @@ export class TabPetsPage implements OnInit {
     this.lugarBuscar = lugar;
   }
 
-  async refreshPets(event:any){
+  calculateAge(birthDate: Date) {
+    console.log(birthDate);
+    var today = new Date();
+    let years = today.getFullYear() - birthDate.getFullYear();
+    if (years > 0) {
+      let noun = years == 1 ? ' año' : ' años';
+      return years + noun;
+    } else {
+      let months = today.getMonth() - birthDate.getMonth();
+      let noun = months == 1 ? ' mes' : ' meses';
+      return months + noun;
+    }
+  }
+  async refreshPets(event: any) {
     this.pets = await this.sistema.getMascotas(true);
     event.target.complete();
   }
