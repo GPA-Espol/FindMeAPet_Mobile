@@ -11,3 +11,10 @@
   color: #ec823a;
   font-size: large;
 }
+
+.text-nothing {
+  font-weight: 600;
+  a {
+    color: var(--ion-color-secondary);
+  }
+}
