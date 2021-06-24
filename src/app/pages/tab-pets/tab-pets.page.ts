@@ -12,10 +12,16 @@ export class TabPetsPage implements OnInit {
   pets: Mascota[] = [];
   textoBuscar: '';
   lugarBuscar = 'todos';
+  loading = true;
+
   constructor(private sistema: SistemaService) {}
 
   async ngOnInit() {
+    this.loading = true;
     this.pets = await this.sistema.getMascotas();
+    setTimeout(() => {
+      this.loading = false;
+    }, 2000);
   }
 
   buscar(event) {
