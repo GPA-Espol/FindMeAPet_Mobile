@@ -6,7 +6,7 @@ import { environment } from 'src/environments/environment';
 import { Router } from '@angular/router';
 import { SistemaService } from './services/sistema/sistema.service';
 import { RolUsuario } from './model/enums.model';
-import { IonMenu } from '@ionic/angular';
+import { IonMenu, Platform } from '@ionic/angular';
 
 /**
  * App component
@@ -23,7 +23,8 @@ export class AppComponent {
     private statusBar: StatusBar,
     private splashScreen: SplashScreen,
     private router: Router,
-    private sistema: SistemaService
+    private sistema: SistemaService,
+    private platform: Platform
   ) {
     this.initializeApp();
   }
@@ -34,8 +35,10 @@ export class AppComponent {
    */
   async initializeApp() {
     if (environment.version != 'web') {
-      this.statusBar.backgroundColorByHexString('#EC823A');
-      this.splashScreen.hide();
+      this.platform.ready().then(() => {
+        this.statusBar.backgroundColorByHexString('#ec823a');
+        this.splashScreen.hide();
+      });
     }
     let userLoggedIn = await this.sistema.userLoggedIn();
     if (userLoggedIn) {
