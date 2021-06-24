@@ -9,22 +9,42 @@
 
 <ion-content>
   <div class="ion-margin-start ion-margin-vertical">
-    <ion-chip class="animal-chip" [outline]="lugarBuscar!='todos'" (click)="filterLocation('todos')">
+    <ion-chip
+      class="animal-chip"
+      [outline]="lugarBuscar!='todos'"
+      [class.animal-chip-pressed]="lugarBuscar=='todos'"
+      (click)="filterLocation('todos')"
+    >
       <ion-label>
         <ion-text color="secondary"> Todos </ion-text>
       </ion-label>
     </ion-chip>
-    <ion-chip class="animal-chip" [outline]="lugarBuscar!='Refugio'" (click)="filterLocation('Refugio')">
+    <ion-chip
+      class="animal-chip"
+      [outline]="lugarBuscar!='Refugio'"
+      [class.animal-chip-pressed]="lugarBuscar=='Refugio'"
+      (click)="filterLocation('Refugio')"
+    >
       <ion-label>
         <ion-text color="secondary"> Refugio </ion-text>
       </ion-label>
     </ion-chip>
-    <ion-chip class="animal-chip" [outline]="lugarBuscar!='Espol'" (click)="filterLocation('Espol')">
+    <ion-chip
+      class="animal-chip"
+      [outline]="lugarBuscar!='Espol'"
+      [class.animal-chip-pressed]="lugarBuscar=='Espol'"
+      (click)="filterLocation('Espol')"
+    >
       <ion-label>
         <ion-text color="secondary"> Espol </ion-text>
       </ion-label>
     </ion-chip>
-    <ion-chip class="animal-chip" [outline]="lugarBuscar!='Externo'" (click)="filterLocation('Externo')">
+    <ion-chip
+      class="animal-chip"
+      [outline]="lugarBuscar!='Externo'"
+      [class.animal-chip-pressed]="lugarBuscar=='Externo'"
+      (click)="filterLocation('Externo')"
+    >
       <ion-label>
         <ion-text color="secondary"> Externo </ion-text>
       </ion-label>
@@ -42,27 +62,29 @@
   </ion-row>
   <ng-template #loadedContent>
     <div *ngIf="pets.length">
-      <ion-card class="card" *ngFor="let pet of pets | lugar:lugarBuscar |filtro: textoBuscar ">
-        <ion-list>
-          <ion-item lines="none">
-            <ion-thumbnail>
-              <img [src]="pet.imagenUrl" alt="image of {{pet.nombre}}" />
-            </ion-thumbnail>
-            <ion-label class="ion-margin-start ion-margin-vertical ion-text-wrap">
-              <h2>{{pet.nombre}}</h2>
-              <ion-row class="ion-margin-vertical">
-                <ion-icon id="icon-location" name="location-outline"></ion-icon>
-                <h3>{{pet.ubicacionMascota}}</h3>
-                <ion-col class="ion-no-margin ion-no-padding">
-                  <div class="ion-text-end">
-                    <h3>{{pet.edad}}</h3>
-                  </div>
-                </ion-col>
-              </ion-row>
-              <p>{{pet.descripcion}}</p>
-            </ion-label>
-          </ion-item>
-        </ion-list>
+      <ion-card class="card-pet" *ngFor="let pet of pets | lugar:lugarBuscar |filtro: textoBuscar ">
+        <ion-item
+          lines="none"
+          class="item-pet"
+          style="margin-top: 10px; margin-bottom: 10px; background: #f5f5fafd"
+        >
+          <ion-thumbnail>
+            <img [src]="pet.imagenUrl" alt="image of {{pet.nombre}}" class="image-pet" />
+          </ion-thumbnail>
+          <ion-label class="ion-margin-start ion-margin-vertical ion-text-wrap">
+            <h2>{{pet.nombre}}</h2>
+            <ion-row style="margin-top: 10px; margin-bottom: 10px">
+              <ion-icon id="icon-location" name="location-outline"></ion-icon>
+              <h3>{{pet.ubicacionMascota}}</h3>
+              <ion-col class="ion-no-margin ion-no-padding">
+                <div class="ion-text-end">
+                  <h3>{{pet.fechaNacimiento | age }}</h3>
+                </div>
+              </ion-col>
+            </ion-row>
+            <p>{{pet.descripcion}}</p>
+          </ion-label>
+        </ion-item>
       </ion-card>
     </div>
     <div *ngIf="!pets.length" class="ion-margin-top">
@@ -78,6 +100,8 @@
     </div>
   </ng-template>
   <ion-fab slot="fixed" style="bottom: 10px; right: 15px">
-    <ion-fab-button routerLink="anadir"><ion-icon name="add-outline"></ion-icon></ion-fab-button>
+    <ion-fab-button routerLink="anadir" class="add-button"
+      ><ion-icon name="add-outline"></ion-icon
+    ></ion-fab-button>
   </ion-fab>
 </ion-content>

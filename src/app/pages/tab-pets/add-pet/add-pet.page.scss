@@ -55,14 +55,6 @@ ion-select {
   color: grey;
 }
 
-#upload-image {
-  --background: rgb(201, 201, 201);
-  border-radius: 15px !important;
-  --padding-left: 50px;
-  margin-left: 50px;
-  margin-right: 50px;
-}
-
 .extra-content {
   background-color: #f5f5fa;
   -moz-border-radius: 50px;
@@ -85,6 +77,11 @@ ion-select {
   border-radius: 15px !important;
   border: 0 !important;
   box-shadow: none !important;
+  /*
+  --padding-left: 50px;
+  margin-left: 50px;
+  margin-right: 50px;
+  */
 }
 
 #icon-camera {

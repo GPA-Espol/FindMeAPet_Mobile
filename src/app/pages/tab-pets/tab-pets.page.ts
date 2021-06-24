@@ -31,4 +31,18 @@ export class TabPetsPage implements OnInit {
   filterLocation(lugar) {
     this.lugarBuscar = lugar;
   }
+
+  calculateAge(birthDate: Date) {
+    console.log(birthDate);
+    var today = new Date();
+    let years = today.getFullYear() - birthDate.getFullYear();
+    if (years > 0) {
+      let noun = years == 1 ? ' año' : ' años';
+      return years + noun;
+    } else {
+      let months = today.getMonth() - birthDate.getMonth();
+      let noun = months == 1 ? ' mes' : ' meses';
+      return months + noun;
+    }
+  }
 }
