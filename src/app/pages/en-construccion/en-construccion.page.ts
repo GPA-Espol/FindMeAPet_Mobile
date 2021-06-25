@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 /**
  * Class Page in charge to show a in construction graph to the user
- * when he visits a page that hasn't been constructed yet.
+ * when he/she visits a page that hasn't been constructed yet.
  * @category Component
  */
 @Component({
