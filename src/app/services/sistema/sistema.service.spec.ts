@@ -35,7 +35,7 @@ describe('SistemaService', () => {
     let usuario = 'admin';
     let password = 'admin';
 
-    service.login('admin', 'admin').then(async () => {
+    service.login(usuario, password).then(async () => {
       let userLogged = await service.userLoggedIn();
       expect(userLogged).toEqual({ token, rol });
       expect(service.admin).toBeTruthy();

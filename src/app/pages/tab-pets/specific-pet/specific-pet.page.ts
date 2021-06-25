@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./specific-pet.page.scss'],
 })
 export class SpecificPetPage implements OnInit {
-  constructor() {}
-
-  ngOnInit() {}
+  ngOnInit() {
+    console.log('Specific pets page works!');
+  }
 }

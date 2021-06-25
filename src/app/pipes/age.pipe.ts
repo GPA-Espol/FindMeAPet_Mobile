@@ -1,9 +1,16 @@
 import { Pipe, PipeTransform } from '@angular/core';
-
+/**
+ * Aux class to get the age of the pets
+ * @category Pipes
+ */
 @Pipe({
   name: 'age',
 })
 export class AgePipe implements PipeTransform {
+  /**Calculate the age of the pet from their date of birth
+   * @param d Birthdate of the pet in the format YYYY-MM-DD
+   * @returns String with the age in years, or month if the pet is less than a year
+   */
   transform(d: any): string {
     let currentDate = new Date(new Date().toUTCString());
     let date = new Date(d + 'Z');

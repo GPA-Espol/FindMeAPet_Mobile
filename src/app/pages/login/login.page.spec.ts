@@ -50,7 +50,7 @@ describe('LoginPage', () => {
   it('LP-02 Should login and redirect to /tabs/admin', async () => {
     component.loginForm.setValue({ user: 'admin', password: 'admin' });
     fixture.detectChanges();
-    console.log(await component.iniciarSesion());
+    await component.iniciarSesion();
     const spy = router.navigateByUrl as jasmine.Spy;
     const navArgs = spy.calls.first().args[0];
     expect(navArgs).toBe('/tabs/admin');
@@ -82,7 +82,6 @@ function buildStub(storage) {
     login: async (user: string, password: string) => {
       await storage.set('test_user', user);
       await storage.set('test_password', password);
-      return undefined;
     },
     userLoggedIn: async () => {
       let user = await storage.get('test_user');

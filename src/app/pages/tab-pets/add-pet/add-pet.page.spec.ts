@@ -35,7 +35,7 @@ describe('AddPetPage', () => {
     })
   );
 
-  it('should create', () => {
+  it('APP-01 should create', () => {
     expect(component).toBeTruthy();
   });
 });

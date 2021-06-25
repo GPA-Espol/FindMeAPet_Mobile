@@ -1,4 +1,4 @@
-import { LugarPipe } from './lugar.pipe';
+import { LugarPipe } from './location.pipe';
 
 describe('LugarPipe', () => {
   let pipe: LugarPipe;
