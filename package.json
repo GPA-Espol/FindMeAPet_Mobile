@@ -1,14 +1,14 @@
 {
   "name": "gpa_mobile",
   "version": "0.0.1",
-  "author": "Ionic Framework",
+  "author": "Gpa team",
   "homepage": "https://ionicframework.com/",
   "scripts": {
-    "ng": "ng",
     "start": "ng serve",
     "build": "ionic cordova build android --prod",
     "test": "ng test",
-    "release": "ng test --watch false && start ./coverage/ngv/lcov-report/index.html && ionic cordova build android --prod",
+    "cov-report": "start ./coverage/ngv/lcov-report/index.html",
+    "release": "npm run sonar && ng test --watch false && npm run cov-report  && npm run docs && npm run build",
     "lint": "ng lint",
     "e2e": "ng e2e",
     "docs": "jsdoc -r src/ -c jsdoc.json",

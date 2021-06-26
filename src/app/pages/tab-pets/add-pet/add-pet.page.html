@@ -15,7 +15,14 @@
           <ion-icon id="icon-camera" name="image"></ion-icon>
         </div>
       </ion-row>
-      <img *ngIf="image64" width="140px" height="140px" [src]="image64" class="image-preview" />
+      <img
+        *ngIf="image64"
+        width="140px"
+        height="140px"
+        [src]="image64"
+        class="image-preview"
+        alt="photo preview"
+      />
     </ion-card>
   </div>
   <div class="center-contenedor">
