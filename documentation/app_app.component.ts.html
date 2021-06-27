@@ -68,7 +68,7 @@
             
             <nav>
                 
-                    <h2><a href="index.html">Documentation</a></h2><div class="category"></div><div class="category"><h2>Component</h2><h3>Classes</h3><ul><li><a href="LoginPage.html">LoginPage</a></li></ul></div><div class="category"><h2>Components</h2><h3>Classes</h3><ul><li><a href="AppComponent.html">AppComponent</a></li></ul></div><div class="category"><h2>Model</h2><h3>Classes</h3><ul><li><a href="Administrador.html">Administrador</a></li><li><a href="AdministrarFormulario.html">AdministrarFormulario</a></li><li><a href="AdministrarMascota.html">AdministrarMascota</a></li><li><a href="AdministrarPublicacion.html">AdministrarPublicacion</a></li><li><a href="AdministrarReporteAsistencia.html">AdministrarReporteAsistencia</a></li><li><a href="AdministrarUsuario.html">AdministrarUsuario</a></li><li><a href="Formulario.html">Formulario</a></li><li><a href="FormularioAdopcion.html">FormularioAdopcion</a></li><li><a href="FormularioPonerAdopcion.html">FormularioPonerAdopcion</a></li><li><a href="Mascota.html">Mascota</a></li><li><a href="Publicacion.html">Publicacion</a></li><li><a href="ReporteAsistencia.html">ReporteAsistencia</a></li><li><a href="SolicitudActualizacionMascota.html">SolicitudActualizacionMascota</a></li><li><a href="UsuarioGPA.html">UsuarioGPA</a></li><li><a href="Voluntario.html">Voluntario</a></li></ul></div><div class="category"><h2>Services</h2><h3>Classes</h3><ul><li><a href="AlertaService.html">AlertaService</a></li><li><a href="SistemaService.html">SistemaService</a></li><li><a href="StorageService.html">StorageService</a></li><li><a href="TokenInterceptorService.html">TokenInterceptorService</a></li><li><a href="Utils.html">Utils</a></li></ul></div>
+                    <h2><a href="index.html">Documentation</a></h2><div class="category"></div><div class="category"><h2>Component</h2><h3>Classes</h3><ul><li><a href="EnConstruccionPage.html">EnConstruccionPage</a></li></ul></div><div class="category"><h2>Components</h2><h3>Classes</h3><ul><li><a href="AppComponent.html">AppComponent</a></li><li><a href="LoginPage.html">LoginPage</a></li></ul></div><div class="category"><h2>Model</h2><h3>Classes</h3><ul><li><a href="Administrador.html">Administrador</a></li><li><a href="AdministrarFormulario.html">AdministrarFormulario</a></li><li><a href="AdministrarMascota.html">AdministrarMascota</a></li><li><a href="AdministrarPublicacion.html">AdministrarPublicacion</a></li><li><a href="AdministrarReporteAsistencia.html">AdministrarReporteAsistencia</a></li><li><a href="AdministrarUsuario.html">AdministrarUsuario</a></li><li><a href="Formulario.html">Formulario</a></li><li><a href="FormularioAdopcion.html">FormularioAdopcion</a></li><li><a href="FormularioPonerAdopcion.html">FormularioPonerAdopcion</a></li><li><a href="Mascota.html">Mascota</a></li><li><a href="Publicacion.html">Publicacion</a></li><li><a href="ReporteAsistencia.html">ReporteAsistencia</a></li><li><a href="SolicitudActualizacionMascota.html">SolicitudActualizacionMascota</a></li><li><a href="UsuarioGPA.html">UsuarioGPA</a></li><li><a href="Voluntario.html">Voluntario</a></li></ul></div><div class="category"><h2>Services</h2><h3>Classes</h3><ul><li><a href="AlertaService.html">AlertaService</a></li><li><a href="SistemaService.html">SistemaService</a></li><li><a href="StorageService.html">StorageService</a></li><li><a href="TokenInterceptorService.html">TokenInterceptorService</a></li><li><a href="Utils.html">Utils</a></li></ul></div>
                 
             </nav>
         </div>
@@ -93,7 +93,7 @@ import { environment } from 'src/environments/environment';
 import { Router } from '@angular/router';
 import { SistemaService } from './services/sistema/sistema.service';
 import { RolUsuario } from './model/enums.model';
-import { IonMenu } from '@ionic/angular';
+import { IonMenu, Platform } from '@ionic/angular';
 
 /**
  * App component
@@ -110,7 +110,8 @@ export class AppComponent {
     private statusBar: StatusBar,
     private splashScreen: SplashScreen,
     private router: Router,
-    private sistema: SistemaService
+    private sistema: SistemaService,
+    private platform: Platform
   ) {
     this.initializeApp();
   }
@@ -121,14 +122,18 @@ export class AppComponent {
    */
   async initializeApp() {
     if (environment.version != 'web') {
-      this.statusBar.backgroundColorByHexString('#EC823A');
-      this.splashScreen.hide();
+      this.platform.ready().then(() => {
+        this.statusBar.backgroundColorByHexString('#ec823a');
+        this.splashScreen.hide();
+      });
     }
     let userLoggedIn = await this.sistema.userLoggedIn();
     if (userLoggedIn) {
       if (userLoggedIn.rol == RolUsuario.ADMIN) {
+        this.sistema.crearUsuario();
         this.router.navigateByUrl('/tabs/admin', { replaceUrl: true });
-      } else {
+      } else if (userLoggedIn.rol == RolUsuario.VOLUNTARIO) {
+        this.sistema.crearUsuario();
         this.router.navigateByUrl('/tabs/voluntario', { replaceUrl: true });
       }
     }

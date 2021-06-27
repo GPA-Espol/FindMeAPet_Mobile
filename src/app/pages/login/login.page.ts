@@ -12,7 +12,7 @@ enum UserType {
 
 /**
  * Class in charge of the behaviour of the Login Page.
- * @category Component
+ * @category Components
  */
 @Component({
   selector: 'app-login',

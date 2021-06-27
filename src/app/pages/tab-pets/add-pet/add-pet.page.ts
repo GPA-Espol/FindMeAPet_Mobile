@@ -10,6 +10,11 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Mascota } from 'src/app/model/mascota.model';
 import * as moment from 'moment';
 import { Administrador } from 'src/app/model/admin/administrador.model';
+
+/**
+ * Component in charge of the behaviour of the add-pet page
+ * @category Components
+ */
 @Component({
   selector: 'app-add-pet',
   templateUrl: './add-pet.page.html',
@@ -53,6 +58,10 @@ export class AddPetPage implements OnInit {
     this.administrador = this.sistema.admin;
   }
 
+  /**
+   * On submit handler that pushes the new pet to the api and adds it to
+   * the system pets array.
+   */
   async onSubmit() {
     let newPet = new Mascota();
     newPet.nombre = this.mascota.get('nombre').value;
@@ -80,6 +89,10 @@ export class AddPetPage implements OnInit {
     this.alertaService.dismissLoading();
   }
 
+  /**
+   * Method that upload the picture to the firebase storage and set the
+   * download link to the attribute image of the pet
+   */
   async upload() {
     var currentDate = Date.now();
     const file: any = this.base64ToImage(this.image64);
@@ -99,6 +112,10 @@ export class AddPetPage implements OnInit {
     this.mascota.patchValue({ image: imageURL });
   }
 
+  /**
+   * Transform the base64 data of the photo into a blob object in an
+   * image format.
+   */
   base64ToImage(dataURI: string) {
     const fileDate = dataURI.split(',');
     const byteString = atob(fileDate[1]);
@@ -110,6 +127,11 @@ export class AddPetPage implements OnInit {
     return new Blob([arrayBuffer], { type: 'image/png' });
   }
 
+  /**
+   * Method that create and show an actionSheetController to the user in order that
+   * he/she select wheter he/she wants to take a photo from the camera or upload it
+   * from the file system.
+   */
   async selectImage() {
     const actionSheet = await this.actionSheetController.create({
       mode: 'ios',
@@ -136,6 +158,11 @@ export class AddPetPage implements OnInit {
     await actionSheet.present();
   }
 
+  /**
+   * Method that activate the camara in order to take a picture.
+   * This method set the attribute image64 with the base64 value of the
+   * picture took.
+   */
   takePicture(source) {
     const options: CameraOptions = {
       quality: 80,
@@ -157,10 +184,18 @@ export class AddPetPage implements OnInit {
     );
   }
 
+  /**
+   * Method that navigate to the home page with a go back animation
+   */
   goback() {
     this.navCtrl.navigateBack('/tabs/admin/mascotas');
   }
 
+  /**
+   * Method that find the birth date of a pet based on its years old,
+   * months old and days old.
+   * @return {Date} The calculated date of its birth date.
+   */
   getBirthDate() {
     let today = moment(new Date());
     today.subtract(this.mascota.get('years').value, 'years');

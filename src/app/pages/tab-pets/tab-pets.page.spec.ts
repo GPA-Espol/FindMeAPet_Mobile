@@ -1,5 +1,7 @@
+import { HttpClientModule } from '@angular/common/http';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
+import { IonicStorageModule } from '@ionic/storage-angular';
 import { AppRoutingModule } from 'src/app/app-routing.module';
 import { PipesModule } from 'src/app/pipes/pipes.module';
 
@@ -13,7 +15,13 @@ describe('TabPetsPage', () => {
     waitForAsync(() => {
       TestBed.configureTestingModule({
         declarations: [TabPetsPage],
-        imports: [IonicModule.forRoot(), PipesModule, AppRoutingModule],
+        imports: [
+          IonicModule.forRoot(),
+          PipesModule,
+          AppRoutingModule,
+          HttpClientModule,
+          IonicStorageModule.forRoot(),
+        ],
       }).compileComponents();
 
       fixture = TestBed.createComponent(TabPetsPage);
