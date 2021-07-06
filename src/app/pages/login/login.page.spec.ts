@@ -8,17 +8,24 @@ import { SistemaService } from 'src/app/services/sistema/sistema.service';
 import { Storage } from '@ionic/storage';
 import { LoginPage } from './login.page';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AlertaService } from 'src/app/services/alerta/alerta.service';
 
 describe('LoginPage', () => {
   let component: LoginPage;
   let fixture: ComponentFixture<LoginPage>;
   let storage: Storage;
   let router: Router;
+  let alertaService: AlertaService;
   beforeEach(
     waitForAsync(async () => {
       let storageService = new Storage();
       storage = await storageService.create();
       const routerSpy = jasmine.createSpyObj('Router', ['navigateByUrl']);
+      const alertServiceSpy = jasmine.createSpyObj('AlertService', [
+        'presentToast',
+        'presentLoading',
+        'dismissLoading',
+      ]);
       TestBed.configureTestingModule({
         declarations: [LoginPage],
         imports: [
@@ -32,11 +39,13 @@ describe('LoginPage', () => {
         providers: [
           { provide: SistemaService, useValue: buildStub(storage) },
           { provide: Router, useValue: routerSpy },
+          { provide: AlertaService, useValue: alertServiceSpy },
         ],
       }).compileComponents();
 
       fixture = TestBed.createComponent(LoginPage);
       router = TestBed.inject(Router);
+      alertaService = TestBed.inject(AlertaService);
       component = fixture.componentInstance;
       component.ngOnInit();
       fixture.detectChanges();
@@ -69,8 +78,11 @@ describe('LoginPage', () => {
     component.loginForm.setValue({ user: 'voluntario', password: 'admin' });
     fixture.detectChanges();
     await component.iniciarSesion();
+    fixture.detectChanges();
+    const presentToastSpy = alertaService.presentToast as jasmine.Spy;
+    const presentToastArgsSpy = presentToastSpy.calls.first().args[0];
+    expect(presentToastArgsSpy).toContain('Usuario o contraseña incorrectas');
     const spy = router.navigateByUrl as jasmine.Spy;
-
     expect(spy.calls.count()).toBe(0);
   });
 });

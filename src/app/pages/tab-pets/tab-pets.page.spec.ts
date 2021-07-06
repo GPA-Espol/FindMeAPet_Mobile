@@ -30,7 +30,7 @@ describe('TabPetsPage', () => {
     })
   );
 
-  it('should create', () => {
+  it('TB-01 should create', () => {
     expect(component).toBeTruthy();
   });
 });
