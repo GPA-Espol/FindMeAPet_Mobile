@@ -1,3 +1,15 @@
 <ion-app>
-  <ion-router-outlet></ion-router-outlet>
+  <ion-menu side="start" menuId="admin" contentId="main" #menu>
+    <ion-content class="ion-padding-top">
+      <ion-grid>
+        <ion-row class="ion-justify-content-center">
+          <img src="/assets/icon/logo_GPA.jpg" alt="" width="150" height="150" class="ion-margin-bottom" />
+        </ion-row>
+        <ion-row class="ion-justify-content-center">
+          <ion-button color="primary" expand="block" (click)="cerrarSesion()">Cerrar sesión</ion-button>
+        </ion-row>
+      </ion-grid>
+    </ion-content>
+  </ion-menu>
+  <ion-router-outlet id="main"></ion-router-outlet>
 </ion-app>

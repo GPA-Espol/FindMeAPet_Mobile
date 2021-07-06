@@ -3,7 +3,18 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  version: 'web',
+  api: 'https://findmepet.herokuapp.com/',
+  firebase: {
+    apiKey: 'AIzaSyCVOUzrCZMdtyhG05c5SZdnURPSeT_GPto',
+    authDomain: 'gpa-findmepet.firebaseapp.com',
+    projectId: 'gpa-findmepet',
+    storageBucket: 'gpa-findmepet.appspot.com',
+    messagingSenderId: '646089805422',
+    appId: '1:646089805422:web:ad65942b4806720ad2a07f',
+    measurementId: 'G-Y0DFMYW385',
+  },
 };
 
 /*
@@ -13,4 +24,3 @@ export const environment = {
  * This import should be commented out in production mode because it will have a negative impact
  * on performance if an error is thrown.
  */
-// import 'zone.js/dist/zone-error';  // Included with Angular CLI.
