@@ -32,7 +32,6 @@ export class AddPetPage implements OnInit {
     private actionSheetController: ActionSheetController,
     private storage: AngularFireStorage,
     private sistema: SistemaService,
-    private alertCtrl: AlertController,
     private alertaService: AlertaService,
     private navCtrl: NavController,
     private formBuilder: FormBuilder
@@ -80,8 +79,8 @@ export class AddPetPage implements OnInit {
       await this.upload();
       newPet.imagenUrl = this.mascota.get('image').value;
       await this.administrador.adminMascota.crearMascota(newPet);
-      this.alertaService.presentToast('La mascota ha sido agregada');
       this.goback();
+      await this.alertaService.presentToast('La mascota ha sido agregada');
     } catch (err) {
       console.error('Error al crear mascota: ', err);
       this.alertaService.presentToast('Error al guardar mascota, por favor intente de nuevo' + err);

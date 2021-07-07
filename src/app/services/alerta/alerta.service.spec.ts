@@ -10,7 +10,7 @@ describe('AlertaService', () => {
   let loadingController: LoadingController;
   let alertElementSpy: HTMLIonLoadingElement;
   beforeEach(() => {
-    toastElementSpy = jasmine.createSpyObj('HTMLIonToastElement', ['present']) as HTMLIonToastElement;
+    toastElementSpy = jasmine.createSpyObj('HTMLIonToastElement', ['present']);
     const toastSpy = jasmine.createSpyObj('ToastController', { create: toastElementSpy });
     alertElementSpy = jasmine.createSpyObj('HTMLIonToastElement', [
       'present',
