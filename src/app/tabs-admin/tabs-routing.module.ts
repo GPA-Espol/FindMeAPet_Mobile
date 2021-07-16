@@ -25,11 +25,13 @@ const routes: Routes = [
         loadChildren: () =>
           import('../pages/en-construccion/en-construccion.module').then((m) => m.EnConstruccionPageModule),
       },
+
       {
         path: 'configuracion',
         loadChildren: () =>
-          import('../pages/en-construccion/en-construccion.module').then((m) => m.EnConstruccionPageModule),
+          import('../pages/tab-manage/tab-manage.module').then((m) => m.TabManagePageModule),
       },
+
       {
         path: '',
         redirectTo: '/tabs/admin/inicio',

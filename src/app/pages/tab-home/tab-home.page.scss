@@ -21,7 +21,7 @@ ion-card-content > .more-info {
   max-width: 80%;
   display: inline;
   font-weight: bold;
-  color: black;
+  color: var(--ion-color-primary);
 }
 
 .more-info {
@@ -49,7 +49,4 @@ ion-card-content > .more-info {
 
 .anomalies-number {
   text-align: center;
-}
-
-ion-card {
 }
