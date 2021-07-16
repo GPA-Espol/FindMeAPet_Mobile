@@ -13,7 +13,7 @@
   </ion-row>
   <div>
     <h1 class="lasts-reports">Últimos reportes</h1>
-    <ion-card>
+    <ion-card mode="ios">
       <ion-card-header>
         <ion-row class="ion-justify-content-between ion-align-content-center">
           <h3 class="name-report ion-no-margin">Alex Vélez Llaque</h3>
@@ -34,13 +34,17 @@
             <span class="report-measurement-descr">Un cuarto de comida restante</span>
           </ion-row>
           <ion-row class="report-info">
-            <span class="report-measurement anomalies-number">0</span>
+            <span
+              class="report-measurement anomalies-number"
+              [ngStyle]="0>0? {'color':'#EAD51E'} : {'color':'#53BB42'}"
+              >0</span
+            >
             <span class="report-measurement-descr">Anomalías reportadas</span>
           </ion-row>
         </ion-row>
       </ion-card-content>
     </ion-card>
-    <ion-card>
+    <ion-card mode="ios">
       <ion-card-header>
         <ion-row class="ion-justify-content-between ion-align-content-center">
           <h3 class="name-report ion-no-margin">Alex Vélez Llaque</h3>
@@ -61,40 +65,17 @@
             <span class="report-measurement-descr">Un cuarto de comida restante</span>
           </ion-row>
           <ion-row class="report-info">
-            <span class="report-measurement anomalies-number">0</span>
+            <span
+              class="report-measurement anomalies-number"
+              [ngStyle]="0>0? {'color':'#EAD51E'} : {'color':'#53BB42'}"
+              >0</span
+            >
             <span class="report-measurement-descr">Anomalías reportadas</span>
           </ion-row>
         </ion-row>
       </ion-card-content>
     </ion-card>
-    <ion-card>
-      <ion-card-header>
-        <ion-row class="ion-justify-content-between ion-align-content-center">
-          <h3 class="name-report ion-no-margin">Alex Vélez Llaque</h3>
-          <h5 class="more-info ion-no-margin">Hoy</h5>
-        </ion-row>
-      </ion-card-header>
-      <ion-card-content>
-        <ion-row class="more-info"> Recorrido </ion-row>
-        <ion-row>
-          <ion-row class="report-info">
-            <span class="report-measurement food-amount">12</span>
-            <span class="report-measurement-descr">Jarras de comida repartidas</span>
-          </ion-row>
-          <ion-row class="report-info">
-            <span class="report-measurement food-remaining"
-              ><ion-icon src="/assets/icon/food.svg"></ion-icon
-            ></span>
-            <span class="report-measurement-descr">Un cuarto de comida restante</span>
-          </ion-row>
-          <ion-row class="report-info">
-            <span class="report-measurement anomalies-number">0</span>
-            <span class="report-measurement-descr">Anomalías reportadas</span>
-          </ion-row>
-        </ion-row>
-      </ion-card-content>
-    </ion-card>
-    <ion-card>
+    <ion-card mode="ios">
       <ion-card-header>
         <ion-row class="ion-justify-content-between ion-align-content-center">
           <h3 class="name-report ion-no-margin">Alex Vélez Llaque</h3>
