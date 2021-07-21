@@ -1,21 +1,19 @@
 <ion-card mode="ios">
   <div class="card-container">
     <div class="image-container">
-      <img
-        src="https://images.freeimages.com/images/premium/previews/4992/49923492-portrait-of-puppy.jpg"
-        alt="Perrito"
-      />
+      <img [src]="publicacion.imagen" alt="Perrito" />
+      <!-- src="https://images.freeimages.com/images/premium/previews/4992/49923492-portrait-of-puppy.jpg" -->
     </div>
     <div class="info-container">
-      <div class="title">¡Balto ya en casita!</div>
+      <div class="title">{{ publicacion.titulo }}</div>
       <div class="description">
         {{ display_description }}
       </div>
       <div class="actions">
-        <div class="icon-button edit">
+        <div class="icon-button edit" tappable>
           <ion-icon name="pencil-outline"></ion-icon>
         </div>
-        <div class="icon-button delete">
+        <div class="icon-button delete" tappable (click)="delete()">
           <ion-icon name="trash-outline"></ion-icon>
         </div>
       </div>
