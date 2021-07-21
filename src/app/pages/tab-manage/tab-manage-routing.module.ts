@@ -6,8 +6,12 @@ import { TabManagePage } from './tab-manage.page';
 const routes: Routes = [
   {
     path: '',
-    component: TabManagePage
-  }
+    component: TabManagePage,
+  },
+  {
+    path: 'noticias',
+    loadChildren: () => import('./news/news.module').then((m) => m.NewsPageModule),
+  },
 ];
 
 @NgModule({

@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-admin-card',
@@ -22,7 +22,7 @@ export class AdminCardComponent implements OnInit {
    * card
    */
   @Input() redirectTo: string;
-  constructor(private router: Router) {}
+  constructor(private router: Router, private route: ActivatedRoute) {}
 
   ngOnInit() {}
 
@@ -30,6 +30,6 @@ export class AdminCardComponent implements OnInit {
    * Method to redirect the user to a new page
    */
   redirect() {
-    this.router.navigateByUrl(this.redirectTo);
+    this.router.navigate([this.redirectTo], { relativeTo: this.route });
   }
 }

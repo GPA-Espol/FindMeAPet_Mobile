@@ -5,10 +5,19 @@ import { TipoPublicacion } from './enums.model';
  * @category Model
  */
 export class Publicacion {
+  private _titulo: string;
   private _imagen: string;
   private _descripcion: string;
   private _tipo: TipoPublicacion;
   private _fecha: Date | string;
+
+  public get titulo(): string {
+    return this._titulo;
+  }
+
+  public set titulo(value: string) {
+    this._titulo = value;
+  }
 
   public get imagen(): string {
     return this._imagen;
