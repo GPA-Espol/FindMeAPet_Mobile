@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
-import { ActionSheetController, NavController } from '@ionic/angular';
+import { ActionSheetController, NavController, AlertController } from '@ionic/angular';
 import { AngularFireStorage } from '@angular/fire/storage';
-import { AlertController } from '@ionic/angular';
-import { map, finalize } from 'rxjs/operators';
+import { finalize } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { SistemaService } from 'src/app/services/sistema/sistema.service';
 import { AlertaService } from 'src/app/services/alerta/alerta.service';
@@ -11,7 +10,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Mascota } from 'src/app/model/mascota.model';
 import * as moment from 'moment';
 import { Administrador } from 'src/app/model/admin/administrador.model';
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 /**
  * Component in charge of the behaviour of the add-pet page
@@ -34,7 +32,6 @@ export class AddPetPage implements OnInit {
     private actionSheetController: ActionSheetController,
     private storage: AngularFireStorage,
     private sistema: SistemaService,
-    private alertCtrl: AlertController,
     private alertaService: AlertaService,
     private navCtrl: NavController,
     private formBuilder: FormBuilder
@@ -82,8 +79,8 @@ export class AddPetPage implements OnInit {
       await this.upload();
       newPet.imagenUrl = this.mascota.get('image').value;
       await this.administrador.adminMascota.crearMascota(newPet);
-      this.alertaService.presentToast('La mascota ha sido agregada');
       this.goback();
+      await this.alertaService.presentToast('La mascota ha sido agregada');
     } catch (err) {
       console.error('Error al crear mascota: ', err);
       this.alertaService.presentToast('Error al guardar mascota, por favor intente de nuevo' + err);
@@ -126,8 +123,7 @@ export class AddPetPage implements OnInit {
     for (let i = 0; i < byteString.length; i++) {
       int8Array[i] = byteString.charCodeAt(i);
     }
-    const blob = new Blob([arrayBuffer], { type: 'image/png' });
-    return blob;
+    return new Blob([arrayBuffer], { type: 'image/png' });
   }
 
   /**

@@ -5,10 +5,6 @@ import { RolUsuario } from 'src/app/model/enums.model';
 import { AlertaService } from 'src/app/services/alerta/alerta.service';
 import { SistemaService } from 'src/app/services/sistema/sistema.service';
 
-enum UserType {
-  Volunteer = 'Voluntario',
-  Admin = 'Administrador',
-}
 
 /**
  * Class in charge of the behaviour of the Login Page.
@@ -64,7 +60,7 @@ export class LoginPage implements OnInit {
       }
     } catch (err) {
       console.error('Error al iniciar sesion: ', err);
-      this.alertaService.presentToast('Usuario o contraseña incorrectas');
+      await this.alertaService.presentToast('Usuario o contraseña incorrectas');
     }
     this.alertaService.dismissLoading();
   }

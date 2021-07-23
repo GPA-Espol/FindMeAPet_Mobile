@@ -7,6 +7,6 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SpecificPetPage implements OnInit {
   ngOnInit() {
-    console.log('Specific pets page works!');
+    console.log('Specific page works');
   }
 }

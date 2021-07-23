@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { UbicacionMascota } from 'src/app/model/enums.model';
 import { Mascota } from 'src/app/model/mascota.model';
 import { SistemaService } from 'src/app/services/sistema/sistema.service';
 
