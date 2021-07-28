@@ -9,8 +9,12 @@ const routes: Routes = [
     component: TabManagePage,
   },
   {
-    path: 'noticias',
-    loadChildren: () => import('./news/news.module').then((m) => m.NewsPageModule),
+    path: 'Noticia',
+    loadChildren: () => import('./publication/publication.module').then((m) => m.PublicationPageModule),
+  },
+  {
+    path: 'Evento',
+    loadChildren: () => import('./publication/publication.module').then((m) => m.PublicationPageModule),
   },
 ];
 

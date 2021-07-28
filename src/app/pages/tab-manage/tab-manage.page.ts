@@ -8,17 +8,17 @@ import { Component, OnInit } from '@angular/core';
 export class TabManagePage implements OnInit {
   options = [
     {
-      redirectTo: 'noticias',
+      redirectTo: 'Noticia',
       icon: '/assets/icon/newspaper.svg',
       description: 'Administrar Noticias',
     },
     {
-      redirectTo: 'eventos',
+      redirectTo: 'Evento',
       icon: '/assets/icon/events.svg',
       description: 'Administrar Eventos',
     },
     {
-      redirectTo: 'usuarios',
+      redirectTo: 'Usuario',
       icon: '/assets/icon/users.svg',
       description: 'Administrar Usuarios',
     },
