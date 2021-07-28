@@ -5,7 +5,7 @@
   <ion-row class="ion-justify-content-center">
     <p class="ion-text-center ion-margin-horizontal text-nothing">
       {{ emptyDescription }}
-      <ng-template *ngIf="link">
+      <ng-template [ngIf]="link">
         <a [routerLink]="link">{{ linkDescription }}</a>
       </ng-template>
     </p>
