@@ -6,8 +6,8 @@ import { AddPetPage } from './add-pet.page';
 const routes: Routes = [
   {
     path: '',
-    component: AddPetPage
-  }
+    component: AddPetPage,
+  },
 ];
 
 @NgModule({

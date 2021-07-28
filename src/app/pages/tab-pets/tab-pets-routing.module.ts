@@ -13,7 +13,7 @@ const routes: Routes = [
     loadChildren: () => import('./add-pet/add-pet.module').then((m) => m.AddPetPageModule),
   },
   {
-    path: 'specific-pet',
+    path: 'informacion/:id',
     loadChildren: () => import('./specific-pet/specific-pet.module').then((m) => m.SpecificPetPageModule),
   },
 ];
