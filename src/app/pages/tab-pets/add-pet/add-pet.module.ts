@@ -7,9 +7,10 @@ import { IonicModule } from '@ionic/angular';
 import { AddPetPageRoutingModule } from './add-pet-routing.module';
 
 import { AddPetPage } from './add-pet.page';
+import { ComponentsModule } from 'src/app/components/components.module';
 
 @NgModule({
-  imports: [CommonModule, FormsModule, IonicModule, AddPetPageRoutingModule, ReactiveFormsModule],
+  imports: [CommonModule, FormsModule, IonicModule, AddPetPageRoutingModule, ReactiveFormsModule, ComponentsModule],
   declarations: [AddPetPage],
 })
 export class AddPetPageModule {}
