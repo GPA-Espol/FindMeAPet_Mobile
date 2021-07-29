@@ -87,6 +87,13 @@ export class SistemaService {
     }
   }
 
+  public async getMascotabyId(id:string) {
+    let url = environment.api + 'mascota/'+ id;
+    let data = await this.http.get<any[]>(url).toPromise();
+    let pet = Mascota.deserializeOne(data);
+    return pet;
+  }
+
   public get voluntario() {
     return this._usuario as Voluntario;
   }

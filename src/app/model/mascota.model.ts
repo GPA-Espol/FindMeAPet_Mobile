@@ -70,6 +70,24 @@ export class Mascota {
     };
   }
 
+  static deserializeOne(mascota: any) {
+    let mascotaResult = new Mascota();
+    mascotaResult._id = mascota.id;
+    mascotaResult.nombre = mascota.nombre;
+    mascotaResult.fechaNacimiento = new Date(mascota.fecha_nacimiento);
+    mascotaResult.color = mascota.color;
+    mascotaResult.isEsterilizado = !!mascota.is_esterilizado;
+    mascotaResult.isAdoptable = !!mascota.is_adoptable;
+    mascotaResult.isAdoptado = !!mascota.is_adoptado;
+    mascotaResult.isCasoExterno = !!mascota.is_caso_externo;
+    mascotaResult.descripcion = mascota.descripcion;
+    mascotaResult.sexo = mascota.sexo;
+    mascotaResult.ubicacionMascota = mascota.ubicacion;
+    mascotaResult.tipoAnimal = mascota.tipo_mascota;
+    mascotaResult.imagenUrl = mascota.imagen_url;
+    return mascotaResult;
+  }
+
   public get id(): number {
     return this._id;
   }

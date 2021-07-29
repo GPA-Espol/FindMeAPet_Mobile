@@ -1,35 +1,92 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>specific-pet</ion-title>
+    <ion-title>Mascota</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <div class="img"></div>
+  <ion-row class="ion-justify-content-center ion-margin-top" *ngIf="loading; else loadedContent">
+    <ion-spinner name="crescent" color="primary"></ion-spinner>
+  </ion-row>
+  <ng-template #loadedContent>
+    <div class="img">
+      <img [src]="pet.imagenUrl" height="30%" width="100%" />
+    </div>
 
-  <div class="content">
-    <ion-row>
-      <ion-text color="dark"> Nombre </ion-text>
-      <ion-text color="dark"> Edad </ion-text>
-    </ion-row>
-    <ion-row>
-      <ion-icon id="icon-location" name="location-outline"></ion-icon>
-      <ion-text color="dark"> Refugio </ion-text>
-    </ion-row>
-    <ion-row>
-      <ion-chip outline color="primary">
-        <ion-icon name="paw-outline"></ion-icon>
-        <ion-label>Tímido</ion-label>
-      </ion-chip>
-      <ion-chip outline color="primary">
-        <ion-icon name="male-female-outline"></ion-icon>
-        <ion-label>Hembra</ion-label>
-      </ion-chip>
-    </ion-row>
-    <ion-row>
-      <div>Es un gato timido ideal para personas como tu. Come bastante y juega mucho</div>
-    </ion-row>
-    <ion-row>
+    <div class="content ion-align-self-end">
+      <!--img width="80" height="80" src=""/-->
+      <!--img class="fondo-mascota" src="assets/img/fondo-mascota.png" alt="no hay mascotas" height="200px" width="100%" /-->
+      <ion-fab slot="fixed" style="top: 10px; right: 15px">
+        <ion-fab-button size="small" routerLink="anadir" 
+          ><ion-icon id="edit-icon" name="pencil-outline"></ion-icon
+        ></ion-fab-button>
+      </ion-fab>
+      <ion-row>
+        <ion-text color="dark"> <h2>{{pet.nombre}}</h2> </ion-text>
+        <div class="ion-text-center" style="margin-top: 22px; margin-bottom: 10px; margin-left: 20px">
+          <ion-text color="medium"> {{pet.fechaNacimiento | age}} </ion-text>
+        </div>
+      </ion-row>
+      <ion-row>
+        <ion-icon id="icon-location" name="location-outline"></ion-icon>
+        <ion-text color="dark" style="margin-top: 1px"> {{pet.ubicacionMascota}} </ion-text>
+      </ion-row>
+      <ion-row class="ion-margin-vertical">
+        <ion-chip outline color="primary">
+          <ion-icon name="paw-outline"></ion-icon>
+          <ion-label>{{pet.color}}</ion-label>
+        </ion-chip>
+        <ion-chip outline color="primary" class="ion-margin-start">
+          <ion-icon name="male-female-outline"></ion-icon>
+          <ion-label>{{ pet.sexo == "M"? 'Macho': 'Hembra'}}</ion-label>
+        </ion-chip>
+      </ion-row>
+      <ion-row>
+        <ion-text color="medium"> {{pet.descripcion}} </ion-text>
+      </ion-row>
+      <div class="ion-margin-vertical">
+        <ion-list class="checklist">
+          <ion-item lines="none">
+            <!--ion-text slot="start" > Esterilizado </ion-text-->
+
+            <ion-label slot="start"> Esterilizado </ion-label>
+            <ion-icon
+              slot="start"
+              [class]="pet.isEsterilizado? 'icon-check' : 'icon-cross'"
+              [name]="pet.isEsterilizado? 'checkmark-outline' : 'close-outline'"
+            ></ion-icon>
+          </ion-item>
+          <ion-item lines="none">
+            <!--ion-text slot="start" >  Adoptado  </ion-text-->
+            <ion-label slot="start"> Adoptado </ion-label>
+            <ion-icon
+              slot="start"
+              [class]="pet.isAdoptado? 'icon-check' : 'icon-cross'"
+              [name]="pet.isAdoptado? 'checkmark-outline' : 'close-outline'"
+            ></ion-icon>
+          </ion-item>
+          <ion-item lines="none">
+            <!--ion-text slot="start" > Caso Externo </ion-text-->
+            <ion-label slot="start"> Caso Externo </ion-label>
+            <ion-icon
+              slot="start"
+              [class]="pet.isCasoExterno? 'icon-check' : 'icon-cross'"
+              [name]="pet.isCasoExterno? 'checkmark-outline' : 'close-outline'"
+            ></ion-icon>
+          </ion-item>
+          <ion-item lines="none">
+            <!--ion-text slot="start" > Adoptable </ion-text-->
+            <ion-label slot="start"> Adoptable </ion-label>
+            <ion-icon
+              slot="start"
+              [class]="pet.isAdoptable? 'icon-check' : 'icon-cross'"
+              [name]="pet.isAdoptable? 'checkmark-outline' : 'close-outline'"
+            ></ion-icon>
+          </ion-item>
+        </ion-list>
+      </div>
+
+      <!--ion-row>
       <ion-list>
         <ion-label color="primary" class="label"> hola </ion-label>
         <ion-item>
@@ -48,6 +105,7 @@
           Another Task
         </ion-item>
       </ion-list>
-    </ion-row>
-  </div>
+    </ion-row-->
+    </div>
+  </ng-template>
 </ion-content>
