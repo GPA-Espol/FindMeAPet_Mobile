@@ -12,11 +12,20 @@ export class Utils {
    * Utility function that check if the time cache has expired (Every object cached
    * expires after 30 minutes).
    * @param {number} setup_time The date valued in miliseconds.
-   * @returns {bool} True if more than 30 minutes has passed from the setup_time.
+   * @returns {boolean} True if more than 30 minutes has passed from the setup_time.
    */
-  cacheExpired(setup_time: number) {
+  static cacheExpired(setup_time: number): boolean {
     var now = new Date().getTime();
     var hours = 1 / 2;
     return now - setup_time > hours * 60 * 60 * 1000;
+  }
+
+  static capitalize(str: string) {
+    if (str.length < 1) {
+      return str;
+    }
+    const lower = str.toLowerCase();
+    const firstUppercase = str.charAt(0).toUpperCase();
+    return firstUppercase + lower.slice(1);
   }
 }

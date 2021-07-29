@@ -29,7 +29,7 @@ export class Administrador extends UsuarioGPA {
     this._adminReporteAsistencia = new AdministrarReporteAsistencia();
     this._adminFormulario = new AdministrarFormulario();
     this._adminMascota = new AdministrarMascota(http, sistema);
-    this._adminPublicacion = new AdministrarPublicacion();
+    this._adminPublicacion = new AdministrarPublicacion(http);
   }
 
   public get adminUsuario(): AdministrarUsuario {

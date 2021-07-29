@@ -3,7 +3,7 @@
     <ion-buttons slot="start">
       <ion-back-button> </ion-back-button>
     </ion-buttons>
-    <ion-title>Agregar noticia</ion-title>
+    <ion-title>{{actionType + " " + publicationsType.toLowerCase()}}</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -12,18 +12,20 @@
     <form [formGroup]="publicationForm">
       <div>
         <ion-item lines="none" class="ion-margin-horizontal">
-          <ion-input type="text" size="10" placeholder="Título" formControlName="titulo"></ion-input>
+          <ion-input type="text" size="10" placeholder="Título" formControlName="title"></ion-input>
+        </ion-item>
+      </div>
+      <app-image-picker #imgPicker></app-image-picker>
+      <div class="ion-margin-top ion-padding-top">
+        <ion-item lines="none" class="ion-margin-horizontal">
+          <ion-textarea rows="6" placeholder="Descripción..." formControlName="description"></ion-textarea>
         </ion-item>
       </div>
     </form>
-    <app-image-picker #imgPicker></app-image-picker>
-    <div class="ion-margin-top ion-padding-top">
-      <ion-item lines="none" class="ion-margin-horizontal">
-        <ion-textarea rows="6" placeholder="Descripción..."></ion-textarea>
-      </ion-item>
-    </div>
     <ion-col class="ion-no-padding">
-      <ion-button expand="block" fill="outline" (click)="savePublication()" mode="ios"> Guardar </ion-button>
+      <ion-button expand="block" fill="outline" (click)="submitPublication()" mode="ios">
+        Guardar
+      </ion-button>
       <ion-button
         class="ion-margin-vertical"
         expand="block"

@@ -9,7 +9,7 @@ const routes: Routes = [
     component: PublicationPage,
   },
   {
-    path: 'anadir',
+    path: 'agregar',
     loadChildren: () =>
       import('./add-publication/add-publication.module').then((m) => m.AddPublicationPageModule),
   },
