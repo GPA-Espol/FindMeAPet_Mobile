@@ -8,7 +8,7 @@
     "build": "ionic cordova build android --prod",
     "test": "ng test",
     "cov-report": "start ./coverage/ngv/lcov-report/index.html",
-    "release": "npm run sonar && ng test --watch false && npm run cov-report  && npm run docs && npm run build",
+    "release": "ng test --watch false && npm run cov-report  && npm run docs && npm run build",
     "lint": "ng lint",
     "e2e": "ng e2e",
     "docs": "jsdoc -r src/ -c jsdoc.json",

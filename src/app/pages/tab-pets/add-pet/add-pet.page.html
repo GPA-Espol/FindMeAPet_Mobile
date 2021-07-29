@@ -8,28 +8,7 @@
 </ion-header>
 
 <ion-content>
-  <div class="center-contenedor">
-    <ion-card id="upload-image">
-      <ion-row *ngIf="!image64" class="ion-justify-content-center ion-no-padding">
-        <div style="margin-top: 45px">
-          <ion-icon id="icon-camera" name="image"></ion-icon>
-        </div>
-      </ion-row>
-      <img
-        *ngIf="image64"
-        width="140px"
-        height="140px"
-        [src]="image64"
-        class="image-preview"
-        alt="photo preview"
-      />
-    </ion-card>
-  </div>
-  <div class="center-contenedor">
-    <ion-button (click)="selectImage()" mode="ios">
-      <ion-icon slot="start" name="arrow-up-circle"></ion-icon> Subir imagen
-    </ion-button>
-  </div>
+  <app-image-picker #imgPicker></app-image-picker>
   <form [formGroup]="mascota">
     <div class="ion-justify-content ion-margin-horizontal ion-margin-top">
       <div>

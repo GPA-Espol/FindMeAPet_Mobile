@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { TipoPublicacion } from 'src/app/model/enums.model';
 
 @Component({
   selector: 'app-tab-manage',
@@ -8,17 +9,17 @@ import { Component, OnInit } from '@angular/core';
 export class TabManagePage implements OnInit {
   options = [
     {
-      redirectTo: 'noticias',
+      redirectTo: TipoPublicacion.NOTICIA,
       icon: '/assets/icon/newspaper.svg',
       description: 'Administrar Noticias',
     },
     {
-      redirectTo: 'eventos',
+      redirectTo: TipoPublicacion.EVENTO,
       icon: '/assets/icon/events.svg',
       description: 'Administrar Eventos',
     },
     {
-      redirectTo: 'usuarios',
+      redirectTo: 'Usuario',
       icon: '/assets/icon/users.svg',
       description: 'Administrar Usuarios',
     },
