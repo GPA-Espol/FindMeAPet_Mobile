@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { TipoPublicacion } from 'src/app/model/enums.model';
 
 import { TabManagePage } from './tab-manage.page';
 
@@ -9,11 +10,11 @@ const routes: Routes = [
     component: TabManagePage,
   },
   {
-    path: 'Noticia',
+    path: TipoPublicacion.NOTICIA,
     loadChildren: () => import('./publication/publication.module').then((m) => m.PublicationPageModule),
   },
   {
-    path: 'Evento',
+    path: TipoPublicacion.EVENTO,
     loadChildren: () => import('./publication/publication.module').then((m) => m.PublicationPageModule),
   },
 ];

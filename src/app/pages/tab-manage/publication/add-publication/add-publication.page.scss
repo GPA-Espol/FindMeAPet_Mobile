@@ -1,0 +1,19 @@
+* {
+  font-family: "Poppins", sans-serif;
+}
+
+ion-item {
+  border: 1px solid #c5c5c5f6;
+  border-radius: 15px !important;
+  --background: rgb(255, 255, 255);
+  margin-left: 15px;
+  --min-height: 40px;
+  margin-bottom: 20px;
+  margin-top: 5px;
+}
+
+ion-input {
+  font-size: 17px;
+  --padding-top: 2px;
+  --padding-bottom: 2px;
+}
