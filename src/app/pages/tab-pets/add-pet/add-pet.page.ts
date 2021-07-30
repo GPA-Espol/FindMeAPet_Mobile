@@ -37,14 +37,14 @@ export class AddPetPage implements OnInit {
     private formBuilder: FormBuilder,
     private router: Router,
     private route: ActivatedRoute,
-    private petObserver : PetObserverService
+    private petObserver: PetObserverService
   ) {}
 
   setMode() {
     let route = this.router.url;
     let array = route.split('/');
     let end = array[array.length - 1];
-    this.mode =  end == 'anadir'? end : 'editar';
+    this.mode = end == 'anadir' ? end : 'editar';
     console.log(this.mode);
   }
 
@@ -85,6 +85,7 @@ export class AddPetPage implements OnInit {
     this.mascota.controls['ubicacion'].setValue(this.petToEdit.ubicacionMascota);
     this.mascota.controls['descripcion'].setValue(this.petToEdit.descripcion);
     this.mascota.controls['tipo'].setValue(this.petToEdit.tipoAnimal);
+    this.setAgeInformation()
   }
 
   setValues(petToSend: Mascota) {
@@ -153,5 +154,38 @@ export class AddPetPage implements OnInit {
     today.subtract(this.mascota.get('months').value, 'months');
     today.subtract(this.mascota.get('days').value, 'days');
     return today.toDate();
+  }
+
+  setAgeInformation(){
+    let information = this.getInformationAge();
+
+    this.mascota.controls['years'].setValue(information.years);
+    this.mascota.controls['months'].setValue(information.months);
+    this.mascota.controls['days'].setValue(information.days);
+  }
+
+  getInformationAge() {
+    let today = moment(new Date());
+    let birthdate = moment(this.petToEdit.fechaNacimiento);
+    console.log(birthdate);
+    var days = this.diffDays(new Date(), this.petToEdit.fechaNacimiento);
+
+    var years = today.diff(birthdate, 'years');
+    today.add(-years, 'years');
+    var months = today.diff(birthdate, 'months');
+    today.add(-months, 'months');
+
+    return { years: years, months: months, days: days };
+  }
+
+  diffDays(d1, d2) {
+    const day1 = d1.getDate();
+    const day2 = d2.getDate();
+    if (day1 >= day2) {
+      return day1 - day2;
+    }
+    const prevMonth = moment(d1).subtract(1, 'month').toDate();
+    const daysInPrevMonth = new Date(prevMonth.getFullYear(), prevMonth.getMonth() + 1, 0).getDate();
+    return daysInPrevMonth - day2 + day1;
   }
 }
