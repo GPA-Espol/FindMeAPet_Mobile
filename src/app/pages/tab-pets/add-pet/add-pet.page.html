@@ -3,13 +3,13 @@
     <ion-buttons slot="start">
       <ion-back-button> </ion-back-button>
     </ion-buttons>
-    <ion-title>Agregar mascota</ion-title>
+    <ion-title>{{mode=='anadir'?'Agregar':'Editar'}} mascota</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <div class="center-contenedor">
-    <ion-card id="upload-image">
+    <ion-card *ngIf="mode=='anadir'" id="upload-image">
       <ion-row *ngIf="!image64" class="ion-justify-content-center ion-no-padding">
         <div style="margin-top: 45px">
           <ion-icon id="icon-camera" name="image"></ion-icon>
@@ -17,10 +17,14 @@
       </ion-row>
       <img *ngIf="image64" width="140px" height="140px" [src]="image64" class="image-preview" />
     </ion-card>
+    <ion-card *ngIf="mode=='editar'&& petToEdit" id="upload-image">
+      <img width="100%" height="140px" [src]="petToEdit.imagenUrl" class="image-preview" />
+    </ion-card>
   </div>
   <div class="center-contenedor">
     <ion-button (click)="selectImage()" mode="ios">
-      <ion-icon slot="start" name="arrow-up-circle"></ion-icon> Subir imagen
+      <ion-icon slot="start" name="arrow-up-circle"></ion-icon> {{mode=='anadir'? 'Subir imagen':'Cambiar
+      imagen'}}
     </ion-button>
   </div>
   <form [formGroup]="mascota">
@@ -157,7 +161,7 @@
           <ion-checkbox slot="end" color="primary" formControlName="adoptable" mode="ios"></ion-checkbox>
         </ion-item>
       </ion-list>
-      <div>
+      <!--div>
         <ion-row class="ion-margin-start ion-margin-top">
           <ion-text color="primary"> 7. </ion-text>
           <div class="title">
@@ -182,7 +186,7 @@
             <ion-select-option value="Juguetón">Juguetón</ion-select-option>
           </ion-select>
         </ion-item>
-      </div>
+      </div-->
       <div>
         <ion-row class="ion-margin-start ion-margin-top">
           <ion-text color="primary"> 8. </ion-text>
@@ -224,7 +228,14 @@
         </ion-item>
       </div>
       <ion-col class="ion-no-padding">
-        <ion-button expand="block" fill="outline" (click)="onSubmit()" mode="ios"> Guardar </ion-button>
+        <ion-button
+          expand="block"
+          fill="outline"
+          (click)="mode=='anadir'? createPet() : editPet()"
+          mode="ios"
+        >
+          {{mode=='anadir'?'Guardar':'Actualizar'}}
+        </ion-button>
         <ion-button
           class="ion-margin-vertical"
           expand="block"

@@ -21,7 +21,14 @@ export class AdministrarMascota {
     // TODO implementar método
   }
 
-  public actualizarMascota() {
-    // TODO implementar método
+  public async actualizarMascota(id:string,mascota: Mascota) {
+    let url = environment.api + 'mascota/'+ id;
+    let mascotaApi = Mascota.serialize(mascota);
+    await this.http.put<any[]>(url, mascotaApi).toPromise();
+    console.log(this.sistema.mascotas);
+    
+    //this.sistema.mascotas.push(mascota);
   }
+
+  
 }
