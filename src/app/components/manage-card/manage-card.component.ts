@@ -66,9 +66,4 @@ export class ManageCardComponent implements OnInit {
     }
     this.alert.dismissLoading();
   }
-
-  edit() {
-    console.log('Editar');
-    //TODO Redireccionar a página de editar
-  }
 }
