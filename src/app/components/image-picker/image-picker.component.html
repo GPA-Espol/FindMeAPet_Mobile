@@ -8,7 +8,7 @@
     <img *ngIf="image64" width="140px" height="140px" [src]="image64" class="image-preview" />
   </ion-card>
   <ion-card *ngIf="mode == 'editar' && petToEdit" id="upload-image">
-    <img width="100%" height="140px" [src]="petToEdit.imagenUrl" class="image-preview" />
+    <img width="100%" height="140px" [src]="image64? image64 : petToEdit.imagenUrl" class="image-preview" />
   </ion-card>
 </div>
 <div class="center-contenedor">

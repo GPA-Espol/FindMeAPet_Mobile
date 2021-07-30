@@ -108,9 +108,17 @@ export class AddPetPage implements OnInit {
   async editPet() {
     this.setValues(this.petToEdit);
     this.petObserver.publish(this.petToEdit);
-    await this.administrador.adminMascota.actualizarMascota(this.idPet, this.petToEdit);
-    this.alertaService.presentToast('La mascota ha sido editada');
-    this.goback();
+    await this.alertaService.presentLoading('Actualizando mascota');
+    try {
+      this.petToEdit.imagenUrl = await this.imgPicker.upload();
+      await this.administrador.adminMascota.actualizarMascota(this.idPet, this.petToEdit);
+      this.goback();
+      await this.alertaService.presentToast('La mascota ha sido editada');
+    } catch (err) {
+      console.error('Error al editar mascota: ', err);
+      this.alertaService.presentToast('Error al editar mascota, por favor intente de nuevo' + err);
+    }
+    this.alertaService.dismissLoading();
   }
 
   /**
