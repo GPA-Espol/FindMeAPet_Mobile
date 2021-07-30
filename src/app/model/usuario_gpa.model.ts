@@ -8,6 +8,7 @@ import { ReporteAsistencia } from './reporte_asistencia.model';
  * @category Model
  */
 export abstract class UsuarioGPA {
+  private _id: number;
   protected _nombreUsuario: string;
   protected _nombre: string;
   protected _apellido: string;
@@ -20,6 +21,13 @@ export abstract class UsuarioGPA {
 
   public verReportesAsistencia(): ReporteAsistencia[] {
     return ReporteAsistencia.deserialize([]);
+  }
+
+  public get id(): number {
+    return this._id;
+  }
+  public set id(value: number) {
+    this._id = value;
   }
 
   public get nombreUsuario(): string {

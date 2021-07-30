@@ -31,7 +31,6 @@ export class AgePipe implements PipeTransform {
       return monthAgo > 1 ? monthAgo + ' meses' : monthAgo + ' mes';
     } else if (createdSecond >= 86400) {
       let dayAgo = Math.floor(createdSecond / 86400);
-      console.log(dayAgo);
       return dayAgo > 1 ? dayAgo + ' días' : dayAgo + ' día';
     }
   }

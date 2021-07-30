@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { TipoPublicacion } from 'src/app/model/enums.model';
 import { Publicacion } from 'src/app/model/publicacion.model';
+import { PublicationObserverService } from 'src/app/observables/publication-observer.service';
+import { SistemaService } from 'src/app/services/sistema/sistema.service';
 
 @Component({
   selector: 'app-news',
@@ -11,33 +14,29 @@ import { Publicacion } from 'src/app/model/publicacion.model';
 export class PublicationPage implements OnInit {
   publications: Publicacion[] = [];
   publicationTitle: string;
-  private publicationsType: TipoPublicacion;
-
-  constructor(private router: Router) {}
+  publicationsType: TipoPublicacion;
+  loading: boolean;
+  private publicationSubscription: Subscription;
+  constructor(
+    private router: Router,
+    private sistema: SistemaService,
+    private publicationObserver: PublicationObserverService
+  ) {}
 
   ngOnInit() {
     this.setPublicationsType();
     this.getPublicationData();
+    this.publicationSubscription = this.publicationObserver.getObservable().subscribe(() => {
+      this.getPublicationData();
+    });
   }
 
-  private getPublicationData() {
-    const publications = this.buildFakeNews();
+  private async getPublicationData() {
+    this.loading = true;
+    const { adminPublicacion } = this.sistema.admin;
+    const publications = await adminPublicacion.verPublicaciones();
     this.publications = publications.filter((publication) => publication.tipo == this.publicationsType);
-  }
-
-  private buildFakeNews() {
-    let publications: Publicacion[] = [];
-    const noticia1 = new Publicacion();
-    noticia1.imagen =
-      'https://images.freeimages.com/images/premium/previews/4992/49923492-portrait-of-puppy.jpg';
-    noticia1.descripcion = `Lorem ipsum dolor, sit amet consectetur adipisicing elit. Veniam necessitatibus et totam sunt. Nemo
-    porro eveniet sapiente, illo repellendus veritatis minima cumque, corporis sequi, ab dolorum at eius
-    quasi fugit.`;
-    noticia1.titulo = '¡Balto ya está en casa!';
-    noticia1.fecha = new Date();
-    noticia1.tipo = TipoPublicacion.EVENTO;
-    publications.push(noticia1);
-    return publications;
+    this.loading = false;
   }
 
   /**
@@ -58,5 +57,9 @@ export class PublicationPage implements OnInit {
     } else {
       this.publicationTitle = 'eventos';
     }
+  }
+
+  ngOnDestroy() {
+    this.publicationSubscription.unsubscribe();
   }
 }
