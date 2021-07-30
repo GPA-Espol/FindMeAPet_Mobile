@@ -9,6 +9,7 @@ import { Administrador } from 'src/app/model/admin/administrador.model';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ImagePickerComponent } from 'src/app/components/image-picker/image-picker.component';
+import { PetObserverService } from 'src/app/observables/pet-observer.service';
 
 /**
  * Component in charge of the behaviour of the add-pet page
@@ -35,7 +36,8 @@ export class AddPetPage implements OnInit {
     private navCtrl: NavController,
     private formBuilder: FormBuilder,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private petObserver : PetObserverService
   ) {}
 
   setMode() {
@@ -104,6 +106,7 @@ export class AddPetPage implements OnInit {
    */
   async editPet() {
     this.setValues(this.petToEdit);
+    this.petObserver.publish(this.petToEdit);
     await this.administrador.adminMascota.actualizarMascota(this.idPet, this.petToEdit);
     this.alertaService.presentToast('La mascota ha sido editada');
     this.goback();
