@@ -76,12 +76,6 @@ export class SistemaService {
     return this._mascotas.data;
   }
 
-  public async createMacota(mascota: any) {
-    let url = environment.api + 'mascota';
-    let response_code = await this.http.post<any[]>(url, mascota).toPromise();
-    return response_code;
-  }
-
   public async crearUsuario() {
     if (!this._usuario) {
       let usuario = await this.userLoggedIn();

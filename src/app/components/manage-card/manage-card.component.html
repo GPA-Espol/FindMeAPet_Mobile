@@ -1,0 +1,21 @@
+<ion-card mode="ios">
+  <div class="card-container">
+    <div class="image-container">
+      <img [src]="publicacion.imagen" alt="imagen noticia" />
+    </div>
+    <div class="info-container">
+      <div class="title">{{ publicacion.titulo }}</div>
+      <div class="description">
+        {{ display_description }}
+      </div>
+      <div class="actions">
+        <div class="icon-button edit" tappable>
+          <ion-icon name="pencil-outline"></ion-icon>
+        </div>
+        <div class="icon-button delete" tappable (click)="delete()">
+          <ion-icon name="trash-outline"></ion-icon>
+        </div>
+      </div>
+    </div>
+  </div>
+</ion-card>

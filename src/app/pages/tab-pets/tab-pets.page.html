@@ -90,16 +90,12 @@
         </ion-item>
       </ion-card>
     </div>
-    <div *ngIf="!pets.length" class="ion-margin-top">
-      <ion-row class="ion-justify-content-center">
-        <img src="assets/icon/pets.svg" alt="no hay mascotas" height="200px" width="200px" />
-      </ion-row>
-      <ion-row class="ion-justify-content-center">
-        <p class="ion-text-center ion-margin-horizontal text-nothing">
-          Aun no hay ninguna mascota en el sistema.
-          <a routerLink="anadir">Empieza a agregarlos ahora!</a>
-        </p>
-      </ion-row>
+    <div *ngIf="!pets.length">
+      <app-empty-list
+        emptyDescription="Aún no hay ninguna mascota en el sistema."
+        link="anadir"
+        linkDescription="Empieza a agregarlas ahora!"
+      ></app-empty-list>
     </div>
   </ng-template>
   <ion-fab slot="fixed" style="bottom: 10px; right: 15px">

@@ -18,29 +18,30 @@ const routes: Routes = [
       },
       {
         path: 'inicio',
-        loadChildren: () =>
-          import('../pages/en-construccion/en-construccion.module').then((m) => m.EnConstruccionPageModule),
+        loadChildren: () => import('../pages/tab-home/tab-home.module').then((m) => m.TabHomePageModule),
       },
       {
         path: 'solicitud',
         loadChildren: () =>
           import('../pages/en-construccion/en-construccion.module').then((m) => m.EnConstruccionPageModule),
       },
+
       {
         path: 'configuracion',
         loadChildren: () =>
-          import('../pages/en-construccion/en-construccion.module').then((m) => m.EnConstruccionPageModule),
+          import('../pages/tab-manage/tab-manage.module').then((m) => m.TabManagePageModule),
       },
+
       {
         path: '',
-        redirectTo: '/tabs/admin/mascotas',
+        redirectTo: '/tabs/admin/inicio',
         pathMatch: 'full',
       },
     ],
   },
   {
     path: '',
-    redirectTo: '/tabs/admin/mascotas',
+    redirectTo: '/tabs/admin/inicio',
     pathMatch: 'full',
   },
 ];

@@ -1,5 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { SistemaService } from 'src/app/services/sistema/sistema.service';
+import { CantidadComida } from './enums.model';
+import { ReporteAsistencia } from './reporte_asistencia.model';
 
 /**
  * Abstract class containing the base information of a GPA User
@@ -15,6 +17,10 @@ export abstract class UsuarioGPA {
   protected _foto: string;
 
   constructor(protected http: HttpClient, protected sistema: SistemaService) {}
+
+  public verReportesAsistencia(): ReporteAsistencia[] {
+    return ReporteAsistencia.deserialize([]);
+  }
 
   public get nombreUsuario(): string {
     return this._nombreUsuario;

@@ -1,0 +1,39 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button> </ion-back-button>
+    </ion-buttons>
+    <ion-title>Agregar noticia</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="ion-justify-content ion-margin-horizontal ion-margin-top">
+    <form [formGroup]="publicationForm">
+      <div>
+        <ion-item lines="none" class="ion-margin-horizontal">
+          <ion-input type="text" size="10" placeholder="Título" formControlName="titulo"></ion-input>
+        </ion-item>
+      </div>
+    </form>
+    <app-image-picker #imgPicker></app-image-picker>
+    <div class="ion-margin-top ion-padding-top">
+      <ion-item lines="none" class="ion-margin-horizontal">
+        <ion-textarea rows="6" placeholder="Descripción..."></ion-textarea>
+      </ion-item>
+    </div>
+    <ion-col class="ion-no-padding">
+      <ion-button expand="block" fill="outline" (click)="savePublication()" mode="ios"> Guardar </ion-button>
+      <ion-button
+        class="ion-margin-vertical"
+        expand="block"
+        fill="outline"
+        color="medium"
+        (click)="goback()"
+        mode="ios"
+      >
+        Cancelar
+      </ion-button>
+    </ion-col>
+  </div>
+</ion-content>

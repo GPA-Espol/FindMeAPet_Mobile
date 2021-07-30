@@ -1,0 +1,51 @@
+.image-container {
+  text-align: center;
+  img {
+    max-height: 25vh;
+    width: 100%;
+    object-fit: cover;
+  }
+}
+
+.info-container {
+  padding: 16px;
+}
+
+.title {
+  margin-bottom: 10px;
+  font-size: 22px;
+  font-weight: bold;
+  text-align: center;
+  color: var(--ion-color-primary);
+}
+
+.description {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 5px;
+}
+
+.icon-button {
+  width: 30px;
+  height: 30px;
+  color: white;
+  font-size: 20px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 10px 10px 0 0;
+}
+
+.edit {
+  background-color: #70abfb;
+}
+
+.delete {
+  background-color: #eb9088;
+}
