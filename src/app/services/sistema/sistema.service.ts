@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { CachedUser } from 'src/app/model/cached_user';
 import { environment } from 'src/environments/environment';
 import { Administrador } from '../../model/admin/administrador.model';
 import { RolUsuario } from '../../model/enums.model';
@@ -21,7 +22,7 @@ export class SistemaService {
   private _usuario: UsuarioGPA;
   private _mascotas: { data: Mascota[]; time: number };
 
-  constructor(private http: HttpClient, private store: StorageService, private utils: Utils) {}
+  constructor(private http: HttpClient, private store: StorageService) {}
 
   /**
    * Make an http request to log in the user in the system, and save his/her role and save the
@@ -32,13 +33,14 @@ export class SistemaService {
    */
   public async login(usuario: string, password: string) {
     let loginUrl = environment.api + 'auth';
-    let { token, rol } = await this.http.post<any>(loginUrl, { usuario, password }).toPromise();
-    await this.store.set('usuario', { token, rol });
+    let { token, rol, id } = await this.http.post<any>(loginUrl, { usuario, password }).toPromise();
+    await this.store.set('usuario', { token, rol, id });
     if (rol == RolUsuario.ADMIN) {
       this._usuario = new Administrador(this.http, this);
     } else {
       this._usuario = new Voluntario(this.http, this);
     }
+    this._usuario.id = id;
   }
 
   /**
@@ -55,20 +57,20 @@ export class SistemaService {
    * @returns If the user has logged in, returns an object \{token,rol\}
    * Else returns undefined
    */
-  public async userLoggedIn() {
+  public async userLoggedIn(): Promise<CachedUser> {
     return this.store.get('usuario');
   }
 
   /**
    * Get the pets from the REST-API and cache them for 30 mins. If the pets has already been
    * cached, it returns the cached pets and avoid make the http request.
-   * @param {bool=} forceReload If true it makes the httpRequest for the pets regardless
+   * @param {boolean=} forceReload If true it makes the httpRequest for the pets regardless
    * of if these have been cached or not
    * @returns An array of pets
    */
   public async getMascotas(forceReload = false) {
     let url = environment.api + 'mascota';
-    if (forceReload || !this._mascotas || this.utils.cacheExpired(this._mascotas.time)) {
+    if (forceReload || !this._mascotas || Utils.cacheExpired(this._mascotas.time)) {
       let data = await this.http.get<any[]>(url).toPromise();
       let now = new Date().getTime();
       this._mascotas = { data: Mascota.deserialize(data), time: now };
@@ -84,11 +86,12 @@ export class SistemaService {
       } else if (usuario.rol == RolUsuario.VOLUNTARIO) {
         this._usuario = new Voluntario(this.http, this);
       }
+      this._usuario.id = usuario.id;
     }
   }
 
-  public async getMascotabyId(id:string) {
-    let url = environment.api + 'mascota/'+ id;
+  public async getMascotabyId(id: string) {
+    let url = environment.api + 'mascota/' + id;
     let data = await this.http.get<any[]>(url).toPromise();
     let pet = Mascota.deserializeOne(data);
     return pet;

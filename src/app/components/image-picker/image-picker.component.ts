@@ -84,6 +84,9 @@ export class ImagePickerComponent implements OnInit {
    * download link to the attribute image of the pet
    */
   async upload() {
+    if (!this.image64) {
+      return '';
+    }
     const currentDate = Date.now();
     const file: any = this.base64ToImage(this.image64);
     const filePath = `Images/${currentDate}`;

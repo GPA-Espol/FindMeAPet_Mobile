@@ -1,26 +1,31 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-menu-button></ion-menu-button>
+      <ion-back-button></ion-back-button>
     </ion-buttons>
     <ion-title>Administrar {{publicationTitle}}</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <div *ngIf="publications.length; else noPublications">
-    <app-manage-card *ngFor="let noticia of publications" [publicacion]="noticia"></app-manage-card>
-  </div>
-  <ng-template #noPublications>
-    <app-empty-list
-      emptyDescription="Aún no hay {{publicationTitle}} en el sistema."
-      link="anadir"
-      linkDescription="Empieza a agregar ahora!"
-    ></app-empty-list>
+  <ion-row class="ion-justify-content-center" *ngIf="loading; else loadedContent">
+    <ion-spinner name="crescent" color="primary"></ion-spinner>
+  </ion-row>
+  <ng-template #loadedContent>
+    <div *ngIf="publications.length; else noPublications">
+      <app-manage-card *ngFor="let publication of publications" [publicacion]="publication"></app-manage-card>
+    </div>
+    <ng-template #noPublications>
+      <app-empty-list
+        emptyDescription="Aún no hay {{publicationTitle}} en el sistema."
+        link="agregar"
+        linkDescription="Empieza a agregar ahora!"
+      ></app-empty-list>
+    </ng-template>
+    <ion-fab slot="fixed" style="bottom: 10px; right: 15px">
+      <ion-fab-button routerLink="agregar" class="add-button"
+        ><ion-icon name="add-outline"></ion-icon
+      ></ion-fab-button>
+    </ion-fab>
   </ng-template>
-  <ion-fab slot="fixed" style="bottom: 10px; right: 15px">
-    <ion-fab-button routerLink="anadir" class="add-button"
-      ><ion-icon name="add-outline"></ion-icon
-    ></ion-fab-button>
-  </ion-fab>
 </ion-content>

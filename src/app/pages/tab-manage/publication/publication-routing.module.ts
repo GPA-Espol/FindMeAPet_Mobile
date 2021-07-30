@@ -9,12 +9,12 @@ const routes: Routes = [
     component: PublicationPage,
   },
   {
-    path: 'anadir',
+    path: 'agregar',
     loadChildren: () =>
       import('./add-publication/add-publication.module').then((m) => m.AddPublicationPageModule),
   },
   {
-    path: 'editar',
+    path: 'editar/:id',
     loadChildren: () =>
       import('./add-publication/add-publication.module').then((m) => m.AddPublicationPageModule),
   },
