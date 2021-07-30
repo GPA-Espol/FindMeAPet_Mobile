@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { Camera, CameraOptions, PictureSourceType } from '@ionic-native/camera/ngx';
 import { ActionSheetController } from '@ionic/angular';
 import { Observable } from 'rxjs';
 import { finalize } from 'rxjs/operators';
+import { Mascota } from 'src/app/model/mascota.model';
 import { AlertaService } from 'src/app/services/alerta/alerta.service';
 
 @Component({
@@ -13,6 +14,8 @@ import { AlertaService } from 'src/app/services/alerta/alerta.service';
 })
 export class ImagePickerComponent implements OnInit {
   image64: string;
+  @Input() mode : string;
+  @Input() petToEdit : Mascota
   constructor(
     private camera: Camera,
     private actionSheetController: ActionSheetController,
@@ -84,8 +87,8 @@ export class ImagePickerComponent implements OnInit {
    * download link to the attribute image of the pet
    */
   async upload() {
-    if (!this.image64) {
-      return '';
+    if(!this.image64){
+      return this.petToEdit.imagenUrl
     }
     const currentDate = Date.now();
     const file: any = this.base64ToImage(this.image64);

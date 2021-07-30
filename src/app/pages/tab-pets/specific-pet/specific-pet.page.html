@@ -1,5 +1,8 @@
 <ion-header>
   <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button> </ion-back-button>
+    </ion-buttons>
     <ion-title>Mascota</ion-title>
   </ion-toolbar>
 </ion-header>
@@ -17,7 +20,7 @@
       <!--img width="80" height="80" src=""/-->
       <!--img class="fondo-mascota" src="assets/img/fondo-mascota.png" alt="no hay mascotas" height="200px" width="100%" /-->
       <ion-fab slot="fixed" style="top: 10px; right: 15px">
-        <ion-fab-button size="small" routerLink="anadir" 
+        <ion-fab-button size="small" routerLink="../../editar/{{pet.id}}" 
           ><ion-icon id="edit-icon" name="pencil-outline"></ion-icon
         ></ion-fab-button>
       </ion-fab>
