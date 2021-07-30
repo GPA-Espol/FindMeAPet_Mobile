@@ -9,7 +9,7 @@
         {{ display_description }}
       </div>
       <div class="actions">
-        <div class="icon-button edit" tappable routerLink="editar">
+        <div class="icon-button edit" tappable routerLink="editar/{{ publicacion.id }}">
           <ion-icon name="pencil-outline"></ion-icon>
         </div>
         <div class="icon-button delete" tappable (click)="delete()">

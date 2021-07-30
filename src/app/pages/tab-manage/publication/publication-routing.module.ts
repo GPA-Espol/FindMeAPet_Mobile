@@ -14,7 +14,7 @@ const routes: Routes = [
       import('./add-publication/add-publication.module').then((m) => m.AddPublicationPageModule),
   },
   {
-    path: 'editar',
+    path: 'editar/:id',
     loadChildren: () =>
       import('./add-publication/add-publication.module').then((m) => m.AddPublicationPageModule),
   },

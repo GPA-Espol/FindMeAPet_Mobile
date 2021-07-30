@@ -15,7 +15,7 @@ export class PublicationPage implements OnInit {
   publications: Publicacion[] = [];
   publicationTitle: string;
   publicationsType: TipoPublicacion;
-
+  loading: boolean;
   private publicationSubscription: Subscription;
   constructor(
     private router: Router,
@@ -32,8 +32,11 @@ export class PublicationPage implements OnInit {
   }
 
   private async getPublicationData() {
+    this.loading = true;
     const { adminPublicacion } = this.sistema.admin;
-    this.publications = await adminPublicacion.verPublicaciones();
+    const publications = await adminPublicacion.verPublicaciones();
+    this.publications = publications.filter((publication) => publication.tipo == this.publicationsType);
+    this.loading = false;
   }
 
   /**

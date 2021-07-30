@@ -20,6 +20,8 @@ export class AddPublicationPage implements OnInit {
   photoUrl: string;
   publicationsType: TipoPublicacion;
   actionType: string;
+  pubToEdit: Publicacion;
+  loading = true;
   @ViewChild('imgPicker') imgPicker: ImagePickerComponent;
   constructor(
     private formBuilder: FormBuilder,
@@ -30,21 +32,33 @@ export class AddPublicationPage implements OnInit {
     private publicationObserver: PublicationObserverService
   ) {}
 
-  ngOnInit() {
-    this.setPublicationsInfo();
+  async ngOnInit() {
+    await this.setPublicationsInfo();
     this.buildForm();
+    this.loading = false;
   }
 
   private buildForm() {
-    this.publicationForm = this.formBuilder.group({
-      title: ['', Validators.required],
-      description: ['', Validators.required],
-    });
+    if (this.actionType == 'Agregar') {
+      this.publicationForm = this.formBuilder.group({
+        title: ['', Validators.required],
+        description: ['', Validators.required],
+      });
+    } else {
+      this.publicationForm = this.formBuilder.group({
+        title: [this.pubToEdit.titulo, Validators.required],
+        description: [this.pubToEdit.descripcion, Validators.required],
+      });
+    }
   }
 
   async submitPublication() {
     try {
-      await this.savePublication();
+      if (this.actionType == 'Agregar') {
+        await this.saveNewPublication();
+      } else {
+        await this.updatePublication();
+      }
     } catch (err) {
       await this.alert.dismissLoading();
       console.error(err);
@@ -52,7 +66,7 @@ export class AddPublicationPage implements OnInit {
     }
   }
 
-  private async savePublication() {
+  private async saveNewPublication() {
     await this.alert.presentLoading('Guardando...');
     const admin = this.sistema.admin;
     const { adminPublicacion } = admin;
@@ -71,20 +85,48 @@ export class AddPublicationPage implements OnInit {
     this.goback();
   }
 
-  private setPublicationsInfo() {
+  private async updatePublication() {
+    await this.alert.presentLoading('Guardando...');
+    const { adminPublicacion } = this.sistema.admin;
+    this.pubToEdit.titulo = this.publicationForm.get('title').value;
+    this.pubToEdit.descripcion = this.publicationForm.get('description').value;
+    await adminPublicacion.actualizarPublicacion(this.pubToEdit);
+    const successMessage = this.getSuccessMessage();
+    this.alert.presentToast(successMessage);
+    this.alert.dismissLoading();
+    this.goback();
+  }
+
+  private async setPublicationsInfo() {
     const currentUrl = this.router.url;
     const currentUrlList = currentUrl.split('/');
-    const publicationType = currentUrlList[currentUrlList.length - 2];
-    const actionType = currentUrlList[currentUrlList.length - 1];
+    const urlLength = currentUrlList.length;
+    const lastSegment = currentUrlList[urlLength - 1];
+    let actionType = lastSegment;
+    let publicationType: string;
+    if (lastSegment == 'agregar') {
+      publicationType = currentUrlList[urlLength - 2];
+    } else {
+      const pubId = +currentUrlList[urlLength - 1];
+      await this.setPubToEdit(pubId);
+      actionType = currentUrlList[urlLength - 2];
+      publicationType = currentUrlList[urlLength - 3];
+    }
     this.actionType = Utils.capitalize(actionType);
     this.publicationsType = <TipoPublicacion>publicationType;
+  }
+
+  private async setPubToEdit(pubId: number) {
+    const { adminPublicacion } = this.sistema.admin;
+    const publications = await adminPublicacion.verPublicaciones();
+    this.pubToEdit = publications.find((pub) => pub.id == pubId);
   }
 
   /**
    * Method that navigate to the home page with a go back animation
    */
   goback() {
-    this.navCtrl.navigateBack(`/tabs/admin/configuracion/${this.publicationsType}`);
+    this.navCtrl.pop();
   }
 
   private getSuccessMessage() {
