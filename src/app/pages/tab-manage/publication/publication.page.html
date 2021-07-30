@@ -9,7 +9,7 @@
 
 <ion-content>
   <div *ngIf="publications.length; else noPublications">
-    <app-manage-card *ngFor="let noticia of publications" [publicacion]="noticia"></app-manage-card>
+    <app-manage-card *ngFor="let publication of publications" [publicacion]="publication"></app-manage-card>
   </div>
   <ng-template #noPublications>
     <app-empty-list

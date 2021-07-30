@@ -1,6 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { AlertController } from '@ionic/angular';
 import { Publicacion } from 'src/app/model/publicacion.model';
+import { PublicationObserverService } from 'src/app/observables/publication-observer.service';
+import { AlertaService } from 'src/app/services/alerta/alerta.service';
+import { SistemaService } from 'src/app/services/sistema/sistema.service';
 
 @Component({
   selector: 'app-manage-card',
@@ -11,7 +14,12 @@ export class ManageCardComponent implements OnInit {
   DISPLAY_TEXT_MAX_LENGTH = 200;
   display_description: string;
   @Input() publicacion: Publicacion;
-  constructor(private alertController: AlertController) {}
+  constructor(
+    private alertController: AlertController,
+    private sistema: SistemaService,
+    private alert: AlertaService,
+    private publicationObserver: PublicationObserverService
+  ) {}
 
   ngOnInit() {
     this.truncateText();
@@ -37,14 +45,26 @@ export class ManageCardComponent implements OnInit {
         },
         {
           text: 'Sí',
-          handler: () => {
-            console.log('Eliminar publicación');
-            //TODO eliminar publicación
+          handler: async () => {
+            await this.deletePublication();
           },
         },
       ],
     });
     await alert.present();
+  }
+
+  private async deletePublication() {
+    try {
+      await this.alert.presentLoading('Eliminando...');
+      const { adminPublicacion } = this.sistema.admin;
+      await adminPublicacion.eliminarPublicacion(this.publicacion.id);
+      this.publicationObserver.publish();
+    } catch (err) {
+      console.error('Error while delete publication', err);
+      this.alert.presentToast('Ha ocurrido un error al eliminar.');
+    }
+    this.alert.dismissLoading();
   }
 
   edit() {

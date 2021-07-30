@@ -5,6 +5,7 @@ import { NavController } from '@ionic/angular';
 import { ImagePickerComponent } from 'src/app/components/image-picker/image-picker.component';
 import { TipoPublicacion } from 'src/app/model/enums.model';
 import { Publicacion } from 'src/app/model/publicacion.model';
+import { PublicationObserverService } from 'src/app/observables/publication-observer.service';
 import { AlertaService } from 'src/app/services/alerta/alerta.service';
 import { SistemaService } from 'src/app/services/sistema/sistema.service';
 import { Utils } from 'src/app/utils/utils';
@@ -25,7 +26,8 @@ export class AddPublicationPage implements OnInit {
     private navCtrl: NavController,
     private router: Router,
     private sistema: SistemaService,
-    private alert: AlertaService
+    private alert: AlertaService,
+    private publicationObserver: PublicationObserverService
   ) {}
 
   ngOnInit() {
@@ -62,6 +64,7 @@ export class AddPublicationPage implements OnInit {
     publication.tipo = this.publicationsType;
     publication.imagen = await this.imgPicker.upload();
     await adminPublicacion.crearPublicacion(publication);
+    this.publicationObserver.publish();
     const successMessage = this.getSuccessMessage();
     this.alert.presentToast(successMessage);
     this.alert.dismissLoading();
