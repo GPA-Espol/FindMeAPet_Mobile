@@ -55,7 +55,7 @@ export class SpecificPetPage implements OnInit {
     const alert = await this.alertController.create({
       cssClass: '',
       header: 'Confirmacion',
-      message: '',
+      message: 'La mascota se eliminará permanentemente',
       buttons: [
         {
           text: 'Cancelar',

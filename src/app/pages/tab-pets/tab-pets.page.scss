@@ -29,15 +29,12 @@
   border-radius: 15px !important;
 }
 .card-pet {
-  box-shadow: -5px -5px 10px rgba(255, 255, 255, 0.5), 5px 5px 10px rgba(170, 170, 204, 0.25),
-    10px 10px 20px rgba(170, 170, 204, 0.25), -10px -10px 20px #ffffff;
-
-  --background: #f5f5fafd !important ;
-  border-radius: 16px !important;
-  margin-bottom: 10px;
+  box-shadow: rgb(0 0 0 / 12%) 0px 4px 16px;
+  border-radius: 10px !important;
+  margin-bottom: 20px;
 }
 .item-pet {
-  --background: #f5f5fafd;
+  --background: transparent !important;
   border-radius: 15px !important;
 }
 
