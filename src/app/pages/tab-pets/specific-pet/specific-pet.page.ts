@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { ModalController } from '@ionic/angular';
 import { Subscription } from 'rxjs';
 import { Mascota } from 'src/app/model/mascota.model';
 import { PetObserverService } from 'src/app/observables/pet-observer.service';
+import { AlertaService } from 'src/app/services/alerta/alerta.service';
 import { SistemaService } from 'src/app/services/sistema/sistema.service';
 
 @Component({
@@ -17,8 +19,12 @@ export class SpecificPetPage implements OnInit {
   constructor(
     private sistema: SistemaService,
     private route: ActivatedRoute,
-    private petObserver: PetObserverService
+    private petObserver: PetObserverService,
+    private alertaService : AlertaService
+    //public modalController: ModalController
   ) {}
+
+ 
   async ngOnInit() {
     this.loading = true;
     await this.getPetPage();
@@ -34,5 +40,14 @@ export class SpecificPetPage implements OnInit {
 
   ngOnDestroy() {
     this.petSubscription.unsubscribe();
+  }
+
+  async modaDelete(){
+    await this.alertaService.confirmationAlert("La mascota se eliminará permanentemente",this.delete);
+  }
+
+  async delete(){
+    console.log("eliminar");
+    
   }
 }

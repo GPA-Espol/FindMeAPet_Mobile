@@ -194,6 +194,6 @@ export class AddPetPage implements OnInit {
     }
     const prevMonth = moment(d1).subtract(1, 'month').toDate();
     const daysInPrevMonth = new Date(prevMonth.getFullYear(), prevMonth.getMonth() + 1, 0).getDate();
-    return daysInPrevMonth - day2 + day1;
+    return daysInPrevMonth - day2 + day1; 
   }
 }

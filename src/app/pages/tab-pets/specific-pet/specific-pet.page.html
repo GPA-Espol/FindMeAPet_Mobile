@@ -20,8 +20,8 @@
       <!--img width="80" height="80" src=""/-->
       <!--img class="fondo-mascota" src="assets/img/fondo-mascota.png" alt="no hay mascotas" height="200px" width="100%" /-->
       <ion-fab slot="fixed" style="top: 10px; right: 15px">
-        <ion-fab-button size="small" routerLink="../../editar/{{pet.id}}" 
-          ><ion-icon id="edit-icon" name="pencil-outline"></ion-icon
+        <ion-fab-button color="danger" size="small" (click)="modaDelete()"
+          ><ion-icon id="delete-icon" name="trash"></ion-icon
         ></ion-fab-button>
       </ion-fab>
       <ion-row>
@@ -87,6 +87,9 @@
             ></ion-icon>
           </ion-item>
         </ion-list>
+      </div>
+      <div class="ion-text-center">
+        <ion-button class="ion-margin-vertical" color="primary" mode="ios"  routerLink="../../editar/{{pet.id}}"> Editar mascota </ion-button>
       </div>
 
       <!--ion-row>

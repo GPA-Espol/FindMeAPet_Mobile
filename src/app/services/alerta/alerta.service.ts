@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { LoadingController, ToastController } from '@ionic/angular';
+import { AlertController, LoadingController, ToastController } from '@ionic/angular';
 
 /**
  * Service Class in charge of presenting some visual feedback to user
@@ -11,7 +11,11 @@ import { LoadingController, ToastController } from '@ionic/angular';
 })
 export class AlertaService {
   private loading: HTMLIonLoadingElement;
-  constructor(private toastController: ToastController, private loadingController: LoadingController) {}
+  constructor(
+    private toastController: ToastController,
+    private loadingController: LoadingController,
+    public alertController: AlertController
+  ) {}
 
   /**
    * Present a dark toast from the top of the screen
@@ -53,5 +57,29 @@ export class AlertaService {
     if (this.loading) {
       await this.loading.dismiss();
     }
+  }
+
+  async confirmationAlert(mensaje,OkHandler: Function) {
+    const alert = await this.alertController.create({
+      cssClass: '',
+      header: 'Confirmacion',
+      message: mensaje,
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+        },
+        {
+          text: 'Ok',
+          handler: async () => {
+            await OkHandler();
+          },
+        },
+      ],
+    });
+
+    await alert.present();
+
+    
   }
 }
