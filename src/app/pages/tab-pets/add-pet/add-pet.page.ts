@@ -40,6 +40,9 @@ export class AddPetPage implements OnInit {
     private petObserver: PetObserverService
   ) {}
 
+  /**
+   * Method that sets the page mode to edit o to anadir. The page funcionality is based on this mode.
+   */
   setMode() {
     let route = this.router.url;
     let array = route.split('/');
@@ -72,6 +75,9 @@ export class AddPetPage implements OnInit {
     }
   }
 
+  /**
+   * Method that set values to the form fields of the pet to edit
+   */
   async getData() {
     this.idPet = this.route.snapshot.paramMap.get('id');
     this.petToEdit = await this.sistema.getMascotabyId(this.idPet);
@@ -88,6 +94,10 @@ export class AddPetPage implements OnInit {
     this.setAgeInformation()
   }
 
+  /**
+   * Method that set the value of the pet object to be sent to the REST API, obtaining the information from the form
+   * @param petToSend Mascota object to set values 
+   */
   setValues(petToSend: Mascota) {
     petToSend.nombre = this.mascota.get('nombre').value;
     petToSend.fechaNacimiento = this.getBirthDate();
@@ -164,6 +174,9 @@ export class AddPetPage implements OnInit {
     return today.toDate();
   }
 
+  /**
+   * Method that set the age information in the form fields
+   */
   setAgeInformation(){
     let information = this.getInformationAge();
 
@@ -172,6 +185,10 @@ export class AddPetPage implements OnInit {
     this.mascota.controls['days'].setValue(information.days);
   }
 
+  /**
+   * Method the age in years, month and days units
+   * @returns Object that contains age information in the attributes 'years', 'months', 'days'
+   */
   getInformationAge() {
     let today = moment(new Date());
     let birthdate = moment(this.petToEdit.fechaNacimiento);
@@ -186,13 +203,20 @@ export class AddPetPage implements OnInit {
     return { years: years, months: months, days: days };
   }
 
-  diffDays(d1, d2) {
-    const day1 = d1.getDate();
-    const day2 = d2.getDate();
+  /**
+   * Method that provides the days between to dates
+   * @param date1 Date one
+   * @param date2 Date two
+   * @returns days difference of the two dates 
+   */
+
+  diffDays(date1, date2) {
+    const day1 = date1.getDate();
+    const day2 = date2.getDate();
     if (day1 >= day2) {
       return day1 - day2;
     }
-    const prevMonth = moment(d1).subtract(1, 'month').toDate();
+    const prevMonth = moment(date1).subtract(1, 'month').toDate();
     const daysInPrevMonth = new Date(prevMonth.getFullYear(), prevMonth.getMonth() + 1, 0).getDate();
     return daysInPrevMonth - day2 + day1; 
   }

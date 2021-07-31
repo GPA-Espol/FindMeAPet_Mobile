@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { ModalController } from '@ionic/angular';
+import { AlertController, ModalController, NavController } from '@ionic/angular';
 import { Subscription } from 'rxjs';
+import { Administrador } from 'src/app/model/admin/administrador.model';
 import { Mascota } from 'src/app/model/mascota.model';
 import { PetObserverService } from 'src/app/observables/pet-observer.service';
 import { AlertaService } from 'src/app/services/alerta/alerta.service';
@@ -16,22 +17,27 @@ export class SpecificPetPage implements OnInit {
   private petSubscription: Subscription;
   pet: Mascota;
   loading = true;
+  administrador: Administrador;
   constructor(
     private sistema: SistemaService,
     private route: ActivatedRoute,
     private petObserver: PetObserverService,
-    private alertaService : AlertaService
-    //public modalController: ModalController
+    private alertaService: AlertaService,
+    public alertController: AlertController,
+    private navCtrl: NavController //public modalController: ModalController
   ) {}
 
- 
   async ngOnInit() {
     this.loading = true;
     await this.getPetPage();
     this.petSubscription = this.petObserver.getObservable().subscribe((mascota) => (this.pet = mascota));
+    this.administrador = this.sistema.admin;
     this.loading = false;
   }
 
+  /**
+   * Method to store the pet whose is information will be displayed in the page
+   */
   async getPetPage() {
     let identification = +this.route.snapshot.paramMap.get('id');
     this.pet = this.sistema.mascotas.find((pet) => pet.id == identification);
@@ -42,12 +48,39 @@ export class SpecificPetPage implements OnInit {
     this.petSubscription.unsubscribe();
   }
 
-  async modaDelete(){
-    await this.alertaService.confirmationAlert("La mascota se eliminará permanentemente",this.delete);
+  /**
+   * Method that displays the modal when pressing the delete button, to ask for confirmation
+   */
+  async modaDelete() {
+    const alert = await this.alertController.create({
+      cssClass: '',
+      header: 'Confirmacion',
+      message: '',
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+        },
+        {
+          text: 'Ok',
+          handler: async () => {
+            await this.deletePet();
+          },
+        },
+      ],
+    });
+
+    await alert.present();
   }
 
-  async delete(){
-    console.log("eliminar");
-    
+  /**
+   * Method that calls the service to delete the pet and navigates to previous page
+   */
+  async deletePet() {
+    await this.alertaService.presentLoading('Eliminando mascota');
+    await this.administrador.adminMascota.eliminarMascota(String(this.pet.id));
+    this.alertaService.dismissLoading();
+    this.navCtrl.pop();
+    await this.alertaService.presentToast('La mascota ha sido eliminanda');
   }
 }

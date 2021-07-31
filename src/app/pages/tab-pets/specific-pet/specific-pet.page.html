@@ -12,7 +12,11 @@
     <ion-spinner name="crescent" color="primary"></ion-spinner>
   </ion-row>
   <ng-template #loadedContent>
-    <div class="img">
+    <div class="img"  *ngIf="!pet.imagenUrl">
+      <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
+    </div>
+    
+    <div class="img"  *ngIf="pet.imagenUrl">
       <img [src]="pet.imagenUrl" height="30%" width="100%" />
     </div>
 
