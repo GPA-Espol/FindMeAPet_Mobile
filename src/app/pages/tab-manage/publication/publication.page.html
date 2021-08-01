@@ -8,7 +8,7 @@
 </ion-header>
 
 <ion-content>
-  <ion-row class="ion-justify-content-center" *ngIf="loading; else loadedContent">
+  <ion-row class="ion-justify-content-center ion-margin-top" *ngIf="loading; else loadedContent">
     <ion-spinner name="crescent" color="primary"></ion-spinner>
   </ion-row>
   <ng-template #loadedContent>

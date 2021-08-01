@@ -19,7 +19,11 @@
             <ion-input type="text" size="10" placeholder="Título" formControlName="title"></ion-input>
           </ion-item>
         </div>
-        <app-image-picker #imgPicker></app-image-picker>
+        <app-image-picker
+          #imgPicker
+          [mode]='actionType=="Agregar"?"anadir":"editar"'
+          [imageUrl]="pubToEdit?.imagenUrl"
+        ></app-image-picker>
         <div class="ion-margin-top ion-padding-top">
           <ion-item lines="none" class="ion-margin-horizontal">
             <ion-textarea rows="6" placeholder="Descripción..." formControlName="description"></ion-textarea>
