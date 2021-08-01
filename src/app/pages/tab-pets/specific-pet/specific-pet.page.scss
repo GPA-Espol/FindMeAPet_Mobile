@@ -1,17 +1,15 @@
-
-
-.content{
+.content {
   margin: auto;
   position: fixed;
-   left: 0; bottom: 0px; right: 0;
-  height: 60%;
+  left: 0;
+  bottom: 0px;
+  right: 0;
+  height: 70%;
   border-top-right-radius: 25px;
   border-top-left-radius: 25px;
   padding: 20px;
   padding-top: 15px;
-  background: #FAFCFF url('../../../../assets/img/naranja.png') no-repeat  center right;
-
-
+  background: #fafcff url("../../../../assets/img/naranja.png") no-repeat center right;
 }
 #icon-location {
   color: #ec823a;
@@ -19,13 +17,13 @@
 }
 
 .icon-check {
-  color: #53BB42;
-  font-size: larger!important;
+  color: #53bb42;
+  font-size: larger !important;
 }
 
 .icon-cross {
-  color: #FC4F4F;
-  font-size: larger!important;
+  color: #fc4f4f;
+  font-size: larger !important;
 }
 
 #edit-icon {
@@ -37,13 +35,18 @@
 }
 
 ion-list {
-  --ion-background-color: transparent  !important;
+  --ion-background-color: transparent !important;
 
   ion-item {
-    --ion-background-color: inherit  !important;
+    --ion-background-color: inherit !important;
   }
 }
 
 .scrollable {
   overflow: scroll
+}
+.img-placeholder {
+  height: 40%;
+  width: 100%;
+  background-color: rgb(177, 177, 177);
 }

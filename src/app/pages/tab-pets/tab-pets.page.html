@@ -65,14 +65,29 @@
       <ion-refresher slot="fixed" (ionRefresh)="refreshPets($event)">
         <ion-refresher-content></ion-refresher-content>
       </ion-refresher>
-      <ion-card class="card-pet" *ngFor="let pet of pets | lugar:lugarBuscar |filtro: textoBuscar " routerLink="informacion/{{pet.id}}">
+      <ion-card
+        class="card-pet"
+        *ngFor="let pet of pets | lugar:lugarBuscar |filtro: textoBuscar "
+        routerLink="informacion/{{pet.id}}"
+      >
         <ion-item
           lines="none"
           class="item-pet"
           style="margin-top: 10px; margin-bottom: 20px; "
         >
-          <ion-thumbnail mode="ios">
-            <img [src]="pet.imagenUrl" alt="image of {{pet.nombre}}" class="image-pet" />
+          <ion-thumbnail>
+            <img
+              *ngIf="pet.imagenUrl"
+              [src]="pet.imagenUrl"
+              alt="image of {{pet.nombre}}"
+              class="image-pet"
+            />
+            <img
+              *ngIf="!pet.imagenUrl"
+              [src]="pet.tipoAnimal == 'Perro'? '/assets/img/dog-placeholder.svg' : '/assets/img/cat-placeholder.svg'"
+              alt="image of {{pet.nombre}}"
+              class="image-pet"
+            />
           </ion-thumbnail>
           <ion-label class="ion-margin-start ion-margin-vertical ion-text-wrap">
             <h2>{{pet.nombre}}</h2>

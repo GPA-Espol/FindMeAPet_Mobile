@@ -1,7 +1,7 @@
 <ion-card mode="ios">
   <div class="card-container">
-    <div *ngIf="publicacion.imagen" class="image-container">
-      <img [src]="publicacion.imagen" alt="imagen publicación" />
+    <div *ngIf="publicacion.imagenUrl" class="image-container">
+      <img [src]="publicacion.imagenUrl" alt="imagen publicación" />
     </div>
     <div class="info-container">
       <div class="title">{{ publicacion.titulo }}</div>

@@ -8,7 +8,7 @@
 </ion-header>
 
 <ion-content>
-  <app-image-picker #imgPicker [mode]="mode" [petToEdit]="petToEdit" ></app-image-picker>
+  <app-image-picker #imgPicker [mode]="mode" [imageUrl]="petToEdit?.imagenUrl"></app-image-picker>
   <form [formGroup]="mascota">
     <div class="ion-justify-content ion-margin-horizontal ion-margin-top">
       <div>

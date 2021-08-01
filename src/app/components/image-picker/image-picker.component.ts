@@ -14,8 +14,8 @@ import { AlertaService } from 'src/app/services/alerta/alerta.service';
 })
 export class ImagePickerComponent implements OnInit {
   image64: string;
-  @Input() mode : string;
-  @Input() petToEdit : Mascota
+  @Input() mode: string;
+  @Input() imageUrl: string;
   constructor(
     private camera: Camera,
     private actionSheetController: ActionSheetController,
@@ -87,8 +87,8 @@ export class ImagePickerComponent implements OnInit {
    * download link to the attribute image of the pet
    */
   async upload() {
-    if(!this.image64){
-      return this.petToEdit.imagenUrl
+    if (!this.image64) {
+      return this.imageUrl || '';
     }
     const currentDate = Date.now();
     const file: any = this.base64ToImage(this.image64);
@@ -105,7 +105,7 @@ export class ImagePickerComponent implements OnInit {
         })
       )
       .toPromise();
-    return await downloadURL.toPromise();
+    return downloadURL.toPromise();
   }
 
   /**

@@ -8,7 +8,7 @@ import { TipoPublicacion } from './enums.model';
 export class Publicacion {
   private _id?: number;
   private _titulo: string;
-  private _imagen: string;
+  private _imagenUrl: string;
   private _descripcion: string;
   private _tag: string;
   private _tipo: TipoPublicacion;
@@ -18,7 +18,7 @@ export class Publicacion {
   static serialize(publication: Publicacion) {
     return {
       titulo: publication.titulo,
-      imagen: publication.imagen,
+      imagen: publication.imagenUrl,
       descripcion: publication.descripcion,
       tag: publication.tag || '',
       tipo_publicacion: publication.tipo,
@@ -36,7 +36,7 @@ export class Publicacion {
     publicationResult.id = publication.id;
     publicationResult.titulo = publication.titulo;
     publicationResult.descripcion = publication.descripcion;
-    publicationResult.imagen = publication.imagen;
+    publicationResult.imagenUrl = publication.imagen;
     publicationResult.tag = publication.tag;
     publicationResult.tipo = publication.tipo_publicacion;
     publicationResult.fecha = new Date(publication.fecha);
@@ -60,12 +60,12 @@ export class Publicacion {
     this._titulo = value;
   }
 
-  public get imagen(): string {
-    return this._imagen;
+  public get imagenUrl(): string {
+    return this._imagenUrl;
   }
 
-  public set imagen(value: string) {
-    this._imagen = value;
+  public set imagenUrl(value: string) {
+    this._imagenUrl = value;
   }
 
   public get descripcion(): string {
