@@ -76,7 +76,7 @@ export class AddPublicationPage implements OnInit {
     publication.fecha = new Date();
     publication.idUsuario = admin.id;
     publication.tipo = this.publicationsType;
-    publication.imagen = await this.imgPicker.upload();
+    publication.imagenUrl = await this.imgPicker.upload();
     await adminPublicacion.crearPublicacion(publication);
     this.publicationObserver.publish();
     const successMessage = this.getSuccessMessage();

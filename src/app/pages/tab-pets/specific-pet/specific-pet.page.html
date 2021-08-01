@@ -12,10 +12,12 @@
     <ion-spinner name="crescent" color="primary"></ion-spinner>
   </ion-row>
   <ng-template #loadedContent>
-    <div class="img">
+    <div *ngIf="pet.imagenUrl; else no_image">
       <img [src]="pet.imagenUrl" height="30%" width="100%" />
     </div>
-
+    <ng-template #no_image>
+      <div class="img-placeholder"></div>
+    </ng-template>
     <div class="content ion-align-self-end">
       <!--img width="80" height="80" src=""/-->
       <!--img class="fondo-mascota" src="assets/img/fondo-mascota.png" alt="no hay mascotas" height="200px" width="100%" /-->

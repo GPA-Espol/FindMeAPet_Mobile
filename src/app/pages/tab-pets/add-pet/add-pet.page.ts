@@ -85,7 +85,7 @@ export class AddPetPage implements OnInit {
     this.mascota.controls['ubicacion'].setValue(this.petToEdit.ubicacionMascota);
     this.mascota.controls['descripcion'].setValue(this.petToEdit.descripcion);
     this.mascota.controls['tipo'].setValue(this.petToEdit.tipoAnimal);
-    this.setAgeInformation()
+    this.setAgeInformation();
   }
 
   setValues(petToSend: Mascota) {
@@ -126,11 +126,11 @@ export class AddPetPage implements OnInit {
    * the system pets array.
    */
   async createPet() {
-    if (!this.imgPicker.image64) {
-      return await this.alertaService.presentToast('Por favor añada la imagen de la mascota');
-    }
     let newPet = new Mascota();
     this.setValues(newPet);
+    if (!this.imgPicker.image64 && newPet.isAdoptable) {
+      return await this.alertaService.presentToast('Por favor añada la imagen de la mascota');
+    }
     await this.alertaService.presentLoading('Creando mascota');
     try {
       newPet.imagenUrl = await this.imgPicker.upload();
@@ -164,7 +164,7 @@ export class AddPetPage implements OnInit {
     return today.toDate();
   }
 
-  setAgeInformation(){
+  setAgeInformation() {
     let information = this.getInformationAge();
 
     this.mascota.controls['years'].setValue(information.years);
