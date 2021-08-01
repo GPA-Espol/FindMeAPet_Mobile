@@ -3,12 +3,12 @@
     <ion-buttons slot="start">
       <ion-back-button> </ion-back-button>
     </ion-buttons>
-    <ion-title>Agregar mascota</ion-title>
+    <ion-title>{{mode=='anadir'?'Agregar':'Editar'}} mascota</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <app-image-picker #imgPicker></app-image-picker>
+  <app-image-picker #imgPicker [mode]="mode" [petToEdit]="petToEdit" ></app-image-picker>
   <form [formGroup]="mascota">
     <div class="ion-justify-content ion-margin-horizontal ion-margin-top">
       <div>
@@ -143,7 +143,7 @@
           <ion-checkbox slot="end" color="primary" formControlName="adoptable" mode="ios"></ion-checkbox>
         </ion-item>
       </ion-list>
-      <div>
+      <!--div>
         <ion-row class="ion-margin-start ion-margin-top">
           <ion-text color="primary"> 7. </ion-text>
           <div class="title">
@@ -168,7 +168,7 @@
             <ion-select-option value="Juguetón">Juguetón</ion-select-option>
           </ion-select>
         </ion-item>
-      </div>
+      </div-->
       <div>
         <ion-row class="ion-margin-start ion-margin-top">
           <ion-text color="primary"> 8. </ion-text>
@@ -209,8 +209,15 @@
           ></ion-textarea>
         </ion-item>
       </div>
-      <ion-col class="ion-no-ping">
-        <ion-button expand="block" fill="outline" (click)="onSubmit()" mode="ios"> Guardar </ion-button>
+      <ion-col class="ion-no-padding">
+        <ion-button
+          expand="block"
+          fill="outline"
+          (click)="mode=='anadir'? createPet() : editPet()"
+          mode="ios"
+        >
+          {{mode=='anadir'?'Guardar':'Actualizar'}}
+        </ion-button>
         <ion-button
           class="ion-margin-vertical"
           expand="block"

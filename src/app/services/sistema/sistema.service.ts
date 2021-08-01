@@ -97,6 +97,8 @@ export class SistemaService {
     return pet;
   }
 
+  
+
   public get voluntario() {
     return this._usuario as Voluntario;
   }

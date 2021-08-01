@@ -21,7 +21,13 @@ export class AdministrarMascota {
     // TODO implementar método
   }
 
-  public actualizarMascota() {
-    // TODO implementar método
+  public async actualizarMascota(id: string, mascota: Mascota) {
+    let url = environment.api + 'mascota/' + id;
+    let mascotaApi = Mascota.serialize(mascota);
+    const index = this.sistema.mascotas.findIndex((pet) => pet.id == mascota.id);
+    this.sistema.mascotas[index] = mascota;
+    await this.http.put<any[]>(url, mascotaApi).toPromise();
+
+    //this.sistema.mascotas.push(mascota);
   }
 }
