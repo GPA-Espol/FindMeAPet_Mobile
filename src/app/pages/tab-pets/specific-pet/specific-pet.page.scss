@@ -30,6 +30,10 @@
   font-size: large !important;
 }
 
+#delete-icon {
+  font-size: large !important;
+}
+
 ion-list {
   --ion-background-color: transparent !important;
 
@@ -38,6 +42,9 @@ ion-list {
   }
 }
 
+.scrollable {
+  overflow: scroll
+}
 .img-placeholder {
   height: 40%;
   width: 100%;

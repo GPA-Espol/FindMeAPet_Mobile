@@ -29,21 +29,7 @@ export class Mascota {
    */
   static deserialize(data: any[]) {
     return data.map((mascota) => {
-      let mascotaResult = new Mascota();
-      mascotaResult._id = mascota.id;
-      mascotaResult.nombre = mascota.nombre;
-      mascotaResult.fechaNacimiento = new Date(mascota.fecha_nacimiento);
-      mascotaResult.color = mascota.color;
-      mascotaResult.isEsterilizado = !!mascota.is_esterilizado;
-      mascotaResult.isAdoptable = !!mascota.is_adoptable;
-      mascotaResult.isAdoptado = !!mascota.is_adoptado;
-      mascotaResult.isCasoExterno = !!mascota.is_caso_externo;
-      mascotaResult.descripcion = mascota.descripcion;
-      mascotaResult.sexo = mascota.sexo;
-      mascotaResult.ubicacionMascota = mascota.ubicacion;
-      mascotaResult.tipoAnimal = mascota.tipo_mascota;
-      mascotaResult.imagenUrl = mascota.imagen_url;
-      return mascotaResult;
+      return this.deserializeOne(mascota);
     });
   }
 
@@ -69,7 +55,11 @@ export class Mascota {
       imagen_url: mascota.imagenUrl,
     };
   }
-
+  /**
+   * Method to synchronize the data obtained from the REST-API to the Model that we have in from a specific pet
+   * @param mascota the response object form the REST-API
+   * @returns instance of  {@link Mascota}
+   */
   static deserializeOne(mascota: any) {
     let mascotaResult = new Mascota();
     mascotaResult._id = mascota.id;

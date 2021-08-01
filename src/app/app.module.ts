@@ -15,7 +15,7 @@ import { Camera } from '@ionic-native/camera/ngx';
 import { AngularFireModule } from '@angular/fire';
 import { environment } from 'src/environments/environment';
 import { TokenInterceptorService } from './services/token-interceptor/token-interceptor.service';
-
+import { FirebaseX } from "@ionic-native/firebase-x/ngx";
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -30,6 +30,7 @@ import { TokenInterceptorService } from './services/token-interceptor/token-inte
     AngularFireModule.initializeApp(environment.firebase),
   ],
   providers: [
+    FirebaseX,
     StatusBar,
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
