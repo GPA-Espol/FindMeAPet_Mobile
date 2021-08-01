@@ -17,8 +17,11 @@ export class AdministrarMascota {
     await this.http.post<void>(url, mascotaApi).toPromise();
   }
 
-  public eliminarMascota() {
-    // TODO implementar método
+  public async eliminarMascota(id: string,) {
+    let url = environment.api + 'mascota/' + id;
+    const index = this.sistema.mascotas.findIndex((pet) => pet.id == +id);
+    this.sistema.mascotas.splice(index, 1);
+    await this.http.delete<any[]>(url).toPromise();
   }
 
   public async actualizarMascota(id: string, mascota: Mascota) {
@@ -30,4 +33,6 @@ export class AdministrarMascota {
 
     //this.sistema.mascotas.push(mascota);
   }
+
+
 }
