@@ -59,7 +59,7 @@ export class AlertaService {
     }
   }
 
-  /*async confirmationAlert(mensaje,OkHandler: Function) {
+  async confirmationAlert(mensaje,OkHandler: Function) {
     const alert = await this.alertController.create({
       cssClass: '',
       header: 'Confirmacion',
@@ -81,5 +81,5 @@ export class AlertaService {
     await alert.present();
 
     
-  }*/
+  }
 }

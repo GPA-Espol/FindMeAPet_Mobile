@@ -24,7 +24,7 @@ export class SpecificPetPage implements OnInit {
     private petObserver: PetObserverService,
     private alertaService: AlertaService,
     public alertController: AlertController,
-    private navCtrl: NavController //public modalController: ModalController
+    private navCtrl: NavController
   ) {}
 
   async ngOnInit() {
@@ -52,25 +52,9 @@ export class SpecificPetPage implements OnInit {
    * Method that displays the modal when pressing the delete button, to ask for confirmation
    */
   async modaDelete() {
-    const alert = await this.alertController.create({
-      cssClass: '',
-      header: 'Confirmacion',
-      message: 'La mascota se eliminará permanentemente',
-      buttons: [
-        {
-          text: 'Cancelar',
-          role: 'cancel',
-        },
-        {
-          text: 'Ok',
-          handler: async () => {
-            await this.deletePet();
-          },
-        },
-      ],
-    });
-
-    await alert.present();
+    const message = 'La mascota se eliminará permanentemente'
+    this.alertaService.confirmationAlert(message,this.deletePet.bind(this))
+    
   }
 
   /**
