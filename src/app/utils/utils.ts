@@ -28,4 +28,13 @@ export class Utils {
     const firstUppercase = str.charAt(0).toUpperCase();
     return firstUppercase + lower.slice(1);
   }
+
+   
+
 }
+
+export enum Mode {
+  EDITAR = 'editar',
+  ANADIR = 'anadir'
+}
+
