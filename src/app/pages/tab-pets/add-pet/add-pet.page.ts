@@ -174,14 +174,10 @@ export class AddPetPage implements OnInit {
     return today.toDate();
   }
 
-<<<<<<< HEAD
   /**
    * Method that set the age information in the form fields
    */
   setAgeInformation(){
-=======
-  setAgeInformation() {
->>>>>>> develop
     let information = this.getInformationAge();
 
     this.mascota.controls['years'].setValue(information.years);
