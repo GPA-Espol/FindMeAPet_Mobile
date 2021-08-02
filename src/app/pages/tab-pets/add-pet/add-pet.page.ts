@@ -96,7 +96,7 @@ export class AddPetPage implements OnInit {
 
   /**
    * Method that set the value of the pet object to be sent to the REST API, obtaining the information from the form
-   * @param petToSend Mascota object to set values 
+   * @param petToSend Mascota object to set values
    */
   setValues(petToSend: Mascota) {
     petToSend.nombre = this.mascota.get('nombre').value;
@@ -174,14 +174,10 @@ export class AddPetPage implements OnInit {
     return today.toDate();
   }
 
-<<<<<<< HEAD
   /**
    * Method that set the age information in the form fields
    */
-  setAgeInformation(){
-=======
   setAgeInformation() {
->>>>>>> develop
     let information = this.getInformationAge();
 
     this.mascota.controls['years'].setValue(information.years);
@@ -211,7 +207,7 @@ export class AddPetPage implements OnInit {
    * Method that provides the days between to dates
    * @param date1 Date one
    * @param date2 Date two
-   * @returns days difference of the two dates 
+   * @returns days difference of the two dates
    */
 
   diffDays(date1, date2) {
@@ -222,6 +218,6 @@ export class AddPetPage implements OnInit {
     }
     const prevMonth = moment(date1).subtract(1, 'month').toDate();
     const daysInPrevMonth = new Date(prevMonth.getFullYear(), prevMonth.getMonth() + 1, 0).getDate();
-    return daysInPrevMonth - day2 + day1; 
+    return daysInPrevMonth - day2 + day1;
   }
 }
