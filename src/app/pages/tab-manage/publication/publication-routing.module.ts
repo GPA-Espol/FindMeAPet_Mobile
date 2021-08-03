@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { Mode } from 'src/app/utils/utils';
 
 import { PublicationPage } from './publication.page';
 
@@ -9,12 +10,12 @@ const routes: Routes = [
     component: PublicationPage,
   },
   {
-    path: 'agregar',
+    path: Mode.ANADIR,
     loadChildren: () =>
       import('./add-publication/add-publication.module').then((m) => m.AddPublicationPageModule),
   },
   {
-    path: 'editar/:id',
+    path: Mode.EDITAR+'/:id',
     loadChildren: () =>
       import('./add-publication/add-publication.module').then((m) => m.AddPublicationPageModule),
   },

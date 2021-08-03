@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { AlertController } from '@ionic/angular';
+import { Subscription } from 'rxjs';
 import { Publicacion } from 'src/app/model/publicacion.model';
 import { PublicationObserverService } from 'src/app/observables/publication-observer.service';
 import { AlertaService } from 'src/app/services/alerta/alerta.service';
@@ -14,6 +15,7 @@ export class ManageCardComponent implements OnInit {
   DISPLAY_TEXT_MAX_LENGTH = 200;
   display_description: string;
   @Input() publicacion: Publicacion;
+  private publicationSubscription: Subscription;
   constructor(
     private alertController: AlertController,
     private sistema: SistemaService,
@@ -23,6 +25,9 @@ export class ManageCardComponent implements OnInit {
 
   ngOnInit() {
     this.truncateText();
+    this.publicationSubscription = this.publicationObserver.getObservable().subscribe(() => {
+      this.truncateText();
+    });
   }
 
   private truncateText() {
@@ -65,5 +70,9 @@ export class ManageCardComponent implements OnInit {
       this.alert.presentToast('Ha ocurrido un error al eliminar.');
     }
     this.alert.dismissLoading();
+  }
+
+  ngOnDestroy() {
+    this.publicationSubscription.unsubscribe();
   }
 }

@@ -82,6 +82,10 @@ export class Mascota {
     return this._id;
   }
 
+  public set id(value: number) {
+    this._id = value;
+  }
+
   public get nombre(): string {
     return this._nombre;
   }
