@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import * as moment from 'moment';
 
 /**
  * Service class in charge to provide some utilities functions to the system.
@@ -28,13 +29,42 @@ export class Utils {
     const firstUppercase = str.charAt(0).toUpperCase();
     return firstUppercase + lower.slice(1);
   }
+  /**
+   * Method that provides the days between to dates
+   * @param date1 Date one
+   * @param date2 Date two
+   * @returns days difference of the two dates
+   */
 
-   
+  static diffDays(date1, date2) {
+    const day1 = date1.getDate();
+    const day2 = date2.getDate();
+    if (day1 >= day2) {
+      return day1 - day2;
+    }
+    const prevMonth = moment(date1).subtract(1, 'month').toDate();
+    const daysInPrevMonth = new Date(prevMonth.getFullYear(), prevMonth.getMonth() + 1, 0).getDate();
+    return daysInPrevMonth - day2 + day1;
+  }
 
+  /**
+   * Method the age in years, month and days units
+   * @returns Object that contains age information in the attributes 'years', 'months', 'days'
+   */
+  static getInformationAge(fecha: Date) {
+    let today = moment(new Date());
+    let birthdate = moment();
+    const days = Utils.diffDays(new Date(),fecha);
+    const years = today.diff(birthdate, 'years');
+    today.add(-years, 'years');
+    const months = today.diff(birthdate, 'months');
+    today.add(-months, 'months');
+
+    return { years: years, months: months, days: days };
+  }
 }
 
 export enum Mode {
   EDITAR = 'editar',
-  ANADIR = 'anadir'
+  ANADIR = 'anadir',
 }
-
