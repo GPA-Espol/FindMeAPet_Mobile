@@ -6,10 +6,12 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Mascota } from 'src/app/model/mascota.model';
 import * as moment from 'moment';
 import { Administrador } from 'src/app/model/admin/administrador.model';
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ImagePickerComponent } from 'src/app/components/image-picker/image-picker.component';
 import { PetObserverService } from 'src/app/observables/pet-observer.service';
+import { Voluntario } from 'src/app/model/voluntario.model';
+import { RolUsuario } from 'src/app/model/enums.model';
+import { Mode } from 'src/app/utils/utils';
 
 /**
  * Component in charge of the behaviour of the add-pet page
@@ -28,6 +30,7 @@ export class AddPetPage implements OnInit {
   ageType: string = '';
   mascota: FormGroup;
   administrador: Administrador;
+  voluntario: Voluntario;
 
   @ViewChild('imgPicker') imgPicker: ImagePickerComponent;
   constructor(
@@ -40,19 +43,16 @@ export class AddPetPage implements OnInit {
     private petObserver: PetObserverService
   ) {}
 
-  /**
-   * Method that sets the page mode to edit o to anadir. The page funcionality is based on this mode.
-   */
-  setMode() {
-    let route = this.router.url;
-    let array = route.split('/');
-    let end = array[array.length - 1];
-    this.mode = end == 'anadir' ? end : 'editar';
-    console.log(this.mode);
+  ngOnInit() {
+    this.buildPetForm();
+    this.setMode();
+    this.createUser();
   }
 
-  ngOnInit() {
-    this.setMode();
+  /**
+   * Method that build the form for the pet based on the model
+   */
+  buildPetForm() {
     this.mascota = this.formBuilder.group({
       nombre: ['', Validators.required],
       color: ['', Validators.required],
@@ -69,9 +69,30 @@ export class AddPetPage implements OnInit {
       days: '',
       image: '',
     });
-    this.administrador = this.sistema.admin;
-    if (this.mode == 'editar') {
+  }
+
+  /**
+   * Method that sets the page mode to edit o to anadir. The page funcionality is based on this mode.
+   */
+  setMode() {
+    let route = this.router.url;
+    let array = route.split('/');
+    let end = array[array.length - 1];
+    this.mode = end == 'anadir' ? Mode.ANADIR : Mode.EDITAR;
+    if (this.mode == Mode.EDITAR) {
       this.getData();
+    }
+  }
+
+  /**
+   * Method that create the user (admin or voluntario) to perform specific functions in the page
+   */
+  async createUser() {
+    let userLogged = await this.sistema.userLoggedIn();
+    if (userLogged.rol == RolUsuario.VOLUNTARIO) {
+      this.voluntario = this.sistema.voluntario;
+    } else {
+      this.administrador = this.sistema.admin;
     }
   }
 
@@ -113,43 +134,72 @@ export class AddPetPage implements OnInit {
   }
 
   /**
-   *  Handler that pushes the pet to the api for it to update it
+   *  Handler that pushes the pet to the REST-API for it to update it
    */
   async editPet() {
+    const loaddingMessage = this.administrador
+      ? 'Actualizando mascota'
+      : 'Enviando solicitud de actualización';
+    const succesMessage = this.administrador ? 'La mascota ha sido editada' : 'La solicitud ha sido enviada';
+    const errorMessage = this.administrador ? 'Error al editar mascota' : 'Error al enviar solicitud';
     this.setValues(this.petToEdit);
     this.petObserver.publish(this.petToEdit);
-    await this.alertaService.presentLoading('Actualizando mascota');
+    await this.alertaService.presentLoading(loaddingMessage);
     try {
       this.petToEdit.imagenUrl = await this.imgPicker.upload();
-      await this.administrador.adminMascota.actualizarMascota(this.idPet, this.petToEdit);
-      this.goback();
-      await this.alertaService.presentToast('La mascota ha sido editada');
+      if (this.administrador) {
+        console.log('no deberia entrar aqui');
+
+        await this.administrador.adminMascota.actualizarMascota(this.idPet, this.petToEdit);
+      } else {
+        await this.voluntario.hacerSolicitudActualizacionMascota();
+        this.goback();
+      }
+      
+      await this.alertaService.presentToast(succesMessage);
     } catch (err) {
-      console.error('Error al editar mascota: ', err);
-      this.alertaService.presentToast('Error al editar mascota, por favor intente de nuevo' + err);
+      this.alertaService.presentToast(errorMessage + ', por favor intente de nuevo' + err);
     }
     this.alertaService.dismissLoading();
   }
 
+  async onSubmit() {
+    if (this.voluntario) {
+      await this.modalVoluntarioConfirmation();
+    } else {
+      if (this.mode == Mode.EDITAR) {
+        this.editPet;
+      } else {
+        this.createPet();
+      }
+    }
+  }
+
   /**
-   * Handler that pushes the new pet to the api and adds it to
+   * Handler that pushes the new pet to the REST-API and adds it to
    * the system pets array.
    */
   async createPet() {
+    const loaddingMessage = this.administrador ? 'Creando mascota' : 'Enviando solicitud de creación';
+    const succesMessage = this.administrador ? 'La mascota ha sido agregada' : 'La solicitud ha sido enviada';
+    const errorMessage = this.administrador ? 'Error al agregar mascota' : 'Error al enviar solicitud';
     let newPet = new Mascota();
     this.setValues(newPet);
     if (!this.imgPicker.image64 && newPet.isAdoptable) {
       return await this.alertaService.presentToast('Por favor añada la imagen de la mascota');
     }
-    await this.alertaService.presentLoading('Creando mascota');
+    await this.alertaService.presentLoading(loaddingMessage);
     try {
       newPet.imagenUrl = await this.imgPicker.upload();
-      await this.administrador.adminMascota.crearMascota(newPet);
+      if (this.administrador) {
+        await this.administrador.adminMascota.crearMascota(newPet);
+      } else {
+        await this.voluntario.hacerSolicitudCreacionMascota();
+      }
       this.goback();
-      await this.alertaService.presentToast('La mascota ha sido agregada');
+      await this.alertaService.presentToast(succesMessage);
     } catch (err) {
-      console.error('Error al crear mascota: ', err);
-      this.alertaService.presentToast('Error al guardar mascota, por favor intente de nuevo' + err);
+      this.alertaService.presentToast(errorMessage + ', por favor intente de nuevo' + err);
     }
     this.alertaService.dismissLoading();
   }
@@ -219,5 +269,19 @@ export class AddPetPage implements OnInit {
     const prevMonth = moment(date1).subtract(1, 'month').toDate();
     const daysInPrevMonth = new Date(prevMonth.getFullYear(), prevMonth.getMonth() + 1, 0).getDate();
     return daysInPrevMonth - day2 + day1;
+  }
+
+  async modalVoluntarioConfirmation() {
+    if (this.mode == Mode.EDITAR) {
+      const messageEdit =
+        'Se enviará una notifiación al administrador para que acepte su solicitud de editar mascota';
+      await this.alertaService.confirmationAlert(messageEdit, this.editPet.bind(this));
+      console.log("aaaaa");
+      
+    } else {
+      const messageAdd =
+        'Se enviará una notifiación al administrador para que acepte su solicitud de agregar mascota';
+      await this.alertaService.confirmationAlert(messageAdd, this.createPet.bind(this));
+    }
   }
 }

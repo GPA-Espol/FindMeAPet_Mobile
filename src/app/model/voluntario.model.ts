@@ -31,8 +31,16 @@ export class Voluntario extends UsuarioGPA {
   }
 
   public hacerSolicitudActualizacionMascota() {
+    console.log('se envió la solicitud');
+    
     // TODO implementar método
   }
+
+  public hacerSolicitudCreacionMascota() {
+    console.log('se envió la solicitud');
+    // TODO implementar método
+  }
+
 
   public agregarReporteAsistencia() {
     // TODO implementar método

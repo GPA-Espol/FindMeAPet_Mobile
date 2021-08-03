@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { AlertController, ModalController, NavController } from '@ionic/angular';
 import { Subscription } from 'rxjs';
 import { Administrador } from 'src/app/model/admin/administrador.model';
+import { RolUsuario } from 'src/app/model/enums.model';
 import { Mascota } from 'src/app/model/mascota.model';
 import { PetObserverService } from 'src/app/observables/pet-observer.service';
 import { AlertaService } from 'src/app/services/alerta/alerta.service';
@@ -31,7 +32,7 @@ export class SpecificPetPage implements OnInit {
     this.loading = true;
     await this.getPetPage();
     this.petSubscription = this.petObserver.getObservable().subscribe((mascota) => (this.pet = mascota));
-    this.administrador = this.sistema.admin;
+    this.createUser();
     this.loading = false;
   }
 
@@ -49,12 +50,21 @@ export class SpecificPetPage implements OnInit {
   }
 
   /**
+   * Method that create the user (admin or voluntario) to perform specific functions in the page
+   */
+  async createUser() {
+    let userLogged = await this.sistema.userLoggedIn();
+    if (userLogged.rol == RolUsuario.ADMIN) {
+      this.administrador = this.sistema.admin;
+    }
+  }
+
+  /**
    * Method that displays the modal when pressing the delete button, to ask for confirmation
    */
   async modaDelete() {
-    const message = 'La mascota se eliminará permanentemente'
-    this.alertaService.confirmationAlert(message,this.deletePet.bind(this))
-    
+    const message = 'La mascota se eliminará permanentemente';
+    this.alertaService.confirmationAlert(message, this.deletePet.bind(this));
   }
 
   /**
