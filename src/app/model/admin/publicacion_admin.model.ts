@@ -24,6 +24,10 @@ export class AdministrarPublicacion {
   }
 
   public async verPublicacion(publicationId: number) {
+    if (!Utils.cacheExpired(this.publicaciones.time)) {
+      const publication = this.publicaciones.data.find((pub) => pub.id == publicationId);
+      if (publication) return publication;
+    }
     const url = `${this.url}/${publicationId}`;
     const res = await this.http.get<any>(url).toPromise();
     return Publicacion.deserialize_one(res);

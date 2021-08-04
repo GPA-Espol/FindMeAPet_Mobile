@@ -15,9 +15,13 @@ const routes: Routes = [
       import('./add-publication/add-publication.module').then((m) => m.AddPublicationPageModule),
   },
   {
-    path: Mode.EDITAR+'/:id',
+    path: Mode.EDITAR + '/:id',
     loadChildren: () =>
       import('./add-publication/add-publication.module').then((m) => m.AddPublicationPageModule),
+  },
+  {
+    path: 'informacion/:id',
+    loadChildren: () => import('./specific-pub/specific-pub.module').then((m) => m.SpecificPubPageModule),
   },
 ];
 

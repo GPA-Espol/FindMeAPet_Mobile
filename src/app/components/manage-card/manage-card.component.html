@@ -1,4 +1,4 @@
-<ion-card mode="ios">
+<ion-card mode="ios" [routerLink]="['informacion', publicacion.id]">
   <div class="card-container">
     <div *ngIf="publicacion.imagenUrl" class="image-container">
       <img [src]="publicacion.imagenUrl" alt="imagen publicación" />
@@ -8,14 +8,7 @@
       <div class="description">
         {{ display_description }}
       </div>
-      <div class="actions">
-        <div class="icon-button edit" tappable routerLink="editar/{{ publicacion.id }}">
-          <ion-icon name="pencil-outline"></ion-icon>
-        </div>
-        <div class="icon-button delete" tappable (click)="delete()">
-          <ion-icon name="trash-outline"></ion-icon>
-        </div>
-      </div>
+      <div class="footer"><b>Publicada: </b> {{ publicacion.fecha | dateFormat }}</div>
     </div>
   </div>
 </ion-card>

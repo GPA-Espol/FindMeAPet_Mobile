@@ -16,12 +16,7 @@ export class ManageCardComponent implements OnInit {
   display_description: string;
   @Input() publicacion: Publicacion;
   private publicationSubscription: Subscription;
-  constructor(
-    private alertController: AlertController,
-    private sistema: SistemaService,
-    private alert: AlertaService,
-    private publicationObserver: PublicationObserverService
-  ) {}
+  constructor(private publicationObserver: PublicationObserverService) {}
 
   ngOnInit() {
     this.truncateText();
@@ -39,7 +34,7 @@ export class ManageCardComponent implements OnInit {
     }
   }
 
-  async delete() {
+  /*async delete() {
     const alert = await this.alertController.create({
       header: '¡Espera!',
       message: '¿Estás seguro que deseas eliminar esta publicación?',
@@ -70,7 +65,7 @@ export class ManageCardComponent implements OnInit {
       this.alert.presentToast('Ha ocurrido un error al eliminar.');
     }
     this.alert.dismissLoading();
-  }
+  }*/
 
   ngOnDestroy() {
     this.publicationSubscription.unsubscribe();
