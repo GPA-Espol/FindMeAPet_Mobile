@@ -1,22 +1,25 @@
 <ion-content>
-  <div class="top-div">
-    <h1 class="title ion-no-margin">Mi perfil</h1>
+  <ion-grid>
+    <div class="top-row ion-padding">
+      <h1 class="title ion-no-margin">Mi perfil</h1>
+      <ion-row class="ion-justify-content-center ion-align-items-center profile-row" >
+        <ion-col size="auto" class="ion-text-center">
+          
 
-    <ion-row class="personalized-flex">
-      <ion-avatar class="item-avatar">
-        <img src="https://www.seekpng.com/png/detail/110-1100707_person-avatar-placeholder.png" />
-      </ion-avatar>
-      <h3 class="name ion-no-margin">Andrea Lopez</h3>
+          <ion-avatar class="item-avatar" style="margin: auto;">
+            <img src="https://www.seekpng.com/png/detail/110-1100707_person-avatar-placeholder.png" />
+          </ion-avatar>
+          <h3 class="name ion-no-margin">Andrea Lopez</h3>
 
-      <h3 class="ion-no-margin ion-no-padding">Estado</h3>
-      <ion-chip class="state-chip">
-        <ion-label>No disponible</ion-label>
-      </ion-chip>
-    </ion-row>
-  </div>
-  <div class="bottom-div-bg">
-    <div class="bottom-div ion-padding-start">
-      <h1 class="title ion-no-margin">Información</h1>
+          <h3 >Estado</h3>
+          <ion-chip class="state-chip  ion-margin-end">
+            <ion-label>No disponible</ion-label>
+          </ion-chip>
+        </ion-col>
+      </ion-row>
     </div>
-  </div>
+    <div class="div-bg">
+      <ion-row class="bottom-row ion-padding"> <h1 class="title ion-no-margin">Informacion</h1> </ion-row>
+    </div>
+  </ion-grid>
 </ion-content>
