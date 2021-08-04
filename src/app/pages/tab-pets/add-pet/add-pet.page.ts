@@ -11,7 +11,7 @@ import { ImagePickerComponent } from 'src/app/components/image-picker/image-pick
 import { PetObserverService } from 'src/app/observables/pet-observer.service';
 import { Voluntario } from 'src/app/model/voluntario.model';
 import { RolUsuario } from 'src/app/model/enums.model';
-import { Mode } from 'src/app/utils/utils';
+import { Mode, Utils } from 'src/app/utils/utils';
 
 /**
  * Component in charge of the behaviour of the add-pet page
@@ -148,14 +148,12 @@ export class AddPetPage implements OnInit {
     try {
       this.petToEdit.imagenUrl = await this.imgPicker.upload();
       if (this.administrador) {
-        console.log('no deberia entrar aqui');
-
         await this.administrador.adminMascota.actualizarMascota(this.idPet, this.petToEdit);
       } else {
         await this.voluntario.hacerSolicitudActualizacionMascota();
-        this.goback();
+        
       }
-      
+      this.goback();
       await this.alertaService.presentToast(succesMessage);
     } catch (err) {
       this.alertaService.presentToast(errorMessage + ', por favor intente de nuevo' + err);
@@ -168,7 +166,7 @@ export class AddPetPage implements OnInit {
       await this.modalVoluntarioConfirmation();
     } else {
       if (this.mode == Mode.EDITAR) {
-        this.editPet;
+        this.editPet();
       } else {
         this.createPet();
       }
@@ -228,59 +226,22 @@ export class AddPetPage implements OnInit {
    * Method that set the age information in the form fields
    */
   setAgeInformation() {
-    let information = this.getInformationAge();
-
+    let information = Utils.getInformationAge(this.petToEdit.fechaNacimiento);
     this.mascota.controls['years'].setValue(information.years);
     this.mascota.controls['months'].setValue(information.months);
     this.mascota.controls['days'].setValue(information.days);
   }
 
-  /**
-   * Method the age in years, month and days units
-   * @returns Object that contains age information in the attributes 'years', 'months', 'days'
-   */
-  getInformationAge() {
-    let today = moment(new Date());
-    let birthdate = moment(this.petToEdit.fechaNacimiento);
-    console.log(birthdate);
-    var days = this.diffDays(new Date(), this.petToEdit.fechaNacimiento);
-
-    var years = today.diff(birthdate, 'years');
-    today.add(-years, 'years');
-    var months = today.diff(birthdate, 'months');
-    today.add(-months, 'months');
-
-    return { years: years, months: months, days: days };
-  }
-
-  /**
-   * Method that provides the days between to dates
-   * @param date1 Date one
-   * @param date2 Date two
-   * @returns days difference of the two dates
-   */
-
-  diffDays(date1, date2) {
-    const day1 = date1.getDate();
-    const day2 = date2.getDate();
-    if (day1 >= day2) {
-      return day1 - day2;
-    }
-    const prevMonth = moment(date1).subtract(1, 'month').toDate();
-    const daysInPrevMonth = new Date(prevMonth.getFullYear(), prevMonth.getMonth() + 1, 0).getDate();
-    return daysInPrevMonth - day2 + day1;
-  }
 
   async modalVoluntarioConfirmation() {
     if (this.mode == Mode.EDITAR) {
       const messageEdit =
-        'Se enviará una notifiación al administrador para que acepte su solicitud de editar mascota';
+        'Se notificará al administrador para que acepte su solicitud de editar mascota';
       await this.alertaService.confirmationAlert(messageEdit, this.editPet.bind(this));
-      console.log("aaaaa");
       
     } else {
       const messageAdd =
-        'Se enviará una notifiación al administrador para que acepte su solicitud de agregar mascota';
+        'Se notificará al administrador para que acepte su solicitud de agregar mascota';
       await this.alertaService.confirmationAlert(messageAdd, this.createPet.bind(this));
     }
   }
