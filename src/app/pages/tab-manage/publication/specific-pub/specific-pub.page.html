@@ -24,7 +24,13 @@
           <ion-button expand="block" routerLink="../../editar/{{publication.id}}" mode="ios">
             Editar {{publication.tipo.toLowerCase()}}
           </ion-button>
-          <ion-button class="ion-margin-vertical" expand="block" color="danger" mode="ios">
+          <ion-button
+            class="ion-margin-vertical"
+            expand="block"
+            color="danger"
+            mode="ios"
+            (click)="modalDelete()"
+          >
             Eliminar {{publication.tipo.toLowerCase()}}
           </ion-button>
         </ion-col>

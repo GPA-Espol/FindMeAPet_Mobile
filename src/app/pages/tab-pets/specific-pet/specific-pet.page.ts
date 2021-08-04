@@ -64,7 +64,7 @@ export class SpecificPetPage implements OnInit {
    */
   async modaDelete() {
     const message = 'La mascota se eliminará permanentemente';
-    this.alertaService.confirmationAlert(message, this.deletePet.bind(this));
+    await this.alertaService.confirmationAlert(message, this.deletePet.bind(this));
   }
 
   /**
