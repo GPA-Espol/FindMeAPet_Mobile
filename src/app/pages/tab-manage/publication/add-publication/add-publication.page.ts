@@ -8,7 +8,7 @@ import { Publicacion } from 'src/app/model/publicacion.model';
 import { PublicationObserverService } from 'src/app/observables/publication-observer.service';
 import { AlertaService } from 'src/app/services/alerta/alerta.service';
 import { SistemaService } from 'src/app/services/sistema/sistema.service';
-import { Utils } from 'src/app/utils/utils';
+import { Mode, Utils } from 'src/app/utils/utils';
 
 @Component({
   selector: 'app-add-publication',
@@ -19,7 +19,7 @@ export class AddPublicationPage implements OnInit {
   publicationForm: FormGroup;
   photoUrl: string;
   publicationsType: TipoPublicacion;
-  actionType: string;
+  mode: Mode;
   pubToEdit: Publicacion;
   loading = true;
   @ViewChild('imgPicker') imgPicker: ImagePickerComponent;
@@ -39,7 +39,7 @@ export class AddPublicationPage implements OnInit {
   }
 
   private buildForm() {
-    if (this.actionType == 'Agregar') {
+    if (this.mode == Mode.ANADIR) {
       this.publicationForm = this.formBuilder.group({
         title: ['', Validators.required],
         description: ['', Validators.required],
@@ -54,7 +54,7 @@ export class AddPublicationPage implements OnInit {
 
   async submitPublication() {
     try {
-      if (this.actionType == 'Agregar') {
+      if (this.mode == Mode.ANADIR) {
         await this.saveNewPublication();
       } else {
         await this.updatePublication();
@@ -91,6 +91,7 @@ export class AddPublicationPage implements OnInit {
     this.pubToEdit.titulo = this.publicationForm.get('title').value;
     this.pubToEdit.descripcion = this.publicationForm.get('description').value;
     await adminPublicacion.actualizarPublicacion(this.pubToEdit);
+    this.publicationObserver.publish();
     const successMessage = this.getSuccessMessage();
     this.alert.presentToast(successMessage);
     this.alert.dismissLoading();
@@ -103,8 +104,8 @@ export class AddPublicationPage implements OnInit {
     const urlLength = currentUrlList.length;
     const lastSegment = currentUrlList[urlLength - 1];
     let actionType = lastSegment;
-    let publicationType: string;
-    if (lastSegment == 'agregar') {
+    let publicationType: any;
+    if (lastSegment == Mode.ANADIR) {
       publicationType = currentUrlList[urlLength - 2];
     } else {
       const pubId = +currentUrlList[urlLength - 1];
@@ -112,7 +113,7 @@ export class AddPublicationPage implements OnInit {
       actionType = currentUrlList[urlLength - 2];
       publicationType = currentUrlList[urlLength - 3];
     }
-    this.actionType = Utils.capitalize(actionType);
+    this.mode = <Mode>actionType;
     this.publicationsType = <TipoPublicacion>publicationType;
   }
 

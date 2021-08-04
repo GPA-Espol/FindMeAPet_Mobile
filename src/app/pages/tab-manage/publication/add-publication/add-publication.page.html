@@ -3,7 +3,7 @@
     <ion-buttons slot="start">
       <ion-back-button> </ion-back-button>
     </ion-buttons>
-    <ion-title>{{actionType + " " + publicationsType}}</ion-title>
+    <ion-title>{{mode=='anadir'?'Agregar':'Editar'}} {{publicationsType}}</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -19,32 +19,23 @@
             <ion-input type="text" size="10" placeholder="Título" formControlName="title"></ion-input>
           </ion-item>
         </div>
-        <app-image-picker
-          #imgPicker
-          [mode]='actionType=="Agregar"?"anadir":"editar"'
-          [imageUrl]="pubToEdit?.imagenUrl"
-        ></app-image-picker>
+        <app-image-picker #imgPicker [mode]="mode" [imageUrl]="pubToEdit?.imagenUrl"></app-image-picker>
         <div class="ion-margin-top ion-padding-top">
           <ion-item lines="none" class="ion-margin-horizontal">
             <ion-textarea rows="6" placeholder="Descripción..." formControlName="description"></ion-textarea>
           </ion-item>
         </div>
       </form>
-      <ion-col class="ion-no-padding">
-        <ion-button expand="block" fill="outline" (click)="submitPublication()" mode="ios">
-          Guardar
-        </ion-button>
-        <ion-button
-          class="ion-margin-vertical"
-          expand="block"
-          fill="outline"
-          color="medium"
-          (click)="goback()"
-          mode="ios"
-        >
-          Cancelar
-        </ion-button>
-      </ion-col>
+      <ion-row class="ion-justify-content-center">
+        <ion-col size="10">
+          <ion-button expand="block" (click)="submitPublication()" mode="ios">
+            {{mode=='anadir'?'Guardar':'Actualizar'}}
+          </ion-button>
+          <ion-button class="ion-margin-vertical" expand="block" color="medium" (click)="goback()" mode="ios">
+            Cancelar
+          </ion-button>
+        </ion-col>
+      </ion-row>
     </div>
   </ng-template>
 </ion-content>
