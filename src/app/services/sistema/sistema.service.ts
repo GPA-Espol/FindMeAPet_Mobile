@@ -73,7 +73,6 @@ export class SistemaService {
     if (forceReload || !this._mascotas || Utils.cacheExpired(this._mascotas.time)) {
       let data = await this.http.get<any[]>(url).toPromise();
       let now = new Date().getTime();
-      console.log(data);
       this._mascotas = { data: Mascota.deserialize(data), time: now };
     }
     return this._mascotas.data;
