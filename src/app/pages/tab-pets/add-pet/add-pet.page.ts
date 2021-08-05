@@ -215,11 +215,13 @@ export class AddPetPage implements OnInit {
    * @return {Date} The calculated date of its birth date.
    */
   getBirthDate() {
-    let today = moment(new Date());
-    today.subtract(this.mascota.get('years').value, 'years');
-    today.subtract(this.mascota.get('months').value, 'months');
-    today.subtract(this.mascota.get('days').value, 'days');
-    return today.toDate();
+    const now = new Date();
+    now.setUTCHours(0,0,0);
+    let birthDate = moment(now);
+    birthDate.subtract(this.mascota.get('years').value, 'years');
+    birthDate.subtract(this.mascota.get('months').value, 'months');
+    birthDate.subtract(this.mascota.get('days').value, 'days');    
+    return birthDate.toDate();
   }
 
   /**

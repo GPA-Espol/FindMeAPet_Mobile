@@ -52,14 +52,15 @@ export class Utils {
    * @returns Object that contains age information in the attributes 'years', 'months', 'days'
    */
   static getInformationAge(fecha: Date) {
-    let today = moment(new Date());
-    let birthdate = moment();
-    const days = Utils.diffDays(new Date(),fecha);
+    const now = new Date();
+    now.setUTCHours(0,0,0);
+    const today = moment(now);
+    const birthdate = moment(fecha);
+    const days = Utils.diffDays(now,fecha);
     const years = today.diff(birthdate, 'years');
     today.add(-years, 'years');
     const months = today.diff(birthdate, 'months');
     today.add(-months, 'months');
-
     return { years: years, months: months, days: days };
   }
 }

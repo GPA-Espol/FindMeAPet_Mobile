@@ -40,9 +40,11 @@ export class Mascota {
    * @returns {any} Object with the fields compatible with the API
    */
   static serialize(mascota: Mascota) {
+    const birthDateISOString = mascota._fechaNacimiento.toISOString();
+    const date = birthDateISOString.split("T")[0];
     return {
       nombre: mascota.nombre,
-      fecha_nacimiento: moment(mascota.fechaNacimiento).format('YYYY-MM-DD'),
+      fecha_nacimiento: date,
       color: mascota.color,
       is_esterilizado: mascota.isEsterilizado ? 1 : 0,
       is_adoptado: mascota.isAdoptado ? 1 : 0,
