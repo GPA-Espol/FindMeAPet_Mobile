@@ -18,14 +18,14 @@ export class AdministrarMascota {
     mascota.id = id;
   }
 
-  public async eliminarMascota(id: string) {
+  public async eliminarMascota(id: number) {
     let url = environment.api + 'mascota/' + id;
     const index = this.sistema.mascotas.findIndex((pet) => pet.id == +id);
     this.sistema.mascotas.splice(index, 1);
     await this.http.delete<any[]>(url).toPromise();
   }
 
-  public async actualizarMascota(id: string, mascota: Mascota) {
+  public async actualizarMascota(id: number, mascota: Mascota) {
     let url = environment.api + 'mascota/' + id;
     let mascotaApi = Mascota.serialize(mascota);
     const index = this.sistema.mascotas.findIndex((pet) => pet.id == mascota.id);

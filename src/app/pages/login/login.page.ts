@@ -65,6 +65,10 @@ export class LoginPage implements OnInit {
     this.alertaService.dismissLoading();
   }
 
+  /**
+   * get the Login form grout
+   * @returns {FormGroup} The form group of the page
+   */
   public get loginForm() {
     return this._loginForm;
   }

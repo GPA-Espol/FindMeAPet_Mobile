@@ -24,7 +24,7 @@ import { Mode, Utils } from 'src/app/utils/utils';
 })
 export class AddPetPage implements OnInit {
   public mode: string = '';
-  idPet: string;
+  idPet: number;
   petToEdit: Mascota;
   extraInformation: boolean = false;
   ageType: string = '';
@@ -100,7 +100,7 @@ export class AddPetPage implements OnInit {
    * Method that set values to the form fields of the pet to edit
    */
   async getData() {
-    this.idPet = this.route.snapshot.paramMap.get('id');
+    this.idPet = +this.route.snapshot.paramMap.get('id');
     this.petToEdit = await this.sistema.getMascotabyId(this.idPet);
     this.mascota.controls['nombre'].setValue(this.petToEdit.nombre);
     this.mascota.controls['color'].setValue(this.petToEdit.color);
