@@ -4,9 +4,13 @@ import { Camera, CameraOptions, PictureSourceType } from '@ionic-native/camera/n
 import { ActionSheetController } from '@ionic/angular';
 import { Observable } from 'rxjs';
 import { finalize } from 'rxjs/operators';
-import { Mascota } from 'src/app/model/mascota.model';
 import { AlertaService } from 'src/app/services/alerta/alerta.service';
 
+/**
+ * Component that takes a photo whether from the camara, or local storage
+ * and it can upload to Firebase Server to get a sharable link.
+ * @category Components
+ */
 @Component({
   selector: 'app-image-picker',
   templateUrl: './image-picker.component.html',

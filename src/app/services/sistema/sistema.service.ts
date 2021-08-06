@@ -78,6 +78,10 @@ export class SistemaService {
     return this._mascotas.data;
   }
 
+  /**
+   * Method that create a new user in the system depending on
+   * the role that the backend sent when the user logged in.
+   */
   public async crearUsuario() {
     if (!this._usuario) {
       let usuario = await this.userLoggedIn();
@@ -90,23 +94,36 @@ export class SistemaService {
     }
   }
 
-  public async getMascotabyId(id: string) {
+  /**
+   * Consult a pet given by its id to the backend, and format it
+   * to a System Mascota instance
+   * @param {number} id The id of the pet
+   * @returns {Mascota} The pet instance mapped from the backend response
+   */
+  public async getMascotabyId(id: number) {
     let url = environment.api + 'mascota/' + id;
     let data = await this.http.get<any[]>(url).toPromise();
     let pet = Mascota.deserializeOne(data);
     return pet;
   }
-
   
-
+  /**
+   * Get the user logged in as a Voluntario instance
+   */
   public get voluntario() {
     return this._usuario as Voluntario;
   }
 
+  /**
+   * Get the user logged in as an Administrador instance
+   */
   public get admin() {
     return this._usuario as Administrador;
   }
 
+  /**
+   * Get the pets that have been cached in the system
+   */
   public get mascotas() {
     return this._mascotas.data;
   }

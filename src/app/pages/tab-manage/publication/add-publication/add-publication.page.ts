@@ -10,6 +10,11 @@ import { AlertaService } from 'src/app/services/alerta/alerta.service';
 import { SistemaService } from 'src/app/services/sistema/sistema.service';
 import { Mode, Utils } from 'src/app/utils/utils';
 
+/**
+ * Class in charge of the adition and updating of a given publication 
+ * of a given type that depends on the active route
+ * @category Components
+ */
 @Component({
   selector: 'app-add-publication',
   templateUrl: './add-publication.page.html',
@@ -38,6 +43,16 @@ export class AddPublicationPage implements OnInit {
     this.loading = false;
   }
 
+  /**
+   * Build the FormGroup of the publication, if adding a new publication
+   * the form properties will be initialized empty, but if updating a 
+   * publication the form properties will be initialized with the last
+   * publication info.
+   * The form will have the following fields:
+   *   - title: the title of the publication
+   *   - description: the body of the publication
+   * The image is not defined here since the way it is saved is different
+   */
   private buildForm() {
     if (this.mode == Mode.ANADIR) {
       this.publicationForm = this.formBuilder.group({
@@ -52,6 +67,10 @@ export class AddPublicationPage implements OnInit {
     }
   }
 
+  /**
+   * Method that handle the submit event of the publication, and 
+   * handle errors
+   */
   async submitPublication() {
     try {
       if (this.mode == Mode.ANADIR) {
@@ -66,6 +85,10 @@ export class AddPublicationPage implements OnInit {
     }
   }
 
+  /**
+   * Gather the information from the form group and the url of the
+   * image to build a new publication that will be saved on the system.
+   */
   private async saveNewPublication() {
     await this.alert.presentLoading('Guardando...');
     const admin = this.sistema.admin;
@@ -85,6 +108,10 @@ export class AddPublicationPage implements OnInit {
     this.goback();
   }
 
+  /**
+   * Gather the information from the form group and the url of the
+   * image to update a publication of the system.
+   */
   private async updatePublication() {
     await this.alert.presentLoading('Guardando...');
     const { adminPublicacion } = this.sistema.admin;
@@ -98,6 +125,11 @@ export class AddPublicationPage implements OnInit {
     this.goback();
   }
 
+  /**
+   * Set the publication info such as if the view will add or update
+   * a publication, and the publication type. Getting all this from
+   * the active route.
+   */
   private async setPublicationsInfo() {
     const currentUrl = this.router.url;
     const currentUrlList = currentUrl.split('/');
@@ -117,6 +149,11 @@ export class AddPublicationPage implements OnInit {
     this.publicationsType = <TipoPublicacion>publicationType;
   }
 
+  /**
+   * If the page will edit a publication, this method get the current state
+   * of that publication given its id
+   * @param {number} pubId Publication id
+   */
   private async setPubToEdit(pubId: number) {
     const { adminPublicacion } = this.sistema.admin;
     const publications = await adminPublicacion.verPublicaciones();
@@ -124,12 +161,17 @@ export class AddPublicationPage implements OnInit {
   }
 
   /**
-   * Method that navigate to the home page with a go back animation
+   * Method that navigate to the publication page with a go back animation
    */
   goback() {
     this.navCtrl.pop();
   }
 
+  /**
+   * Method that builds an appropiate success message depending on
+   * the publication type
+   * @returns {string} The success message
+   */
   private getSuccessMessage() {
     if (this.publicationsType == TipoPublicacion.EVENTO) {
       return 'Se ha guardado el evento correctamente.';

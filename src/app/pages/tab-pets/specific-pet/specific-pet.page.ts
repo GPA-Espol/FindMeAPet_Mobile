@@ -9,6 +9,10 @@ import { PetObserverService } from 'src/app/observables/pet-observer.service';
 import { AlertaService } from 'src/app/services/alerta/alerta.service';
 import { SistemaService } from 'src/app/services/sistema/sistema.service';
 
+/**
+ * Class in charge of the behaviour of a specific pet page
+ * @category Components
+ */
 @Component({
   selector: 'app-specific-pet',
   templateUrl: './specific-pet.page.html',
@@ -45,10 +49,6 @@ export class SpecificPetPage implements OnInit {
     //this.pet = await this.sistema.getMascotabyId(id);
   }
 
-  ngOnDestroy() {
-    this.petSubscription.unsubscribe();
-  }
-
   /**
    * Method that create the user (admin or voluntario) to perform specific functions in the page
    */
@@ -72,9 +72,13 @@ export class SpecificPetPage implements OnInit {
    */
   async deletePet() {
     await this.alertaService.presentLoading('Eliminando mascota');
-    await this.administrador.adminMascota.eliminarMascota(String(this.pet.id));
+    await this.administrador.adminMascota.eliminarMascota(this.pet.id);
     this.alertaService.dismissLoading();
     this.navCtrl.pop();
     await this.alertaService.presentToast('La mascota ha sido eliminanda');
+  }
+
+  ngOnDestroy() {
+    this.petSubscription.unsubscribe();
   }
 }

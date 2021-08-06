@@ -6,6 +6,10 @@ import { PublicationObserverService } from 'src/app/observables/publication-obse
 import { AlertaService } from 'src/app/services/alerta/alerta.service';
 import { SistemaService } from 'src/app/services/sistema/sistema.service';
 
+/**
+ * Class in charge of showing a specific publication.
+ * @category Components
+ */
 @Component({
   selector: 'app-specific-pub',
   templateUrl: './specific-pub.page.html',
@@ -27,6 +31,10 @@ export class SpecificPubPage implements OnInit {
     this.loading = false;
   }
 
+  /**
+   * Will bring all the information of a publications with an id that will be
+   * obtained from the params of the active route.
+   */
   private async setPublicationInfo() {
     let idPublication: number;
     this.route.paramMap.subscribe((paramMap) => {
@@ -36,11 +44,19 @@ export class SpecificPubPage implements OnInit {
     this.publication = await adminPublicacion.verPublicacion(idPublication);
   }
 
+  /**
+   * Will show a modal for the user to confirm that indeed he/she wants to 
+   * delete the current publication
+   */
   async modalDelete() {
     const message = '¿Estás seguro que deseas eliminar esta publicación?';
     await this.alert.confirmationAlert(message, this.deletePublication.bind(this));
   }
 
+  /**
+   * Delete the current publication from the system and shows a feedback to user
+   * when the deletion completes
+   */
   private async deletePublication() {
     try {
       await this.alert.presentLoading('Eliminando...');

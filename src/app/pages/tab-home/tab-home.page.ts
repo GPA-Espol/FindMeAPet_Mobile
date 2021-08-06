@@ -5,12 +5,5 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './tab-home.page.html',
   styleUrls: ['./tab-home.page.scss'],
 })
-export class TabHomePage implements OnInit {
-
-  
-  constructor() { }
-
-  ngOnInit() {
-  }
-
+export class TabHomePage {
 }

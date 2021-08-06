@@ -68,7 +68,7 @@
             
             <nav>
                 
-                    <h2><a href="index.html">Documentation</a></h2><div class="category"></div><div class="category"><h2>Component</h2><h3>Classes</h3><ul><li><a href="EnConstruccionPage.html">EnConstruccionPage</a></li></ul></div><div class="category"><h2>Components</h2><h3>Classes</h3><ul><li><a href="AppComponent.html">AppComponent</a></li><li><a href="LoginPage.html">LoginPage</a></li></ul></div><div class="category"><h2>Model</h2><h3>Classes</h3><ul><li><a href="Administrador.html">Administrador</a></li><li><a href="AdministrarFormulario.html">AdministrarFormulario</a></li><li><a href="AdministrarMascota.html">AdministrarMascota</a></li><li><a href="AdministrarPublicacion.html">AdministrarPublicacion</a></li><li><a href="AdministrarReporteAsistencia.html">AdministrarReporteAsistencia</a></li><li><a href="AdministrarUsuario.html">AdministrarUsuario</a></li><li><a href="Formulario.html">Formulario</a></li><li><a href="FormularioAdopcion.html">FormularioAdopcion</a></li><li><a href="FormularioPonerAdopcion.html">FormularioPonerAdopcion</a></li><li><a href="Mascota.html">Mascota</a></li><li><a href="Publicacion.html">Publicacion</a></li><li><a href="ReporteAsistencia.html">ReporteAsistencia</a></li><li><a href="SolicitudActualizacionMascota.html">SolicitudActualizacionMascota</a></li><li><a href="UsuarioGPA.html">UsuarioGPA</a></li><li><a href="Voluntario.html">Voluntario</a></li></ul></div><div class="category"><h2>Services</h2><h3>Classes</h3><ul><li><a href="AlertaService.html">AlertaService</a></li><li><a href="SistemaService.html">SistemaService</a></li><li><a href="StorageService.html">StorageService</a></li><li><a href="TokenInterceptorService.html">TokenInterceptorService</a></li><li><a href="Utils.html">Utils</a></li></ul></div>
+                    <h2><a href="index.html">Documentation</a></h2><div class="category"></div><div class="category"><h2>Components</h2><h3>Classes</h3><ul><li><a href="AddPetPage.html">AddPetPage</a></li><li><a href="AddPublicationPage.html">AddPublicationPage</a></li><li><a href="AppComponent.html">AppComponent</a></li><li><a href="EmptyListComponent.html">EmptyListComponent</a></li><li><a href="EnConstruccionPage.html">EnConstruccionPage</a></li><li><a href="ImagePickerComponent.html">ImagePickerComponent</a></li><li><a href="LoginPage.html">LoginPage</a></li><li><a href="ManageCardComponent.html">ManageCardComponent</a></li><li><a href="PublicationPage.html">PublicationPage</a></li><li><a href="SpecificPetPage.html">SpecificPetPage</a></li><li><a href="SpecificPubPage.html">SpecificPubPage</a></li><li><a href="TabManagePage.html">TabManagePage</a></li><li><a href="TabPetsPage.html">TabPetsPage</a></li></ul></div><div class="category"><h2>Model</h2><h3>Classes</h3><ul><li><a href="Administrador.html">Administrador</a></li><li><a href="AdministrarFormulario.html">AdministrarFormulario</a></li><li><a href="AdministrarMascota.html">AdministrarMascota</a></li><li><a href="AdministrarPublicacion.html">AdministrarPublicacion</a></li><li><a href="AdministrarReporteAsistencia.html">AdministrarReporteAsistencia</a></li><li><a href="AdministrarUsuario.html">AdministrarUsuario</a></li><li><a href="Formulario.html">Formulario</a></li><li><a href="FormularioAdopcion.html">FormularioAdopcion</a></li><li><a href="FormularioPonerAdopcion.html">FormularioPonerAdopcion</a></li><li><a href="Mascota.html">Mascota</a></li><li><a href="Publicacion.html">Publicacion</a></li><li><a href="ReporteAsistencia.html">ReporteAsistencia</a></li><li><a href="SolicitudActualizacionMascota.html">SolicitudActualizacionMascota</a></li><li><a href="UsuarioGPA.html">UsuarioGPA</a></li><li><a href="Voluntario.html">Voluntario</a></li></ul></div><div class="category"><h2>Pipes</h2><h3>Classes</h3><ul><li><a href="AgePipe.html">AgePipe</a></li><li><a href="DateFormatPipe.html">DateFormatPipe</a></li><li><a href="FiltroPipe.html">FiltroPipe</a></li><li><a href="LugarPipe.html">LugarPipe</a></li></ul></div><div class="category"><h2>Services</h2><h3>Classes</h3><ul><li><a href="AlertaService.html">AlertaService</a></li><li><a href="PetObserverService.html">PetObserverService</a></li><li><a href="PublicationObserverService.html">PublicationObserverService</a></li><li><a href="SistemaService.html">SistemaService</a></li><li><a href="StorageService.html">StorageService</a></li><li><a href="TokenInterceptorService.html">TokenInterceptorService</a></li></ul><h3>Global</h3><ul><li><a href="global.html#Utils">Utils</a></li></ul></div>
                 
             </nav>
         </div>
@@ -85,21 +85,66 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>/**
+            <pre class="prettyprint source linenums"><code>import { HttpClient } from '@angular/common/http';
+import { Utils } from 'src/app/utils/utils';
+import { environment } from 'src/environments/environment';
+import { Publicacion } from '../publicacion.model';
+
+/**
  * Class containing the actions that the admin can do regarding the publications.
  * @category Model
  */
 export class AdministrarPublicacion {
-  public crearPublicacion() {
-    // TODO implementar método
+  private url = environment.api + 'publicacion';
+
+  private publicaciones: { data: Publicacion[]; time: number };
+
+  constructor(private http: HttpClient) {}
+
+  public async verPublicaciones(forceReload = false) {
+    if (forceReload || !this.publicaciones || Utils.cacheExpired(this.publicaciones.time)) {
+      const res = await this.http.get&lt;any[]>(this.url).toPromise();
+      const now = new Date().getTime();
+      this.publicaciones = { data: Publicacion.deserialize(res), time: now };
+    }
+    return this.publicaciones.data;
   }
 
-  public eliminarPublicacion() {
-    // TODO implementar método
+  public async verPublicacion(publicationId: number) {
+    if (!Utils.cacheExpired(this.publicaciones.time)) {
+      const publication = this.publicaciones.data.find((pub) => pub.id == publicationId);
+      if (publication) return publication;
+    }
+    const url = `${this.url}/${publicationId}`;
+    const res = await this.http.get&lt;any>(url).toPromise();
+    return Publicacion.deserialize_one(res);
   }
 
-  public actualizarPublicacion() {
-    // TODO implementar método
+  public async crearPublicacion(publication: Publicacion) {
+    if (!this.publicaciones) {
+      this.publicaciones = { data: [], time: new Date().getTime() };
+    }
+    const body = Publicacion.serialize(publication);
+    this.publicaciones.data.push(publication);
+    const { id } = await this.http.post&lt;any>(this.url, body).toPromise();
+    publication.id = id;
+  }
+
+  public eliminarPublicacion(publicationId: number) {
+    if (!this.publicaciones) {
+      this.publicaciones = { data: [], time: new Date().getTime() };
+    }
+    const indexPub = this.publicaciones.data.findIndex((publication) => publication.id === publicationId);
+    this.publicaciones.data.splice(indexPub, 1);
+    const url = `${this.url}/${publicationId}`;
+    return this.http.delete(url).toPromise();
+  }
+
+  public actualizarPublicacion(publication: Publicacion) {
+    const publicationId = publication.id;
+    const body = Publicacion.serialize(publication);
+    const url = `${this.url}/${publicationId}`;
+    return this.http.put(url, body).toPromise();
   }
 }
 </code></pre>

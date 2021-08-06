@@ -11,11 +11,9 @@ export class AgePipe implements PipeTransform {
    * @param d Birthdate of the pet in the format YYYY-MM-DD
    * @returns String with the age in years, or month if the pet is less than a year
    */
-  transform(d: any): string {
-    let currentDate = new Date(new Date().toUTCString());
-    let date = new Date(d + 'Z');
-    let offsetTimeZoneHours = date.getTimezoneOffset() / 60;
-    date.setHours(date.getHours() + offsetTimeZoneHours);
+  transform(date: any): string {
+    let currentDate = new Date();
+    currentDate.setUTCHours(0,0,0);
     let year = currentDate.getFullYear() - date.getFullYear();
     let month = currentDate.getMonth() - date.getMonth();
     let day = currentDate.getDate() - date.getDate();

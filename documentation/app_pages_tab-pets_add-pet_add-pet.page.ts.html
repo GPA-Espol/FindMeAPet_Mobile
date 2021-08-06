@@ -1,0 +1,366 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title> app/pages/tab-pets/add-pet/add-pet.page.ts</title>
+
+  <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script src="./build/entry.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <link href="https://fonts.googleapis.com/css?family=Roboto:100,400,700|Inconsolata,700" rel="stylesheet">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+  <link type="text/css" rel="stylesheet" href="https://jmblog.github.io/color-themes-for-google-code-prettify/themes/tomorrow-night.min.css">
+  <link type="text/css" rel="stylesheet" href="styles/app.min.css">
+  <link type="text/css" rel="stylesheet" href="styles/iframe.css">
+  <link type="text/css" rel="stylesheet" href="">
+  <script async defer src="https://buttons.github.io/buttons.js"></script>
+
+  
+</head>
+
+
+
+<body class="layout small-header">
+    <div id="stickyNavbarOverlay"></div>
+    
+
+<div class="top-nav">
+    <div class="inner">
+        <a id="hamburger" role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+        </a>
+        <div class="logo">
+            
+            
+        </div>
+        <div class="menu">
+            
+            <div class="navigation">
+                <a
+                    href="index.html"
+                    class="link"
+                >
+                    API Documentation
+                </a>
+                
+                
+                
+            </div>
+        </div>
+    </div>
+</div>
+    <div id="main">
+        <div
+            class="sidebar "
+            id="sidebarNav"
+        >
+            
+            <nav>
+                
+                    <h2><a href="index.html">Documentation</a></h2><div class="category"></div><div class="category"><h2>Components</h2><h3>Classes</h3><ul><li><a href="AddPetPage.html">AddPetPage</a></li><li><a href="AddPublicationPage.html">AddPublicationPage</a></li><li><a href="AppComponent.html">AppComponent</a></li><li><a href="EmptyListComponent.html">EmptyListComponent</a></li><li><a href="EnConstruccionPage.html">EnConstruccionPage</a></li><li><a href="ImagePickerComponent.html">ImagePickerComponent</a></li><li><a href="LoginPage.html">LoginPage</a></li><li><a href="ManageCardComponent.html">ManageCardComponent</a></li><li><a href="PublicationPage.html">PublicationPage</a></li><li><a href="SpecificPetPage.html">SpecificPetPage</a></li><li><a href="SpecificPubPage.html">SpecificPubPage</a></li><li><a href="TabManagePage.html">TabManagePage</a></li><li><a href="TabPetsPage.html">TabPetsPage</a></li></ul></div><div class="category"><h2>Model</h2><h3>Classes</h3><ul><li><a href="Administrador.html">Administrador</a></li><li><a href="AdministrarFormulario.html">AdministrarFormulario</a></li><li><a href="AdministrarMascota.html">AdministrarMascota</a></li><li><a href="AdministrarPublicacion.html">AdministrarPublicacion</a></li><li><a href="AdministrarReporteAsistencia.html">AdministrarReporteAsistencia</a></li><li><a href="AdministrarUsuario.html">AdministrarUsuario</a></li><li><a href="Formulario.html">Formulario</a></li><li><a href="FormularioAdopcion.html">FormularioAdopcion</a></li><li><a href="FormularioPonerAdopcion.html">FormularioPonerAdopcion</a></li><li><a href="Mascota.html">Mascota</a></li><li><a href="Publicacion.html">Publicacion</a></li><li><a href="ReporteAsistencia.html">ReporteAsistencia</a></li><li><a href="SolicitudActualizacionMascota.html">SolicitudActualizacionMascota</a></li><li><a href="UsuarioGPA.html">UsuarioGPA</a></li><li><a href="Voluntario.html">Voluntario</a></li></ul></div><div class="category"><h2>Pipes</h2><h3>Classes</h3><ul><li><a href="AgePipe.html">AgePipe</a></li><li><a href="DateFormatPipe.html">DateFormatPipe</a></li><li><a href="FiltroPipe.html">FiltroPipe</a></li><li><a href="LugarPipe.html">LugarPipe</a></li></ul></div><div class="category"><h2>Services</h2><h3>Classes</h3><ul><li><a href="AlertaService.html">AlertaService</a></li><li><a href="PetObserverService.html">PetObserverService</a></li><li><a href="PublicationObserverService.html">PublicationObserverService</a></li><li><a href="SistemaService.html">SistemaService</a></li><li><a href="StorageService.html">StorageService</a></li><li><a href="TokenInterceptorService.html">TokenInterceptorService</a></li></ul><h3>Global</h3><ul><li><a href="global.html#Utils">Utils</a></li></ul></div>
+                
+            </nav>
+        </div>
+        <div class="core" id="main-content-wrapper">
+            <div class="content">
+                <header class="page-title">
+                    <p>Source</p>
+                    <h1>app/pages/tab-pets/add-pet/add-pet.page.ts</h1>
+                </header>
+                
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import { Component, OnInit, ViewChild } from '@angular/core';
+import { NavController } from '@ionic/angular';
+import { SistemaService } from 'src/app/services/sistema/sistema.service';
+import { AlertaService } from 'src/app/services/alerta/alerta.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Mascota } from 'src/app/model/mascota.model';
+import * as moment from 'moment';
+import { Administrador } from 'src/app/model/admin/administrador.model';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ImagePickerComponent } from 'src/app/components/image-picker/image-picker.component';
+import { PetObserverService } from 'src/app/observables/pet-observer.service';
+import { Voluntario } from 'src/app/model/voluntario.model';
+import { RolUsuario } from 'src/app/model/enums.model';
+import { Mode, Utils } from 'src/app/utils/utils';
+
+/**
+ * Component in charge of the behaviour of the add-pet page
+ * @category Components
+ */
+@Component({
+  selector: 'app-add-pet',
+  templateUrl: './add-pet.page.html',
+  styleUrls: ['./add-pet.page.scss'],
+})
+export class AddPetPage implements OnInit {
+  public mode: string = '';
+  idPet: number;
+  petToEdit: Mascota;
+  extraInformation: boolean = false;
+  ageType: string = '';
+  mascota: FormGroup;
+  administrador: Administrador;
+  voluntario: Voluntario;
+
+  @ViewChild('imgPicker') imgPicker: ImagePickerComponent;
+  constructor(
+    private sistema: SistemaService,
+    private alertaService: AlertaService,
+    private navCtrl: NavController,
+    private formBuilder: FormBuilder,
+    private router: Router,
+    private route: ActivatedRoute,
+    private petObserver: PetObserverService
+  ) {}
+
+  ngOnInit() {
+    this.buildPetForm();
+    this.setMode();
+    this.createUser();
+  }
+
+  /**
+   * Method that build the form for the pet based on the model
+   */
+  buildPetForm() {
+    this.mascota = this.formBuilder.group({
+      nombre: ['', Validators.required],
+      color: ['', Validators.required],
+      esterilizado: 0,
+      adoptado: 0,
+      caso_externo: 0,
+      adoptable: 0,
+      descripcion: ['', Validators.required],
+      sexo: ['', Validators.required],
+      ubicacion: ['', Validators.required],
+      tipo: ['', Validators.required],
+      years: '',
+      months: '',
+      days: '',
+      image: '',
+    });
+  }
+
+  /**
+   * Method that sets the page mode to edit o to anadir. The page funcionality is based on this mode.
+   */
+  setMode() {
+    let route = this.router.url;
+    let array = route.split('/');
+    let end = array[array.length - 1];
+    this.mode = end == 'anadir' ? Mode.ANADIR : Mode.EDITAR;
+    if (this.mode == Mode.EDITAR) {
+      this.getData();
+    }
+  }
+
+  /**
+   * Method that create the user (admin or voluntario) to perform specific functions in the page
+   */
+  async createUser() {
+    let userLogged = await this.sistema.userLoggedIn();
+    if (userLogged.rol == RolUsuario.VOLUNTARIO) {
+      this.voluntario = this.sistema.voluntario;
+    } else {
+      this.administrador = this.sistema.admin;
+    }
+  }
+
+  /**
+   * Method that set values to the form fields of the pet to edit
+   */
+  async getData() {
+    this.idPet = +this.route.snapshot.paramMap.get('id');
+    this.petToEdit = await this.sistema.getMascotabyId(this.idPet);
+    this.mascota.controls['nombre'].setValue(this.petToEdit.nombre);
+    this.mascota.controls['color'].setValue(this.petToEdit.color);
+    this.mascota.controls['caso_externo'].setValue(this.petToEdit.isCasoExterno);
+    this.mascota.controls['esterilizado'].setValue(this.petToEdit.isEsterilizado);
+    this.mascota.controls['adoptado'].setValue(this.petToEdit.isAdoptado);
+    this.mascota.controls['adoptable'].setValue(this.petToEdit.isAdoptable);
+    this.mascota.controls['sexo'].setValue(this.petToEdit.sexo);
+    this.mascota.controls['ubicacion'].setValue(this.petToEdit.ubicacionMascota);
+    this.mascota.controls['descripcion'].setValue(this.petToEdit.descripcion);
+    this.mascota.controls['tipo'].setValue(this.petToEdit.tipoAnimal);
+    this.setAgeInformation();
+  }
+
+  /**
+   * Method that set the value of the pet object to be sent to the REST API, obtaining the information from the form
+   * @param petToSend Mascota object to set values
+   */
+  setValues(petToSend: Mascota) {
+    petToSend.nombre = this.mascota.get('nombre').value;
+    petToSend.fechaNacimiento = this.getBirthDate();
+    petToSend.color = this.mascota.get('color').value;
+    petToSend.isCasoExterno = this.mascota.get('caso_externo').value;
+    petToSend.isEsterilizado = this.mascota.get('esterilizado').value;
+    petToSend.isAdoptado = this.mascota.get('adoptado').value;
+    petToSend.isAdoptable = this.mascota.get('adoptable').value;
+    petToSend.sexo = this.mascota.get('sexo').value;
+    petToSend.ubicacionMascota = this.mascota.get('ubicacion').value;
+    petToSend.descripcion = this.mascota.get('descripcion').value;
+    petToSend.tipoAnimal = this.mascota.get('tipo').value;
+  }
+
+  /**
+   *  Handler that pushes the pet to the REST-API for it to update it
+   */
+  async editPet() {
+    const loaddingMessage = this.administrador
+      ? 'Actualizando mascota'
+      : 'Enviando solicitud de actualización';
+    const succesMessage = this.administrador ? 'La mascota ha sido editada' : 'La solicitud ha sido enviada';
+    const errorMessage = this.administrador ? 'Error al editar mascota' : 'Error al enviar solicitud';
+    this.setValues(this.petToEdit);
+    this.petObserver.publish(this.petToEdit);
+    await this.alertaService.presentLoading(loaddingMessage);
+    try {
+      this.petToEdit.imagenUrl = await this.imgPicker.upload();
+      if (this.administrador) {
+        await this.administrador.adminMascota.actualizarMascota(this.idPet, this.petToEdit);
+      } else {
+        await this.voluntario.hacerSolicitudActualizacionMascota();
+        
+      }
+      this.goback();
+      await this.alertaService.presentToast(succesMessage);
+    } catch (err) {
+      this.alertaService.presentToast(errorMessage + ', por favor intente de nuevo' + err);
+    }
+    this.alertaService.dismissLoading();
+  }
+
+  async onSubmit() {
+    if (this.voluntario) {
+      await this.modalVoluntarioConfirmation();
+    } else {
+      if (this.mode == Mode.EDITAR) {
+        this.editPet();
+      } else {
+        this.createPet();
+      }
+    }
+  }
+
+  /**
+   * Handler that pushes the new pet to the REST-API and adds it to
+   * the system pets array.
+   */
+  async createPet() {
+    const loaddingMessage = this.administrador ? 'Creando mascota' : 'Enviando solicitud de creación';
+    const succesMessage = this.administrador ? 'La mascota ha sido agregada' : 'La solicitud ha sido enviada';
+    const errorMessage = this.administrador ? 'Error al agregar mascota' : 'Error al enviar solicitud';
+    let newPet = new Mascota();
+    this.setValues(newPet);
+    if (!this.imgPicker.image64 &amp;&amp; newPet.isAdoptable) {
+      return await this.alertaService.presentToast('Por favor añada la imagen de la mascota');
+    }
+    await this.alertaService.presentLoading(loaddingMessage);
+    try {
+      newPet.imagenUrl = await this.imgPicker.upload();
+      if (this.administrador) {
+        await this.administrador.adminMascota.crearMascota(newPet);
+      } else {
+        await this.voluntario.hacerSolicitudCreacionMascota();
+      }
+      this.goback();
+      await this.alertaService.presentToast(succesMessage);
+    } catch (err) {
+      this.alertaService.presentToast(errorMessage + ', por favor intente de nuevo' + err);
+    }
+    this.alertaService.dismissLoading();
+  }
+
+  /**
+   * Method that navigate to the home page with a go back animation
+   */
+  goback() {
+    this.navCtrl.pop();
+  }
+
+  /**
+   * Method that find the birth date of a pet based on its years old,
+   * months old and days old.
+   * @return {Date} The calculated date of its birth date.
+   */
+  getBirthDate() {
+    const now = new Date();
+    now.setUTCHours(0,0,0);
+    let birthDate = moment(now);
+    birthDate.subtract(this.mascota.get('years').value, 'years');
+    birthDate.subtract(this.mascota.get('months').value, 'months');
+    birthDate.subtract(this.mascota.get('days').value, 'days');    
+    return birthDate.toDate();
+  }
+
+  /**
+   * Method that set the age information in the form fields
+   */
+  setAgeInformation() {
+    let information = Utils.getInformationAge(this.petToEdit.fechaNacimiento);
+    this.mascota.controls['years'].setValue(information.years);
+    this.mascota.controls['months'].setValue(information.months);
+    this.mascota.controls['days'].setValue(information.days);
+  }
+
+
+  async modalVoluntarioConfirmation() {
+    if (this.mode == Mode.EDITAR) {
+      const messageEdit =
+        'Se notificará al administrador para que acepte su solicitud de editar mascota';
+      await this.alertaService.confirmationAlert(messageEdit, this.editPet.bind(this));
+      
+    } else {
+      const messageAdd =
+        'Se notificará al administrador para que acepte su solicitud de agregar mascota';
+      await this.alertaService.confirmationAlert(messageAdd, this.createPet.bind(this));
+    }
+  }
+}
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+            </div>
+            
+            <footer class="footer">
+                <div class="content has-text-centered">
+                    <p>Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.7</a></p>
+                    <p class="sidebar-created-by">
+                        <a href="https://github.com/SoftwareBrothers/better-docs" target="_blank">BetterDocs theme</a> provided with <i class="fas fa-heart"></i> by 
+                        <a href="http://softwarebrothers.co" target="_blank">SoftwareBrothers - JavaScript Development Agency</a>
+                    </p>
+                </div>
+            </footer>
+            
+        </div>
+        <div id="side-nav" class="side-nav">
+        </div>
+    </div>
+<script src="scripts/app.min.js"></script>
+<script>PR.prettyPrint();</script>
+<script src="scripts/linenumber.js"> </script>
+
+</body>
+</html>

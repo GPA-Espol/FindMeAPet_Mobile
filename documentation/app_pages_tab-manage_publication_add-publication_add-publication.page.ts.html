@@ -1,0 +1,297 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title> app/pages/tab-manage/publication/add-publication/add-publication.page.ts</title>
+
+  <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script src="./build/entry.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <link href="https://fonts.googleapis.com/css?family=Roboto:100,400,700|Inconsolata,700" rel="stylesheet">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+  <link type="text/css" rel="stylesheet" href="https://jmblog.github.io/color-themes-for-google-code-prettify/themes/tomorrow-night.min.css">
+  <link type="text/css" rel="stylesheet" href="styles/app.min.css">
+  <link type="text/css" rel="stylesheet" href="styles/iframe.css">
+  <link type="text/css" rel="stylesheet" href="">
+  <script async defer src="https://buttons.github.io/buttons.js"></script>
+
+  
+</head>
+
+
+
+<body class="layout small-header">
+    <div id="stickyNavbarOverlay"></div>
+    
+
+<div class="top-nav">
+    <div class="inner">
+        <a id="hamburger" role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+        </a>
+        <div class="logo">
+            
+            
+        </div>
+        <div class="menu">
+            
+            <div class="navigation">
+                <a
+                    href="index.html"
+                    class="link"
+                >
+                    API Documentation
+                </a>
+                
+                
+                
+            </div>
+        </div>
+    </div>
+</div>
+    <div id="main">
+        <div
+            class="sidebar "
+            id="sidebarNav"
+        >
+            
+            <nav>
+                
+                    <h2><a href="index.html">Documentation</a></h2><div class="category"></div><div class="category"><h2>Components</h2><h3>Classes</h3><ul><li><a href="AddPetPage.html">AddPetPage</a></li><li><a href="AddPublicationPage.html">AddPublicationPage</a></li><li><a href="AppComponent.html">AppComponent</a></li><li><a href="EmptyListComponent.html">EmptyListComponent</a></li><li><a href="EnConstruccionPage.html">EnConstruccionPage</a></li><li><a href="ImagePickerComponent.html">ImagePickerComponent</a></li><li><a href="LoginPage.html">LoginPage</a></li><li><a href="ManageCardComponent.html">ManageCardComponent</a></li><li><a href="PublicationPage.html">PublicationPage</a></li><li><a href="SpecificPetPage.html">SpecificPetPage</a></li><li><a href="SpecificPubPage.html">SpecificPubPage</a></li><li><a href="TabManagePage.html">TabManagePage</a></li><li><a href="TabPetsPage.html">TabPetsPage</a></li></ul></div><div class="category"><h2>Model</h2><h3>Classes</h3><ul><li><a href="Administrador.html">Administrador</a></li><li><a href="AdministrarFormulario.html">AdministrarFormulario</a></li><li><a href="AdministrarMascota.html">AdministrarMascota</a></li><li><a href="AdministrarPublicacion.html">AdministrarPublicacion</a></li><li><a href="AdministrarReporteAsistencia.html">AdministrarReporteAsistencia</a></li><li><a href="AdministrarUsuario.html">AdministrarUsuario</a></li><li><a href="Formulario.html">Formulario</a></li><li><a href="FormularioAdopcion.html">FormularioAdopcion</a></li><li><a href="FormularioPonerAdopcion.html">FormularioPonerAdopcion</a></li><li><a href="Mascota.html">Mascota</a></li><li><a href="Publicacion.html">Publicacion</a></li><li><a href="ReporteAsistencia.html">ReporteAsistencia</a></li><li><a href="SolicitudActualizacionMascota.html">SolicitudActualizacionMascota</a></li><li><a href="UsuarioGPA.html">UsuarioGPA</a></li><li><a href="Voluntario.html">Voluntario</a></li></ul></div><div class="category"><h2>Pipes</h2><h3>Classes</h3><ul><li><a href="AgePipe.html">AgePipe</a></li><li><a href="DateFormatPipe.html">DateFormatPipe</a></li><li><a href="FiltroPipe.html">FiltroPipe</a></li><li><a href="LugarPipe.html">LugarPipe</a></li></ul></div><div class="category"><h2>Services</h2><h3>Classes</h3><ul><li><a href="AlertaService.html">AlertaService</a></li><li><a href="PetObserverService.html">PetObserverService</a></li><li><a href="PublicationObserverService.html">PublicationObserverService</a></li><li><a href="SistemaService.html">SistemaService</a></li><li><a href="StorageService.html">StorageService</a></li><li><a href="TokenInterceptorService.html">TokenInterceptorService</a></li></ul><h3>Global</h3><ul><li><a href="global.html#Utils">Utils</a></li></ul></div>
+                
+            </nav>
+        </div>
+        <div class="core" id="main-content-wrapper">
+            <div class="content">
+                <header class="page-title">
+                    <p>Source</p>
+                    <h1>app/pages/tab-manage/publication/add-publication/add-publication.page.ts</h1>
+                </header>
+                
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import { Component, OnInit, ViewChild } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { NavController } from '@ionic/angular';
+import { ImagePickerComponent } from 'src/app/components/image-picker/image-picker.component';
+import { TipoPublicacion } from 'src/app/model/enums.model';
+import { Publicacion } from 'src/app/model/publicacion.model';
+import { PublicationObserverService } from 'src/app/observables/publication-observer.service';
+import { AlertaService } from 'src/app/services/alerta/alerta.service';
+import { SistemaService } from 'src/app/services/sistema/sistema.service';
+import { Mode, Utils } from 'src/app/utils/utils';
+
+/**
+ * Class in charge of the adition and updating of a given publication 
+ * of a given type that depends on the active route
+ * @category Components
+ */
+@Component({
+  selector: 'app-add-publication',
+  templateUrl: './add-publication.page.html',
+  styleUrls: ['./add-publication.page.scss'],
+})
+export class AddPublicationPage implements OnInit {
+  publicationForm: FormGroup;
+  photoUrl: string;
+  publicationsType: TipoPublicacion;
+  mode: Mode;
+  pubToEdit: Publicacion;
+  loading = true;
+  @ViewChild('imgPicker') imgPicker: ImagePickerComponent;
+  constructor(
+    private formBuilder: FormBuilder,
+    private navCtrl: NavController,
+    private router: Router,
+    private sistema: SistemaService,
+    private alert: AlertaService,
+    private publicationObserver: PublicationObserverService
+  ) {}
+
+  async ngOnInit() {
+    await this.setPublicationsInfo();
+    this.buildForm();
+    this.loading = false;
+  }
+
+  /**
+   * Build the FormGroup of the publication, if adding a new publication
+   * the form properties will be initialized empty, but if updating a 
+   * publication the form properties will be initialized with the last
+   * publication info.
+   * The form will have the following fields:
+   *   - title: the title of the publication
+   *   - description: the body of the publication
+   * The image is not defined here since the way it is saved is different
+   */
+  private buildForm() {
+    if (this.mode == Mode.ANADIR) {
+      this.publicationForm = this.formBuilder.group({
+        title: ['', Validators.required],
+        description: ['', Validators.required],
+      });
+    } else {
+      this.publicationForm = this.formBuilder.group({
+        title: [this.pubToEdit.titulo, Validators.required],
+        description: [this.pubToEdit.descripcion, Validators.required],
+      });
+    }
+  }
+
+  /**
+   * Method that handle the submit event of the publication, and 
+   * handle errors
+   */
+  async submitPublication() {
+    try {
+      if (this.mode == Mode.ANADIR) {
+        await this.saveNewPublication();
+      } else {
+        await this.updatePublication();
+      }
+    } catch (err) {
+      await this.alert.dismissLoading();
+      console.error(err);
+      this.alert.presentToast(`Ha ocurrido un error al guardar ${this.publicationsType.toLowerCase()}.`);
+    }
+  }
+
+  /**
+   * Gather the information from the form group and the url of the
+   * image to build a new publication that will be saved on the system.
+   */
+  private async saveNewPublication() {
+    await this.alert.presentLoading('Guardando...');
+    const admin = this.sistema.admin;
+    const { adminPublicacion } = admin;
+    const publication = new Publicacion();
+    publication.titulo = this.publicationForm.get('title').value;
+    publication.descripcion = this.publicationForm.get('description').value;
+    publication.fecha = new Date();
+    publication.idUsuario = admin.id;
+    publication.tipo = this.publicationsType;
+    publication.imagenUrl = await this.imgPicker.upload();
+    await adminPublicacion.crearPublicacion(publication);
+    this.publicationObserver.publish();
+    const successMessage = this.getSuccessMessage();
+    this.alert.presentToast(successMessage);
+    this.alert.dismissLoading();
+    this.goback();
+  }
+
+  /**
+   * Gather the information from the form group and the url of the
+   * image to update a publication of the system.
+   */
+  private async updatePublication() {
+    await this.alert.presentLoading('Guardando...');
+    const { adminPublicacion } = this.sistema.admin;
+    this.pubToEdit.titulo = this.publicationForm.get('title').value;
+    this.pubToEdit.descripcion = this.publicationForm.get('description').value;
+    await adminPublicacion.actualizarPublicacion(this.pubToEdit);
+    this.publicationObserver.publish();
+    const successMessage = this.getSuccessMessage();
+    this.alert.presentToast(successMessage);
+    this.alert.dismissLoading();
+    this.goback();
+  }
+
+  /**
+   * Set the publication info such as if the view will add or update
+   * a publication, and the publication type. Getting all this from
+   * the active route.
+   */
+  private async setPublicationsInfo() {
+    const currentUrl = this.router.url;
+    const currentUrlList = currentUrl.split('/');
+    const urlLength = currentUrlList.length;
+    const lastSegment = currentUrlList[urlLength - 1];
+    let actionType = lastSegment;
+    let publicationType: any;
+    if (lastSegment == Mode.ANADIR) {
+      publicationType = currentUrlList[urlLength - 2];
+    } else {
+      const pubId = +currentUrlList[urlLength - 1];
+      await this.setPubToEdit(pubId);
+      actionType = currentUrlList[urlLength - 2];
+      publicationType = currentUrlList[urlLength - 3];
+    }
+    this.mode = &lt;Mode>actionType;
+    this.publicationsType = &lt;TipoPublicacion>publicationType;
+  }
+
+  /**
+   * If the page will edit a publication, this method get the current state
+   * of that publication given its id
+   * @param {number} pubId Publication id
+   */
+  private async setPubToEdit(pubId: number) {
+    const { adminPublicacion } = this.sistema.admin;
+    const publications = await adminPublicacion.verPublicaciones();
+    this.pubToEdit = publications.find((pub) => pub.id == pubId);
+  }
+
+  /**
+   * Method that navigate to the publication page with a go back animation
+   */
+  goback() {
+    this.navCtrl.pop();
+  }
+
+  /**
+   * Method that builds an appropiate success message depending on
+   * the publication type
+   * @returns {string} The success message
+   */
+  private getSuccessMessage() {
+    if (this.publicationsType == TipoPublicacion.EVENTO) {
+      return 'Se ha guardado el evento correctamente.';
+    }
+    return 'Se ha guardado la noticia correctamente';
+  }
+}
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+            </div>
+            
+            <footer class="footer">
+                <div class="content has-text-centered">
+                    <p>Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.7</a></p>
+                    <p class="sidebar-created-by">
+                        <a href="https://github.com/SoftwareBrothers/better-docs" target="_blank">BetterDocs theme</a> provided with <i class="fas fa-heart"></i> by 
+                        <a href="http://softwarebrothers.co" target="_blank">SoftwareBrothers - JavaScript Development Agency</a>
+                    </p>
+                </div>
+            </footer>
+            
+        </div>
+        <div id="side-nav" class="side-nav">
+        </div>
+    </div>
+<script src="scripts/app.min.js"></script>
+<script>PR.prettyPrint();</script>
+<script src="scripts/linenumber.js"> </script>
+
+</body>
+</html>

@@ -24,7 +24,7 @@ import { Mode, Utils } from 'src/app/utils/utils';
 })
 export class AddPetPage implements OnInit {
   public mode: string = '';
-  idPet: string;
+  idPet: number;
   petToEdit: Mascota;
   extraInformation: boolean = false;
   ageType: string = '';
@@ -100,7 +100,7 @@ export class AddPetPage implements OnInit {
    * Method that set values to the form fields of the pet to edit
    */
   async getData() {
-    this.idPet = this.route.snapshot.paramMap.get('id');
+    this.idPet = +this.route.snapshot.paramMap.get('id');
     this.petToEdit = await this.sistema.getMascotabyId(this.idPet);
     this.mascota.controls['nombre'].setValue(this.petToEdit.nombre);
     this.mascota.controls['color'].setValue(this.petToEdit.color);
@@ -215,11 +215,13 @@ export class AddPetPage implements OnInit {
    * @return {Date} The calculated date of its birth date.
    */
   getBirthDate() {
-    let today = moment(new Date());
-    today.subtract(this.mascota.get('years').value, 'years');
-    today.subtract(this.mascota.get('months').value, 'months');
-    today.subtract(this.mascota.get('days').value, 'days');
-    return today.toDate();
+    const now = new Date();
+    now.setUTCHours(0,0,0);
+    let birthDate = moment(now);
+    birthDate.subtract(this.mascota.get('years').value, 'years');
+    birthDate.subtract(this.mascota.get('months').value, 'months');
+    birthDate.subtract(this.mascota.get('days').value, 'days');    
+    return birthDate.toDate();
   }
 
   /**
