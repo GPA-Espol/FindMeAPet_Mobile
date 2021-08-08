@@ -42,3 +42,15 @@
 .add-button {
   --box-shadow: 0px 8px 50px #f7eaea;
 }
+
+.chips-container {
+  width: max-content;
+}
+
+.wrapper {
+  overflow-x: scroll;
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
