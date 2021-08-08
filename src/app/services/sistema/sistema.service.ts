@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { FirebaseX } from '@ionic-native/firebase-x/ngx';
 import { CachedUser } from 'src/app/model/cached_user';
 import { environment } from 'src/environments/environment';
 import { Administrador } from '../../model/admin/administrador.model';
@@ -22,7 +23,7 @@ export class SistemaService {
   private _usuario: UsuarioGPA;
   private _mascotas: { data: Mascota[]; time: number };
 
-  constructor(private http: HttpClient, private store: StorageService) {}
+  constructor(private http: HttpClient, private store: StorageService, private firebase: FirebaseX) {}
 
   /**
    * Make an http request to log in the user in the system, and save his/her role and save the
@@ -32,8 +33,11 @@ export class SistemaService {
    * @param {string} password The password of the user to login
    */
   public async login(usuario: string, password: string) {
-    let loginUrl = environment.api + 'auth';
-    let { token, rol, id } = await this.http.post<any>(loginUrl, { usuario, password }).toPromise();
+    const loginUrl = environment.api + 'auth';
+    const id_device = await this.firebase.getToken();
+    const { token, rol, id } = await this.http
+      .post<any>(loginUrl, { usuario, password, id_device })
+      .toPromise();
     await this.store.set('usuario', { token, rol, id });
     if (rol == RolUsuario.ADMIN) {
       this._usuario = new Administrador(this.http, this);
@@ -44,12 +48,14 @@ export class SistemaService {
   }
 
   /**
-   * Logs out the user in the system. It remove the user instance, and remove its info from the
-   * localStorage.
+   * Logs out the user in the system. It remove the user instance, remove its info from the
+   * localStorage, and send a request to delete the user device.
    */
   public async logout() {
     this._usuario = undefined;
     await this.store.remove('usuario');
+    const deleteUserDeviceUrl = environment.api + 'usuario/device';
+    this.http.delete(deleteUserDeviceUrl);
   }
 
   /**
@@ -106,7 +112,7 @@ export class SistemaService {
     let pet = Mascota.deserializeOne(data);
     return pet;
   }
-  
+
   /**
    * Get the user logged in as a Voluntario instance
    */

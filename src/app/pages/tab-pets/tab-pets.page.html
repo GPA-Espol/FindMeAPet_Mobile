@@ -8,18 +8,33 @@
 </ion-header>
 
 <ion-content>
-  <div class="ion-margin-start ion-margin-vertical">
-    <ion-chip
-      class="animal-chip"
-      [outline]="lugarBuscar!='todos'"
-      [class.animal-chip-pressed]="lugarBuscar=='todos'"
-      (click)="filterLocation('todos')"
-    >
-      <ion-label>
-        <ion-text color="secondary"> Todos </ion-text>
-      </ion-label>
-    </ion-chip>
-    <ion-chip
+  <div class="wrapper ion-margin-top">
+    <div class="chips-container">
+      <ion-chip
+        class="animal-chip"
+        [outline]="lugarBuscar!='todos'"
+        [class.animal-chip-pressed]="lugarBuscar=='todos'"
+        (click)="filterLocation('todos')"
+      >
+        <ion-label>
+          <ion-text color="secondary"> Todos </ion-text>
+        </ion-label>
+      </ion-chip>
+      <ion-chip
+        *ngFor="let ubicacion of ubicaciones"
+        class="animal-chip"
+        [outline]="lugarBuscar!=ubicacion"
+        [class.animal-chip-pressed]="lugarBuscar==ubicacion"
+        (click)="filterLocation(ubicacion)"
+      >
+        <ion-label>
+          <ion-text color="secondary"> {{ubicacion}} </ion-text>
+        </ion-label>
+      </ion-chip>
+    </div>
+  </div>
+  <div class="ion-margin-start">
+    <!-- <ion-chip
       class="animal-chip"
       [outline]="lugarBuscar!='Refugio'"
       [class.animal-chip-pressed]="lugarBuscar=='Refugio'"
@@ -48,7 +63,7 @@
       <ion-label>
         <ion-text color="secondary"> Externo </ion-text>
       </ion-label>
-    </ion-chip>
+    </ion-chip> -->
     <ion-searchbar
       animated
       clearIcon

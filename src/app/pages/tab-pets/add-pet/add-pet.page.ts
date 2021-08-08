@@ -10,7 +10,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ImagePickerComponent } from 'src/app/components/image-picker/image-picker.component';
 import { PetObserverService } from 'src/app/observables/pet-observer.service';
 import { Voluntario } from 'src/app/model/voluntario.model';
-import { RolUsuario } from 'src/app/model/enums.model';
+import { RolUsuario, UbicacionMascota } from 'src/app/model/enums.model';
 import { Mode, Utils } from 'src/app/utils/utils';
 
 /**
@@ -23,7 +23,8 @@ import { Mode, Utils } from 'src/app/utils/utils';
   styleUrls: ['./add-pet.page.scss'],
 })
 export class AddPetPage implements OnInit {
-  public mode: string = '';
+  mode: string = '';
+  ubicaciones: UbicacionMascota[];
   idPet: number;
   petToEdit: Mascota;
   extraInformation: boolean = false;
@@ -47,6 +48,7 @@ export class AddPetPage implements OnInit {
     this.buildPetForm();
     this.setMode();
     this.createUser();
+    this.ubicaciones = Object.values(UbicacionMascota);
   }
 
   /**
@@ -151,7 +153,6 @@ export class AddPetPage implements OnInit {
         await this.administrador.adminMascota.actualizarMascota(this.idPet, this.petToEdit);
       } else {
         await this.voluntario.hacerSolicitudActualizacionMascota();
-        
       }
       this.goback();
       await this.alertaService.presentToast(succesMessage);
@@ -216,11 +217,11 @@ export class AddPetPage implements OnInit {
    */
   getBirthDate() {
     const now = new Date();
-    now.setUTCHours(0,0,0);
+    now.setUTCHours(0, 0, 0);
     let birthDate = moment(now);
     birthDate.subtract(this.mascota.get('years').value, 'years');
     birthDate.subtract(this.mascota.get('months').value, 'months');
-    birthDate.subtract(this.mascota.get('days').value, 'days');    
+    birthDate.subtract(this.mascota.get('days').value, 'days');
     return birthDate.toDate();
   }
 
@@ -234,16 +235,12 @@ export class AddPetPage implements OnInit {
     this.mascota.controls['days'].setValue(information.days);
   }
 
-
   async modalVoluntarioConfirmation() {
     if (this.mode == Mode.EDITAR) {
-      const messageEdit =
-        'Se notificará al administrador para que acepte su solicitud de editar mascota';
+      const messageEdit = 'Se notificará al administrador para que acepte su solicitud de editar mascota';
       await this.alertaService.confirmationAlert(messageEdit, this.editPet.bind(this));
-      
     } else {
-      const messageAdd =
-        'Se notificará al administrador para que acepte su solicitud de agregar mascota';
+      const messageAdd = 'Se notificará al administrador para que acepte su solicitud de agregar mascota';
       await this.alertaService.confirmationAlert(messageAdd, this.createPet.bind(this));
     }
   }

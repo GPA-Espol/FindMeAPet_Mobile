@@ -1,6 +1,7 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { FirebaseX } from '@ionic-native/firebase-x/ngx';
 import { RolUsuario } from 'src/app/model/enums.model';
 import { AlertaService } from 'src/app/services/alerta/alerta.service';
 import { SistemaService } from 'src/app/services/sistema/sistema.service';
@@ -22,10 +23,11 @@ export class LoginPage implements OnInit {
   constructor(
     private sistema: SistemaService,
     private alertaService: AlertaService,
-    private router: Router
+    private router: Router,
+    private firebase: FirebaseX
   ) {}
 
-  ngOnInit() {
+  async ngOnInit() {
     this.initForm();
   }
 

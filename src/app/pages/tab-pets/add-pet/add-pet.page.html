@@ -112,10 +112,9 @@
           formControlName="ubicacion"
           mode="ios"
         >
-          <ion-select-option value="Refugio">Refugio</ion-select-option>
-          <ion-select-option value="Externo">Externo</ion-select-option>
-          <ion-select-option value="Dentro espol">Dentro de Espol</ion-select-option>
-          <ion-select-option value="Hogar temporal">Hogar Temporal</ion-select-option>
+          <ion-select-option *ngFor="let ubicacion of ubicaciones" [value]="ubicacion"
+            >{{ubicacion}}</ion-select-option
+          >
         </ion-select>
       </ion-item>
       <ion-row class="ion-margin-start">
