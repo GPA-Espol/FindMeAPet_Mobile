@@ -8,6 +8,9 @@ import { SistemaService } from './services/sistema/sistema.service';
 import { RolUsuario } from './model/enums.model';
 import { IonMenu, Platform } from '@ionic/angular';
 import { FirebaseX } from '@ionic-native/firebase-x/ngx';
+import { StorageService } from './services/storage/storage.service';
+import { NotificationType } from './utils/utils';
+import { NotificationsService } from './services/notifications/notifications.service';
 
 /**
  * App component
@@ -25,7 +28,9 @@ export class AppComponent {
     private splashScreen: SplashScreen,
     private router: Router,
     private sistema: SistemaService,
-    private platform: Platform
+    private platform: Platform,
+    private firebase: FirebaseX,
+    private notificationService: NotificationsService
   ) {
     this.initializeApp();
   }
@@ -39,6 +44,7 @@ export class AppComponent {
       this.platform.ready().then(() => {
         this.statusBar.backgroundColorByHexString('#ec823a');
         this.splashScreen.hide();
+        this.setFirebaseNotifHandler();
       });
     }
     let userLoggedIn = await this.sistema.userLoggedIn();
@@ -61,5 +67,15 @@ export class AppComponent {
     this.router.navigateByUrl('/', { replaceUrl: true });
     await this.sistema.logout();
     this.ionMenu.close(true);
+  }
+
+  private setFirebaseNotifHandler() {
+    this.firebase.onMessageReceived().subscribe((data) => {
+      if (data.tap) {
+        this.notificationService.readedNotif(data);
+      } else {
+        this.notificationService.newNotif(data);
+      }
+    });
   }
 }
