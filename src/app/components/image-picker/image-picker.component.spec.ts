@@ -1,66 +1,38 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { AngularFireStorage } from '@angular/fire/storage';
-import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { ActionSheetController, IonicModule, NavController } from '@ionic/angular';
 import { IonicStorageModule } from '@ionic/storage-angular';
-import { AppRoutingModule } from 'src/app/app-routing.module';
-import { AdministrarMascota } from 'src/app/model/admin/mascota_admin.model';
-import { AlertaService } from 'src/app/services/alerta/alerta.service';
-import { SistemaService } from 'src/app/services/sistema/sistema.service';
 import { Camera } from '@ionic-native/camera/ngx';
 
 import { ImagePickerComponent } from './image-picker.component';
 import { Observable, Observer } from 'rxjs';
-import { Mascota } from 'src/app/model/mascota.model';
-import { UbicacionMascota } from 'src/app/model/enums.model';
 
 const photoUrl = 'www';
 
 describe('ImagePickerComponent', () => {
   let component: ImagePickerComponent;
   let fixture: ComponentFixture<ImagePickerComponent>;
-  let adminMascotaSpy: AdministrarMascota;
-  let system: SistemaService;
   let camera: Camera;
   let actionSheetElementSpy: HTMLIonActionSheetElement;
   beforeEach(
     waitForAsync(() => {
-      const alertServiceSpy = jasmine.createSpyObj('AlertService', [
-        'presentToast',
-        'presentLoading',
-        'dismissLoading',
-      ]);
-      adminMascotaSpy = jasmine.createSpyObj('AdministrarMascota', ['crearMascota']);
-      const adminSpy = jasmine.createSpyObj('Administrador', [], { adminMascota: adminMascotaSpy });
-      const systemSpy = jasmine.createSpyObj('SistemaService', [], { admin: adminSpy });
       const cameraSpy = createCameraSpy();
-      const navCtrlSpy = jasmine.createSpyObj('NavController', ['navigateBack']);
       actionSheetElementSpy = jasmine.createSpyObj('HTMLIonActionSheetElement', ['present']);
       const actionSheetController = jasmine.createSpyObj('ActionSheetController', {
         create: actionSheetElementSpy,
       });
       TestBed.configureTestingModule({
         declarations: [ImagePickerComponent],
-        imports: [
-          IonicModule.forRoot(),
-          HttpClientTestingModule,
-          IonicStorageModule.forRoot(),
-          AppRoutingModule,
-          ReactiveFormsModule,
-        ],
+        imports: [IonicModule.forRoot(), HttpClientTestingModule, IonicStorageModule.forRoot()],
         providers: [
           { provide: Camera, useValue: cameraSpy },
           { provide: AngularFireStorage, useValue: createAngularFireStorageSpy() },
-          { provide: AlertaService, useValue: alertServiceSpy },
-          { provide: SistemaService, useValue: systemSpy },
           { provide: ActionSheetController, useValue: actionSheetController },
-          { provide: NavController, useValue: navCtrlSpy },
         ],
       }).compileComponents();
       fixture = TestBed.createComponent(ImagePickerComponent);
       component = fixture.componentInstance;
-      system = TestBed.inject(SistemaService);
       camera = TestBed.inject(Camera);
       fixture.detectChanges();
     })
@@ -139,19 +111,4 @@ function createCameraSpy() {
     },
     { DestinationType: {}, EncodingType: {}, MediaType: {} }
   );
-}
-
-function createTestPet() {
-  let testPet = new Mascota();
-  testPet.nombre = 'Diego';
-  testPet.color = 'Blanco';
-  testPet.isEsterilizado = true;
-  testPet.isAdoptado = false;
-  testPet.isCasoExterno = false;
-  testPet.isAdoptable = true;
-  testPet.descripcion = 'Usa arenero.';
-  testPet.sexo = 'M';
-  testPet.ubicacionMascota = UbicacionMascota.ASO_FIMCP;
-  testPet.tipoAnimal = 'Gato';
-  return testPet;
 }
