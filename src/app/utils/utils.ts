@@ -53,10 +53,10 @@ export class Utils {
    */
   static getInformationAge(fecha: Date) {
     const now = new Date();
-    now.setUTCHours(0,0,0);
+    now.setUTCHours(0, 0, 0);
     const today = moment(now);
     const birthdate = moment(fecha);
-    const days = Utils.diffDays(now,fecha);
+    const days = Utils.diffDays(now, fecha);
     const years = today.diff(birthdate, 'years');
     today.add(-years, 'years');
     const months = today.diff(birthdate, 'months');
@@ -68,4 +68,12 @@ export class Utils {
 export enum Mode {
   EDITAR = 'editar',
   ANADIR = 'anadir',
+}
+
+export enum NotificationType {
+  ADD_PET_REQUEST = '1',
+  EDIT_PET_REQUEST = '2',
+  ADOPT_PET_REQUEST = '3',
+  EXTERNAL_REQUEST = '4',
+  ABSENT_NOTIF = '5',
 }
