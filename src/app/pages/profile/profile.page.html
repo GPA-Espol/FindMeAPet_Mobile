@@ -1,25 +1,38 @@
 <ion-content>
-  <ion-grid>
+  <ion-grid *ngIf="usuario">
     <div class="top-row ion-padding">
       <h1 class="title ion-no-margin">Mi perfil</h1>
-      <ion-row class="ion-justify-content-center ion-align-items-center profile-row" >
+      <ion-row class="ion-justify-content-center ion-align-items-center profile-row">
         <ion-col size="auto" class="ion-text-center">
-          
-
-          <ion-avatar class="item-avatar" style="margin: auto;">
-            <img src="https://www.seekpng.com/png/detail/110-1100707_person-avatar-placeholder.png" />
+          <ion-avatar class="user-avatar" style="margin: auto">
+            <img src="/assets/Ellipse.png" />
           </ion-avatar>
-          <h3 class="name ion-no-margin">Andrea Lopez</h3>
-
-          <h3 >Estado</h3>
-          <ion-chip class="state-chip  ion-margin-end">
+          <!--h3 class="title ion-no-margin">{{usuario.nombre}} {{usuario.apellido}}</h3-->
+          <h3 class="title ion-no-margin">Nombre y Apellido</h3>
+          <h3 class="ion-no-margin ion-margin-top">Estado</h3>
+          <ion-chip class="state-chip">
             <ion-label>No disponible</ion-label>
           </ion-chip>
         </ion-col>
       </ion-row>
     </div>
     <div class="div-bg">
-      <ion-row class="bottom-row ion-padding"> <h1 class="title ion-no-margin">Informacion</h1> </ion-row>
+      <ion-row class="bottom-row ion-padding">
+        <ion-list class="ion-no-margin">
+          <ion-list-header
+            ><h1 class="title ion-no-margin ion-margin-bottom">Información</h1></ion-list-header
+          >
+          <ion-item *ngFor="let item of informationItems" lines="none" class="ion-margin-bottom">
+            <ion-avatar slot="start" class="icon-avatar">
+              <img [src]="item.icon" />
+            </ion-avatar>
+            <div style="display: block !important">
+              <ion-label>{{item.title}}</ion-label>
+              <ion-note>{{item.info}}</ion-note>
+            </div>
+          </ion-item>
+        </ion-list></ion-row
+      >
     </div>
   </ion-grid>
 </ion-content>

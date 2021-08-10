@@ -7,6 +7,8 @@ import { Router } from '@angular/router';
 import { SistemaService } from './services/sistema/sistema.service';
 import { RolUsuario } from './model/enums.model';
 import { IonMenu, Platform } from '@ionic/angular';
+import { FirebaseX } from '@ionic-native/firebase-x/ngx';
+
 
 /**
  * App component
@@ -24,7 +26,8 @@ export class AppComponent {
     private splashScreen: SplashScreen,
     private router: Router,
     private sistema: SistemaService,
-    private platform: Platform
+    private platform: Platform,
+    private firebase : FirebaseX
   ) {
     this.initializeApp();
   }

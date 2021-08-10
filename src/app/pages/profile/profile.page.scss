@@ -20,9 +20,26 @@ ion-grid {
 .profile-row {
   height: 100%;
   width: 100%;
-  
 }
 .div-bg {
   background-color: #f9c49a;
-  
+}
+
+.state-chip {
+  --background: #fb6d4e;
+  --color: white;
+}
+.icon-avatar {
+  --border-radius: 0px;
+}
+
+.title {
+  color: #3a2a11;
+  font-weight: bold !important;
+}
+
+.user-avatar {
+  height: 100px;
+  width: 100px;
+  margin-bottom: 10px!important;
 }

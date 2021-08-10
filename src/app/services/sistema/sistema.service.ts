@@ -97,14 +97,16 @@ export class SistemaService {
     return pet;
   }
 
-  
-
   public get voluntario() {
     return this._usuario as Voluntario;
   }
 
   public get admin() {
     return this._usuario as Administrador;
+  }
+
+  public get usuario() {
+    return this._usuario;
   }
 
   public get mascotas() {
