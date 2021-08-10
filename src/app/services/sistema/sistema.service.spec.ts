@@ -4,6 +4,7 @@ import { HttpClientTestingModule, HttpTestingController } from '@angular/common/
 import { SistemaService } from './sistema.service';
 import { Storage } from '@ionic/storage';
 import { environment } from 'src/environments/environment';
+import { RolUsuario } from 'src/app/model/enums.model';
 
 describe('SistemaService', () => {
   let service: SistemaService;
@@ -31,13 +32,13 @@ describe('SistemaService', () => {
 
   it('SS-03 should log in as admin', (done) => {
     let token = 'abcd';
-    let rol = 'Admin';
+    let rol = RolUsuario.ADMIN;
     let usuario = 'admin';
     let password = 'admin';
 
     service.login(usuario, password).then(async () => {
       let userLogged = await service.userLoggedIn();
-      expect(userLogged).toEqual({ token, rol });
+      expect(userLogged).toEqual({ token, rol, id:5 });
       expect(service.admin).toBeTruthy();
       done();
     });
@@ -61,12 +62,12 @@ describe('SistemaService', () => {
 
   it('SS-06 should log in as volunteer', (done) => {
     let token = 'abcd';
-    let rol = 'Voluntario';
+    let rol = RolUsuario.VOLUNTARIO;
     let usuario = 'voluntario';
     let password = 'voluntario';
     service.login(usuario, password).then(async () => {
       let userLogged = await service.userLoggedIn();
-      expect(userLogged).toEqual({ rol, token });
+      expect(userLogged).toEqual({ rol, token, id:5 });
       expect(service.voluntario).toBeTruthy();
       done();
     });

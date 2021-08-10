@@ -22,6 +22,11 @@ export class AdminCardComponent implements OnInit {
    * card
    */
   @Input() redirectTo: string;
+
+  /**
+   * Number of notifications of the option
+   */
+  @Input() notifications;
   constructor(private router: Router, private route: ActivatedRoute) {}
 
   ngOnInit() {}

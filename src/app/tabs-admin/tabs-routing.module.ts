@@ -23,15 +23,13 @@ const routes: Routes = [
       {
         path: 'solicitud',
         loadChildren: () =>
-          import('../pages/en-construccion/en-construccion.module').then((m) => m.EnConstruccionPageModule),
+          import('../pages/tab-request/tab-request.module').then((m) => m.TabRequestPageModule),
       },
-
       {
         path: 'configuracion',
         loadChildren: () =>
           import('../pages/tab-manage/tab-manage.module').then((m) => m.TabManagePageModule),
       },
-
       {
         path: '',
         redirectTo: '/tabs/admin/inicio',
