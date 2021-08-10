@@ -8,12 +8,12 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class AgePipe implements PipeTransform {
   /**Calculate the age of the pet from their date of birth
-   * @param d Birthdate of the pet in the format YYYY-MM-DD
-   * @returns String with the age in years, or month if the pet is less than a year
+   * @param {Date} d Birthdate of the pet
+   * @returns {String} with the age in years, or month if the pet is less than a year
    */
-  transform(date: any): string {
+  transform(date: Date): string {
     let currentDate = new Date();
-    currentDate.setUTCHours(0,0,0);
+    currentDate.setUTCHours(0, 0, 0);
     let year = currentDate.getFullYear() - date.getFullYear();
     let month = currentDate.getMonth() - date.getMonth();
     let day = currentDate.getDate() - date.getDate();
