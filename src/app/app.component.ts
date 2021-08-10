@@ -69,6 +69,9 @@ export class AppComponent {
     this.ionMenu.close(true);
   }
 
+  /**
+   * Set the callback to excecute when a new Firebase notification comes
+   */
   private setFirebaseNotifHandler() {
     this.firebase.onMessageReceived().subscribe((data) => {
       if (data.tap) {

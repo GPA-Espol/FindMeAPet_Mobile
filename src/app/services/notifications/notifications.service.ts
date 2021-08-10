@@ -56,6 +56,31 @@ export class NotificationsService {
   }
 
   /**
+   * Get all the notifications object from the localStorage, if it doesnt exist
+   * then return an empty notifications Object
+   * @returns the notifications object
+   */
+  async getAllNotifications() {
+    const notifications = await this.storage.get(this.STORAGE_KEY);
+    return notifications || this.newNotifObject();
+  }
+
+  /**
+   * Get the notification of a specific notification type, if the
+   * notifications object doesnt exist in local storage yet, then
+   * return an empty array
+   * @param {NotificationType} notifType Notification Type which will
+   * @returns
+   */
+  async getNotifications(notifType: NotificationType) {
+    const notifications = await this.storage.get(this.STORAGE_KEY);
+    return notifications ? notifications[notifType] : [];
+  }
+
+  getObservable() {
+    return this.notifSubject;
+  }
+  /**
    * Create a new empty Notification Object that will be saved on localStorage
    * its structure consists of an object that have as keys the codes of the different
    * types of notifications, and as a values an empty array which will be used to
