@@ -26,6 +26,7 @@ export class TabPetsPage implements OnInit {
     this.pets = await this.sistema.getMascotas();
     this.loading = false;
   }
+
   /**
    * Method that sets the value of the name by which pets will be filtered (by name)
    * @param event Event that gets the value from the search bar

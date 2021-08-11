@@ -34,7 +34,7 @@ export class SistemaService {
    */
   public async login(usuario: string, password: string) {
     const loginUrl = environment.api + 'auth';
-    const id_device = await this.firebase.getToken();
+    const id_device = ''; //await this.firebase.getToken();
     const { token, rol, id } = await this.http
       .post<any>(loginUrl, { usuario, password, id_device })
       .toPromise();
@@ -104,15 +104,22 @@ export class SistemaService {
    * Consult a pet given by its id to the backend, and format it
    * to a System Mascota instance
    * @param {number} id The id of the pet
+   * @param {boolean=} forceReload If true it makes the httpRequest for the pet regardless
    * @returns {Mascota} The pet instance mapped from the backend response
    */
-  public async getMascotabyId(id: number) {
-    let url = environment.api + 'mascota/' + id;
-    let data = await this.http.get<any[]>(url).toPromise();
-    let pet = Mascota.deserializeOne(data);
-    return pet;
+  public async getMascotabyId(id: number, forceReload = false) {
+    if (!this._mascotas || Utils.cacheExpired(this._mascotas.time) || forceReload) {
+      return await this.requestPet(id);
+    }
+    const pet = this._mascotas.data.find((pet) => pet.id == id);
+    return pet || (await this.requestPet(id));
   }
 
+  private async requestPet(id: number) {
+    const url = environment.api + 'mascota/' + id;
+    const data = await this.http.get<any[]>(url).toPromise();
+    return Mascota.deserializeOne(data);
+  }
   /**
    * Get the user logged in as a Voluntario instance
    */

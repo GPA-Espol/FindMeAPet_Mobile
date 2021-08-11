@@ -1,0 +1,33 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Solicitudes de adopción</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-row class="ion-justify-content-center" *ngIf="loading; else loadedContent">
+    <ion-spinner name="crescent" color="primary"></ion-spinner>
+  </ion-row>
+  <ng-template #loadedContent>
+    <ion-card *ngFor="let request of requests" class="adoption-card" mode="ios" [routerLink]="request.id">
+      <ion-card-header>
+        <ion-row class="ion-justify-content-between ion-align-content-center">
+          <h3 class="name-request ion-no-margin">{{request.nombre}} {{request.apellido}}</h3>
+          <!-- <h5 class="more-info ion-no-margin">Hoy</h5> -->
+        </ion-row>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-row class="more-info"> {{request.correo_electronico}} </ion-row>
+        <ion-row class="pet-to-adopt ion-align-content-center">
+          <ion-icon *ngIf="request.petType == 'Gato'" src="/assets/icon/gato.svg"></ion-icon>
+          <ion-icon *ngIf="request.petType == 'Perro'" src="/assets/icon/perro.svg"></ion-icon>
+          <p>{{request.petName}}</p>
+        </ion-row>
+        <p>Tiene {{request.fecha_nacimiento | age}}, y vive en la ciudad de {{request.ciudad}}</p>
+      </ion-card-content>
+    </ion-card>
+  </ng-template>
+</ion-content>

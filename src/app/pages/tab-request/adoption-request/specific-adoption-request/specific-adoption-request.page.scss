@@ -1,0 +1,42 @@
+.img-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  img {
+    border-radius: 15px;
+    width: 150px;
+  }
+}
+
+ion-item-divider {
+  color: var(--ion-color-primary);
+  border-color: var(--ion-color-primary);
+}
+
+ion-label {
+  overflow: visible !important;
+  margin-right: 10px;
+}
+
+ion-text {
+  margin: 10px 0 !important;
+}
+
+ion-item:nth-child(even) {
+  background-color: #f8f8f9;
+}
+
+ion-item::part(native) {
+  background: transparent;
+}
+
+ion-list {
+  padding-bottom: 80px;
+}
+
+.decision {
+  position: fixed;
+  width: 100%;
+  bottom: 0px;
+  background-color: white;
+}

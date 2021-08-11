@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { NotificationsService } from 'src/app/services/notifications/notifications.service';
 import { NotificationType } from 'src/app/utils/utils';
-
+import { RequestsTypes } from './request-types.enum';
 @Component({
   selector: 'app-tab-request',
   templateUrl: './tab-request.page.html',
@@ -12,19 +12,19 @@ export class TabRequestPage implements OnInit {
   Object = Object;
   options = {
     adoption: {
-      redirectTo: 'adopcion',
+      redirectTo: RequestsTypes.ADOPTION,
       icon: '/assets/icon/adopcion.svg',
       description: 'Adopción',
       notifications: 0,
     },
     requests: {
-      redirectTo: 'propuesta-voluntarios',
+      redirectTo: RequestsTypes.VOLUNTEERS_REQUESTS,
       icon: '/assets/icon/voluntario.svg',
       description: 'Propuestas de voluntarios',
       notifications: 0,
     },
     externals: {
-      redirectTo: 'casos-ext',
+      redirectTo: RequestsTypes.EXTERNAL_CASES,
       icon: '/assets/icon/mascotas.png',
       description: 'Casos externos',
       notifications: 0,

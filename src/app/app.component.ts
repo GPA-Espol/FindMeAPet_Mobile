@@ -8,8 +8,6 @@ import { SistemaService } from './services/sistema/sistema.service';
 import { RolUsuario } from './model/enums.model';
 import { IonMenu, Platform } from '@ionic/angular';
 import { FirebaseX } from '@ionic-native/firebase-x/ngx';
-import { StorageService } from './services/storage/storage.service';
-import { NotificationType } from './utils/utils';
 import { NotificationsService } from './services/notifications/notifications.service';
 
 /**
@@ -75,6 +73,7 @@ export class AppComponent {
   private setFirebaseNotifHandler() {
     this.firebase.onMessageReceived().subscribe((data) => {
       if (data.tap) {
+        //TODO Redirect to the notification view
         this.notificationService.readedNotif(data);
       } else {
         this.notificationService.newNotif(data);
