@@ -14,17 +14,18 @@ export class AdministrarMascota {
     let url = environment.api + 'mascota';
     let mascotaApi = Mascota.serialize(mascota);
     this.sistema.mascotas.push(mascota);
-    await this.http.post<void>(url, mascotaApi).toPromise();
+    const { id } = await this.http.post<any>(url, mascotaApi).toPromise();
+    mascota.id = id;
   }
 
-  public async eliminarMascota(id: string,) {
+  public async eliminarMascota(id: number) {
     let url = environment.api + 'mascota/' + id;
     const index = this.sistema.mascotas.findIndex((pet) => pet.id == +id);
     this.sistema.mascotas.splice(index, 1);
     await this.http.delete<any[]>(url).toPromise();
   }
 
-  public async actualizarMascota(id: string, mascota: Mascota) {
+  public async actualizarMascota(id: number, mascota: Mascota) {
     let url = environment.api + 'mascota/' + id;
     let mascotaApi = Mascota.serialize(mascota);
     const index = this.sistema.mascotas.findIndex((pet) => pet.id == mascota.id);
@@ -33,6 +34,4 @@ export class AdministrarMascota {
 
     //this.sistema.mascotas.push(mascota);
   }
-
-
 }

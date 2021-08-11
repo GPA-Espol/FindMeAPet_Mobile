@@ -4,9 +4,13 @@ import { Camera, CameraOptions, PictureSourceType } from '@ionic-native/camera/n
 import { ActionSheetController } from '@ionic/angular';
 import { Observable } from 'rxjs';
 import { finalize } from 'rxjs/operators';
-import { Mascota } from 'src/app/model/mascota.model';
 import { AlertaService } from 'src/app/services/alerta/alerta.service';
 
+/**
+ * Component that takes a photo whether from the camara, or local storage
+ * and it can upload to Firebase Server to get a sharable link.
+ * @category Components
+ */
 @Component({
   selector: 'app-image-picker',
   templateUrl: './image-picker.component.html',
@@ -61,7 +65,7 @@ export class ImagePickerComponent implements OnInit {
    * This method set the attribute image64 with the base64 value of the
    * picture took.
    */
-  private takePicture(source: PictureSourceType) {
+  async takePicture(source: PictureSourceType) {
     const options: CameraOptions = {
       quality: 80,
       destinationType: this.camera.DestinationType.DATA_URL,
@@ -71,15 +75,13 @@ export class ImagePickerComponent implements OnInit {
       targetWidth: 1000,
       targetHeight: 1000,
     };
-    this.camera.getPicture(options).then(
-      (imageData) => {
-        this.image64 = 'data:image/jpeg;base64,' + imageData;
-      },
-      (err) => {
-        this.alertaService.presentToast('Ha ocurrido un error al tomar la foto.');
-        console.error(err);
-      }
-    );
+    try {
+      const imageData = await this.camera.getPicture(options);
+      this.image64 = 'data:image/jpeg;base64,' + imageData;
+    } catch (err) {
+      this.alertaService.presentToast('Ha ocurrido un error al tomar la foto.');
+      console.error(err);
+    }
   }
 
   /**

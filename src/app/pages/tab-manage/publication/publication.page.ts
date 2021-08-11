@@ -6,6 +6,13 @@ import { Publicacion } from 'src/app/model/publicacion.model';
 import { PublicationObserverService } from 'src/app/observables/publication-observer.service';
 import { SistemaService } from 'src/app/services/sistema/sistema.service';
 
+/**
+ * Class in charge of showing all the publications.
+ * Note: This class will show both type of publications depending
+ * on the active route, so when the user is in the News route, all the news will
+ * be shown, the same with the other publications types
+ * @category Components
+ */
 @Component({
   selector: 'app-news',
   templateUrl: './publication.page.html',
@@ -25,13 +32,19 @@ export class PublicationPage implements OnInit {
 
   ngOnInit() {
     this.setPublicationsType();
-    this.getPublicationData();
+    this.setPublicationData();
     this.publicationSubscription = this.publicationObserver.getObservable().subscribe(() => {
-      this.getPublicationData();
+      this.setPublicationData();
     });
   }
 
-  private async getPublicationData() {
+
+  /**
+   * Method that consult the publications from the backend, and will
+   * set an array of publications, filtering the type of which the page
+   * belongs to
+   */
+  private async setPublicationData() {
     this.loading = true;
     const { adminPublicacion } = this.sistema.admin;
     const publications = await adminPublicacion.verPublicaciones();
@@ -51,6 +64,10 @@ export class PublicationPage implements OnInit {
     this.setPublicationTitle();
   }
 
+  /**
+   * Set the publication title that will be shown on the header of the view
+   * depending on the publication type
+   */
   private setPublicationTitle() {
     if (this.publicationsType == TipoPublicacion.NOTICIA) {
       this.publicationTitle = 'noticias';
@@ -59,6 +76,10 @@ export class PublicationPage implements OnInit {
     }
   }
 
+  /**
+   * Method that unsubscribe from the publication observable
+   * when the component is destroyed
+   */
   ngOnDestroy() {
     this.publicationSubscription.unsubscribe();
   }

@@ -12,17 +12,19 @@ export class Publicacion {
   private _descripcion: string;
   private _tag: string;
   private _tipo: TipoPublicacion;
-  private _fecha: Date | string;
+  private _fecha: Date;
   private _idUsuario: number;
 
   static serialize(publication: Publicacion) {
+    const dateISOString = publication.fecha.toISOString();
+    const date = dateISOString.split("T")[0];
     return {
       titulo: publication.titulo,
       imagen: publication.imagenUrl,
       descripcion: publication.descripcion,
       tag: publication.tag || '',
       tipo_publicacion: publication.tipo,
-      fecha: moment(publication.fecha).format('YYYY-MM-DD'),
+      fecha: date,
       id_usuario: publication.idUsuario,
     };
   }
@@ -92,11 +94,11 @@ export class Publicacion {
     this._tipo = value;
   }
 
-  public get fecha(): Date | string {
+  public get fecha(): Date {
     return this._fecha;
   }
 
-  public set fecha(value: Date | string) {
+  public set fecha(value: Date) {
     this._fecha = value;
   }
 

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { UbicacionMascota } from 'src/app/model/enums.model';
 import { Mascota } from 'src/app/model/mascota.model';
 import { SistemaService } from 'src/app/services/sistema/sistema.service';
 
@@ -16,14 +17,16 @@ export class TabPetsPage implements OnInit {
   textoBuscar: '';
   lugarBuscar = 'todos';
   loading = true;
-
+  ubicaciones: UbicacionMascota[];
   constructor(private sistema: SistemaService) {}
 
   async ngOnInit() {
     this.loading = true;
+    this.ubicaciones = Object.values(UbicacionMascota);
     this.pets = await this.sistema.getMascotas();
     this.loading = false;
   }
+
   /**
    * Method that sets the value of the name by which pets will be filtered (by name)
    * @param event Event that gets the value from the search bar

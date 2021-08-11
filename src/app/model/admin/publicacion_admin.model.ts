@@ -24,18 +24,23 @@ export class AdministrarPublicacion {
   }
 
   public async verPublicacion(publicationId: number) {
+    if (!Utils.cacheExpired(this.publicaciones.time)) {
+      const publication = this.publicaciones.data.find((pub) => pub.id == publicationId);
+      if (publication) return publication;
+    }
     const url = `${this.url}/${publicationId}`;
     const res = await this.http.get<any>(url).toPromise();
     return Publicacion.deserialize_one(res);
   }
 
-  public crearPublicacion(publication: Publicacion) {
+  public async crearPublicacion(publication: Publicacion) {
     if (!this.publicaciones) {
       this.publicaciones = { data: [], time: new Date().getTime() };
     }
     const body = Publicacion.serialize(publication);
     this.publicaciones.data.push(publication);
-    return this.http.post(this.url, body).toPromise();
+    const { id } = await this.http.post<any>(this.url, body).toPromise();
+    publication.id = id;
   }
 
   public eliminarPublicacion(publicationId: number) {

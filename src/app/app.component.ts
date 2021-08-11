@@ -8,7 +8,7 @@ import { SistemaService } from './services/sistema/sistema.service';
 import { RolUsuario } from './model/enums.model';
 import { IonMenu, Platform } from '@ionic/angular';
 import { FirebaseX } from '@ionic-native/firebase-x/ngx';
-
+import { NotificationsService } from './services/notifications/notifications.service';
 
 /**
  * App component
@@ -27,7 +27,8 @@ export class AppComponent {
     private router: Router,
     private sistema: SistemaService,
     private platform: Platform,
-    private firebase : FirebaseX
+    private firebase: FirebaseX,
+    private notificationService: NotificationsService
   ) {
     this.initializeApp();
   }
@@ -41,6 +42,7 @@ export class AppComponent {
       this.platform.ready().then(() => {
         this.statusBar.backgroundColorByHexString('#ec823a');
         this.splashScreen.hide();
+        this.setFirebaseNotifHandler();
       });
     }
     let userLoggedIn = await this.sistema.userLoggedIn();
@@ -63,5 +65,19 @@ export class AppComponent {
     this.router.navigateByUrl('/', { replaceUrl: true });
     await this.sistema.logout();
     this.ionMenu.close(true);
+  }
+
+  /**
+   * Set the callback to excecute when a new Firebase notification comes
+   */
+  private setFirebaseNotifHandler() {
+    this.firebase.onMessageReceived().subscribe((data) => {
+      if (data.tap) {
+        //TODO Redirect to the notification view
+        this.notificationService.readedNotif(data);
+      } else {
+        this.notificationService.newNotif(data);
+      }
+    });
   }
 }

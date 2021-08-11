@@ -118,8 +118,8 @@
           formControlName="ubicacion"
           mode="ios"
         >
-          <ion-select-option *ngFor="let ubicacion of ubicacionesKeys" [value]="ubicacionesKeys[ubicacion]"
-            >{{ubicacion.replace('_',' ')|titlecase}}</ion-select-option
+          <ion-select-option *ngFor="let ubicacion of ubicaciones" [value]="ubicacion"
+            >{{ubicacion}}</ion-select-option
           >
         </ion-select>
       </ion-item>

@@ -25,14 +25,14 @@ export class TabsPage {
       iconActivo: 'assets/icon/inicio_activo.svg',
     },
     {
-      tab: 'solicitud',
-      icon: 'assets/icon/solicitud.svg',
-      iconActivo: 'assets/icon/solicitud_activo.svg',
+      tab: 'reporte-actividad',
+      icon: 'assets/icon/actividad.svg',
+      iconActivo: 'assets/icon/actividad_activo.svg',
     },
     {
-      tab: 'configuracion',
-      icon: 'assets/icon/config.svg',
-      iconActivo: 'assets/icon/config_activo.svg',
+      tab: 'puntos-alimentacion',
+      icon: 'assets/icon/brujula.svg',
+      iconActivo: 'assets/icon/brujula_activo.svg',
     },
   ];
   @ViewChild(IonTabs) ionTabs: IonTabs;

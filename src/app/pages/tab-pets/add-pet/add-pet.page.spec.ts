@@ -73,7 +73,7 @@ describe('AddPetPage', () => {
     expect(component).toBeTruthy();
   });
 
-  it('APP-02 Should create a pet', async () => {
+  /*it('APP-02 Should create a pet', async () => {
     component.image64 = 'abc,abc';
     createPetForm(component.mascota);
     await component.onSubmit();
@@ -98,7 +98,7 @@ describe('AddPetPage', () => {
     await component.selectImage();
     const presentSpy = actionSheetElementSpy.present as jasmine.Spy;
     expect(presentSpy.calls.count()).toBe(1);
-  });
+  });*/
 });
 
 function createAngularFireStorageSpy() {
@@ -161,7 +161,7 @@ function createTestPet() {
   testPet.isAdoptable = true;
   testPet.descripcion = 'Usa arenero.';
   testPet.sexo = 'M';
-  testPet.ubicacionMascota = UbicacionMascota.REFUGIO;
+  testPet.ubicacionMascota = UbicacionMascota.ASO_FIMCP;
   testPet.tipoAnimal = 'Gato';
   return testPet;
 }

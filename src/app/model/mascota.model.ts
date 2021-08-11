@@ -40,9 +40,11 @@ export class Mascota {
    * @returns {any} Object with the fields compatible with the API
    */
   static serialize(mascota: Mascota) {
+    const birthDateISOString = mascota._fechaNacimiento.toISOString();
+    const date = birthDateISOString.split('T')[0];
     return {
       nombre: mascota.nombre,
-      fecha_nacimiento: moment(mascota.fechaNacimiento).format('YYYY-MM-DD'),
+      fecha_nacimiento: date,
       color: mascota.color,
       is_esterilizado: mascota.isEsterilizado ? 1 : 0,
       is_adoptado: mascota.isAdoptado ? 1 : 0,
@@ -80,6 +82,10 @@ export class Mascota {
 
   public get id(): number {
     return this._id;
+  }
+
+  public set id(value: number) {
+    this._id = value;
   }
 
   public get nombre(): string {
@@ -183,5 +189,17 @@ export class Mascota {
   }
   public set imagenUrl(value: string) {
     this._imagenUrl = value;
+  }
+}
+
+class Hola {
+  private nombre: string;
+  private apellido: string;
+
+  serialize(hola: Hola) {
+    return {
+      nombre: hola.nombre,
+      apellido: hola.apellido,
+    };
   }
 }

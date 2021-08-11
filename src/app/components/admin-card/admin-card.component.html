@@ -1,8 +1,10 @@
 <ion-card button (click)="redirect()" mode="ios">
   <div class="content-container">
     <div class="icon-container">
-      <ion-icon [src]="icon"></ion-icon>
+      <ion-icon *ngIf="icon.endsWith('svg')" [src]="icon"></ion-icon>
+      <img *ngIf="icon.endsWith('png')" [src]="icon" />
     </div>
     <div class="card-info">{{ description }}</div>
   </div>
+  <ion-badge *ngIf="notifications" color="danger">{{ notifications }}</ion-badge>
 </ion-card>

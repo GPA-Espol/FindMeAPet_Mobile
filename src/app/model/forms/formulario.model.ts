@@ -5,19 +5,14 @@ import { EstadoSolicitud } from '../enums.model';
  * @category Model
  */
 export class Formulario {
-  protected _CI: string;
   protected _nombre: string;
   protected _apellido: string;
   protected _ciudad: string;
   protected _edad: string;
   protected _email: string;
-  protected _fecha: Date | string;
+  protected _fechaNacimiento: Date;
   protected _direccion: string;
   protected _estado: EstadoSolicitud;
-
-  public get CI(): string {
-    return this._CI;
-  }
 
   public get nombre(): string {
     return this._nombre;
@@ -39,8 +34,8 @@ export class Formulario {
     return this._email;
   }
 
-  public get fecha(): Date | string {
-    return this._fecha;
+  public get fechaNacimiento(): Date {
+    return this._fechaNacimiento;
   }
 
   public get direccion(): string {

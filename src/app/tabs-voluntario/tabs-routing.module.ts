@@ -21,12 +21,12 @@ const routes: Routes = [
         loadChildren: () => import('../pages/tab-home/tab-home.module').then( m => m.TabHomePageModule)
       },
       {
-        path: 'solicitud',
+        path: 'reporte-actividad',
         loadChildren: () =>
           import('../pages/en-construccion/en-construccion.module').then((m) => m.EnConstruccionPageModule),
       },
       {
-        path: 'configuracion',
+        path: 'puntos-alimentacion',
         loadChildren: () =>
           import('../pages/en-construccion/en-construccion.module').then((m) => m.EnConstruccionPageModule),
       },

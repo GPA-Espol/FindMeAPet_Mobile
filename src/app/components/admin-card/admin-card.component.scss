@@ -9,7 +9,7 @@
 .icon-container {
   min-width: 7rem;
   min-height: 7rem;
-  background: linear-gradient(180deg, #f99a9b 4.17%, #ffaa71 100%);
+  background: var(--ion-color-primary);
   border-radius: 50%;
   display: flex;
   justify-content: center;
@@ -25,4 +25,11 @@
   color: #494b4d;
   font-size: 24px;
   font-weight: 500;
+}
+
+ion-badge {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  font-size: 15px;
 }

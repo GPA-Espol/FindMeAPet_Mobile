@@ -6,7 +6,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Mascota } from 'src/app/model/mascota.model';
 import * as moment from 'moment';
 import { Administrador } from 'src/app/model/admin/administrador.model';
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ImagePickerComponent } from 'src/app/components/image-picker/image-picker.component';
 import { PetObserverService } from 'src/app/observables/pet-observer.service';
@@ -24,8 +23,9 @@ import { Mode, Utils } from 'src/app/utils/utils';
   styleUrls: ['./add-pet.page.scss'],
 })
 export class AddPetPage implements OnInit {
-  public mode: string = '';
-  idPet: string;
+  mode: string = '';
+  ubicaciones: UbicacionMascota[];
+  idPet: number;
   petToEdit: Mascota;
   extraInformation: boolean = false;
   ageType: string = '';
@@ -34,7 +34,6 @@ export class AddPetPage implements OnInit {
   voluntario: Voluntario;
   colors = ColorMascota;
   colorsKeys=[]
-  ubicaciones : UbicacionMascota
   ubicacionesKeys = []
 
   @ViewChild('imgPicker') imgPicker: ImagePickerComponent;
@@ -53,7 +52,7 @@ export class AddPetPage implements OnInit {
     this.setMode();
     this.createUser();
     this.colorsKeys = Object.keys(ColorMascota);
-    this.ubicacionesKeys = Object.keys(UbicacionMascota);
+    this.ubicaciones = Object.values(UbicacionMascota);
   }
 
   /**
@@ -107,7 +106,7 @@ export class AddPetPage implements OnInit {
    * Method that set values to the form fields of the pet to edit
    */
   async getData() {
-    this.idPet = this.route.snapshot.paramMap.get('id');
+    this.idPet = +this.route.snapshot.paramMap.get('id');
     this.petToEdit = await this.sistema.getMascotabyId(this.idPet);
     this.mascota.controls['nombre'].setValue(this.petToEdit.nombre);
     this.mascota.controls['color'].setValue(this.petToEdit.color);
@@ -158,7 +157,6 @@ export class AddPetPage implements OnInit {
         await this.administrador.adminMascota.actualizarMascota(this.idPet, this.petToEdit);
       } else {
         await this.voluntario.hacerSolicitudActualizacionMascota();
-        
       }
       this.goback();
       await this.alertaService.presentToast(succesMessage);
@@ -224,11 +222,13 @@ export class AddPetPage implements OnInit {
    * @return {Date} The calculated date of its birth date.
    */
   getBirthDate() {
-    let today = moment(new Date());
-    today.subtract(this.mascota.get('years').value, 'years');
-    today.subtract(this.mascota.get('months').value, 'months');
-    today.subtract(this.mascota.get('days').value, 'days');
-    return today.toDate();
+    const now = new Date();
+    now.setUTCHours(0, 0, 0);
+    let birthDate = moment(now);
+    birthDate.subtract(this.mascota.get('years').value, 'years');
+    birthDate.subtract(this.mascota.get('months').value, 'months');
+    birthDate.subtract(this.mascota.get('days').value, 'days');
+    return birthDate.toDate();
   }
 
   /**
@@ -241,16 +241,12 @@ export class AddPetPage implements OnInit {
     this.mascota.controls['days'].setValue(information.days);
   }
 
-
   async modalVoluntarioConfirmation() {
     if (this.mode == Mode.EDITAR) {
-      const messageEdit =
-        'Se notificará al administrador para que acepte su solicitud de editar mascota';
+      const messageEdit = 'Se notificará al administrador para que acepte su solicitud de editar mascota';
       await this.alertaService.confirmationAlert(messageEdit, this.editPet.bind(this));
-      
     } else {
-      const messageAdd =
-        'Se notificará al administrador para que acepte su solicitud de agregar mascota';
+      const messageAdd = 'Se notificará al administrador para que acepte su solicitud de agregar mascota';
       await this.alertaService.confirmationAlert(messageAdd, this.createPet.bind(this));
     }
   }

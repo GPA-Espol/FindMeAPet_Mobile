@@ -68,7 +68,7 @@
             
             <nav>
                 
-                    <h2><a href="index.html">Documentation</a></h2><div class="category"></div><div class="category"><h2>Component</h2><h3>Classes</h3><ul><li><a href="EnConstruccionPage.html">EnConstruccionPage</a></li></ul></div><div class="category"><h2>Components</h2><h3>Classes</h3><ul><li><a href="AppComponent.html">AppComponent</a></li><li><a href="LoginPage.html">LoginPage</a></li></ul></div><div class="category"><h2>Model</h2><h3>Classes</h3><ul><li><a href="Administrador.html">Administrador</a></li><li><a href="AdministrarFormulario.html">AdministrarFormulario</a></li><li><a href="AdministrarMascota.html">AdministrarMascota</a></li><li><a href="AdministrarPublicacion.html">AdministrarPublicacion</a></li><li><a href="AdministrarReporteAsistencia.html">AdministrarReporteAsistencia</a></li><li><a href="AdministrarUsuario.html">AdministrarUsuario</a></li><li><a href="Formulario.html">Formulario</a></li><li><a href="FormularioAdopcion.html">FormularioAdopcion</a></li><li><a href="FormularioPonerAdopcion.html">FormularioPonerAdopcion</a></li><li><a href="Mascota.html">Mascota</a></li><li><a href="Publicacion.html">Publicacion</a></li><li><a href="ReporteAsistencia.html">ReporteAsistencia</a></li><li><a href="SolicitudActualizacionMascota.html">SolicitudActualizacionMascota</a></li><li><a href="UsuarioGPA.html">UsuarioGPA</a></li><li><a href="Voluntario.html">Voluntario</a></li></ul></div><div class="category"><h2>Services</h2><h3>Classes</h3><ul><li><a href="AlertaService.html">AlertaService</a></li><li><a href="SistemaService.html">SistemaService</a></li><li><a href="StorageService.html">StorageService</a></li><li><a href="TokenInterceptorService.html">TokenInterceptorService</a></li><li><a href="Utils.html">Utils</a></li></ul></div>
+                    <h2><a href="index.html">Documentation</a></h2><div class="category"></div><div class="category"><h2>Components</h2><h3>Classes</h3><ul><li><a href="AddPetPage.html">AddPetPage</a></li><li><a href="AddPublicationPage.html">AddPublicationPage</a></li><li><a href="AppComponent.html">AppComponent</a></li><li><a href="EmptyListComponent.html">EmptyListComponent</a></li><li><a href="EnConstruccionPage.html">EnConstruccionPage</a></li><li><a href="ImagePickerComponent.html">ImagePickerComponent</a></li><li><a href="LoginPage.html">LoginPage</a></li><li><a href="ManageCardComponent.html">ManageCardComponent</a></li><li><a href="PublicationPage.html">PublicationPage</a></li><li><a href="SpecificPetPage.html">SpecificPetPage</a></li><li><a href="SpecificPubPage.html">SpecificPubPage</a></li><li><a href="TabManagePage.html">TabManagePage</a></li><li><a href="TabPetsPage.html">TabPetsPage</a></li></ul></div><div class="category"><h2>Model</h2><h3>Classes</h3><ul><li><a href="Administrador.html">Administrador</a></li><li><a href="AdministrarFormulario.html">AdministrarFormulario</a></li><li><a href="AdministrarMascota.html">AdministrarMascota</a></li><li><a href="AdministrarPublicacion.html">AdministrarPublicacion</a></li><li><a href="AdministrarReporteAsistencia.html">AdministrarReporteAsistencia</a></li><li><a href="AdministrarUsuario.html">AdministrarUsuario</a></li><li><a href="Formulario.html">Formulario</a></li><li><a href="FormularioAdopcion.html">FormularioAdopcion</a></li><li><a href="FormularioPonerAdopcion.html">FormularioPonerAdopcion</a></li><li><a href="Mascota.html">Mascota</a></li><li><a href="Publicacion.html">Publicacion</a></li><li><a href="ReporteAsistencia.html">ReporteAsistencia</a></li><li><a href="SolicitudActualizacionMascota.html">SolicitudActualizacionMascota</a></li><li><a href="UsuarioGPA.html">UsuarioGPA</a></li><li><a href="Voluntario.html">Voluntario</a></li></ul></div><div class="category"><h2>Pipes</h2><h3>Classes</h3><ul><li><a href="AgePipe.html">AgePipe</a></li><li><a href="DateFormatPipe.html">DateFormatPipe</a></li><li><a href="FiltroPipe.html">FiltroPipe</a></li><li><a href="LugarPipe.html">LugarPipe</a></li></ul></div><div class="category"><h2>Services</h2><h3>Classes</h3><ul><li><a href="AlertaService.html">AlertaService</a></li><li><a href="PetObserverService.html">PetObserverService</a></li><li><a href="PublicationObserverService.html">PublicationObserverService</a></li><li><a href="SistemaService.html">SistemaService</a></li><li><a href="StorageService.html">StorageService</a></li><li><a href="TokenInterceptorService.html">TokenInterceptorService</a></li></ul><h3>Global</h3><ul><li><a href="global.html#Utils">Utils</a></li></ul></div>
                 
             </nav>
         </div>
@@ -87,6 +87,7 @@
         <article>
             <pre class="prettyprint source linenums"><code>import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { CachedUser } from 'src/app/model/cached_user';
 import { environment } from 'src/environments/environment';
 import { Administrador } from '../../model/admin/administrador.model';
 import { RolUsuario } from '../../model/enums.model';
@@ -108,7 +109,7 @@ export class SistemaService {
   private _usuario: UsuarioGPA;
   private _mascotas: { data: Mascota[]; time: number };
 
-  constructor(private http: HttpClient, private store: StorageService, private utils: Utils) {}
+  constructor(private http: HttpClient, private store: StorageService) {}
 
   /**
    * Make an http request to log in the user in the system, and save his/her role and save the
@@ -119,13 +120,14 @@ export class SistemaService {
    */
   public async login(usuario: string, password: string) {
     let loginUrl = environment.api + 'auth';
-    let { token, rol } = await this.http.post&lt;any>(loginUrl, { usuario, password }).toPromise();
-    await this.store.set('usuario', { token, rol });
+    let { token, rol, id } = await this.http.post&lt;any>(loginUrl, { usuario, password }).toPromise();
+    await this.store.set('usuario', { token, rol, id });
     if (rol == RolUsuario.ADMIN) {
       this._usuario = new Administrador(this.http, this);
     } else {
       this._usuario = new Voluntario(this.http, this);
     }
+    this._usuario.id = id;
   }
 
   /**
@@ -142,20 +144,20 @@ export class SistemaService {
    * @returns If the user has logged in, returns an object \{token,rol\}
    * Else returns undefined
    */
-  public async userLoggedIn() {
+  public async userLoggedIn(): Promise&lt;CachedUser> {
     return this.store.get('usuario');
   }
 
   /**
    * Get the pets from the REST-API and cache them for 30 mins. If the pets has already been
    * cached, it returns the cached pets and avoid make the http request.
-   * @param {bool=} forceReload If true it makes the httpRequest for the pets regardless
+   * @param {boolean=} forceReload If true it makes the httpRequest for the pets regardless
    * of if these have been cached or not
    * @returns An array of pets
    */
   public async getMascotas(forceReload = false) {
     let url = environment.api + 'mascota';
-    if (forceReload || !this._mascotas || this.utils.cacheExpired(this._mascotas.time)) {
+    if (forceReload || !this._mascotas || Utils.cacheExpired(this._mascotas.time)) {
       let data = await this.http.get&lt;any[]>(url).toPromise();
       let now = new Date().getTime();
       this._mascotas = { data: Mascota.deserialize(data), time: now };
@@ -163,12 +165,10 @@ export class SistemaService {
     return this._mascotas.data;
   }
 
-  public async createMacota(mascota: any) {
-    let url = environment.api + 'mascota';
-    let response_code = await this.http.post&lt;any[]>(url, mascota).toPromise();
-    return response_code;
-  }
-
+  /**
+   * Method that create a new user in the system depending on
+   * the role that the backend sent when the user logged in.
+   */
   public async crearUsuario() {
     if (!this._usuario) {
       let usuario = await this.userLoggedIn();
@@ -177,17 +177,40 @@ export class SistemaService {
       } else if (usuario.rol == RolUsuario.VOLUNTARIO) {
         this._usuario = new Voluntario(this.http, this);
       }
+      this._usuario.id = usuario.id;
     }
   }
 
+  /**
+   * Consult a pet given by its id to the backend, and format it
+   * to a System Mascota instance
+   * @param {number} id The id of the pet
+   * @returns {Mascota} The pet instance mapped from the backend response
+   */
+  public async getMascotabyId(id: number) {
+    let url = environment.api + 'mascota/' + id;
+    let data = await this.http.get&lt;any[]>(url).toPromise();
+    let pet = Mascota.deserializeOne(data);
+    return pet;
+  }
+  
+  /**
+   * Get the user logged in as a Voluntario instance
+   */
   public get voluntario() {
     return this._usuario as Voluntario;
   }
 
+  /**
+   * Get the user logged in as an Administrador instance
+   */
   public get admin() {
     return this._usuario as Administrador;
   }
 
+  /**
+   * Get the pets that have been cached in the system
+   */
   public get mascotas() {
     return this._mascotas.data;
   }

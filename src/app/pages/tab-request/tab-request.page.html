@@ -1,0 +1,18 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Ver solicitudes</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <app-admin-card
+    *ngFor="let option of Object.keys(options)"
+    [icon]="options[option].icon"
+    [description]="options[option].description"
+    [redirectTo]="options[option].redirectTo"
+    [notifications]="options[option].notifications"
+  ></app-admin-card>
+</ion-content>

@@ -1,0 +1,40 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{publication?.tipo}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-row class="ion-justify-content-center ion-margin-top" *ngIf="loading; else loadedContent">
+    <ion-spinner name="crescent" color="primary"></ion-spinner>
+  </ion-row>
+  <ng-template #loadedContent>
+    <div class="ion-margin">
+      <h1>{{publication?.titulo}}</h1>
+      <div class="image-pub ion-margin-top" *ngIf="publication.imagenUrl">
+        <img [src]="publication.imagenUrl" alt="Imagen de publicación" />
+      </div>
+      <p *ngFor="let par of publication.descripcion.split('\n')" class="description-pub">{{par}}</p>
+      <p class="date-pub"><b>Publicada:</b> {{publication.fecha | dateFormat}}</p>
+      <ion-row class="ion-justify-content-center">
+        <ion-col size="10">
+          <ion-button expand="block" routerLink="../../editar/{{publication.id}}" mode="ios">
+            Editar {{publication.tipo.toLowerCase()}}
+          </ion-button>
+          <ion-button
+            class="ion-margin-vertical"
+            expand="block"
+            color="danger"
+            mode="ios"
+            (click)="modalDelete()"
+          >
+            Eliminar {{publication.tipo.toLowerCase()}}
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </div>
+  </ng-template>
+</ion-content>
