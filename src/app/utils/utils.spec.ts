@@ -41,6 +41,6 @@ describe('UtilsService', () => {
   });
 });
 
-function subtractTime(time: number, minutes:number, seconds:number) {
+function subtractTime(time: number, minutes: number, seconds: number) {
   return time - minutes * 60 * 1000 - seconds * 1000;
 }

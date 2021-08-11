@@ -15,7 +15,7 @@ export class AdministrarFormulario {
     // TODO implementar método
   }
 
-  public revisarFormulario() {
+  public revisarFormularios() {
     // TODO implementar método
   }
 }

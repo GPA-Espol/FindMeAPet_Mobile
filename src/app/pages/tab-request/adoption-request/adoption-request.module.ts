@@ -7,13 +7,15 @@ import { IonicModule } from '@ionic/angular';
 import { AdoptionRequestPageRoutingModule } from './adoption-request-routing.module';
 
 import { AdoptionRequestPage } from './adoption-request.page';
+import { PipesModule } from 'src/app/pipes/pipes.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    AdoptionRequestPageRoutingModule
+    AdoptionRequestPageRoutingModule,
+    PipesModule
   ],
   declarations: [AdoptionRequestPage]
 })

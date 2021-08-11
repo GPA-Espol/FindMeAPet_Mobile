@@ -8,55 +8,26 @@
 </ion-header>
 
 <ion-content>
-  <ion-card class="adoption-card" mode="ios">
-    <ion-card-header>
-      <ion-row class="ion-justify-content-between ion-align-content-center">
-        <h3 class="name-request ion-no-margin">Eunice Gálvez</h3>
-        <h5 class="more-info ion-no-margin">Hoy</h5>
-      </ion-row>
-    </ion-card-header>
-    <ion-card-content>
-      <ion-row class="more-info"> eugalvez@espol.edu.ec </ion-row>
-      <ion-row class="pet-to-adopt ion-align-content-center">
-        <ion-icon src="/assets/icon/gato.svg"></ion-icon>
-        <p>Michi</p>
-      </ion-row>
-      <p>Vive en Quito en un departamento, le gustan muchos los gatos y es una persona responsable</p>
-    </ion-card-content>
-  </ion-card>
-  <ion-card class="adoption-card" mode="ios">
-    <ion-card-header>
-      <ion-row class="ion-justify-content-between ion-align-content-center">
-        <h3 class="name-request ion-no-margin">Juan Nebel</h3>
-        <h5 class="more-info ion-no-margin">Ayer</h5>
-      </ion-row>
-    </ion-card-header>
-    <ion-card-content>
-      <ion-row class="more-info"> juan@espol.edu.ec </ion-row>
-      <ion-row class="pet-to-adopt ion-align-content-center">
-        <ion-icon src="/assets/icon/perro.svg"></ion-icon>
-        <p>Balto</p>
-      </ion-row>
-      <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dignissimos, cum!</p>
-    </ion-card-content>
-  </ion-card>
-  <ion-card class="adoption-card" mode="ios">
-    <ion-card-header>
-      <ion-row class="ion-justify-content-between ion-align-content-center">
-        <h3 class="name-request ion-no-margin">Juan Pérez</h3>
-        <h5 class="more-info ion-no-margin">Hace 2 días</h5>
-      </ion-row>
-    </ion-card-header>
-    <ion-card-content>
-      <ion-row class="more-info"> pedro@espol.edu.ec </ion-row>
-      <ion-row class="pet-to-adopt ion-align-content-center">
-        <ion-icon src="/assets/icon/gato.svg"></ion-icon>
-        <p>Michi</p>
-      </ion-row>
-      <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor alias enim quam recusandae illo? Vel
-        dolor atque eum reiciendis dolore?
-      </p>
-    </ion-card-content>
-  </ion-card>
+  <ion-row class="ion-justify-content-center" *ngIf="loading; else loadedContent">
+    <ion-spinner name="crescent" color="primary"></ion-spinner>
+  </ion-row>
+  <ng-template #loadedContent>
+    <ion-card *ngFor="let request of requests" class="adoption-card" mode="ios">
+      <ion-card-header>
+        <ion-row class="ion-justify-content-between ion-align-content-center">
+          <h3 class="name-request ion-no-margin">{{request.nombre}} {{request.apellido}}</h3>
+          <!-- <h5 class="more-info ion-no-margin">Hoy</h5> -->
+        </ion-row>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-row class="more-info"> {{request.correo_electronico}} </ion-row>
+        <ion-row class="pet-to-adopt ion-align-content-center">
+          <ion-icon *ngIf="request.petType == 'Gato'" src="/assets/icon/gato.svg"></ion-icon>
+          <ion-icon *ngIf="request.petType == 'Perro'" src="/assets/icon/perro.svg"></ion-icon>
+          <p>{{request.petName}}</p>
+        </ion-row>
+        <p>Tiene {{request.fecha_nacimiento | age}}, y vive en la ciudad de {{request.ciudad}}</p>
+      </ion-card-content>
+    </ion-card>
+  </ng-template>
 </ion-content>
