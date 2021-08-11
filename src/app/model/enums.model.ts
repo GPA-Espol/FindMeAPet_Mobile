@@ -56,3 +56,13 @@ export enum EstadoSolicitud {
   APROBADO = 'Aprobado',
   RECHAZADO = 'Rechazado',
 }
+
+export enum ColorMascota {
+  BLANCO = 'blanco',
+  NEGRO = 'negro',
+  CAREY = 'bicolor',
+  CALICO = 'calicó',
+  GRIS = 'gris',
+  ROMANO = 'romano',
+  NARANJA = 'naranja'
+}

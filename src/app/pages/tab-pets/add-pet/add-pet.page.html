@@ -87,12 +87,18 @@
         </ion-row>
 
         <ion-item lines="none" class="ion-margin-top ion-margin-horizontal">
-          <ion-input
-            type="text"
-            size="10"
-            placeholder="Ej: Amarillo, blanco con manchas negras"
+          <ion-label>Color de la mascota</ion-label>
+          <ion-select
+            placeholder="Elegir uno"
+            okText="Ok"
+            cancelText="Cancelar"
             formControlName="color"
-          ></ion-input>
+            mode="ios"
+          >
+            <ion-select-option *ngFor="let color of colorsKeys" [value]="colors[color]"
+              >{{color|titlecase}}</ion-select-option
+            >
+          </ion-select>
         </ion-item>
       </div>
       <ion-row class="ion-margin-start">

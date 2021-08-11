@@ -10,7 +10,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ImagePickerComponent } from 'src/app/components/image-picker/image-picker.component';
 import { PetObserverService } from 'src/app/observables/pet-observer.service';
 import { Voluntario } from 'src/app/model/voluntario.model';
-import { RolUsuario, UbicacionMascota } from 'src/app/model/enums.model';
+import {  ColorMascota, RolUsuario, UbicacionMascota } from 'src/app/model/enums.model';
 import { Mode, Utils } from 'src/app/utils/utils';
 
 /**
@@ -32,6 +32,9 @@ export class AddPetPage implements OnInit {
   mascota: FormGroup;
   administrador: Administrador;
   voluntario: Voluntario;
+  colors = ColorMascota;
+  colorsKeys=[]
+  ubicacionesKeys = []
 
   @ViewChild('imgPicker') imgPicker: ImagePickerComponent;
   constructor(
@@ -48,6 +51,7 @@ export class AddPetPage implements OnInit {
     this.buildPetForm();
     this.setMode();
     this.createUser();
+    this.colorsKeys = Object.keys(ColorMascota);
     this.ubicaciones = Object.values(UbicacionMascota);
   }
 
@@ -201,6 +205,8 @@ export class AddPetPage implements OnInit {
       this.alertaService.presentToast(errorMessage + ', por favor intente de nuevo' + err);
     }
     this.alertaService.dismissLoading();
+    console.log('NEW PET', newPet );
+    
   }
 
   /**

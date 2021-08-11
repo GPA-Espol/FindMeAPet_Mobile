@@ -1,0 +1,55 @@
+ion-grid {
+  padding: 0;
+  .top-row {
+    background-color: #f9c49a;
+    height: 350px;
+    border-bottom-right-radius: 60px;
+    @media (max-width: 175px) {
+      height: 400px;
+    }
+    @media (max-width: 120px) {
+      height: 450px;
+    }
+  }
+  .bottom-row {
+    background-color:white;
+    //height: 600px;
+    border-top-left-radius: 60px;
+  }
+}
+.div-bg{
+  background-color: #f9c49a;
+}
+.profile-row {
+  height: 100%;
+  width: 100%;
+}
+
+.no-available-chip {
+  --background: #fb6d4e;
+  --color: white;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.available-chip {
+  --background: #57db84;
+  --color: white;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.icon-avatar {
+  --border-radius: 0px;
+}
+
+.title {
+  color: #3a2a11;
+  font-weight: bold !important;
+}
+
+.user-avatar {
+  height: 100px;
+  width: 100px;
+  margin-bottom: 10px !important;
+}

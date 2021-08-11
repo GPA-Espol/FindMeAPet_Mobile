@@ -14,7 +14,7 @@ const routes: Routes = [
       {
         path: 'perfil',
         loadChildren: () =>
-          import('../pages/en-construccion/en-construccion.module').then((m) => m.EnConstruccionPageModule),
+          import('../pages/profile/profile.module').then((m) => m.ProfilePageModule),
       },
       {
         path: 'inicio',
