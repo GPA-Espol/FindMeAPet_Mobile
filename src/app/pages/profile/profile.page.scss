@@ -21,14 +21,21 @@ ion-grid {
   height: 100%;
   width: 100%;
 }
-.div-bg {
-  background-color: #f9c49a;
-}
 
-.state-chip {
+.no-available-chip {
   --background: #fb6d4e;
   --color: white;
+  padding-left: 20px;
+  padding-right: 20px;
 }
+
+.available-chip {
+  --background: #57db84;
+  --color: white;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
 .icon-avatar {
   --border-radius: 0px;
 }
@@ -41,5 +48,5 @@ ion-grid {
 .user-avatar {
   height: 100px;
   width: 100px;
-  margin-bottom: 10px!important;
+  margin-bottom: 10px !important;
 }

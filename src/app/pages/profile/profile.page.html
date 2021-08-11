@@ -5,13 +5,18 @@
       <ion-row class="ion-justify-content-center ion-align-items-center profile-row">
         <ion-col size="auto" class="ion-text-center">
           <ion-avatar class="user-avatar" style="margin: auto">
-            <img src="/assets/Ellipse.png" />
+            <ion-img
+              [src]="adminTemplate? 'https://firebasestorage.googleapis.com/v0/b/gpa-findmepet.appspot.com/o/monik.jpg?alt=media&token=d58191af-8194-477e-accd-5ed90ddf1700':'https://firebasestorage.googleapis.com/v0/b/gpa-findmepet.appspot.com/o/eu.jpg?alt=media&token=18c19a8b-7907-40e1-afd8-f9492d40b831'"
+            ></ion-img>
           </ion-avatar>
           <!--h3 class="title ion-no-margin">{{usuario.nombre}} {{usuario.apellido}}</h3-->
-          <h3 class="title ion-no-margin">Nombre y Apellido</h3>
-          <h3 class="ion-no-margin ion-margin-top">Estado</h3>
-          <ion-chip class="state-chip">
-            <ion-label>No disponible</ion-label>
+          <h3 *ngIf="adminTemplate" class="title ion-no-margin">Mónica Santos</h3>
+          <h3 *ngIf="!adminTemplate" class="title ion-no-margin">Eunice Galvez</h3>
+          <h4 class="ion-no-margin ion-margin-top" style="font-size: medium">Estado</h4>
+          <ion-chip [class]="adminTemplate? 'available-chip' : 'no-available-chip'">
+            <ion-label style="text-align: center"
+              >{{adminTemplate? 'Disponible' : 'No disponible'}}</ion-label
+            >
           </ion-chip>
         </ion-col>
       </ion-row>

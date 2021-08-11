@@ -15,6 +15,7 @@ export class ProfilePage implements OnInit {
   voluntario: Voluntario;
   administrador: Administrador;
   usuario: UsuarioGPA;
+  adminTemplate : boolean;
   constructor(private sistema: SistemaService) {}
 
   ngOnInit() {
@@ -25,13 +26,14 @@ export class ProfilePage implements OnInit {
 
   async setUser() {
     let cached_user = await this.sistema.userLoggedIn();
-    
     if (cached_user.rol == RolUsuario.VOLUNTARIO) {
       this.setItemsVolunteer();
       this.usuario = await this.sistema.voluntario as UsuarioGPA;
+      this.adminTemplate = false;
     } else {
       this.setItemsAdmin();
       this.usuario = await this.sistema.admin as UsuarioGPA;
+      this.adminTemplate = true;
     }
     console.log(this.usuario);
     
@@ -40,7 +42,7 @@ export class ProfilePage implements OnInit {
   setItemsAdmin() {
     this.informationItems = [
       { title: 'Usuario', info: 'Administrador', icon: '/assets/user-icon.png' },
-      { title: 'Desde', info: '20/10/99', icon: '/assets/since.png' },
+      { title: 'Desde', info: '20/10/2019', icon: '/assets/since.png' },
     ];
   }
 
@@ -49,7 +51,7 @@ export class ProfilePage implements OnInit {
       { title: 'Usuario', info: 'Voluntario', icon: '/assets/user-icon.png' },
       { title: 'Actividad', info: 'Recorrido', icon: '/assets/activity.png' },
       { title: 'Dias de voluntariado', info: 'Lunes y Miercoles', icon: '/assets/calendar.png' },
-      { title: 'Desde', info: '20/10/99', icon: '/assets/since.png' },
+      { title: 'Desde', info: '20/02/2020', icon: '/assets/since.png' },
     ];
   }
 }
