@@ -49,7 +49,7 @@ export class AppComponent {
     if (userLoggedIn) {
       if (userLoggedIn.rol == RolUsuario.ADMIN) {
         this.sistema.crearUsuario();
-        this.router.navigateByUrl('/tabs/admin/solicitud/adopction/1', { replaceUrl: true });
+        this.router.navigateByUrl('/tabs/admin', { replaceUrl: true });
       } else if (userLoggedIn.rol == RolUsuario.VOLUNTARIO) {
         this.sistema.crearUsuario();
         this.router.navigateByUrl('/tabs/voluntario', { replaceUrl: true });
@@ -73,6 +73,7 @@ export class AppComponent {
   private setFirebaseNotifHandler() {
     this.firebase.onMessageReceived().subscribe((data) => {
       if (data.tap) {
+        //TODO Redirect to the notification view
         this.notificationService.readedNotif(data);
       } else {
         this.notificationService.newNotif(data);

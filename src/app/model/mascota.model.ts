@@ -41,7 +41,7 @@ export class Mascota {
    */
   static serialize(mascota: Mascota) {
     const birthDateISOString = mascota._fechaNacimiento.toISOString();
-    const date = birthDateISOString.split("T")[0];
+    const date = birthDateISOString.split('T')[0];
     return {
       nombre: mascota.nombre,
       fecha_nacimiento: date,
@@ -189,5 +189,17 @@ export class Mascota {
   }
   public set imagenUrl(value: string) {
     this._imagenUrl = value;
+  }
+}
+
+class Hola {
+  private nombre: string;
+  private apellido: string;
+
+  serialize(hola: Hola) {
+    return {
+      nombre: hola.nombre,
+      apellido: hola.apellido,
+    };
   }
 }

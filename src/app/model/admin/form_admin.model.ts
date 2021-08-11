@@ -46,4 +46,8 @@ export class AdministrarFormulario {
       },
     ];
   }
+
+  public async responderFormularioAdopcion(idForm: number, acepta: boolean) {
+    // TODO implementar método
+  }
 }
