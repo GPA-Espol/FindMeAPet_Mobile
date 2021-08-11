@@ -9,32 +9,7 @@ import { SistemaService } from 'src/app/services/sistema/sistema.service';
 export class AdoptionRequestPage implements OnInit {
   loading = true;
 
-  requests: any[] = [
-    {
-      nombre: 'Eunice',
-      apellido: 'Gálvez',
-      ciudad: 'Guayaquil',
-      fecha_nacimiento: '1998-08-16',
-      correo_electronico: 'eagalvez@espol.edu.ec',
-      id_mascota: 1,
-    },
-    {
-      nombre: 'Juan',
-      apellido: 'Pérez',
-      ciudad: 'Guayaquil',
-      fecha_nacimiento: '1970-06-15',
-      correo_electronico: 'juan@espol.edu.ec',
-      id_mascota: 2,
-    },
-    {
-      nombre: 'María',
-      apellido: 'Gómez',
-      ciudad: 'Guayaquil',
-      fecha_nacimiento: '2000-02-28',
-      correo_electronico: 'maria@espol.edu.ec',
-      id_mascota: 3,
-    },
-  ];
+  requests: any[];
 
   constructor(private sistema: SistemaService) {}
 
@@ -48,13 +23,16 @@ export class AdoptionRequestPage implements OnInit {
    * to the data that will be used in the view
    */
   private async prepareRequestInfo() {
+    const { adminFormulario } = this.sistema.admin;
+    const requests = await adminFormulario.revisarFormularios();
     await Promise.all(
-      this.requests.map(async (request) => {
+      requests.map(async (request: any) => {
         const pet = await this.sistema.getMascotabyId(request.id_mascota);
         request.petName = pet.nombre;
         request.petType = pet.tipoAnimal;
         request.fecha_nacimiento = new Date(request.fecha_nacimiento);
       })
     );
+    this.requests = requests;
   }
 }

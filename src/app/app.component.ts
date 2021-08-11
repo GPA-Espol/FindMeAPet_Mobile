@@ -8,8 +8,6 @@ import { SistemaService } from './services/sistema/sistema.service';
 import { RolUsuario } from './model/enums.model';
 import { IonMenu, Platform } from '@ionic/angular';
 import { FirebaseX } from '@ionic-native/firebase-x/ngx';
-import { StorageService } from './services/storage/storage.service';
-import { NotificationType } from './utils/utils';
 import { NotificationsService } from './services/notifications/notifications.service';
 
 /**
@@ -51,7 +49,7 @@ export class AppComponent {
     if (userLoggedIn) {
       if (userLoggedIn.rol == RolUsuario.ADMIN) {
         this.sistema.crearUsuario();
-        this.router.navigateByUrl('/tabs/admin', { replaceUrl: true });
+        this.router.navigateByUrl('/tabs/admin/solicitud/adopction/1', { replaceUrl: true });
       } else if (userLoggedIn.rol == RolUsuario.VOLUNTARIO) {
         this.sistema.crearUsuario();
         this.router.navigateByUrl('/tabs/voluntario', { replaceUrl: true });

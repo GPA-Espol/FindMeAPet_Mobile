@@ -12,7 +12,7 @@
     <ion-spinner name="crescent" color="primary"></ion-spinner>
   </ion-row>
   <ng-template #loadedContent>
-    <ion-card *ngFor="let request of requests" class="adoption-card" mode="ios">
+    <ion-card *ngFor="let request of requests" class="adoption-card" mode="ios" [routerLink]="request.id">
       <ion-card-header>
         <ion-row class="ion-justify-content-between ion-align-content-center">
           <h3 class="name-request ion-no-margin">{{request.nombre}} {{request.apellido}}</h3>
