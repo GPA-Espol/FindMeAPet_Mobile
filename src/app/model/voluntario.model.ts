@@ -27,7 +27,7 @@ export class Voluntario extends UsuarioGPA {
     return voluntario;
   }
 
-  constructor(http: HttpClient, sistema: SistemaService) {
+  constructor(http?: HttpClient, sistema?: SistemaService) {
     super(http, sistema);
     this._rol = [];
     this._horario = [];
@@ -62,6 +62,14 @@ export class Voluntario extends UsuarioGPA {
 
   public get rol(): RolVoluntario[] {
     return this._rol;
+  }
+
+  public set rol(rol: RolVoluntario[]) {
+    this._rol = rol;
+  }
+
+  public set horario(horario: Dia[]) {
+    this._horario = horario;
   }
 
   public get horario(): Dia[] {

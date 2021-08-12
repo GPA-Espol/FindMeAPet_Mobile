@@ -16,8 +16,17 @@ export class AdministrarUsuario {
   private admins: { data: Administrador[]; time: number };
 
   constructor(private http: HttpClient) {}
-  public crearVoluntario() {
-    // TODO implementar método
+
+  public agregarVoluntario(voluntario: Voluntario, contrasena: string) {
+    this.voluntarios.data.push(voluntario);
+    const data = Voluntario.serialize(voluntario, contrasena);
+    return this.http.post<any>(this.url, data).toPromise();
+  }
+
+  public agregarAdministrador(admin: Administrador, contrasena: string) {
+    this.admins.data.push(admin);
+    const data = Administrador.serialize(admin, contrasena);
+    return this.http.post<any>(this.url, data).toPromise();
   }
 
   public eliminarVoluntario() {
@@ -25,10 +34,6 @@ export class AdministrarUsuario {
   }
 
   public actualizarVoluntario() {
-    // TODO implementar método
-  }
-
-  public agregarAdministrador() {
     // TODO implementar método
   }
 

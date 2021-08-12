@@ -24,8 +24,9 @@
           placeholder="Elegir uno"
           okText="Ok"
           cancelText="Cancelar"
-          formControlName="sexo"
+          formControlName="tipoUsuario"
           mode="ios"
+          (ionChange)="onUserTypeChange($event)"
         >
           <ion-select-option value="Admin">Administrador</ion-select-option>
           <ion-select-option value="Voluntario">Voluntario</ion-select-option>
@@ -168,55 +169,57 @@
           <ion-checkbox slot="end" color="primary" formControlName="isEstEspol" mode="ios"></ion-checkbox>
         </ion-item>
       </div>
-      <div>
-        <ion-row class="ion-margin-start">
-          <ion-text color="primary"> 10. </ion-text>
-          <div class="title">
-            <ion-text color="dark"> Actividad </ion-text>
-            <ion-text color="danger"> * </ion-text>
-          </div>
-        </ion-row>
-        <ion-item lines="none" class="ion-margin-horizontal">
-          <ion-label>Rol del voluntario</ion-label>
-          <ion-select
-            placeholder="Elegir uno"
-            okText="Ok"
-            cancelText="Cancelar"
-            formControlName="rolVoluntario"
-            mode="ios"
-          >
-            <ion-select-option value="Recorrido">Recorrido</ion-select-option>
-            <ion-select-option value="Refugio">Refugio</ion-select-option>
-          </ion-select>
-        </ion-item>
-      </div>
-      <div>
-        <ion-row class="ion-margin-start">
-          <ion-text color="primary"> 11. </ion-text>
-          <div class="title">
-            <ion-text color="dark"> Horarios </ion-text>
-            <ion-text color="danger"> * </ion-text>
-          </div>
-        </ion-row>
-        <ion-item lines="none" class="ion-margin-horizontal">
-          <ion-label>Días</ion-label>
-          <ion-select
-            placeholder="Elegir uno"
-            okText="Ok"
-            cancelText="Cancelar"
-            formControlName="horarios"
-            mode="ios"
-            multiple
-          >
-            <ion-select-option value="Lunes">Lunes</ion-select-option>
-            <ion-select-option value="Martes">Martes</ion-select-option>
-            <ion-select-option value="Miercoles">Miércoles</ion-select-option>
-            <ion-select-option value="Jueves">Jueves</ion-select-option>
-            <ion-select-option value="Viernes">Viernes</ion-select-option>
-            <ion-select-option value="Sábado">Sábado</ion-select-option>
-            <ion-select-option value="Domingo">Domingo</ion-select-option>
-          </ion-select>
-        </ion-item>
+      <div class="volunteer-options" *ngIf="tipoUsuario=='Voluntario'">
+        <div>
+          <ion-row class="ion-margin-start">
+            <ion-text color="primary"> 10. </ion-text>
+            <div class="title">
+              <ion-text color="dark"> Actividad </ion-text>
+              <ion-text color="danger"> * </ion-text>
+            </div>
+          </ion-row>
+          <ion-item lines="none" class="ion-margin-horizontal">
+            <ion-label>Rol del voluntario</ion-label>
+            <ion-select
+              placeholder="Elegir uno"
+              okText="Ok"
+              cancelText="Cancelar"
+              formControlName="rolVoluntario"
+              mode="ios"
+            >
+              <ion-select-option value="Recorrido">Recorrido</ion-select-option>
+              <ion-select-option value="Refugio">Refugio</ion-select-option>
+            </ion-select>
+          </ion-item>
+        </div>
+        <div>
+          <ion-row class="ion-margin-start">
+            <ion-text color="primary"> 11. </ion-text>
+            <div class="title">
+              <ion-text color="dark"> Horarios </ion-text>
+              <ion-text color="danger"> * </ion-text>
+            </div>
+          </ion-row>
+          <ion-item lines="none" class="ion-margin-horizontal">
+            <ion-label>Días</ion-label>
+            <ion-select
+              placeholder="Elegir uno"
+              okText="Ok"
+              cancelText="Cancelar"
+              formControlName="horarios"
+              mode="ios"
+              multiple
+            >
+              <ion-select-option value="Lunes">Lunes</ion-select-option>
+              <ion-select-option value="Martes">Martes</ion-select-option>
+              <ion-select-option value="Miercoles">Miércoles</ion-select-option>
+              <ion-select-option value="Jueves">Jueves</ion-select-option>
+              <ion-select-option value="Viernes">Viernes</ion-select-option>
+              <ion-select-option value="Sábado">Sábado</ion-select-option>
+              <ion-select-option value="Domingo">Domingo</ion-select-option>
+            </ion-select>
+          </ion-item>
+        </div>
       </div>
       <ion-row class="ion-justify-content-center">
         <ion-col size="10">

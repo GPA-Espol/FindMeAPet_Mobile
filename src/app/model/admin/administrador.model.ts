@@ -34,7 +34,7 @@ export class Administrador extends UsuarioGPA {
     return admin;
   }
 
-  constructor(http: HttpClient, sistema: SistemaService) {
+  constructor(http?: HttpClient, sistema?: SistemaService) {
     super(http, sistema);
     this._adminUsuario = new AdministrarUsuario(http);
     this._adminReporteAsistencia = new AdministrarReporteAsistencia();

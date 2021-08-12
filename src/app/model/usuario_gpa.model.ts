@@ -87,10 +87,10 @@ export abstract class UsuarioGPA {
     this._apellido = value;
   }
 
-  protected get correo(): string {
+  public get correo(): string {
     return this._correo;
   }
-  protected set correo(value: string) {
+  public set correo(value: string) {
     this._correo = value;
   }
 
