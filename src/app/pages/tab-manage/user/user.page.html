@@ -1,0 +1,60 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Administrar usuarios</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-segment value="admin" #segment>
+    <ion-segment-button value="admin">
+      <ion-label>Administradores</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="vol">
+      <ion-label>Voluntarios</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+
+  <ion-row class="ion-justify-content-center ion-margin-top" *ngIf="loading; else loadedContent">
+    <ion-spinner name="crescent" color="primary"></ion-spinner>
+  </ion-row>
+  <ng-template #loadedContent>
+    <div *ngIf="segment.value == 'admin'" class="ion-margin-top">
+      <ion-card *ngFor="let admin of admins" mode="ios" class="card-user" routerLink="informacion">
+        <ion-item lines="none" class="item-user">
+          <ion-thumbnail>
+            <img [src]="admin.foto || '/assets/img/user-placeholder.png'" alt="image" class="image-user" />
+          </ion-thumbnail>
+          <ion-label class="ion-margin-start ion-margin-vertical ion-text-wrap">
+            <h2>{{admin.nombre}} {{admin.apellido}}</h2>
+            <ion-text color="medium">{{admin.nombreUsuario}}</ion-text>
+          </ion-label>
+        </ion-item>
+      </ion-card>
+    </div>
+    <div *ngIf="segment.value == 'vol'" class="ion-margin-top">
+      <ion-card *ngFor="let volunteer of volunteers" mode="ios" class="card-user" routerLink="informacion">
+        <ion-item lines="none" class="item-user">
+          <ion-thumbnail>
+            <img
+              [src]="volunteer.foto || '/assets/img/user-placeholder.png'"
+              alt="image"
+              class="image-user"
+            />
+          </ion-thumbnail>
+          <ion-label class="ion-margin-start ion-margin-vertical ion-text-wrap">
+            <h2>{{volunteer.nombre}} {{volunteer.apellido}}</h2>
+            <ion-text color="medium">{{volunteer.nombreUsuario}}</ion-text>
+          </ion-label>
+        </ion-item>
+      </ion-card>
+    </div>
+  </ng-template>
+  <ion-fab slot="fixed" style="bottom: 10px; right: 15px">
+    <ion-fab-button routerLink="anadir" class="add-button"
+      ><ion-icon name="add-outline"></ion-icon
+    ></ion-fab-button>
+  </ion-fab>
+</ion-content>

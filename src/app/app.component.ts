@@ -49,7 +49,7 @@ export class AppComponent {
     if (userLoggedIn) {
       if (userLoggedIn.rol == RolUsuario.ADMIN) {
         this.sistema.crearUsuario();
-        this.router.navigateByUrl('/tabs/admin', { replaceUrl: true });
+        this.router.navigateByUrl('/tabs/admin/configuracion/Usuario', { replaceUrl: true });
       } else if (userLoggedIn.rol == RolUsuario.VOLUNTARIO) {
         this.sistema.crearUsuario();
         this.router.navigateByUrl('/tabs/voluntario', { replaceUrl: true });

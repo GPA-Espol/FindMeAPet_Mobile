@@ -12,10 +12,43 @@ export abstract class UsuarioGPA {
   protected _nombreUsuario: string;
   protected _nombre: string;
   protected _apellido: string;
-  protected _edad: string;
+  protected _correo: string;
+  protected _fechaNacimiento: Date;
   protected _sexo: string;
   protected _isEstESPOL: boolean;
   protected _foto: string;
+  private _estadoActivo: boolean;
+
+  static serialize(usuarioGPA: UsuarioGPA, contrasena: string): any {
+    let date = usuarioGPA.fechaNacimiento.toISOString();
+    date = date.split('T')[0];
+    return {
+      id: usuarioGPA.id,
+      usuario: usuarioGPA.nombreUsuario,
+      contrasena,
+      nombre: usuarioGPA.nombre,
+      apellido: usuarioGPA.apellido,
+      correo: usuarioGPA.correo,
+      fecha_nacimiento: date,
+      sexo: usuarioGPA.sexo,
+      isEstESPOL: usuarioGPA.isEstESPOL,
+      imagen_url: usuarioGPA.foto,
+      estado: usuarioGPA.estadoActivo ? 'A' : 'I',
+    };
+  }
+
+  static deserialize(data: any, usuarioGPA: UsuarioGPA) {
+    usuarioGPA.id = data.id;
+    usuarioGPA.nombreUsuario = data.usuario;
+    usuarioGPA.nombre = data.nombre;
+    usuarioGPA.apellido = data.apellido;
+    usuarioGPA.correo = data.correo;
+    usuarioGPA.fechaNacimiento = new Date(data.fecha_nacimiento);
+    usuarioGPA.sexo = data.sexo;
+    usuarioGPA.isEstESPOL = !!data.isEstESPOL;
+    usuarioGPA.foto = data.imagen_url;
+    usuarioGPA.estadoActivo = data.estado == 'A';
+  }
 
   constructor(protected http: HttpClient, protected sistema: SistemaService) {}
 
@@ -54,12 +87,19 @@ export abstract class UsuarioGPA {
     this._apellido = value;
   }
 
-  public get edad(): string {
-    return this._edad;
+  protected get correo(): string {
+    return this._correo;
+  }
+  protected set correo(value: string) {
+    this._correo = value;
   }
 
-  public set edad(value: string) {
-    this._edad = value;
+  public get fechaNacimiento(): Date {
+    return this._fechaNacimiento;
+  }
+
+  public set fechaNacimiento(value: Date) {
+    this._fechaNacimiento = value;
   }
 
   public get sexo(): string {
@@ -84,5 +124,12 @@ export abstract class UsuarioGPA {
 
   public set foto(value: string) {
     this._foto = value;
+  }
+
+  protected get estadoActivo(): boolean {
+    return this._estadoActivo;
+  }
+  protected set estadoActivo(value: boolean) {
+    this._estadoActivo = value;
   }
 }

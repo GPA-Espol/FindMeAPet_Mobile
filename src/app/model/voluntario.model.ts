@@ -12,6 +12,21 @@ export class Voluntario extends UsuarioGPA {
   private _rol: RolVoluntario[];
   private _horario: Dia[];
 
+  static serialize(voluntario: Voluntario, password: string): any {
+    const data = super.serialize(voluntario, password);
+    data.rol = voluntario.rol;
+    data.horario = voluntario.horario;
+    return data;
+  }
+
+  static deserialize(data: any): Voluntario {
+    const voluntario = new Voluntario(null, null);
+    super.deserialize(data, voluntario);
+    voluntario._rol = data.rol;
+    voluntario._horario = data.horario;
+    return voluntario;
+  }
+
   constructor(http: HttpClient, sistema: SistemaService) {
     super(http, sistema);
     this._rol = [];
@@ -32,7 +47,7 @@ export class Voluntario extends UsuarioGPA {
 
   public hacerSolicitudActualizacionMascota() {
     console.log('se envió la solicitud');
-    
+
     // TODO implementar método
   }
 
@@ -40,7 +55,6 @@ export class Voluntario extends UsuarioGPA {
     console.log('se envió la solicitud');
     // TODO implementar método
   }
-
 
   public agregarReporteAsistencia() {
     // TODO implementar método

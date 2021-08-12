@@ -17,6 +17,10 @@ const routes: Routes = [
     path: TipoPublicacion.EVENTO,
     loadChildren: () => import('./publication/publication.module').then((m) => m.PublicationPageModule),
   },
+  {
+    path: 'Usuario',
+    loadChildren: () => import('./user/user.module').then((m) => m.UserPageModule),
+  },
 ];
 
 @NgModule({
