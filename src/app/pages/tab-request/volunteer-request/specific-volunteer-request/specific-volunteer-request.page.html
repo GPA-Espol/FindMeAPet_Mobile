@@ -1,0 +1,32 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons>
+      <ion-back-button> </ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-slides pager="true" [options]="slideOpts">
+    <ion-slide>
+      <div style="display: block">
+        <h1>Version Actual</h1>
+        <request-form></request-form>
+      </div>
+    </ion-slide>
+    <ion-slide>
+      <div style="display: block">
+        <h1>Propuesta voluntario</h1>
+        <request-form [new]="true"></request-form>
+      </div>
+    </ion-slide>
+  </ion-slides>
+  <ion-row class="ion-justify-content-center ion-margin-top decision">
+    <ion-col size="5">
+      <ion-button mode="ios" expand="block" color="medium">Rechazar</ion-button>
+    </ion-col>
+    <ion-col size="5">
+      <ion-button mode="ios" expand="block">Aceptar</ion-button>
+    </ion-col>
+  </ion-row>
+</ion-content>

@@ -7,10 +7,11 @@ import { EmptyListComponent } from './empty-list/empty-list.component';
 import { RouterModule } from '@angular/router';
 import { ImagePickerComponent } from './image-picker/image-picker.component';
 import { PipesModule } from '../pipes/pipes.module';
+import { RequestFormComponent } from './request-form/request-form.component';
 
 @NgModule({
-  declarations: [AdminCardComponent, ManageCardComponent, EmptyListComponent, ImagePickerComponent],
+  declarations: [AdminCardComponent, ManageCardComponent, EmptyListComponent, ImagePickerComponent,RequestFormComponent],
   imports: [CommonModule, IonicModule, RouterModule, PipesModule],
-  exports: [AdminCardComponent, ManageCardComponent, EmptyListComponent, ImagePickerComponent],
+  exports: [AdminCardComponent, ManageCardComponent, EmptyListComponent, ImagePickerComponent,RequestFormComponent],
 })
 export class ComponentsModule {}
