@@ -36,6 +36,12 @@
             <ion-select-option value="Voluntario">Voluntario</ion-select-option>
           </ion-select>
         </ion-item>
+        <ion-text
+          *ngIf="userForm.controls['tipoUsuario'].invalid && userForm.controls['tipoUsuario'].touched"
+          class="form-error"
+        >
+          Por favor elige un tipo de usuario.
+        </ion-text>
       </div>
       <div class="ion-justify-content ion-margin-horizontal ion-margin-top">
         <div>
@@ -54,8 +60,14 @@
               formControlName="nombre"
             ></ion-input>
           </ion-item>
+          <ion-text
+            *ngIf="userForm.controls['nombre'].invalid && userForm.controls['nombre'].touched"
+            class="form-error"
+          >
+            Por favor ingrese su nombre.
+          </ion-text>
         </div>
-        <div>
+        <div class="ion-margin-top">
           <ion-row class="ion-margin-start">
             <ion-text color="primary"> 3. </ion-text>
             <div class="title">
@@ -71,8 +83,14 @@
               formControlName="apellido"
             ></ion-input>
           </ion-item>
+          <ion-text
+            *ngIf="userForm.controls['apellido'].invalid && userForm.controls['apellido'].touched"
+            class="form-error"
+          >
+            Por favor ingrese su apellido.
+          </ion-text>
         </div>
-        <div>
+        <div class="ion-margin-top">
           <ion-row class="ion-margin-start">
             <ion-text color="primary"> 4. </ion-text>
             <div class="title">
@@ -88,8 +106,14 @@
               formControlName="nombreUsuario"
             ></ion-input>
           </ion-item>
+          <ion-text
+            *ngIf="userForm.controls['nombreUsuario'].invalid && userForm.controls['nombreUsuario'].touched"
+            class="form-error"
+          >
+            Por favor ingrese un nombre de usuario.
+          </ion-text>
         </div>
-        <div>
+        <div class="ion-margin-top">
           <ion-row class="ion-margin-start center-checkbox">
             <ion-text color="primary"> 5. </ion-text>
             <div class="title center-checkbox">
@@ -117,7 +141,7 @@
             </ion-item>
           </ng-template>
         </div>
-        <div>
+        <div class="ion-margin-top">
           <ion-row class="ion-margin-start">
             <ion-text color="primary"> 6. </ion-text>
             <div class="title">
@@ -133,8 +157,14 @@
               formControlName="correo"
             ></ion-input>
           </ion-item>
+          <ion-text
+            *ngIf="userForm.controls['correo'].invalid && userForm.controls['correo'].touched"
+            class="form-error"
+          >
+            Por favor ingrese un correo electrónico válido.
+          </ion-text>
         </div>
-        <div>
+        <div class="ion-margin-top">
           <ion-row class="ion-margin-start">
             <ion-text color="primary"> 7. </ion-text>
             <div class="title">
@@ -146,7 +176,7 @@
             <ion-datetime displayFormat="DD/MM/YYYY" formControlName="fechaNacimiento"> </ion-datetime>
           </ion-item>
         </div>
-        <div>
+        <div class="ion-margin-top">
           <ion-row class="ion-margin-start">
             <ion-text color="primary"> 8. </ion-text>
             <div class="title">
@@ -167,13 +197,18 @@
               <ion-select-option value="F">Femenino</ion-select-option>
             </ion-select>
           </ion-item>
+          <ion-text
+            *ngIf="userForm.controls['fechaNacimiento'].invalid && userForm.controls['fechaNacimiento'].touched"
+            class="form-error"
+          >
+            Por favor escoja el sexo del usuario.
+          </ion-text>
         </div>
-        <div>
+        <div class="ion-margin-top">
           <ion-row class="ion-margin-start">
             <ion-text color="primary"> 9. </ion-text>
             <div class="title">
               <ion-text color="dark">Lugar de origen </ion-text>
-              <ion-text color="danger"> * </ion-text>
             </div>
           </ion-row>
           <ion-item lines="none" class="ion-margin-horizontal">
@@ -181,7 +216,7 @@
             <ion-checkbox slot="end" color="primary" formControlName="isEstEspol" mode="ios"></ion-checkbox>
           </ion-item>
         </div>
-        <div class="volunteer-options" *ngIf="tipoUsuario=='Voluntario'">
+        <div class="volunteer-options ion-margin-top" *ngIf="tipoUsuario=='Voluntario'">
           <div>
             <ion-row class="ion-margin-start">
               <ion-text color="primary"> 10. </ion-text>
@@ -203,13 +238,18 @@
                 <ion-select-option value="Refugio">Refugio</ion-select-option>
               </ion-select>
             </ion-item>
+            <ion-text
+              *ngIf="userForm.controls['fechaNacimiento'].invalid && userForm.controls['fechaNacimiento'].touched"
+              class="form-error"
+            >
+              Por favor escoja el rol del voluntario.
+            </ion-text>
           </div>
           <div>
-            <ion-row class="ion-margin-start">
+            <ion-row class="ion-margin-start ion-margin-top">
               <ion-text color="primary"> 11. </ion-text>
               <div class="title">
                 <ion-text color="dark"> Horarios </ion-text>
-                <ion-text color="danger"> * </ion-text>
               </div>
             </ion-row>
             <ion-item lines="none" class="ion-margin-horizontal">
@@ -235,7 +275,7 @@
         </div>
         <ion-row class="ion-justify-content-center">
           <ion-col size="10">
-            <ion-button expand="block" (click)="onSubmit()" mode="ios">
+            <ion-button expand="block" (click)="onSubmit()" [disabled]="userForm.invalid" mode="ios">
               {{mode=='anadir'?'Guardar':'Actualizar'}}
             </ion-button>
             <ion-button

@@ -56,7 +56,7 @@ export class AddUserPage implements OnInit {
       isEstEspol: [this.userToEdit?.isEstESPOL || false, Validators.required],
       tipoUsuario: [this.tipoUsuario || '', Validators.required],
       password: [''],
-      repeatPassword: ['', Validators.required],
+      repeatPassword: [''],
       rolVoluntario: rolVoluntario || '',
       horarios: '',
     });
