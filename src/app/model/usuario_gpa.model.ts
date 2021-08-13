@@ -31,7 +31,7 @@ export abstract class UsuarioGPA {
       correo: usuarioGPA.correo,
       fecha_nacimiento: date,
       sexo: usuarioGPA.sexo,
-      isEstESPOL: usuarioGPA.isEstESPOL,
+      is_est_espol: usuarioGPA.isEstESPOL,
       imagen_url: usuarioGPA.foto,
       estado: usuarioGPA.estadoActivo ? 'A' : 'I',
     };

@@ -61,4 +61,21 @@ export class AdministrarUsuario {
     }
     return { admins: this.admins.data, voluntarios: this.voluntarios.data };
   }
+
+  public async obtenerUsuarioPorId(id: number, forceReload = false) {
+    if (forceReload || !this.voluntarios || Utils.cacheExpired(this.voluntarios.time)) {
+      const usuario = await this.http.get<any>(`${this.url}/${id}`).toPromise();
+      if (usuario.id_rol == 1) {
+        return Administrador.deserialize(usuario);
+      } else {
+        return Voluntario.deserialize(usuario);
+      }
+    }
+    return this.findUser(id);
+  }
+
+  private findUser(id) {
+    const user = this.voluntarios.data.find((vol) => vol.id === id);
+    return user || this.admins.data.find((admin) => admin.id === id);
+  }
 }

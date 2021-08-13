@@ -10,6 +10,10 @@ const routes: Routes = [
     component: UserPage,
   },
   {
+    path: ':id',
+    loadChildren: () => import('./specific-user/specific-user.module').then((m) => m.SpecificUserPageModule),
+  },
+  {
     path: Mode.ANADIR,
     loadChildren: () => import('./add-user/add-user.module').then((m) => m.AddUserPageModule),
   },

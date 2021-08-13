@@ -25,6 +25,7 @@ export class Administrador extends UsuarioGPA {
 
   static serialize(admin: Administrador, password: string): any {
     const data = super.serialize(admin, password);
+    data.id_rol = 1;
     return data;
   }
 

@@ -14,6 +14,7 @@ export class Voluntario extends UsuarioGPA {
 
   static serialize(voluntario: Voluntario, password: string): any {
     const data = super.serialize(voluntario, password);
+    data.id_rol = 2;
     data.rol = voluntario.rol;
     data.horario = voluntario.horario;
     return data;

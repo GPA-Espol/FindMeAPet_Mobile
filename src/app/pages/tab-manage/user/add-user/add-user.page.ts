@@ -1,11 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NavController } from '@ionic/angular';
+import { ImagePickerComponent } from 'src/app/components/image-picker/image-picker.component';
 import { Administrador } from 'src/app/model/admin/administrador.model';
 import { RolUsuario } from 'src/app/model/enums.model';
 import { UsuarioGPA } from 'src/app/model/usuario_gpa.model';
 import { Voluntario } from 'src/app/model/voluntario.model';
+import { AlertaService } from 'src/app/services/alerta/alerta.service';
 import { SistemaService } from 'src/app/services/sistema/sistema.service';
 import { Mode } from 'src/app/utils/utils';
 
@@ -20,12 +22,15 @@ export class AddUserPage implements OnInit {
   userToEdit: UsuarioGPA;
   tipoUsuario = '';
   private idUser: number;
+
+  @ViewChild('imgPicker') imgPicker: ImagePickerComponent;
   constructor(
     private router: Router,
     private navCtrl: NavController,
     private route: ActivatedRoute,
     private formBuilder: FormBuilder,
-    private sistema: SistemaService
+    private sistema: SistemaService,
+    private alert: AlertaService
   ) {}
 
   ngOnInit() {
@@ -60,41 +65,53 @@ export class AddUserPage implements OnInit {
     }
   }
 
-  onSubmit() {
-    if (this.tipoUsuario == RolUsuario.ADMIN) {
+  async onSubmit() {
+    await this.alert.presentLoading('Guardando...');
+    try {
+      if (this.tipoUsuario == RolUsuario.ADMIN) {
+        await this.submitAdmin();
+      } else {
+        await this.submitVoluntario();
+      }
+    } catch (ex) {
+      console.log('Ha ocurrido un error al enviar el usuario, ', ex);
+      this.alert.presentToast('Ha ocurrido un error al guardar el usuario');
     }
+    this.alert.dismissLoading();
   }
 
-  submitAdmin() {
+  async submitAdmin() {
     const { adminUsuario } = this.sistema.admin;
     const password = this.userForm.get('password').value;
     if (this.mode == Mode.ANADIR) {
       const admin = new Administrador();
-      this.setValues(admin);
-      adminUsuario.agregarAdministrador(admin, password);
+      await this.setValues(admin);
+      await adminUsuario.agregarAdministrador(admin, password);
     }
   }
 
-  submitVoluntario() {
+  async submitVoluntario() {
     const { adminUsuario } = this.sistema.admin;
     const password = this.userForm.get('password').value;
     if (this.mode == Mode.ANADIR) {
       const voluntario = new Voluntario();
-      this.setValues(voluntario);
+      await this.setValues(voluntario);
       voluntario.horario = this.userForm.get('horarios').value;
       voluntario.rol = this.userForm.get('rolVoluntario').value;
       adminUsuario.agregarVoluntario(voluntario, password);
     }
   }
 
-  private setValues(user: UsuarioGPA) {
+  private async setValues(user: UsuarioGPA) {
     user.nombre = this.userForm.get('nombre').value;
     user.apellido = this.userForm.get('apellido').value;
     user.nombreUsuario = this.userForm.get('nombreUsuario').value;
     user.correo = this.userForm.get('correo').value;
-    user.fechaNacimiento = this.userForm.get('fechaNacimiento').value;
+    user.fechaNacimiento = new Date(this.userForm.get('fechaNacimiento').value);
+    user.fechaNacimiento.setHours(0, 0, 0, 0);
     user.sexo = this.userForm.get('sexo').value;
     user.isEstESPOL = this.userForm.get('isEstEspol').value;
+    user.foto = await this.imgPicker.upload();
   }
 
   onUserTypeChange($event: any) {
