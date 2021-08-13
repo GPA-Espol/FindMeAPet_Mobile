@@ -45,3 +45,11 @@ ion-select {
   margin-left: 19px;
   color: grey;
 }
+
+.center-checkbox {
+  display: flex;
+  align-items: center;
+  ion-text {
+    margin-right: 5px;
+  }
+}
