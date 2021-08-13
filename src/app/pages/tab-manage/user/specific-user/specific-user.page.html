@@ -15,43 +15,51 @@
     <div class="container">
       <div class="header">
         <div class="user-image">
-          <img
-            src="https://firebasestorage.googleapis.com/v0/b/gpa-findmepet.appspot.com/o/monik.jpg?alt=media&token=d58191af-8194-477e-accd-5ed90ddf1700"
-            alt="Imagen del usuario"
-          />
+          <img [src]="user.foto || '/assets/img/user-placeholder.png'" alt="Imagen del usuario" />
         </div>
         <div class="user-info">
-          <h2>Katherine Romero Llaque</h2>
-          <h5>Voluntaria - Refugio</h5>
+          <h2>{{user.nombre}} {{user.apellido}}</h2>
+          <ng-template [ngIf]="isAdmin">
+            <h5>{{user.sexo=="F"? "Administradora" : "Administrador"}}</h5>
+          </ng-template>
+          <ng-template [ngIf]="!isAdmin">
+            <h5>{{user.sexo=="F"? "Voluntaria" : "Voluntario"}} - {{user.rol}}</h5>
+          </ng-template>
         </div>
       </div>
       <div class="body">
         <ion-row>
           <ion-icon name="mail-outline"></ion-icon>
-          <div>alanvele@espol.edu.ec</div>
+          <div>{{user.correo}}</div>
         </ion-row>
         <ion-row>
           <ion-icon name="person-outline"></ion-icon>
-          <div>Alex</div>
+          <div>{{user.nombreUsuario}}</div>
         </ion-row>
         <ion-row>
           <ion-icon src="/assets/icon/birthday.svg"></ion-icon>
-          <div>25 años</div>
+          <div>{{user.fechaNacimiento | age}}</div>
         </ion-row>
         <ion-row>
           <ion-icon src="/assets/icon/student.svg"></ion-icon>
-          <div>Es estudiante de ESPOL</div>
+          <div>{{user.isEstESPOL? 'Es':'No es'}} estudiante de ESPOL</div>
         </ion-row>
-        <ion-row>
+        <ion-row *ngIf="!isAdmin">
           <ion-icon name="calendar-outline"></ion-icon>
-          <div>Lunes, Miércoles</div>
+          <div>{{user.horario?.join(", ")}}</div>
         </ion-row>
       </div>
     </div>
     <ion-row class="ion-justify-content-center">
       <ion-col size="10">
         <ion-button expand="block" [routerLink]="['../editar',1]" mode="ios"> Editar usuario </ion-button>
-        <ion-button class="ion-margin-vertical" expand="block" color="danger" mode="ios">
+        <ion-button
+          class="ion-margin-vertical"
+          expand="block"
+          color="danger"
+          mode="ios"
+          (click)="modaDelete()"
+        >
           Eliminar usuario
         </ion-button>
       </ion-col>

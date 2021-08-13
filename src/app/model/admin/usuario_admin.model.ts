@@ -29,8 +29,10 @@ export class AdministrarUsuario {
     return this.http.post<any>(this.url, data).toPromise();
   }
 
-  public eliminarVoluntario() {
-    // TODO implementar método
+  public eliminarUsuario(id: number) {
+    const index = this.voluntarios.data.findIndex((vol) => vol.id === id);
+    this.voluntarios.data.splice(index, 1);
+    return this.http.delete<any>(`${this.url}/${id}`).toPromise();
   }
 
   public actualizarVoluntario() {

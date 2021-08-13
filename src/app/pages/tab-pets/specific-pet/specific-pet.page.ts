@@ -71,11 +71,11 @@ export class SpecificPetPage implements OnInit {
    * Method that calls the service to delete the pet and navigates to previous page
    */
   async deletePet() {
-    await this.alertaService.presentLoading('Eliminando mascota');
+    await this.alertaService.presentLoading('Eliminando...');
     await this.administrador.adminMascota.eliminarMascota(this.pet.id);
     this.alertaService.dismissLoading();
     this.navCtrl.pop();
-    await this.alertaService.presentToast('La mascota ha sido eliminanda');
+    await this.alertaService.presentToast('La mascota ha sido eliminada');
   }
 
   ngOnDestroy() {
