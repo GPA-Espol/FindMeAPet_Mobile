@@ -40,7 +40,7 @@ export class AdministrarMascota {
     let url = environment.api + 'solicitud';
     this.propuestas = await this.http.get<any[]>(url).toPromise();
 
-    return this.propuestas;
+    return this.propuestas.filter((x) => x.estado == 3);
   }
 
   public verPropuestasVoluntarioById(id: number) {
@@ -50,6 +50,6 @@ export class AdministrarMascota {
 
   public async actualizarSolicitud(solicitud: any) {
     let url = environment.api + 'solicitud/update';
-    let result = await this.http.put<any[]>(url, solicitud).toPromise();
+    await this.http.put<any[]>(url, solicitud).toPromise();
   }
 }
