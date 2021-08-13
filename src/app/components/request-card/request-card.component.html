@@ -1,0 +1,21 @@
+<ion-card class="adoption-card" mode="ios">
+  <ion-card-header>
+    <ion-row class="ion-justify-content-between ion-align-content-center">
+      <h3 class="name-request ion-no-margin">Valeria Barzola</h3>
+    </ion-row>
+  </ion-card-header>
+  <ion-card-content>
+    <ion-row class="more-info"> correo@gmail.com </ion-row>
+    <ion-row class="pet-to-adopt ion-align-content-center ion-align-items-center">
+      <ion-icon
+        [src]="pet.tipoAnimal == 'Perro' ? '/assets/icon/perro.svg' : '/assets/icon/gato.svg'"
+      ></ion-icon>
+      <p>{{ pet.nombre }}</p>
+    </ion-row>
+    <ion-row>
+      <ion-chip [color]="mode == 'editar' ? 'warning' : 'success'">
+        <ion-label>{{ mode == "editar" ? "Editar mascota" : "Agregar mascota" }}</ion-label>
+      </ion-chip>
+    </ion-row>
+  </ion-card-content>
+</ion-card>

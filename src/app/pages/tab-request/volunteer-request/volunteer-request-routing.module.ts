@@ -9,7 +9,7 @@ const routes: Routes = [
     component: VolunteerRequestPage
   },
   {
-    path: 'specific',
+    path: 'informacion/:id',
     loadChildren: () => import('./specific-volunteer-request/specific-volunteer-request.module').then( m => m.SpecificVolunteerRequestPageModule)
   }
 ];

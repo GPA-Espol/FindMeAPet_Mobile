@@ -8,10 +8,11 @@ import { RouterModule } from '@angular/router';
 import { ImagePickerComponent } from './image-picker/image-picker.component';
 import { PipesModule } from '../pipes/pipes.module';
 import { RequestFormComponent } from './request-form/request-form.component';
+import { RequestCardComponent } from './request-card/request-card.component';
 
 @NgModule({
-  declarations: [AdminCardComponent, ManageCardComponent, EmptyListComponent, ImagePickerComponent,RequestFormComponent],
+  declarations: [AdminCardComponent, ManageCardComponent, EmptyListComponent, ImagePickerComponent,RequestFormComponent, RequestCardComponent],
   imports: [CommonModule, IonicModule, RouterModule, PipesModule],
-  exports: [AdminCardComponent, ManageCardComponent, EmptyListComponent, ImagePickerComponent,RequestFormComponent],
+  exports: [AdminCardComponent, ManageCardComponent, EmptyListComponent, ImagePickerComponent,RequestFormComponent,RequestCardComponent],
 })
 export class ComponentsModule {}

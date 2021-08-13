@@ -7,13 +7,15 @@ import { IonicModule } from '@ionic/angular';
 import { VolunteerRequestPageRoutingModule } from './volunteer-request-routing.module';
 
 import { VolunteerRequestPage } from './volunteer-request.page';
+import { ComponentsModule } from 'src/app/components/components.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    VolunteerRequestPageRoutingModule
+    VolunteerRequestPageRoutingModule,
+    ComponentsModule
   ],
   declarations: [VolunteerRequestPage]
 })

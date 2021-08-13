@@ -2,6 +2,9 @@ import { HttpClient } from '@angular/common/http';
 import { Dia, RolVoluntario } from './enums.model';
 import { UsuarioGPA } from './usuario_gpa.model';
 import { SistemaService } from 'src/app/services/sistema/sistema.service';
+import { Mascota } from './mascota.model';
+import { Utils } from '../utils/utils';
+import { environment } from 'src/environments/environment';
 
 /**
  * Class extending from {@link UsuarioGPA} containing the information of a volunteer,
@@ -30,15 +33,24 @@ export class Voluntario extends UsuarioGPA {
     // TODO implementar método
   }
 
-  public hacerSolicitudActualizacionMascota() {
+  public async hacerSolicitudActualizacionMascota(oldPet: Mascota, requestPet: Mascota, idMascotta: number) {
+    let url = environment.api + 'solicitud';
+    let petChanges = Utils.getObjectDifference(oldPet, Mascota.serialize(requestPet));
+    petChanges['id_mascota'] = idMascotta
+    console.log(petChanges);
+    await this.http.post<any>(url, petChanges).toPromise();
     console.log('se envió la solicitud');
-    
-    // TODO implementar método
+
+
   }
 
-  public hacerSolicitudCreacionMascota() {
-    console.log('se envió la solicitud');
-    // TODO implementar método
+  public async hacerSolicitudCreacionMascota(pet: Mascota) {
+    let url = environment.api + 'solicitud';
+    console.log("mascota a enviar", Mascota.serialize(pet));
+    
+    await this.http.post<any>(url, Mascota.serialize(pet)).toPromise();
+
+
   }
 
 

@@ -8,42 +8,14 @@
 </ion-header>
 
 <ion-content>
-  <ion-card  class="adoption-card" mode="ios" routerLink='specific'>
-    <ion-card-header>
-      <ion-row class="ion-justify-content-between ion-align-content-center">
-        <h3 class="name-request ion-no-margin">Valeria Barzola</h3>
-      </ion-row>
-    </ion-card-header>
-    <ion-card-content>
-      <ion-row class="more-info"> correo@gmail.com </ion-row>
-      <ion-row class="pet-to-adopt ion-align-content-center ion-align-items-center">
-        <ion-icon src="/assets/icon/gato.svg"></ion-icon>
-        <p>Nommbre mascota</p>
-      </ion-row>
-      <ion-row>
-        <ion-chip color='success'>
-          <ion-label>Agregar mascota</ion-label>
-        </ion-chip>
-      </ion-row>
-    </ion-card-content>
-  </ion-card>
-  <ion-card  class="adoption-card" mode="ios" routerLink='specific'>
-    <ion-card-header>
-      <ion-row class="ion-justify-content-between ion-align-content-center">
-        <h3 class="name-request ion-no-margin">Valeria Barzola</h3>
-      </ion-row>
-    </ion-card-header>
-    <ion-card-content>
-      <ion-row class="more-info"> correo@gmail.com </ion-row>
-      <ion-row class="pet-to-adopt ion-align-content-center ion-align-items-center">
-        <ion-icon src="/assets/icon/perro.svg"></ion-icon>
-        <p>Nommbre mascota</p>
-      </ion-row>
-      <ion-row>
-        <ion-chip color='warning'>
-          <ion-label>Editar mascota</ion-label>
-        </ion-chip>
-      </ion-row>
-    </ion-card-content>
-  </ion-card>
+  <ion-row class="ion-justify-content-center" *ngIf="loading; else loadedContent">
+    <ion-spinner name="crescent" color="primary"></ion-spinner>
+  </ion-row>
+  <ng-template #loadedContent>
+    <app-request-card *ngFor="let p of propuestas" [propuesta]="p" routerLink="informacion/{{p.id}}">
+    </app-request-card>
+  </ng-template>
+  
+
+  
 </ion-content>

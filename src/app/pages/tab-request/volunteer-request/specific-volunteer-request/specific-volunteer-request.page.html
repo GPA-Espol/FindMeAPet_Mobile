@@ -7,26 +7,27 @@
 </ion-header>
 
 <ion-content>
-  <ion-slides pager="true" [options]="slideOpts">
+  <ion-slides pager="true" [options]="slideOpts" *ngIf="mode=='editar'">
     <ion-slide>
       <div style="display: block">
         <h1>Version Actual</h1>
-        <request-form></request-form>
+        <request-form [mascota]="actualPet"></request-form>
       </div>
     </ion-slide>
     <ion-slide>
       <div style="display: block">
         <h1>Propuesta voluntario</h1>
-        <request-form [new]="true"></request-form>
+        <request-form [mascota]="requestPet" [compareTo]="actualPet"></request-form>
       </div>
     </ion-slide>
   </ion-slides>
+  <request-form *ngIf="mode!='editar'" [mascota]="requestPet"></request-form>
   <ion-row class="ion-justify-content-center ion-margin-top decision">
     <ion-col size="5">
-      <ion-button mode="ios" expand="block" color="medium">Rechazar</ion-button>
+      <ion-button mode="ios" expand="block" color="medium" (click)="rechazarPropuesta()">Rechazar</ion-button>
     </ion-col>
     <ion-col size="5">
-      <ion-button mode="ios" expand="block">Aceptar</ion-button>
+      <ion-button mode="ios" expand="block" (click)="aceptarPropuesta()">Aceptar</ion-button>
     </ion-col>
   </ion-row>
 </ion-content>
