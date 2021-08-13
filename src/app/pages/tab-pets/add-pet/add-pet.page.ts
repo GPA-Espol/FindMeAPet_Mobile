@@ -212,7 +212,7 @@ export class AddPetPage implements OnInit {
       
     }
     this.alertaService.dismissLoading();
-    //console.log('NEW PET', newPet );
+
     
   }
 

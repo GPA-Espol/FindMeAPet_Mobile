@@ -31,37 +31,43 @@ export class SpecificVolunteerRequestPage implements OnInit {
     private navCtrl: NavController
   ) {}
 
-  ngOnInit() {
+  async ngOnInit() {
     this.administrador = this.sistema.admin;
 
     this.getPropuesta();
-    this.setMode();
+
+    await this.setMode();
   }
 
-  async getPropuesta() {
+  getPropuesta() {
     let id = +this.route.snapshot.paramMap.get('id');
     this.send.id_solicitud = id;
     this.propuesta = this.administrador.adminMascota.verPropuestasVoluntarioById(id);
-    console.log('propuesta', this.propuesta);
   }
 
   async setMode() {
     this.mode = this.propuesta.id_mascota ? Mode.EDITAR : Mode.ANADIR;
+
     if (this.mode == Mode.EDITAR) {
       this.actualPet = await this.sistema.getMascotabyId(this.propuesta.id_mascota);
     }
     this.requestPet = Mascota.deserializeOne(this.propuesta);
+    this.requestPet.isAdoptable = this.propuesta.is_adoptable;
+    this.requestPet.isAdoptado = this.propuesta.is_adoptado;
+    this.requestPet.isCasoExterno = this.propuesta.is_caso_externo;
+    this.requestPet.isEsterilizado = this.propuesta.is_esterilizado;
   }
 
   async aceptarPropuesta() {
     await this.alertaService.presentLoading('Aceptando Propuesta');
     try {
       this.send.estado = 'A';
-      this.administrador.adminMascota.actualizarSolicitud(this.send);
+      await this.administrador.adminMascota.actualizarSolicitud(this.send);
       this.navCtrl.pop();
       await this.alertaService.presentToast('La propuesta fue aceptada');
     } catch (err) {
-      this.alertaService.presentToast('Error al aceptar propuesta' + ', por favor intente de nuevo' + err);
+      this.alertaService.presentToast('Error al aceptar propuesta, por favor intente de nuevo' + err);
+      console.log(err);
     }
     this.alertaService.dismissLoading();
   }
@@ -70,7 +76,7 @@ export class SpecificVolunteerRequestPage implements OnInit {
     await this.alertaService.presentLoading('Rechazando Propuesta');
     try {
       this.send.estado = 'R';
-      this.administrador.adminMascota.actualizarSolicitud(this.send);
+      await this.administrador.adminMascota.actualizarSolicitud(this.send);
       this.navCtrl.pop();
       await this.alertaService.presentToast('La propuesta fue rechazada');
     } catch (err) {

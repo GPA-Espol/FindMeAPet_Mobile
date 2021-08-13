@@ -39,17 +39,17 @@ export class AdministrarMascota {
   public async verPropuestasVoluntarios() {
     let url = environment.api + 'solicitud';
     this.propuestas = await this.http.get<any[]>(url).toPromise();
+
     return this.propuestas;
-    //console.log(requests);
   }
 
   public verPropuestasVoluntarioById(id: number) {
-    let propuesta = this.propuestas.find((p) => (p.id = id));
+    let propuesta = this.propuestas.find((p) => p.id == id);
     return propuesta;
   }
 
   public async actualizarSolicitud(solicitud: any) {
     let url = environment.api + 'solicitud/update';
-    await this.http.put<any[]>(url, solicitud).toPromise();
+    let result = await this.http.put<any[]>(url, solicitud).toPromise();
   }
 }

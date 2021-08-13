@@ -11,7 +11,7 @@ export class VolunteerRequestPage implements OnInit {
   loading: boolean;
   administrador: Administrador;
   propuestas: any[];
-  constructor(private sistema: SistemaService) { }
+  constructor(private sistema: SistemaService) {}
 
   async ngOnInit() {
     this.loading = true;
@@ -24,12 +24,9 @@ export class VolunteerRequestPage implements OnInit {
     this.propuestas = await this.administrador.adminMascota.verPropuestasVoluntarios();
     for (const propuesta of this.propuestas) {
       if (propuesta.id_mascota) {
-        propuesta.mascota = await this.sistema.getMascotabyId(propuesta.id_mascota)
+        propuesta.mascota = await this.sistema.getMascotabyId(propuesta.id_mascota);
       }
-
     }
-    console.log(this.propuestas);
 
   }
-
 }

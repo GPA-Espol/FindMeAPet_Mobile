@@ -53,14 +53,14 @@ export class Voluntario extends UsuarioGPA {
     let url = environment.api + 'solicitud';
     let petChanges = Utils.getObjectDifference(oldPet, Mascota.serialize(requestPet));
     petChanges['id_mascota'] = idMascotta;
-    console.log(petChanges);
+
     await this.http.post<any>(url, petChanges).toPromise();
-    console.log('se envió la solicitud');
+
   }
 
   public async hacerSolicitudCreacionMascota(pet: Mascota) {
     let url = environment.api + 'solicitud';
-    console.log('mascota a enviar', Mascota.serialize(pet));
+    
 
     await this.http.post<any>(url, Mascota.serialize(pet)).toPromise();
   }

@@ -23,12 +23,8 @@ export class RequestCardComponent implements OnInit {
 
   async setMode() {
     this.mode = this.propuesta.mascota ? Mode.EDITAR : Mode.ANADIR;
-    console.log(this.mode);
     if (this.mode == Mode.EDITAR) {
-      console.log(this.propuesta.id_mascota);
-
       this.pet = this.propuesta.mascota;
-      console.log(this.pet);
     } else {
       this.pet = Mascota.deserializeOne(this.propuesta);
     }

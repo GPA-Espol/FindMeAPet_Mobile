@@ -8,7 +8,6 @@ import { Mode } from 'src/app/utils/utils';
   styleUrls: ['./request-form.component.scss'],
 })
 export class RequestFormComponent implements OnInit {
-  @Input() new: boolean;
   @Input() compareTo: Mascota;
   @Input() mascota: Mascota;
   constructor() {}
@@ -16,10 +15,14 @@ export class RequestFormComponent implements OnInit {
   ngOnInit() {}
 
   returnValue(key) {
-    return this.compareTo ? (this.mascota[key] ? this.mascota[key] : this.compareTo[key]) : this.mascota[key];
+    return this.compareTo
+      ? this.mascota[key] !== null
+        ? this.mascota[key]
+        : this.compareTo[key]
+      : this.mascota[key];
   }
 
   returnClass(key) {
-    return this.compareTo ? (this.mascota[key] ? 'new' : '') : '';
+    return this.compareTo ? (this.mascota[key] !== null ? 'new' : '') : '';
   }
 }

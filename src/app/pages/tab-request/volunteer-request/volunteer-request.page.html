@@ -12,10 +12,7 @@
     <ion-spinner name="crescent" color="primary"></ion-spinner>
   </ion-row>
   <ng-template #loadedContent>
-    <app-request-card *ngFor="let p of propuestas" [propuesta]="p" routerLink="informacion/{{p.id}}">
+    <app-request-card *ngFor="let p of propuestas" [propuesta]="p" [routerLink]="['informacion',p.id]">
     </app-request-card>
   </ng-template>
-  
-
-  
 </ion-content>
