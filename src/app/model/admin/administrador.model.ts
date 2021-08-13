@@ -23,9 +23,21 @@ export class Administrador extends UsuarioGPA {
   private _adminMascota: AdministrarMascota;
   private _adminPublicacion: AdministrarPublicacion;
 
-  constructor(http: HttpClient, sistema: SistemaService) {
+  static serialize(admin: Administrador, password: string): any {
+    const data = super.serialize(admin, password);
+    data.id_rol = 1;
+    return data;
+  }
+
+  static deserialize(data: any): Administrador {
+    const admin = new Administrador(null, null);
+    super.deserialize(data, admin);
+    return admin;
+  }
+
+  constructor(http?: HttpClient, sistema?: SistemaService) {
     super(http, sistema);
-    this._adminUsuario = new AdministrarUsuario();
+    this._adminUsuario = new AdministrarUsuario(http);
     this._adminReporteAsistencia = new AdministrarReporteAsistencia();
     this._adminFormulario = new AdministrarFormulario();
     this._adminMascota = new AdministrarMascota(http, sistema);
