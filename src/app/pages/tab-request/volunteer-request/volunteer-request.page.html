@@ -1,0 +1,18 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Propuestas por voluntarios</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-row class="ion-justify-content-center" *ngIf="loading; else loadedContent">
+    <ion-spinner name="crescent" color="primary"></ion-spinner>
+  </ion-row>
+  <ng-template #loadedContent>
+    <app-request-card *ngFor="let p of propuestas" [propuesta]="p" [routerLink]="['informacion',p.id]">
+    </app-request-card>
+  </ng-template>
+</ion-content>

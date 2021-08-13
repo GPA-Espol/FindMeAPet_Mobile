@@ -43,6 +43,16 @@ export enum UbicacionMascota {
   GTSI = 'GTSI',
 }
 
+export enum ColorMascota {
+  BLANCO = 'Blanco',
+  NEGRO = 'Negro',
+  CAREY = 'Bicolor',
+  CALICO = 'Calicó',
+  GRIS = 'Gris',
+  ROMANO = 'Romano',
+  NARANJA = 'Naranja'
+}
+
 export enum Personalidad {
   TIMIDO = 'Tímido',
   DOCIL = 'Dócil',
@@ -56,3 +66,5 @@ export enum EstadoSolicitud {
   APROBADO = 'Aprobado',
   RECHAZADO = 'Rechazado',
 }
+
+

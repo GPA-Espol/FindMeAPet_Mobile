@@ -63,6 +63,17 @@ export class Utils {
     today.add(-months, 'months');
     return { years: years, months: months, days: days };
   }
+
+  static getObjectDifference(oldObject: any, newObject: any) {
+    let resultObject: any = {};
+    let keysObj1 = Object.keys(oldObject);
+    keysObj1.forEach((key) => {
+      if (oldObject[key] != newObject[key]) {
+        resultObject[key] = newObject[key];
+      }
+    });
+    return resultObject;
+  }
 }
 
 export enum Mode {

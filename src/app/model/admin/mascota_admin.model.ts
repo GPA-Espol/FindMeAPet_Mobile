@@ -8,6 +8,7 @@ import { Mascota } from '../mascota.model';
  * @category Model
  */
 export class AdministrarMascota {
+  propuestas: any[] = [];
   constructor(private http: HttpClient, private sistema: SistemaService) {}
 
   public async crearMascota(mascota: Mascota) {
@@ -33,5 +34,22 @@ export class AdministrarMascota {
     await this.http.put<any[]>(url, mascotaApi).toPromise();
 
     //this.sistema.mascotas.push(mascota);
+  }
+
+  public async verPropuestasVoluntarios() {
+    let url = environment.api + 'solicitud';
+    this.propuestas = await this.http.get<any[]>(url).toPromise();
+
+    return this.propuestas.filter((x) => x.estado == 3);
+  }
+
+  public verPropuestasVoluntarioById(id: number) {
+    let propuesta = this.propuestas.find((p) => p.id == id);
+    return propuesta;
+  }
+
+  public async actualizarSolicitud(solicitud: any) {
+    let url = environment.api + 'solicitud/update';
+    await this.http.put<any[]>(url, solicitud).toPromise();
   }
 }

@@ -1,0 +1,43 @@
+<ion-content>
+  <ion-grid *ngIf="usuario">
+    <div class="top-row ion-padding">
+      <h1 class="title ion-no-margin">Mi perfil</h1>
+      <ion-row class="ion-justify-content-center ion-align-items-center profile-row">
+        <ion-col size="auto" class="ion-text-center">
+          <ion-avatar class="user-avatar" style="margin: auto">
+            <ion-img
+              [src]="adminTemplate? 'https://firebasestorage.googleapis.com/v0/b/gpa-findmepet.appspot.com/o/monik.jpg?alt=media&token=d58191af-8194-477e-accd-5ed90ddf1700':'https://firebasestorage.googleapis.com/v0/b/gpa-findmepet.appspot.com/o/eu.jpg?alt=media&token=18c19a8b-7907-40e1-afd8-f9492d40b831'"
+            ></ion-img>
+          </ion-avatar>
+          <!--h3 class="title ion-no-margin">{{usuario.nombre}} {{usuario.apellido}}</h3-->
+          <h3 *ngIf="adminTemplate" class="title ion-no-margin">Mónica Santos</h3>
+          <h3 *ngIf="!adminTemplate" class="title ion-no-margin">Eunice Galvez</h3>
+          <h4 class="ion-no-margin ion-margin-top" style="font-size: medium">Estado</h4>
+          <ion-chip [class]="adminTemplate? 'available-chip' : 'no-available-chip'">
+            <ion-label style="text-align: center"
+              >{{adminTemplate? 'Disponible' : 'No disponible'}}</ion-label
+            >
+          </ion-chip>
+        </ion-col>
+      </ion-row>
+    </div>
+    <div class="div-bg">
+      <ion-row class="bottom-row ion-padding">
+        <ion-list class="ion-no-margin ion-margin-start">
+          <ion-list-header
+            ><h1 class="title ion-no-margin ion-margin-bottom">Información</h1></ion-list-header
+          >
+          <ion-item *ngFor="let item of informationItems" lines="none" class="ion-margin-bottom">
+            <ion-avatar slot="start" class="icon-avatar">
+              <img [src]="item.icon" />
+            </ion-avatar>
+            <div style="display: block !important">
+              <ion-label>{{item.title}}</ion-label>
+              <ion-note>{{item.info}}</ion-note>
+            </div>
+          </ion-item>
+        </ion-list></ion-row
+      >
+    </div>
+  </ion-grid>
+</ion-content>
