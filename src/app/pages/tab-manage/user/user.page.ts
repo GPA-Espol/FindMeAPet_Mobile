@@ -18,7 +18,6 @@ export class UserPage implements OnInit {
   async ngOnInit() {
     await this.getData();
     this.loading = false;
-    console.log(this.admins);
   }
 
   private async getData() {

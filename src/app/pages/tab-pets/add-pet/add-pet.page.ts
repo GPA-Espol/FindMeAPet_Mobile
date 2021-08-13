@@ -26,7 +26,8 @@ export class AddPetPage implements OnInit {
   mode: string = '';
   ubicaciones: UbicacionMascota[];
   idPet: number;
-  petToEdit: Mascota;
+  oldPet : any = {};
+  petToEdit: Mascota ;
   extraInformation: boolean = false;
   ageType: string = '';
   mascota: FormGroup;
@@ -80,13 +81,14 @@ export class AddPetPage implements OnInit {
   /**
    * Method that sets the page mode to edit o to anadir. The page funcionality is based on this mode.
    */
-  setMode() {
+  async setMode() {
     let route = this.router.url;
     let array = route.split('/');
     let end = array[array.length - 1];
     this.mode = end == 'anadir' ? Mode.ANADIR : Mode.EDITAR;
     if (this.mode == Mode.EDITAR) {
-      this.getData();
+      await this.getData();  
+      Object.assign(this.oldPet, Mascota.serialize(this.petToEdit));
     }
   }
 
@@ -107,7 +109,10 @@ export class AddPetPage implements OnInit {
    */
   async getData() {
     this.idPet = +this.route.snapshot.paramMap.get('id');
-    this.petToEdit = await this.sistema.getMascotabyId(this.idPet);
+    let petSistema= await this.sistema.getMascotabyId(this.idPet);
+    this.petToEdit =  new Mascota();
+    Object.assign(this.petToEdit, petSistema)
+    //this.petToEdit = <any> {...petSistema};
     this.mascota.controls['nombre'].setValue(this.petToEdit.nombre);
     this.mascota.controls['color'].setValue(this.petToEdit.color);
     this.mascota.controls['caso_externo'].setValue(this.petToEdit.isCasoExterno);
@@ -149,14 +154,14 @@ export class AddPetPage implements OnInit {
     const succesMessage = this.administrador ? 'La mascota ha sido editada' : 'La solicitud ha sido enviada';
     const errorMessage = this.administrador ? 'Error al editar mascota' : 'Error al enviar solicitud';
     this.setValues(this.petToEdit);
-    this.petObserver.publish(this.petToEdit);
     await this.alertaService.presentLoading(loaddingMessage);
     try {
       this.petToEdit.imagenUrl = await this.imgPicker.upload();
       if (this.administrador) {
+        this.petObserver.publish(this.petToEdit); 
         await this.administrador.adminMascota.actualizarMascota(this.idPet, this.petToEdit);
       } else {
-        await this.voluntario.hacerSolicitudActualizacionMascota();
+        await this.voluntario.hacerSolicitudActualizacionMascota(this.oldPet, this.petToEdit,this.idPet );
       }
       this.goback();
       await this.alertaService.presentToast(succesMessage);
@@ -197,15 +202,17 @@ export class AddPetPage implements OnInit {
       if (this.administrador) {
         await this.administrador.adminMascota.crearMascota(newPet);
       } else {
-        await this.voluntario.hacerSolicitudCreacionMascota();
+        await this.voluntario.hacerSolicitudCreacionMascota(newPet);
       }
       this.goback();
       await this.alertaService.presentToast(succesMessage);
     } catch (err) {
       this.alertaService.presentToast(errorMessage + ', por favor intente de nuevo' + err);
+      console.log(err);
+      
     }
     this.alertaService.dismissLoading();
-    console.log('NEW PET', newPet );
+
     
   }
 

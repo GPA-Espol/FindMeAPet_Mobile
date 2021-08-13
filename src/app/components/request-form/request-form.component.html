@@ -1,0 +1,149 @@
+<form *ngIf="mascota">
+  <div class="ion-justify-content ion-margin-horizontal ion-margin-top">
+    <div>
+      <ion-row class="ion-margin-start">
+        <ion-text color="primary"> 1. </ion-text>
+        <div class="title">
+          <ion-text color="dark"> Nombre </ion-text>
+        </div>
+      </ion-row>
+
+      <ion-item lines="none" class="ion-margin-horizontal" [class]="returnClass('nombre')">
+        <ion-input type="text" size="10" [value]="returnValue('nombre')" disabled="true"></ion-input>
+      </ion-item>
+    </div>
+
+    <ion-row class="ion-margin-start"
+      ><ion-text color="primary"> 2. </ion-text>
+      <div class="title">
+        <ion-text color="dark"> Edad </ion-text>
+      </div>
+    </ion-row>
+
+    <ion-row class="my-vertical-margin">
+      <ion-col size="4" class="ion-no-margin ion-align-items-center">
+        <ion-label class="number-label">años</ion-label>
+        <ion-item lines="none">
+          <ion-input type="number" class="age" [value]="" disabled="true"></ion-input>
+        </ion-item>
+      </ion-col>
+      <ion-col size="4" class="ion-no-margin">
+        <ion-label class="number-label">meses</ion-label>
+        <ion-item lines="none">
+          <ion-input type="number" value="3" disabled="true"></ion-input>
+        </ion-item>
+      </ion-col>
+      <ion-col size="4" class="ion-no-margin">
+        <ion-label class="number-label">días</ion-label>
+        <ion-item lines="none">
+          <ion-input type="number" placeholder="días" value="0" disabled="true"></ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+
+    <ion-row class="ion-margin-start">
+      <ion-text color="primary"> 3. </ion-text>
+      <div class="title">
+        <ion-text color="dark"> Sexo </ion-text>
+      </div>
+    </ion-row>
+
+    <ion-item lines="none" class="ion-margin-horizontal" [class]="returnClass('sexo')">
+      <ion-input type="text" size="10" [value]="returnValue('sexo')" disabled="true"></ion-input>
+    </ion-item>
+    <div>
+      <ion-row class="ion-margin-start">
+        <ion-text color="primary"> 4. </ion-text>
+        <div class="title">
+          <ion-text color="dark"> Color </ion-text>
+        </div>
+      </ion-row>
+
+      <ion-item lines="none" class="ion-margin-horizontal" [class]="returnClass('color')">
+        <ion-input type="text" size="10" [value]="returnValue('color')" disabled="true"></ion-input>
+      </ion-item>
+    </div>
+    <ion-row class="ion-margin-start">
+      <ion-text color="primary"> 5. </ion-text>
+      <div class="title">
+        <ion-text color="dark"> Ubicación </ion-text>
+      </div>
+    </ion-row>
+
+    <ion-item lines="none" class="ion-margin-horizontal" [class]="returnClass('ubicacionMascota')">
+      <ion-input type="text" size="10" [value]="returnValue('ubicacionMascota')" disabled="true"></ion-input>
+    </ion-item>
+    <ion-row class="ion-margin-start">
+      <ion-text color="primary"> 6. </ion-text>
+      <div class="title">
+        <ion-text color="dark"> Caracteristicas </ion-text>
+      </div>
+    </ion-row>
+    <ion-list>
+      <ion-item lines="none" class="no-margin-item" [class]="returnClass('isEsterilizado')">
+        <ion-label>Esterilizado</ion-label>
+        <ion-checkbox
+          slot="end"
+          color="primary"
+          mode="ios"
+          disabled="true"
+          [checked]="returnValue('isEsterilizado')"
+        ></ion-checkbox>
+      </ion-item>
+      <ion-item lines="none" class="no-margin-item" [class]="returnClass('isAdoptado')">
+        <ion-label>Adoptado</ion-label>
+        <ion-checkbox
+          slot="end"
+          color="primary"
+          disabled="true"
+          mode="ios"
+          [checked]="returnValue('isAdoptado')"
+        ></ion-checkbox>
+      </ion-item>
+      <ion-item lines="none" class="no-margin-item" [class]="returnClass('isCasoExterno')">
+        <ion-label>Caso Externo</ion-label>
+        <ion-checkbox
+          slot="end"
+          color="primary"
+          disabled="true"
+          mode="ios"
+          [checked]="returnValue('isCasoExterno')"
+        ></ion-checkbox>
+      </ion-item>
+      <ion-item lines="none" class="no-margin-item" [class]="returnClass('isAdoptable')">
+        <ion-label>Es adopable</ion-label>
+        <ion-checkbox
+          slot="end"
+          color="primary"
+          disabled="true"
+          mode="ios"
+          [checked]="returnValue('isAdoptable')"
+        ></ion-checkbox>
+      </ion-item>
+    </ion-list>
+    <div>
+      <ion-row class="ion-margin-start ion-margin-top">
+        <ion-text color="primary"> 8. </ion-text>
+        <div class="title">
+          <ion-text color="dark"> Tipo de animal </ion-text>
+        </div>
+      </ion-row>
+
+      <ion-item lines="none" class="ion-margin-horizontal" [class]="returnClass('tipoAnimal')">
+        <ion-input type="text" size="10" [value]="returnValue('tipoAnimal')" disabled="true"></ion-input>
+      </ion-item>
+    </div>
+    <div>
+      <ion-row class="ion-margin-start">
+        <ion-text color="primary"> 9. </ion-text>
+        <div class="title">
+          <ion-text color="dark"> Descripción </ion-text>
+        </div>
+      </ion-row>
+
+      <ion-item lines="none">
+        <ion-textarea auto-grow rows="4" disabled="true" [value]="returnValue('descripcion')"></ion-textarea>
+      </ion-item>
+    </div>
+  </div>
+</form>

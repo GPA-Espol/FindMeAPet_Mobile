@@ -17,13 +17,14 @@ const routes: Routes = [
   {
     path: RequestsTypes.VOLUNTEERS_REQUESTS,
     loadChildren: () =>
-      import('../../pages/en-construccion/en-construccion.module').then((m) => m.EnConstruccionPageModule),
+      import('./volunteer-request/volunteer-request.module').then((m) => m.VolunteerRequestPageModule),
   },
   {
     path: RequestsTypes.EXTERNAL_CASES,
     loadChildren: () =>
       import('../../pages/en-construccion/en-construccion.module').then((m) => m.EnConstruccionPageModule),
   },
+
 ];
 
 @NgModule({
