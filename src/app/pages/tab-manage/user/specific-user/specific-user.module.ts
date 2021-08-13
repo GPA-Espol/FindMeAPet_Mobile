@@ -8,9 +8,10 @@ import { SpecificUserPageRoutingModule } from './specific-user-routing.module';
 
 import { SpecificUserPage } from './specific-user.page';
 import { RouterModule } from '@angular/router';
+import { PipesModule } from 'src/app/pipes/pipes.module';
 
 @NgModule({
-  imports: [CommonModule, FormsModule, IonicModule, RouterModule, SpecificUserPageRoutingModule],
+  imports: [CommonModule, FormsModule, IonicModule, RouterModule, SpecificUserPageRoutingModule, PipesModule],
   declarations: [SpecificUserPage],
 })
 export class SpecificUserPageModule {}

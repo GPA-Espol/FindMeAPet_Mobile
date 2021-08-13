@@ -45,7 +45,7 @@ export abstract class UsuarioGPA {
     usuarioGPA.correo = data.correo;
     usuarioGPA.fechaNacimiento = new Date(data.fecha_nacimiento);
     usuarioGPA.sexo = data.sexo;
-    usuarioGPA.isEstESPOL = !!data.isEstESPOL;
+    usuarioGPA.isEstESPOL = !!data.is_est_espol;
     usuarioGPA.foto = data.imagen_url;
     usuarioGPA.estadoActivo = data.estado == 'A';
   }

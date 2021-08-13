@@ -17,32 +17,60 @@ export class AdministrarUsuario {
 
   constructor(private http: HttpClient) {}
 
-  public agregarVoluntario(voluntario: Voluntario, contrasena: string) {
-    this.voluntarios.data.push(voluntario);
+  public async agregarVoluntario(voluntario: Voluntario, contrasena?: string) {
     const data = Voluntario.serialize(voluntario, contrasena);
-    return this.http.post<any>(this.url, data).toPromise();
+    data.estado = 'A';
+    const { id } = await this.http.post<any>(this.url, data).toPromise();
+    voluntario.id = id;
+    this.voluntarios.data.push(voluntario);
   }
 
-  public agregarAdministrador(admin: Administrador, contrasena: string) {
-    this.admins.data.push(admin);
+  public async agregarAdministrador(admin: Administrador, contrasena: string) {
     const data = Administrador.serialize(admin, contrasena);
-    return this.http.post<any>(this.url, data).toPromise();
+    data.estado = 'A';
+    const { id } = await this.http.post<any>(this.url, data).toPromise();
+    admin.id = id;
+    this.admins.data.push(admin);
   }
 
-  public eliminarVoluntario() {
-    // TODO implementar método
+  public eliminarUsuario(id: number) {
+    const index = this.voluntarios.data.findIndex((vol) => vol.id === id);
+    if (index !== -1) {
+      this.voluntarios.data.splice(index, 1);
+    } else {
+      const index = this.admins.data.findIndex((admin) => admin.id === id);
+      if (index !== -1) {
+        this.admins.data.splice(index, 1);
+      }
+    }
+    return this.http.delete<any>(`${this.url}/${id}`).toPromise();
   }
 
-  public actualizarVoluntario() {
-    // TODO implementar método
+  public actualizarVoluntario(voluntario: Voluntario, contrasena?: string) {
+    const index = this.admins.data.findIndex((vol) => vol.id === voluntario.id);
+    if (index !== -1) {
+      this.admins.data.splice(index, 1);
+      this.voluntarios.data.push(voluntario);
+    } else {
+      const index = this.voluntarios.data.findIndex((vol) => vol.id === voluntario.id);
+      this.voluntarios.data[index] = voluntario;
+    }
+    const data = Voluntario.serialize(voluntario, contrasena);
+    return this.http.put<void>(`${this.url}/${voluntario.id}`, data).toPromise();
   }
 
-  public eliminarAdministrador() {
-    // TODO implementar método
-  }
-
-  public actualizarAdministrador() {
-    // TODO implementar método
+  public actualizarAdministrador(admin: Administrador, contrasena: string) {
+    const index = this.voluntarios.data.findIndex((vol) => vol.id === admin.id);
+    if (index !== -1) {
+      this.voluntarios.data.splice(index, 1);
+      this.admins.data.push(admin);
+    } else {
+      const index = this.admins.data.findIndex((admin) => admin.id === admin.id);
+      this.admins.data[index] = admin;
+    }
+    this.admins.data[index] = admin;
+    const data = Administrador.serialize(admin, contrasena);
+    return this.http.put<void>(`${this.url}/${admin.id}`, data).toPromise();
   }
 
   public async obtenerUsuarios(forceReload = false) {

@@ -7,6 +7,7 @@ import { Administrador } from 'src/app/model/admin/administrador.model';
 import { RolUsuario } from 'src/app/model/enums.model';
 import { UsuarioGPA } from 'src/app/model/usuario_gpa.model';
 import { Voluntario } from 'src/app/model/voluntario.model';
+import { UserService } from 'src/app/observables/user.service';
 import { AlertaService } from 'src/app/services/alerta/alerta.service';
 import { SistemaService } from 'src/app/services/sistema/sistema.service';
 import { Mode } from 'src/app/utils/utils';
@@ -21,8 +22,8 @@ export class AddUserPage implements OnInit {
   userForm: FormGroup;
   userToEdit: UsuarioGPA;
   tipoUsuario = '';
-  private idUser: number;
-
+  loading = true;
+  editPassword: false;
   @ViewChild('imgPicker') imgPicker: ImagePickerComponent;
   constructor(
     private router: Router,
@@ -30,38 +31,44 @@ export class AddUserPage implements OnInit {
     private route: ActivatedRoute,
     private formBuilder: FormBuilder,
     private sistema: SistemaService,
-    private alert: AlertaService
+    private alert: AlertaService,
+    private userObserver: UserService
   ) {}
 
-  ngOnInit() {
+  async ngOnInit() {
+    await this.setMode();
     this.setBuildForm();
-    this.setMode();
+    this.loading = false;
   }
 
   setBuildForm() {
+    const rolVoluntario = (this.userToEdit as any)?.rol;
     this.userForm = this.formBuilder.group({
-      nombre: ['', Validators.required],
-      apellido: ['', Validators.required],
-      nombreUsuario: ['', Validators.required],
-      correo: ['', [Validators.email, Validators.required]],
-      fechaNacimiento: [new Date().toISOString(), Validators.required],
-      sexo: ['', Validators.required],
-      isEstEspol: [false, Validators.required],
-      tipoUsuario: ['', Validators.required],
-      password: ['', Validators.required],
-      repeatPassword: ['', Validators.required],
-      rolVoluntario: '',
+      nombre: [this.userToEdit?.nombre || '', Validators.required],
+      apellido: [this.userToEdit?.apellido || '', Validators.required],
+      nombreUsuario: [this.userToEdit?.nombreUsuario || '', Validators.required],
+      correo: [this.userToEdit?.correo || '', [Validators.email, Validators.required]],
+      fechaNacimiento: [
+        this.userToEdit?.fechaNacimiento.toISOString() || new Date().toISOString(),
+        Validators.required,
+      ],
+      sexo: [this.userToEdit?.sexo || '', Validators.required],
+      isEstEspol: [this.userToEdit?.isEstESPOL || false, Validators.required],
+      tipoUsuario: [this.tipoUsuario || '', Validators.required],
+      password: [''],
+      repeatPassword: [''],
+      rolVoluntario: rolVoluntario || '',
       horarios: '',
     });
   }
 
-  setMode() {
-    let route = this.router.url;
-    let array = route.split('/');
-    let end = array[array.length - 1];
+  async setMode() {
+    const route = this.router.url;
+    const array = route.split('/');
+    const end = array[array.length - 1];
     this.mode = end == 'anadir' ? Mode.ANADIR : Mode.EDITAR;
     if (this.mode == Mode.EDITAR) {
-      this.getData();
+      await this.getData();
     }
   }
 
@@ -83,23 +90,63 @@ export class AddUserPage implements OnInit {
   async submitAdmin() {
     const { adminUsuario } = this.sistema.admin;
     const password = this.userForm.get('password').value;
+    const admin = new Administrador();
+    await this.setValues(admin);
     if (this.mode == Mode.ANADIR) {
-      const admin = new Administrador();
-      await this.setValues(admin);
+      if (!this.validatePassword()) {
+        return;
+      }
       await adminUsuario.agregarAdministrador(admin, password);
+    } else {
+      if (this.editPassword && !this.validatePassword()) {
+        return;
+      }
+      admin.id = this.userToEdit.id;
+      const passwordToSend = this.editPassword ? password : undefined;
+      await adminUsuario.actualizarAdministrador(admin, passwordToSend);
     }
+    this.goback();
+    this.userObserver.publish();
   }
 
   async submitVoluntario() {
     const { adminUsuario } = this.sistema.admin;
     const password = this.userForm.get('password').value;
+    const voluntario = new Voluntario();
+    await this.setValues(voluntario);
+    voluntario.horario = this.userForm.get('horarios').value;
+    voluntario.rol = this.userForm.get('rolVoluntario').value;
     if (this.mode == Mode.ANADIR) {
-      const voluntario = new Voluntario();
-      await this.setValues(voluntario);
-      voluntario.horario = this.userForm.get('horarios').value;
-      voluntario.rol = this.userForm.get('rolVoluntario').value;
-      adminUsuario.agregarVoluntario(voluntario, password);
+      if (!this.validatePassword()) {
+        return;
+      }
+      await adminUsuario.agregarVoluntario(voluntario, password);
+    } else {
+      if (this.editPassword && !this.validatePassword()) {
+        return;
+      }
+      voluntario.id = this.userToEdit.id;
+      const passwordToSend = this.editPassword ? password : undefined;
+      await adminUsuario.actualizarVoluntario(voluntario, passwordToSend);
     }
+    this.goback();
+    this.userObserver.publish();
+  }
+
+  validatePassword() {
+    const password = this.userForm.get('password').value;
+    const repeatPassword = this.userForm.get('repeatPassword').value;
+    if (!password) {
+      this.alert.presentToast('El campo contraseña es requerido');
+      this.userForm.get('password').setErrors({ password: 'El campo contraseña es requerido' });
+      return false;
+    }
+    if (password != repeatPassword) {
+      this.alert.presentToast('Las contraseñas no coinciden');
+      this.userForm.get('repeatPassword').setErrors({ repeatPassword: 'Las contraseñas no coinciden' });
+      return false;
+    }
+    return true;
   }
 
   private async setValues(user: UsuarioGPA) {
@@ -118,11 +165,18 @@ export class AddUserPage implements OnInit {
     this.tipoUsuario = $event.target.value;
   }
 
+  onEditPasswordChange($event: any) {
+    this.editPassword = $event.target.checked;
+  }
+
   goback() {
     this.navCtrl.pop();
   }
 
-  private getData() {
-    this.idUser = +this.route.snapshot.paramMap.get('id');
+  private async getData() {
+    const idUser = +this.route.snapshot.paramMap.get('id');
+    const { adminUsuario } = this.sistema.admin;
+    this.userToEdit = await adminUsuario.obtenerUsuarioPorId(idUser);
+    this.tipoUsuario = this.userToEdit instanceof Administrador ? RolUsuario.ADMIN : RolUsuario.VOLUNTARIO;
   }
 }
