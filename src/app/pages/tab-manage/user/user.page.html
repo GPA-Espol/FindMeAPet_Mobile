@@ -22,7 +22,7 @@
   </ion-row>
   <ng-template #loadedContent>
     <div *ngIf="segment.value == 'admin'" class="ion-margin-top">
-      <ion-card *ngFor="let admin of admins" mode="ios" class="card-user" [routerLink]="admin.id">
+      <ion-card *ngFor="let admin of admins" mode="ios" class="card-user" [routerLink]="'{{admin.id}}'">
         <ion-item lines="none" class="item-user">
           <ion-thumbnail>
             <img [src]="admin.foto || '/assets/img/user-placeholder.png'" alt="image" class="image-user" />
@@ -35,7 +35,12 @@
       </ion-card>
     </div>
     <div *ngIf="segment.value == 'vol'" class="ion-margin-top">
-      <ion-card *ngFor="let volunteer of volunteers" mode="ios" class="card-user" [routerLink]="volunteer.id">
+      <ion-card
+        *ngFor="let volunteer of volunteers"
+        mode="ios"
+        class="card-user"
+        [routerLink]="'{{volunteer.id}}'"
+      >
         <ion-item lines="none" class="item-user">
           <ion-thumbnail>
             <img
