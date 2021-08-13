@@ -7,14 +7,10 @@ import { IonicModule } from '@ionic/angular';
 import { SpecificUserPageRoutingModule } from './specific-user-routing.module';
 
 import { SpecificUserPage } from './specific-user.page';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-    IonicModule,
-    SpecificUserPageRoutingModule
-  ],
-  declarations: [SpecificUserPage]
+  imports: [CommonModule, FormsModule, IonicModule, RouterModule, SpecificUserPageRoutingModule],
+  declarations: [SpecificUserPage],
 })
 export class SpecificUserPageModule {}

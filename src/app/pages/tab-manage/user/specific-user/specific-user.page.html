@@ -50,7 +50,7 @@
     </div>
     <ion-row class="ion-justify-content-center">
       <ion-col size="10">
-        <ion-button expand="block" routerLink="../editar/{{1}}" mode="ios"> Editar usuario </ion-button>
+        <ion-button expand="block" [routerLink]="['../editar',1]" mode="ios"> Editar usuario </ion-button>
         <ion-button class="ion-margin-vertical" expand="block" color="danger" mode="ios">
           Eliminar usuario
         </ion-button>
