@@ -12,8 +12,8 @@
     <ion-spinner name="crescent" color="primary"></ion-spinner>
   </ion-row>
   <ng-template #loadedContent>
-    <div *ngIf="pet.imagenUrl; else no_image">
-      <img [src]="pet.imagenUrl" height="40%" width="100%" />
+    <div *ngIf="pet.imagenUrl; else no_image" style="height: 40%" class="scrollable">
+      <img [src]="pet.imagenUrl" />
     </div>
     <ng-template #no_image>
       <div class="img-placeholder"></div>
@@ -21,7 +21,7 @@
     <div class="content ion-align-self-end scrollable">
       <!--img width="80" height="80" src=""/-->
       <!--img class="fondo-mascota" src="assets/img/fondo-mascota.png" alt="no hay mascotas" height="200px" width="100%" /-->
-      <ion-fab *ngIf='administrador' slot="fixed" style="top: 10px; right: 15px">
+      <ion-fab *ngIf="administrador" slot="fixed" style="top: 10px; right: 15px">
         <ion-fab-button color="danger" size="small" (click)="modaDelete()"
           ><ion-icon id="delete-icon" name="trash"></ion-icon
         ></ion-fab-button>

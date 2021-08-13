@@ -2,7 +2,7 @@ ion-grid {
   padding: 0;
   .top-row {
     background-color: #f9c49a;
-    height: 350px;
+    height: 320px;
     border-bottom-right-radius: 60px;
     @media (max-width: 175px) {
       height: 400px;
@@ -12,16 +12,16 @@ ion-grid {
     }
   }
   .bottom-row {
-    background-color:white;
+    background-color: white;
     //height: 600px;
     border-top-left-radius: 60px;
   }
 }
-.div-bg{
+.div-bg {
   background-color: #f9c49a;
 }
 .profile-row {
-  height: 100%;
+  height: 85%;
   width: 100%;
 }
 
