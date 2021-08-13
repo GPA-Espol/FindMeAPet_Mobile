@@ -56,6 +56,7 @@ export class AdministrarUsuario {
       this.voluntarios.data[index] = voluntario;
     }
     const data = Voluntario.serialize(voluntario, contrasena);
+    data.estado = 'A';
     return this.http.put<void>(`${this.url}/${voluntario.id}`, data).toPromise();
   }
 
@@ -70,6 +71,7 @@ export class AdministrarUsuario {
     }
     this.admins.data[index] = admin;
     const data = Administrador.serialize(admin, contrasena);
+    data.estado = 'A';
     return this.http.put<void>(`${this.url}/${admin.id}`, data).toPromise();
   }
 
