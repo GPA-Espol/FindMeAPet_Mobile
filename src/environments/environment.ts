@@ -5,8 +5,7 @@
 export const environment = {
   production: false,
   version: 'web',
-  //api: 'https://findmepet.herokuapp.com/',
-  api: 'http://localhost:3000/',
+  api: 'https://findmepet.herokuapp.com/',
   firebase: {
     apiKey: 'AIzaSyCVOUzrCZMdtyhG05c5SZdnURPSeT_GPto',
     authDomain: 'gpa-findmepet.firebaseapp.com',
