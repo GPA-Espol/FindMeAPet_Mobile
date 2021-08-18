@@ -34,10 +34,11 @@ export class SistemaService {
    */
   public async login(usuario: string, password: string) {
     const loginUrl = environment.api + 'auth';
-    const id_device = ''; //await this.firebase.getToken();
+    const id_device = await this.firebase.getToken();
     const { token, rol, id } = await this.http
       .post<any>(loginUrl, { usuario, password, id_device })
       .toPromise();
+    console.log(loginUrl);
     await this.store.set('usuario', { token, rol, id });
     if (rol == RolUsuario.ADMIN) {
       this._usuario = new Administrador(this.http, this);

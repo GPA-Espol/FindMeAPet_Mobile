@@ -31,5 +31,6 @@ export class AgePipe implements PipeTransform {
       let dayAgo = Math.floor(createdSecond / 86400);
       return dayAgo > 1 ? dayAgo + ' días' : dayAgo + ' día';
     }
+    return '0 días';
   }
 }
