@@ -11,7 +11,7 @@ import { SistemaService } from 'src/app/services/sistema/sistema.service';
 import { Mode, Utils } from 'src/app/utils/utils';
 
 /**
- * Class in charge of the adition and updating of a given publication 
+ * Class in charge of the adition and updating of a given publication
  * of a given type that depends on the active route
  * @category Components
  */
@@ -45,7 +45,7 @@ export class AddPublicationPage implements OnInit {
 
   /**
    * Build the FormGroup of the publication, if adding a new publication
-   * the form properties will be initialized empty, but if updating a 
+   * the form properties will be initialized empty, but if updating a
    * publication the form properties will be initialized with the last
    * publication info.
    * The form will have the following fields:
@@ -68,7 +68,7 @@ export class AddPublicationPage implements OnInit {
   }
 
   /**
-   * Method that handle the submit event of the publication, and 
+   * Method that handle the submit event of the publication, and
    * handle errors
    */
   async submitPublication() {

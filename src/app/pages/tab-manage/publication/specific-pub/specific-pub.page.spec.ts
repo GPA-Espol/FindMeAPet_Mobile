@@ -1,5 +1,8 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { IonicModule } from '@ionic/angular';
+import { ActivatedRoute } from '@angular/router';
+import { IonicModule, NavController } from '@ionic/angular';
+import { Publicacion } from 'src/app/model/publicacion.model';
+import { SistemaService } from 'src/app/services/sistema/sistema.service';
 
 import { SpecificPubPage } from './specific-pub.page';
 
@@ -7,18 +10,53 @@ describe('SpecificPubPage', () => {
   let component: SpecificPubPage;
   let fixture: ComponentFixture<SpecificPubPage>;
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      declarations: [ SpecificPubPage ],
-      imports: [IonicModule.forRoot()]
-    }).compileComponents();
+  beforeEach(
+    waitForAsync(() => {
+      const navCtrlSpy = jasmine.createSpyObj('NavController', ['pop']);
+      TestBed.configureTestingModule({
+        declarations: [SpecificPubPage],
+        imports: [IonicModule.forRoot()],
+        providers: [
+          {
+            provide: ActivatedRoute,
+            useValue: {
+              snapshot:{
+                paramMap:{
+                  get: (id)=>5
+                }
+              }
+            },
+          },
+          {
+            provide: SistemaService,
+            useValue: buildSistemaService(),
+          },
+          {
+            provide: NavController,
+            useValue: navCtrlSpy,
+          },
+        ],
+      }).compileComponents();
 
-    fixture = TestBed.createComponent(SpecificPubPage);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  }));
+      fixture = TestBed.createComponent(SpecificPubPage);
+      component = fixture.componentInstance;
+      fixture.detectChanges();
+    })
+  );
 
   it('should create', () => {
     expect(component).toBeTruthy();
   });
 });
+
+function buildSistemaService() {
+  const publication = new Publicacion();
+  return {
+    admin: {
+      adminPublicacion: {
+        verPublicacion: (id) => publication,
+        eliminarPublicacion: (id) => {},
+      },
+    },
+  };
+}

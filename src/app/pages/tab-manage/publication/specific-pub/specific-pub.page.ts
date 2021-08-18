@@ -36,10 +36,7 @@ export class SpecificPubPage implements OnInit {
    * obtained from the params of the active route.
    */
   private async setPublicationInfo() {
-    let idPublication: number;
-    this.route.paramMap.subscribe((paramMap) => {
-      idPublication = +paramMap.get('id');
-    });
+    let idPublication = +this.route.snapshot.paramMap.get('id');
     const { adminPublicacion } = this.sistema.admin;
     this.publication = await adminPublicacion.verPublicacion(idPublication);
   }

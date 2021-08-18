@@ -14,7 +14,7 @@ import { Mode } from 'src/app/utils/utils';
 })
 export class RequestCardComponent implements OnInit {
   loading: boolean;
-  mode: String;
+  mode: string;
   user: Voluntario = new Voluntario();
   pet: Mascota;
   @Input() propuesta: any;
