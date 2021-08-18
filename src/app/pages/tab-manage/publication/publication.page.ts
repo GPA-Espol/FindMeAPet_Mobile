@@ -30,14 +30,14 @@ export class PublicationPage implements OnInit {
     private publicationObserver: PublicationObserverService
   ) {}
 
-  ngOnInit() {
+  async ngOnInit() {
     this.setPublicationsType();
-    this.setPublicationData();
+    await this.setPublicationData();
+
     this.publicationSubscription = this.publicationObserver.getObservable().subscribe(() => {
       this.setPublicationData();
     });
   }
-
 
   /**
    * Method that consult the publications from the backend, and will
