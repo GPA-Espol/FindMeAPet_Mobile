@@ -9,6 +9,7 @@ import { Storage } from '@ionic/storage';
 import { LoginPage } from './login.page';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AlertaService } from 'src/app/services/alerta/alerta.service';
+import { FirebaseX } from '@ionic-native/firebase-x/ngx';
 
 describe('LoginPage', () => {
   let component: LoginPage;
@@ -40,6 +41,7 @@ describe('LoginPage', () => {
           { provide: SistemaService, useValue: buildStub(storage) },
           { provide: Router, useValue: routerSpy },
           { provide: AlertaService, useValue: alertServiceSpy },
+          FirebaseX,
         ],
       }).compileComponents();
 

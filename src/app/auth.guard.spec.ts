@@ -4,6 +4,7 @@ import { IonicStorageModule } from '@ionic/storage-angular';
 import { AppRoutingModule } from './app-routing.module';
 import { Storage } from '@ionic/storage';
 import { AuthAdminGuard, AuthVoluntarioGuard, LoggedInGuard } from './auth.guard';
+import { FirebaseX } from '@ionic-native/firebase-x/ngx';
 
 describe('LoggedInGuard', () => {
   let guard: LoggedInGuard;
@@ -13,6 +14,7 @@ describe('LoggedInGuard', () => {
     storage = await storageService.create();
     TestBed.configureTestingModule({
       imports: [AppRoutingModule, HttpClientModule, IonicStorageModule.forRoot()],
+      providers: [FirebaseX],
     });
     guard = TestBed.inject(LoggedInGuard);
   });
@@ -42,6 +44,7 @@ describe('AuthAdminGuard', () => {
     storage = await storageService.create();
     TestBed.configureTestingModule({
       imports: [AppRoutingModule, HttpClientModule, IonicStorageModule.forRoot()],
+      providers: [FirebaseX],
     });
     guard = TestBed.inject(AuthAdminGuard);
   });
@@ -70,6 +73,7 @@ describe('AuthVoluntarioGuard', () => {
     storage = await storageService.create();
     TestBed.configureTestingModule({
       imports: [AppRoutingModule, HttpClientModule, IonicStorageModule.forRoot()],
+      providers: [FirebaseX],
     });
     guard = TestBed.inject(AuthVoluntarioGuard);
   });
