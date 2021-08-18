@@ -10,7 +10,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ImagePickerComponent } from 'src/app/components/image-picker/image-picker.component';
 import { PetObserverService } from 'src/app/observables/pet-observer.service';
 import { Voluntario } from 'src/app/model/voluntario.model';
-import {  ColorMascota, RolUsuario, UbicacionMascota } from 'src/app/model/enums.model';
+import { ColorMascota, RolUsuario, UbicacionMascota } from 'src/app/model/enums.model';
 import { Mode, Utils } from 'src/app/utils/utils';
 
 /**
@@ -26,16 +26,16 @@ export class AddPetPage implements OnInit {
   mode: string = '';
   ubicaciones: UbicacionMascota[];
   idPet: number;
-  oldPet : any = {};
-  petToEdit: Mascota ;
+  oldPet: any = {};
+  petToEdit: Mascota;
   extraInformation: boolean = false;
   ageType: string = '';
   mascota: FormGroup;
   administrador: Administrador;
   voluntario: Voluntario;
   colors = ColorMascota;
-  colorsKeys=[]
-  ubicacionesKeys = []
+  colorsKeys = [];
+  ubicacionesKeys = [];
 
   @ViewChild('imgPicker') imgPicker: ImagePickerComponent;
   constructor(
@@ -67,7 +67,7 @@ export class AddPetPage implements OnInit {
       adoptado: 0,
       caso_externo: 0,
       adoptable: 0,
-      descripcion: ['', Validators.required],
+      descripcion: '',
       sexo: ['', Validators.required],
       ubicacion: ['', Validators.required],
       tipo: ['', Validators.required],
@@ -87,7 +87,7 @@ export class AddPetPage implements OnInit {
     let end = array[array.length - 1];
     this.mode = end == 'anadir' ? Mode.ANADIR : Mode.EDITAR;
     if (this.mode == Mode.EDITAR) {
-      await this.getData();  
+      await this.getData();
       Object.assign(this.oldPet, Mascota.serialize(this.petToEdit));
     }
   }
@@ -109,9 +109,9 @@ export class AddPetPage implements OnInit {
    */
   async getData() {
     this.idPet = +this.route.snapshot.paramMap.get('id');
-    let petSistema= await this.sistema.getMascotabyId(this.idPet);
-    this.petToEdit =  new Mascota();
-    Object.assign(this.petToEdit, petSistema)
+    let petSistema = await this.sistema.getMascotabyId(this.idPet);
+    this.petToEdit = new Mascota();
+    Object.assign(this.petToEdit, petSistema);
     //this.petToEdit = <any> {...petSistema};
     this.mascota.controls['nombre'].setValue(this.petToEdit.nombre);
     this.mascota.controls['color'].setValue(this.petToEdit.color);
@@ -158,10 +158,10 @@ export class AddPetPage implements OnInit {
     try {
       this.petToEdit.imagenUrl = await this.imgPicker.upload();
       if (this.administrador) {
-        this.petObserver.publish(this.petToEdit); 
+        this.petObserver.publish(this.petToEdit);
         await this.administrador.adminMascota.actualizarMascota(this.idPet, this.petToEdit);
       } else {
-        await this.voluntario.hacerSolicitudActualizacionMascota(this.oldPet, this.petToEdit,this.idPet );
+        await this.voluntario.hacerSolicitudActualizacionMascota(this.oldPet, this.petToEdit, this.idPet);
       }
       this.goback();
       await this.alertaService.presentToast(succesMessage);
@@ -172,6 +172,10 @@ export class AddPetPage implements OnInit {
   }
 
   async onSubmit() {
+    if (this.mascota.invalid) {
+      await this.alertaService.presentToast('Completar los campos obligatorios');
+      return;
+    }
     if (this.voluntario) {
       await this.modalVoluntarioConfirmation();
     } else {
@@ -209,11 +213,8 @@ export class AddPetPage implements OnInit {
     } catch (err) {
       this.alertaService.presentToast(errorMessage + ', por favor intente de nuevo' + err);
       console.log(err);
-      
     }
     this.alertaService.dismissLoading();
-
-    
   }
 
   /**
