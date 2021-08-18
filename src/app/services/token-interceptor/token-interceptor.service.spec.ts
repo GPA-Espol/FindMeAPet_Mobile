@@ -7,6 +7,7 @@ import { Storage } from '@ionic/storage';
 import { TokenInterceptorService } from './token-interceptor.service';
 import { environment } from 'src/environments/environment';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { FirebaseX } from '@ionic-native/firebase-x/ngx';
 
 describe('TokenInterceptorService', () => {
   let httpMock: HttpTestingController;
@@ -21,6 +22,7 @@ describe('TokenInterceptorService', () => {
       imports: [HttpClientTestingModule, IonicStorageModule.forRoot()],
       providers: [
         SistemaService,
+        FirebaseX,
         {
           provide: HTTP_INTERCEPTORS,
           useClass: TokenInterceptorService,
