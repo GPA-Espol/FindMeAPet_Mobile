@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { FirebaseX } from '@ionic-native/firebase-x/ngx';
+import { Platform } from '@ionic/angular';
 import { CachedUser } from 'src/app/model/cached_user';
 import { environment } from 'src/environments/environment';
 import { Administrador } from '../../model/admin/administrador.model';
@@ -23,7 +24,12 @@ export class SistemaService {
   private _usuario: UsuarioGPA;
   private _mascotas: { data: Mascota[]; time: number };
 
-  constructor(private http: HttpClient, private store: StorageService, private firebase: FirebaseX) {}
+  constructor(
+    private http: HttpClient,
+    private store: StorageService,
+    private firebase: FirebaseX,
+    private platform: Platform
+  ) {}
 
   /**
    * Make an http request to log in the user in the system, and save his/her role and save the
@@ -34,7 +40,7 @@ export class SistemaService {
    */
   public async login(usuario: string, password: string) {
     const loginUrl = environment.api + 'auth';
-    const id_device = await this.firebase.getToken();
+    const id_device = this.platform.is('cordova') ? await this.firebase.getToken() : '';
     const { token, rol, id } = await this.http
       .post<any>(loginUrl, { usuario, password, id_device })
       .toPromise();

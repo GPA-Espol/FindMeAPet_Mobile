@@ -76,7 +76,7 @@
     <ion-spinner name="crescent" color="primary"></ion-spinner>
   </ion-row>
   <ng-template #loadedContent>
-    <div *ngIf="pets.length">
+    <div *ngIf="pets.length" id="pets">
       <ion-refresher slot="fixed" (ionRefresh)="refreshPets($event)">
         <ion-refresher-content></ion-refresher-content>
       </ion-refresher>
