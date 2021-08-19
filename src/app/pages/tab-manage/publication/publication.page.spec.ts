@@ -16,6 +16,7 @@ describe('PublicationPage', () => {
   let router: any;
   let observer = new Subject();
   let sistema: any;
+  const baseUrl = '/tabs/admin/configuracion/';
   beforeEach(
     waitForAsync(() => {
       TestBed.configureTestingModule({
@@ -46,43 +47,43 @@ describe('PublicationPage', () => {
   });
 
   it('PPC-02 Should set Noticia as publication type', () => {
-    router.url = '/tabs/admin/configuracion/' + TipoPublicacion.NOTICIA;
+    router.url = baseUrl + TipoPublicacion.NOTICIA;
     component.ngOnInit();
     expect(component.publicationsType).toEqual(TipoPublicacion.NOTICIA);
   });
 
   it('PPC-03 Should set Evento as publication type', () => {
-    router.url = '/tabs/admin/configuracion/' + TipoPublicacion.EVENTO;
+    router.url = baseUrl + TipoPublicacion.EVENTO;
     component.ngOnInit();
     expect(component.publicationsType).toEqual(TipoPublicacion.EVENTO);
   });
 
   it('PPC-04 Should set "noticias" as publication title', () => {
-    router.url = '/tabs/admin/configuracion/' + TipoPublicacion.NOTICIA;
+    router.url = baseUrl + TipoPublicacion.NOTICIA;
     component.ngOnInit();
     expect(component.publicationTitle).toEqual('noticias');
   });
 
   it('PPC-05 Should set "eventos" as publication title', () => {
-    router.url = '/tabs/admin/configuracion/' + TipoPublicacion.EVENTO;
+    router.url = baseUrl + TipoPublicacion.EVENTO;
     component.ngOnInit();
     expect(component.publicationTitle).toEqual('eventos');
   });
 
   it('PPC-06 Should set only publications of type "noticia" as data', async () => {
-    router.url = '/tabs/admin/configuracion/' + TipoPublicacion.NOTICIA;
+    router.url = baseUrl + TipoPublicacion.NOTICIA;
     await component.ngOnInit();
     expect(component.publications.length).toBe(2);
   });
 
   it('PPC-07 Should set only publications of type "evento" as data', async () => {
-    router.url = '/tabs/admin/configuracion/' + TipoPublicacion.EVENTO;
+    router.url = baseUrl + TipoPublicacion.EVENTO;
     await component.ngOnInit();
     expect(component.publications.length).toBe(0);
   });
 
   it('PPC-08 Should update publications on observable next call', (done) => {
-    router.url = '/tabs/admin/configuracion/' + TipoPublicacion.EVENTO;
+    router.url = baseUrl + TipoPublicacion.EVENTO;
     component.ngOnInit().then(() => {
       const newPub = new Publicacion();
       newPub.tipo = TipoPublicacion.EVENTO;

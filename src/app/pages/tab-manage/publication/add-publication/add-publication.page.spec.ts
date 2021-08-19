@@ -11,6 +11,7 @@ import { AddPublicationPage } from './add-publication.page';
 describe('AddPublicationPage', () => {
   let component: AddPublicationPage;
   let fixture: ComponentFixture<AddPublicationPage>;
+  const baseUrl = '/tabs/admin/configuracion/';
 
   beforeEach(
     waitForAsync(() => {
@@ -33,7 +34,7 @@ describe('AddPublicationPage', () => {
     })
   );
 
-  it('should create', () => {
+  it('APC-01 Should create', () => {
     expect(component).toBeTruthy();
   });
 });
