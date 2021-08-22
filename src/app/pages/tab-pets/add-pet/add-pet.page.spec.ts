@@ -12,7 +12,7 @@ import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { Observable, Observer } from 'rxjs';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { Mascota } from 'src/app/model/mascota.model';
-import { UbicacionMascota } from 'src/app/model/enums.model';
+import { RolUsuario, UbicacionMascota } from 'src/app/model/enums.model';
 import { Router } from '@angular/router';
 import { AlertaService } from 'src/app/services/alerta/alerta.service';
 import { Administrador } from 'src/app/model/admin/administrador.model';
@@ -35,7 +35,22 @@ describe('AddPetPage', () => {
       ]);
       adminMascotaSpy = jasmine.createSpyObj('AdministrarMascota', ['crearMascota']);
       const adminSpy = jasmine.createSpyObj('Administrador', [], { adminMascota: adminMascotaSpy });
-      const systemSpy = jasmine.createSpyObj('SistemaService', [], { admin: adminSpy });
+      const systemSpy = jasmine.createSpyObj(
+        'SistemaService',
+        {
+          userLoggedIn: () => {
+            return {
+              id: 5,
+              rol: RolUsuario.ADMIN,
+              token: 'token',
+            };
+          },
+          getMascotabyId: createTestPet(),
+        },
+        {
+          admin: adminSpy,
+        }
+      );
       const cameraSpy = createCameraSpy();
       const navCtrlSpy = jasmine.createSpyObj('NavController', ['navigateBack']);
       actionSheetElementSpy = jasmine.createSpyObj('HTMLIonActionSheetElement', ['present']);
@@ -163,5 +178,6 @@ function createTestPet() {
   testPet.sexo = 'M';
   testPet.ubicacionMascota = UbicacionMascota.ASO_FIMCP;
   testPet.tipoAnimal = 'Gato';
+  testPet.fechaNacimiento = new Date();
   return testPet;
 }
