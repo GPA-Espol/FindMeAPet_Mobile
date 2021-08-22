@@ -4,6 +4,7 @@ import { FirebaseX } from '@ionic-native/firebase-x/ngx';
 import { IonicModule } from '@ionic/angular';
 import { IonicStorageModule } from '@ionic/storage-angular';
 import { AppRoutingModule } from 'src/app/app-routing.module';
+import { ComponentsModule } from 'src/app/components/components.module';
 import { UbicacionMascota } from 'src/app/model/enums.model';
 import { Mascota } from 'src/app/model/mascota.model';
 import { PipesModule } from 'src/app/pipes/pipes.module';
@@ -25,6 +26,8 @@ describe('TabPetsPage', () => {
           AppRoutingModule,
           HttpClientModule,
           IonicStorageModule.forRoot(),
+          PipesModule,
+          ComponentsModule,
         ],
         providers: [FirebaseX, { provide: SistemaService, useValue: createSistemaService() }],
       }).compileComponents();

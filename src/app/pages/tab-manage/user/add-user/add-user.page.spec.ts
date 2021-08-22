@@ -2,6 +2,7 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { IonicModule, NavController } from '@ionic/angular';
+import { ComponentsModule } from 'src/app/components/components.module';
 import { SistemaService } from 'src/app/services/sistema/sistema.service';
 
 import { AddUserPage } from './add-user.page';
@@ -16,7 +17,7 @@ describe('AddUserPage', () => {
       const id = 5;
       TestBed.configureTestingModule({
         declarations: [AddUserPage],
-        imports: [IonicModule.forRoot(), ReactiveFormsModule],
+        imports: [IonicModule.forRoot(), ReactiveFormsModule, ComponentsModule],
         providers: [
           { provide: Router, useValue: buildRouter() },
           { provide: NavController, useValue: navCtrlSpy },

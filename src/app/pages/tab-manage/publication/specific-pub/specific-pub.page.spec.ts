@@ -2,6 +2,7 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { ActivatedRoute } from '@angular/router';
 import { IonicModule, NavController } from '@ionic/angular';
 import { Publicacion } from 'src/app/model/publicacion.model';
+import { PipesModule } from 'src/app/pipes/pipes.module';
 import { SistemaService } from 'src/app/services/sistema/sistema.service';
 
 import { SpecificPubPage } from './specific-pub.page';
@@ -15,16 +16,16 @@ describe('SpecificPubPage', () => {
       const navCtrlSpy = jasmine.createSpyObj('NavController', ['pop']);
       TestBed.configureTestingModule({
         declarations: [SpecificPubPage],
-        imports: [IonicModule.forRoot()],
+        imports: [IonicModule.forRoot(), PipesModule],
         providers: [
           {
             provide: ActivatedRoute,
             useValue: {
-              snapshot:{
-                paramMap:{
-                  get: (id)=>5
-                }
-              }
+              snapshot: {
+                paramMap: {
+                  get: (id) => 5,
+                },
+              },
             },
           },
           {

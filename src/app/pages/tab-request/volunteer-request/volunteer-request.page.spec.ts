@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 import { AppRoutingModule } from 'src/app/app-routing.module';
+import { ComponentsModule } from 'src/app/components/components.module';
 import { UbicacionMascota } from 'src/app/model/enums.model';
 import { Mascota } from 'src/app/model/mascota.model';
 import { SistemaService } from 'src/app/services/sistema/sistema.service';
@@ -15,7 +16,7 @@ describe('VolunteerRequestPage', () => {
     waitForAsync(() => {
       TestBed.configureTestingModule({
         declarations: [VolunteerRequestPage],
-        imports: [IonicModule.forRoot(), AppRoutingModule],
+        imports: [IonicModule.forRoot(), AppRoutingModule, ComponentsModule],
         providers: [{ provide: SistemaService, useValue: createSistemaService() }],
       }).compileComponents();
 

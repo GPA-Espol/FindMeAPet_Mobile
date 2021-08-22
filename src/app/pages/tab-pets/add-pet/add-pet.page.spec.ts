@@ -18,6 +18,7 @@ import { AlertaService } from 'src/app/services/alerta/alerta.service';
 import { Administrador } from 'src/app/model/admin/administrador.model';
 import { SistemaService } from 'src/app/services/sistema/sistema.service';
 import { AdministrarMascota } from 'src/app/model/admin/mascota_admin.model';
+import { ComponentsModule } from 'src/app/components/components.module';
 
 describe('AddPetPage', () => {
   let component: AddPetPage;
@@ -65,6 +66,7 @@ describe('AddPetPage', () => {
           IonicStorageModule.forRoot(),
           AppRoutingModule,
           ReactiveFormsModule,
+          ComponentsModule,
         ],
         providers: [
           { provide: Camera, useValue: cameraSpy },
