@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 import { Subject } from 'rxjs';
 import { AppRoutingModule } from 'src/app/app-routing.module';
+import { ComponentsModule } from 'src/app/components/components.module';
 import { TipoPublicacion } from 'src/app/model/enums.model';
 import { Publicacion } from 'src/app/model/publicacion.model';
 import { PublicationObserverService } from 'src/app/observables/publication-observer.service';
@@ -21,7 +22,7 @@ describe('PublicationPage', () => {
     waitForAsync(() => {
       TestBed.configureTestingModule({
         declarations: [PublicationPage],
-        imports: [IonicModule.forRoot(), AppRoutingModule],
+        imports: [IonicModule.forRoot(), AppRoutingModule, ComponentsModule],
         providers: [
           { provide: SistemaService, useValue: buildSistemaService() },
           { provide: Router, useValue: buildRouterMock() },

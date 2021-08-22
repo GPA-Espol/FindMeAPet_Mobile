@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { ActivatedRoute, Router } from '@angular/router';
 import { IonicModule, NavController } from '@ionic/angular';
+import { PipesModule } from 'src/app/pipes/pipes.module';
 import { SistemaService } from 'src/app/services/sistema/sistema.service';
 
 import { SpecificUserPage } from './specific-user.page';
@@ -16,7 +17,7 @@ describe('SpecificUserPage', () => {
       const routerSpy = jasmine.createSpyObj('Router', ['navigateByUrl']);
       TestBed.configureTestingModule({
         declarations: [SpecificUserPage],
-        imports: [IonicModule.forRoot()],
+        imports: [IonicModule.forRoot(), PipesModule],
         providers: [
           { provide: ActivatedRoute, useValue: buildActivatedRoute(id) },
           { provide: SistemaService, useValue: buildSistemaService() },

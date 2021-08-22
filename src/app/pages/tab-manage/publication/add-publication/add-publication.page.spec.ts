@@ -3,6 +3,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { IonicModule, NavController } from '@ionic/angular';
 import { AppRoutingModule } from 'src/app/app-routing.module';
+import { ComponentsModule } from 'src/app/components/components.module';
 import { SistemaService } from 'src/app/services/sistema/sistema.service';
 import { Mode } from 'src/app/utils/utils';
 
@@ -18,7 +19,7 @@ describe('AddPublicationPage', () => {
       const navCtrlSpy = jasmine.createSpyObj('NavController', ['pop']);
       TestBed.configureTestingModule({
         declarations: [AddPublicationPage],
-        imports: [IonicModule.forRoot(), ReactiveFormsModule],
+        imports: [IonicModule.forRoot(), ReactiveFormsModule, ComponentsModule],
         providers: [
           { provide: SistemaService, useValue: buildSistemaService() },
           { provide: Router, useValue: buildRouterMock() },

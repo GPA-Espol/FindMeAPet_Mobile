@@ -4,6 +4,7 @@ import { IonicModule, NavController } from '@ionic/angular';
 import { Administrador } from 'src/app/model/admin/administrador.model';
 import { RolUsuario, UbicacionMascota } from 'src/app/model/enums.model';
 import { Mascota } from 'src/app/model/mascota.model';
+import { PipesModule } from 'src/app/pipes/pipes.module';
 import { SistemaService } from 'src/app/services/sistema/sistema.service';
 
 import { SpecificPetPage } from './specific-pet.page';
@@ -16,7 +17,7 @@ describe('SpecificPetPage', () => {
       const navCtrlSpy = jasmine.createSpyObj('NavController', ['pop']);
       TestBed.configureTestingModule({
         declarations: [SpecificPetPage],
-        imports: [IonicModule.forRoot()],
+        imports: [IonicModule.forRoot(), PipesModule],
         providers: [
           { provide: SistemaService, useValue: createSistemaService() },
           { provide: ActivatedRoute, useValue: { snapshot: { paramMap: { get: () => 1 } } } },

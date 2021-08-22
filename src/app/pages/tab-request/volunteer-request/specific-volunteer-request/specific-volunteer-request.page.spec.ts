@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { ActivatedRoute } from '@angular/router';
 import { IonicModule, NavController } from '@ionic/angular';
+import { ComponentsModule } from 'src/app/components/components.module';
 import { UbicacionMascota } from 'src/app/model/enums.model';
 import { Mascota } from 'src/app/model/mascota.model';
 import { SistemaService } from 'src/app/services/sistema/sistema.service';
@@ -16,7 +17,7 @@ describe('SpecificVolunteerRequestPage', () => {
       const navCtrlSpy = jasmine.createSpyObj('NavController', ['pop']);
       TestBed.configureTestingModule({
         declarations: [SpecificVolunteerRequestPage],
-        imports: [IonicModule.forRoot()],
+        imports: [IonicModule.forRoot(), ComponentsModule],
         providers: [
           { provide: ActivatedRoute, useValue: { snapshot: { paramMap: { get: () => '1' } } } },
           { provide: SistemaService, useFactory: buildSistemaService },
