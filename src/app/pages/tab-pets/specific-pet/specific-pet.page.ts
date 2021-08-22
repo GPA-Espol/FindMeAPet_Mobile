@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { AlertController, ModalController, NavController } from '@ionic/angular';
+import { NavController } from '@ionic/angular';
 import { Subscription } from 'rxjs';
 import { Administrador } from 'src/app/model/admin/administrador.model';
 import { RolUsuario } from 'src/app/model/enums.model';
@@ -28,7 +28,6 @@ export class SpecificPetPage implements OnInit {
     private route: ActivatedRoute,
     private petObserver: PetObserverService,
     private alertaService: AlertaService,
-    public alertController: AlertController,
     private navCtrl: NavController
   ) {}
 

@@ -18,7 +18,7 @@ export class SpecificVolunteerRequestPage implements OnInit {
   actualPet: Mascota;
   requestPet: Mascota;
   propuesta: any;
-  mode: String;
+  mode: string;
   send: any = {};
   slideOpts = {
     initialSlide: 0,
@@ -40,7 +40,10 @@ export class SpecificVolunteerRequestPage implements OnInit {
   }
 
   getPropuesta() {
-    let id = +this.route.snapshot.paramMap.get('id');
+    console.log('antes');
+
+    const id = +this.route.snapshot.paramMap.get('id');
+    console.log('des');
     this.send.id_solicitud = id;
     this.propuesta = this.administrador.adminMascota.verPropuestasVoluntarioById(id);
   }

@@ -47,7 +47,7 @@ describe('SistemaService', () => {
     setTimeout(() => {
       const req = httpMock.expectOne(`${environment.api}auth`);
       expect(req.request.method).toBe('POST');
-      expect(req.request.body).toEqual({ usuario, password, id_device });
+      expect(req.request.body).toEqual({ usuario, password, id_device: '' });
       req.flush({ token, rol, id });
     }, 100); // This is not deterministic, but it's ok. A real test would be better. I think an observable would help.
   });
@@ -79,7 +79,7 @@ describe('SistemaService', () => {
     setTimeout(() => {
       const req = httpMock.expectOne(`${environment.api}auth`);
       expect(req.request.method).toBe('POST');
-      expect(req.request.body).toEqual({ usuario, password, id_device });
+      expect(req.request.body).toEqual({ usuario, password, id_device: '' });
       req.flush({ token, rol, id });
     }, 100); // This is not deterministic
   });

@@ -191,15 +191,3 @@ export class Mascota {
     this._imagenUrl = value;
   }
 }
-
-class Hola {
-  private nombre: string;
-  private apellido: string;
-
-  serialize(hola: Hola) {
-    return {
-      nombre: hola.nombre,
-      apellido: hola.apellido,
-    };
-  }
-}
