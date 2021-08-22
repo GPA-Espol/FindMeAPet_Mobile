@@ -33,6 +33,7 @@ export enum UbicacionMascota {
   FICT = 'FICT',
   FIMCP = 'FIMCP',
   FIEC = 'FIEC',
+  FCV = 'FCV',
   ASO_FIMCP = 'ASO FIMCP',
   CELEX = 'CELEX',
   MASTERADOS_FCSH = 'Masterados FCSH',
@@ -50,7 +51,7 @@ export enum ColorMascota {
   CALICO = 'Calicó',
   GRIS = 'Gris',
   ROMANO = 'Romano',
-  NARANJA = 'Naranja'
+  NARANJA = 'Naranja',
 }
 
 export enum Personalidad {
@@ -66,5 +67,3 @@ export enum EstadoSolicitud {
   APROBADO = 'Aprobado',
   RECHAZADO = 'Rechazado',
 }
-
-
