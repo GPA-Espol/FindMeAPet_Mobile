@@ -1,0 +1,14 @@
+<ion-card mode="ios" [routerLink]="['informacion', publicacion.id]">
+  <div class="card-container">
+    <div *ngIf="publicacion.imagenUrl" class="image-container">
+      <img [src]="publicacion.imagenUrl" alt="imagen publicación" />
+    </div>
+    <div class="info-container">
+      <div class="title">{{ publicacion.titulo }}</div>
+      <div class="description">
+        {{ display_description }}
+      </div>
+      <div class="footer"><b>Publicada: </b> {{ publicacion.fecha | dateFormat }}</div>
+    </div>
+  </div>
+</ion-card>

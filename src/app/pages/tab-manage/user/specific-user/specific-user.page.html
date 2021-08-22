@@ -1,0 +1,70 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Usuario</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-row class="ion-justify-content-center ion-margin-top" *ngIf="loading; else loadedContent">
+    <ion-spinner name="crescent" color="primary"></ion-spinner>
+  </ion-row>
+  <ng-template #loadedContent>
+    <div class="container">
+      <div class="header">
+        <div class="user-image">
+          <img [src]="user.foto || '/assets/img/user-placeholder.png'" alt="Imagen del usuario" />
+        </div>
+        <div class="user-info">
+          <h2>{{user.nombre}} {{user.apellido}}</h2>
+          <ng-template [ngIf]="isAdmin">
+            <h5>{{user.sexo=="F"? "Administradora" : "Administrador"}}</h5>
+          </ng-template>
+          <ng-template [ngIf]="!isAdmin">
+            <h5>{{user.sexo=="F"? "Voluntaria" : "Voluntario"}} - Refugio</h5>
+          </ng-template>
+        </div>
+      </div>
+      <div class="body">
+        <ion-row>
+          <ion-icon name="mail-outline"></ion-icon>
+          <div>{{user.correo}}</div>
+        </ion-row>
+        <ion-row>
+          <ion-icon name="person-outline"></ion-icon>
+          <div>{{user.nombreUsuario}}</div>
+        </ion-row>
+        <ion-row>
+          <ion-icon src="/assets/icon/birthday.svg"></ion-icon>
+          <div>{{user.fechaNacimiento | age}}</div>
+        </ion-row>
+        <ion-row>
+          <ion-icon src="/assets/icon/student.svg"></ion-icon>
+          <div>{{user.isEstESPOL? 'Es':'No es'}} estudiante de ESPOL</div>
+        </ion-row>
+        <ion-row *ngIf="!isAdmin">
+          <ion-icon name="calendar-outline"></ion-icon>
+          <div>Lunes, Miércoles</div>
+        </ion-row>
+      </div>
+    </div>
+    <ion-row class="ion-justify-content-center">
+      <ion-col size="10">
+        <ion-button expand="block" [routerLink]="['../editar',user.id]" mode="ios">
+          Editar usuario
+        </ion-button>
+        <ion-button
+          class="ion-margin-vertical"
+          expand="block"
+          color="danger"
+          mode="ios"
+          (click)="modaDelete()"
+        >
+          Eliminar usuario
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ng-template>
+</ion-content>

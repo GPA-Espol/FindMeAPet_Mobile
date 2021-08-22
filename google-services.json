@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "646089805422",
+    "project_id": "gpa-findmepet",
+    "storage_bucket": "gpa-findmepet.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:646089805422:android:20af144cbacb31b4d2a07f",
+        "android_client_info": {
+          "package_name": "io.ionic.gpa"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "646089805422-ul873v980b4bk9jfuiso31agmap8vmak.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDJx4U5wJDLKjy-pDi7pTuzoP3bFG1nYvA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "646089805422-ul873v980b4bk9jfuiso31agmap8vmak.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

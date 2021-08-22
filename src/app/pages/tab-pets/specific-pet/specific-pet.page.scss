@@ -1,20 +1,53 @@
 .content {
-  border-top-right-radius: 15px;
-  border-top-left-radius: 15px;
-  border-top-color: indigo;
-  border-width: 50px;
+  margin: auto;
+  position: fixed;
+  left: 0;
+  bottom: 0px;
+  right: 0;
+  height: 60%;
+  border-top-right-radius: 25px;
+  border-top-left-radius: 25px;
+  padding: 20px;
+  padding-top: 15px;
+  background: #fafcff url("../../../../assets/img/naranja.png") no-repeat center right;
+  box-shadow: inset 0 7px 9px -7px rgba(0, 0, 0, 0.5);
+}
+#icon-location {
+  color: #ec823a;
+  font-size: larger;
 }
 
-.list-time {
-  width: 70px;
-  min-height: 4.3em;
+.icon-check {
+  color: #53bb42;
+  font-size: larger !important;
 }
-.list-time.purple-border {
-  border-right: 2px solid purple;
+
+.icon-cross {
+  color: #fc4f4f;
+  font-size: larger !important;
 }
-.list-time.orange-border {
-  border-right: 2px solid orange;
+
+#edit-icon {
+  font-size: large !important;
 }
-.list-time .bold {
-  color: black;
+
+#delete-icon {
+  font-size: large !important;
+}
+
+ion-list {
+  --ion-background-color: transparent !important;
+
+  ion-item {
+    --ion-background-color: inherit !important;
+  }
+}
+
+.scrollable {
+  overflow: scroll;
+}
+.img-placeholder {
+  height: 45%;
+  width: 100%;
+  background-color: rgb(177, 177, 177);
 }

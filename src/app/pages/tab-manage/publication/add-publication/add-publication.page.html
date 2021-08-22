@@ -1,0 +1,58 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button> </ion-back-button>
+    </ion-buttons>
+    <ion-title>{{mode=='anadir'?'Agregar':'Editar'}} {{publicationsType}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-row class="ion-justify-content-center" *ngIf="loading; else loadedContent">
+    <ion-spinner name="crescent" color="primary"></ion-spinner>
+  </ion-row>
+  <ng-template #loadedContent>
+    <div class="ion-justify-content ion-margin-horizontal ion-margin-top">
+      <form [formGroup]="publicationForm">
+        <div class="input-container">
+          <ion-item lines="none" class="ion-margin-horizontal">
+            <ion-input type="text" size="10" placeholder="Título" formControlName="title"></ion-input>
+          </ion-item>
+          <ion-text
+            *ngIf="publicationForm.controls['title'].invalid && publicationForm.controls['title'].touched"
+            class="form-error"
+          >
+            Por favor ingresa el título.
+          </ion-text>
+        </div>
+        <app-image-picker #imgPicker [mode]="mode" [imageUrl]="pubToEdit?.imagenUrl"></app-image-picker>
+        <div class="ion-margin-top ion-padding-top input-container">
+          <ion-item lines="none" class="ion-margin-horizontal">
+            <ion-textarea rows="6" placeholder="Descripción..." formControlName="description"></ion-textarea>
+          </ion-item>
+          <ion-text
+            *ngIf="publicationForm.controls['description'].invalid && publicationForm.controls['description'].touched"
+            class="form-error"
+          >
+            Por favor ingresa la descripción.
+          </ion-text>
+        </div>
+      </form>
+      <ion-row class="ion-justify-content-center">
+        <ion-col size="10">
+          <ion-button
+            expand="block"
+            (click)="submitPublication()"
+            [disabled]="publicationForm.invalid"
+            mode="ios"
+          >
+            {{mode=='anadir'?'Guardar':'Actualizar'}}
+          </ion-button>
+          <ion-button class="ion-margin-vertical" expand="block" color="medium" (click)="goback()" mode="ios">
+            Cancelar
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </div>
+  </ng-template>
+</ion-content>

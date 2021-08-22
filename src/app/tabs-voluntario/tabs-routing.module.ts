@@ -14,20 +14,19 @@ const routes: Routes = [
       {
         path: 'perfil',
         loadChildren: () =>
-          import('../pages/en-construccion/en-construccion.module').then((m) => m.EnConstruccionPageModule),
+          import('../pages/profile/profile.module').then((m) => m.ProfilePageModule),
       },
       {
         path: 'inicio',
+        loadChildren: () => import('../pages/tab-home/tab-home.module').then( m => m.TabHomePageModule)
+      },
+      {
+        path: 'reporte-actividad',
         loadChildren: () =>
           import('../pages/en-construccion/en-construccion.module').then((m) => m.EnConstruccionPageModule),
       },
       {
-        path: 'solicitud',
-        loadChildren: () =>
-          import('../pages/en-construccion/en-construccion.module').then((m) => m.EnConstruccionPageModule),
-      },
-      {
-        path: 'configuracion',
+        path: 'puntos-alimentacion',
         loadChildren: () =>
           import('../pages/en-construccion/en-construccion.module').then((m) => m.EnConstruccionPageModule),
       },

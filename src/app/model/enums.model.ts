@@ -30,10 +30,28 @@ export enum TipoPublicacion {
 }
 
 export enum UbicacionMascota {
-  REFUGIO = 'Refugio',
-  EXTERNO = 'Externo',
-  DENTRO_ESPOL = 'Dentro espol',
-  HOGAR_TEMPORAL = 'Hogar temporal',
+  FICT = 'FICT',
+  FIMCP = 'FIMCP',
+  FIEC = 'FIEC',
+  FCV = 'FCV',
+  ASO_FIMCP = 'ASO FIMCP',
+  CELEX = 'CELEX',
+  MASTERADOS_FCSH = 'Masterados FCSH',
+  AUDITORIA_FCSH = 'Auditoría FCSH',
+  LABS_FCSH = 'Laboratorios FCSH',
+  FOTOCOPIADORAS = 'Fotocopiadoras',
+  FEPOL = 'FEPOL',
+  GTSI = 'GTSI',
+}
+
+export enum ColorMascota {
+  BLANCO = 'Blanco',
+  NEGRO = 'Negro',
+  CAREY = 'Bicolor',
+  CALICO = 'Calicó',
+  GRIS = 'Gris',
+  ROMANO = 'Romano',
+  NARANJA = 'Naranja',
 }
 
 export enum Personalidad {

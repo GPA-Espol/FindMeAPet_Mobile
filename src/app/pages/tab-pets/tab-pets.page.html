@@ -8,18 +8,33 @@
 </ion-header>
 
 <ion-content>
-  <div class="ion-margin-start ion-margin-vertical">
-    <ion-chip
-      class="animal-chip"
-      [outline]="lugarBuscar!='todos'"
-      [class.animal-chip-pressed]="lugarBuscar=='todos'"
-      (click)="filterLocation('todos')"
-    >
-      <ion-label>
-        <ion-text color="secondary"> Todos </ion-text>
-      </ion-label>
-    </ion-chip>
-    <ion-chip
+  <div class="wrapper ion-margin-top">
+    <div class="chips-container">
+      <ion-chip
+        class="animal-chip"
+        [outline]="lugarBuscar!='todos'"
+        [class.animal-chip-pressed]="lugarBuscar=='todos'"
+        (click)="filterLocation('todos')"
+      >
+        <ion-label>
+          <ion-text color="secondary"> Todos </ion-text>
+        </ion-label>
+      </ion-chip>
+      <ion-chip
+        *ngFor="let ubicacion of ubicaciones"
+        class="animal-chip"
+        [outline]="lugarBuscar!=ubicacion"
+        [class.animal-chip-pressed]="lugarBuscar==ubicacion"
+        (click)="filterLocation(ubicacion)"
+      >
+        <ion-label>
+          <ion-text color="secondary"> {{ubicacion}} </ion-text>
+        </ion-label>
+      </ion-chip>
+    </div>
+  </div>
+  <div class="ion-margin-start">
+    <!-- <ion-chip
       class="animal-chip"
       [outline]="lugarBuscar!='Refugio'"
       [class.animal-chip-pressed]="lugarBuscar=='Refugio'"
@@ -30,7 +45,7 @@
       </ion-label>
     </ion-chip>
     <ion-chip
-      class="animal-chip"
+      class="animal-chip "
       [outline]="lugarBuscar!='Espol'"
       [class.animal-chip-pressed]="lugarBuscar=='Espol'"
       (click)="filterLocation('Espol')"
@@ -48,7 +63,7 @@
       <ion-label>
         <ion-text color="secondary"> Externo </ion-text>
       </ion-label>
-    </ion-chip>
+    </ion-chip> -->
     <ion-searchbar
       animated
       clearIcon
@@ -61,18 +76,30 @@
     <ion-spinner name="crescent" color="primary"></ion-spinner>
   </ion-row>
   <ng-template #loadedContent>
-    <div *ngIf="pets.length">
+    <div *ngIf="pets.length" id="pets">
       <ion-refresher slot="fixed" (ionRefresh)="refreshPets($event)">
         <ion-refresher-content></ion-refresher-content>
       </ion-refresher>
-      <ion-card class="card-pet" *ngFor="let pet of pets | lugar:lugarBuscar |filtro: textoBuscar ">
-        <ion-item
-          lines="none"
-          class="item-pet"
-          style="margin-top: 10px; margin-bottom: 15px; background: #f5f5fafd"
-        >
+      <ion-card
+        mode="ios"
+        class="card-pet"
+        *ngFor="let pet of pets | lugar:lugarBuscar |filtro: textoBuscar "
+        routerLink="informacion/{{pet.id}}"
+      >
+        <ion-item lines="none" class="item-pet" style="margin-top: 10px; margin-bottom: 20px">
           <ion-thumbnail>
-            <img [src]="pet.imagenUrl" alt="image of {{pet.nombre}}" class="image-pet" />
+            <img
+              *ngIf="pet.imagenUrl"
+              [src]="pet.imagenUrl"
+              alt="image of {{pet.nombre}}"
+              class="image-pet"
+            />
+            <img
+              *ngIf="!pet.imagenUrl"
+              [src]="pet.tipoAnimal == 'Perro'? '/assets/img/dog-placeholder.svg' : '/assets/img/cat-placeholder.svg'"
+              alt="image of {{pet.nombre}}"
+              class="image-pet"
+            />
           </ion-thumbnail>
           <ion-label class="ion-margin-start ion-margin-vertical ion-text-wrap">
             <h2>{{pet.nombre}}</h2>
@@ -90,20 +117,16 @@
         </ion-item>
       </ion-card>
     </div>
-    <div *ngIf="!pets.length" class="ion-margin-top">
-      <ion-row class="ion-justify-content-center">
-        <img src="assets/icon/pets.svg" alt="no hay mascotas" height="200px" width="200px" />
-      </ion-row>
-      <ion-row class="ion-justify-content-center">
-        <p class="ion-text-center ion-margin-horizontal text-nothing">
-          Aun no hay ninguna mascota en el sistema.
-          <a routerLink="anadir">Empieza a agregarlos ahora!</a>
-        </p>
-      </ion-row>
+    <div *ngIf="!pets.length">
+      <app-empty-list
+        emptyDescription="Aún no hay ninguna mascota en el sistema."
+        link="anadir"
+        linkDescription="Empieza a agregarlas ahora!"
+      ></app-empty-list>
     </div>
   </ng-template>
   <ion-fab slot="fixed" style="bottom: 10px; right: 15px">
-    <ion-fab-button routerLink="anadir" class="add-button"
+    <ion-fab-button routerLink="anadir" class="add-button" id="add-pet"
       ><ion-icon name="add-outline"></ion-icon
     ></ion-fab-button>
   </ion-fab>

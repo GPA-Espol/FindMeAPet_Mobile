@@ -1,0 +1,22 @@
+#upload-image {
+  width: 45% !important;
+  height: 140px !important;
+  --background: rgb(223, 223, 223);
+  border-radius: 15px !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+
+#icon-camera {
+  font-size: 40px !important;
+}
+
+.image-preview {
+  object-fit: cover;
+  object-position: center center;
+}
+
+.center-contenedor {
+  display: flex;
+  justify-content: center;
+}

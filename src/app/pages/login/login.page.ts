@@ -1,14 +1,11 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { FirebaseX } from '@ionic-native/firebase-x/ngx';
 import { RolUsuario } from 'src/app/model/enums.model';
 import { AlertaService } from 'src/app/services/alerta/alerta.service';
 import { SistemaService } from 'src/app/services/sistema/sistema.service';
 
-enum UserType {
-  Volunteer = 'Voluntario',
-  Admin = 'Administrador',
-}
 
 /**
  * Class in charge of the behaviour of the Login Page.
@@ -26,10 +23,11 @@ export class LoginPage implements OnInit {
   constructor(
     private sistema: SistemaService,
     private alertaService: AlertaService,
-    private router: Router
+    private router: Router,
+    private firebase: FirebaseX
   ) {}
 
-  ngOnInit() {
+  async ngOnInit() {
     this.initForm();
   }
 
@@ -64,11 +62,15 @@ export class LoginPage implements OnInit {
       }
     } catch (err) {
       console.error('Error al iniciar sesion: ', err);
-      this.alertaService.presentToast('Usuario o contraseña incorrectas');
+      await this.alertaService.presentToast('Usuario o contraseña incorrectas');
     }
     this.alertaService.dismissLoading();
   }
 
+  /**
+   * get the Login form grout
+   * @returns {FormGroup} The form group of the page
+   */
   public get loginForm() {
     return this._loginForm;
   }
